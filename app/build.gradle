@@ -12,14 +12,36 @@ android {
 		targetSdkVersion 30
 		versionCode 1
 		versionName "1.0"
+		resConfigs "en", "fr", "de", "it"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 
+	productFlavors {
+		dev {
+			applicationIdSuffix '.dev'
+		}
+		prod {
+		}
+	}
+
+	flavorDimensions "version"
+
+	signingConfigs {
+		release {
+			storeFile file("TODO")
+			storePassword "TODO"
+			keyAlias 'keyAlias'
+			keyPassword "TODO"
+		}
+	}
+
 	buildTypes {
 		release {
-			minifyEnabled false
+			shrinkResources true
+			setMinifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release
 		}
 	}
 	compileOptions {
