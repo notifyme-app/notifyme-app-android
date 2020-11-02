@@ -22,6 +22,8 @@
 	<dimen name="button_height">72dp</dimen>
 
 	<dimen name="card_elevation">10dp</dimen>
-
+	<dimen name="qr_scanner_indicator_size">50dp</dimen>
+	<dimen name="qr_scanner_indicator_stroke_width">5dp</dimen>
+	<dimen name="qr_scanner_indicator_stroke_width_inverse">-5dp</dimen>
 
 </resources>

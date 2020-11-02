@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
@@ -46,6 +47,8 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		previewView = view.findViewById(R.id.camera_preview);
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		startCameraAndQrAnalyzer();
 	}
 

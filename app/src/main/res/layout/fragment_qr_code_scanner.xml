@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="@color/light_grey"
 	tools:context=".ui.QrCodeScannerFragment">
 
-	<androidx.camera.view.PreviewView
-		android:id="@+id/camera_preview"
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" />
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toTopOf="parent"
+		app:navigationIcon="@drawable/ic_arrow_back"
+		app:title="@string/checkin_title"
+		app:titleTextAppearance="@style/N2Step.Text.Title" />
+
+	<TextView
+		android:id="@+id/qr_code_scanner_explanation"
+		style="@style/N2Step.Text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/spacing_small"
+		android:gravity="center"
+		android:text="@string/checkin_scan_code"
+		app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:layout_constraintDimensionRatio="1:1"
+		app:layout_constraintTop_toBottomOf="@id/qr_code_scanner_explanation">
+
+		<androidx.camera.view.PreviewView
+			android:id="@+id/camera_preview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="@dimen/spacing_huge" />
+
+		<View
+			android:layout_width="@dimen/qr_scanner_indicator_size"
+			android:layout_height="@dimen/qr_scanner_indicator_size"
+			android:layout_margin="@dimen/spacing_very_large"
+			android:background="@drawable/qr_scanner_top_right"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<View
+			android:layout_width="@dimen/qr_scanner_indicator_size"
+			android:layout_height="@dimen/qr_scanner_indicator_size"
+			android:layout_margin="@dimen/spacing_very_large"
+			android:background="@drawable/qr_scanner_top_left"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<View
+			android:layout_width="@dimen/qr_scanner_indicator_size"
+			android:layout_height="@dimen/qr_scanner_indicator_size"
+			android:layout_margin="@dimen/spacing_very_large"
+			android:background="@drawable/qr_scanner_bottom_left"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<View
+			android:layout_width="@dimen/qr_scanner_indicator_size"
+			android:layout_height="@dimen/qr_scanner_indicator_size"
+			android:layout_margin="@dimen/spacing_very_large"
+			android:background="@drawable/qr_scanner_bottom_right"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<ImageButton
+		style="@style/N2Step.ImageButton"
+		android:layout_width="@dimen/button_height"
+		android:layout_height="@dimen/button_height"
+		android:layout_margin="@dimen/spacing_large"
+		android:elevation="@dimen/card_elevation"
+		android:src="@drawable/ic_flash_on"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
