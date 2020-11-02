@@ -2,4 +2,41 @@
 <resources>
     <string name="language_code">"fr"</string>
     <string name="app_name">"N2Step"</string>
+
+    <!-- Title of Checkin Screen -->
+    <string name="checkin_title">"Check-In"</string>
+
+    <!-- Title of diary screen -->
+    <string name="diary_title">"Diary"</string>
+
+    <!-- Homescreen: Title of checkin button -->
+    <string name="checkin_button_title">"Check-In"</string>
+
+    <!-- Homescreen: No Reports title -->
+    <string name="no_report_title">"No report"</string>
+
+    <!-- Check-In: scan code -->
+    <string name="checkin_scan_code">"Scan QR code to check in"</string>
+
+    <!-- iOS: Text bei Berechtigung für Kamera -->
+    <string name="NSCameraUsageDescription">"Your camera is used to scan the QR code."</string>
+
+    <!-- iOS Permission: Text to show for FaceID -->
+    <string name="NSFaceIDUsageDescription">"Enabling Face ID allows you to securely access your diary."</string>
+
+    <!-- iOS FaceID: Text that is shown as reason for Face ID -->
+    <string name="face_id_reason_text">"Scan your face to see your diary"</string>
+
+    <!-- Homescreen: Text with no report -->
+    <string name="no_report_hero_text">"Enjoy your day and stay healthy"</string>
+
+    <!-- Check In: Button title -->
+    <string name="check_in_now_button_title">"Check In Now"</string>
+
+    <!-- Reminder Notification Title -->
+    <string name="checkout_reminder_title">"Checkout Reminder"</string>
+
+    <!-- Reminder Checkout Text -->
+    <string name="checkout_reminder_text">"Do you want to check out?"</string>
+
 </resources>
