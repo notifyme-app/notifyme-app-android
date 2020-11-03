@@ -11,6 +11,7 @@
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="@color/white"
 		app:layout_constraintTop_toTopOf="parent"
 		app:navigationIcon="@drawable/ic_arrow_back"
 		app:title="@string/checkin_title"
@@ -21,7 +22,7 @@
 		style="@style/N2Step.Text"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/spacing_small"
+		android:layout_marginTop="@dimen/spacing_huge"
 		android:gravity="center"
 		android:text="@string/checkin_scan_code"
 		app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -73,12 +74,14 @@
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ImageButton
+		android:id="@+id/fragment_qr_scanner_flash_button"
 		style="@style/N2Step.ImageButton"
 		android:layout_width="@dimen/button_height"
 		android:layout_height="@dimen/button_height"
 		android:layout_margin="@dimen/spacing_large"
 		android:elevation="@dimen/card_elevation"
 		android:src="@drawable/ic_flash_on"
+		android:tint="@color/primary"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent" />
 

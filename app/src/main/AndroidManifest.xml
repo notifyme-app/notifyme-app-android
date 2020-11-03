@@ -14,7 +14,8 @@
 		android:theme="@style/N2StepTheme">
 		<activity
 			android:name=".MainActivity"
-			android:theme="@style/N2StepTheme">
+			android:screenOrientation="portrait"
+			android:theme="@style/N2StepTheme">>
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

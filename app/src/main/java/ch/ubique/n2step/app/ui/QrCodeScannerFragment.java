@@ -3,13 +3,16 @@ package ch.ubique.n2step.app.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
+import androidx.camera.core.TorchState;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
@@ -30,6 +33,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private PreviewView previewView;
 	private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 	private ExecutorService cameraExecutor;
+	private ImageButton flashButton;
 	private Toast toast;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
@@ -47,9 +51,32 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		previewView = view.findViewById(R.id.camera_preview);
+		flashButton = view.findViewById(R.id.fragment_qr_scanner_flash_button);
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		startCameraAndQrAnalyzer();
+	}
+
+
+	private void setupFlashButton(Camera camera) {
+
+		if (!camera.getCameraInfo().hasFlashUnit()) {
+			flashButton.setVisibility(View.GONE);
+		} else {
+			flashButton.setVisibility(View.VISIBLE);
+		}
+
+		camera.getCameraInfo().getTorchState().observe(getViewLifecycleOwner(), v -> {
+			if (v == TorchState.ON) {
+				flashButton.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_flash_off));
+			} else {
+				flashButton.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_flash_on));
+			}
+		});
+
+		flashButton.setOnClickListener(v -> {
+			camera.getCameraControl().enableTorch(camera.getCameraInfo().getTorchState().getValue() == TorchState.OFF);
+		});
 	}
 
 	private void startCameraAndQrAnalyzer() {
@@ -66,7 +93,8 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
 
 				cameraProvider.unbindAll();
-				cameraProvider.bindToLifecycle(getViewLifecycleOwner(), cameraSelector, preview, imageAnalyzer);
+				Camera camera = cameraProvider.bindToLifecycle(getViewLifecycleOwner(), cameraSelector, preview, imageAnalyzer);
+				setupFlashButton(camera);
 			} catch (ExecutionException | InterruptedException e) {
 				Log.d(TAG, "Error starting camera " + e.getMessage());
 				e.printStackTrace();
