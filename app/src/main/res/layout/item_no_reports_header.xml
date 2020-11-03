@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/N2Step.Card.Secondary"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginHorizontal="@dimen/spacing_large">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/spacing_very_large"
+		android:orientation="vertical">
+
+		<TextView
+			style="@style/N2Step.Text.Title.White"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/spacing_large"
+			android:text="@string/no_report_information_title" />
+
+		<TextView
+			style="@style/N2Step.Text.White"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/no_report_information_text" />
+
+	</LinearLayout>
+
+</androidx.cardview.widget.CardView>

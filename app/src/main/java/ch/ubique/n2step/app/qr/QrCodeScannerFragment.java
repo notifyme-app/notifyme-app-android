@@ -1,4 +1,4 @@
-package ch.ubique.n2step.app.ui;
+package ch.ubique.n2step.app.qr;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +25,6 @@ import java.util.concurrent.Executors;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.app.utils.QrCodeAnalyzer;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 

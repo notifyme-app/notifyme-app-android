@@ -3,8 +3,6 @@ package ch.ubique.n2step.app;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import ch.ubique.n2step.app.ui.MainFragment;
-
 public class MainActivity extends AppCompatActivity {
 
 	@Override

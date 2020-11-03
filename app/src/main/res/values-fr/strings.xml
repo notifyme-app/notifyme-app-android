@@ -30,13 +30,54 @@
     <!-- Homescreen: Text with no report -->
     <string name="no_report_hero_text">"Enjoy your day and stay healthy"</string>
 
-    <!-- Check In: Button title -->
-    <string name="check_in_now_button_title">"Check In Now"</string>
-
     <!-- Reminder Notification Title -->
     <string name="checkout_reminder_title">"Checkout Reminder"</string>
 
     <!-- Reminder Checkout Text -->
     <string name="checkout_reminder_text">"Do you want to check out?"</string>
 
+    <!-- Check In Confirm: Button title -->
+    <string name="check_in_now_button_title">"Check In Now"</string>
+
+    <!-- CheckIn: Check out Button title -->
+    <string name="checkout_button_title">"Check out"</string>
+
+    <!-- Title for 1 report -->
+    <string name="report_title_singular">"1 report"</string>
+
+    <!-- Reports: Title for multiple reports -->
+    <string name="report_title_plural">"{NUMBER} reports"</string>
+
+    <!-- Reports: Infection text -->
+    <string name="report_message_text">"An infection could have occured"</string>
+
+    <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
+    <string name="no_report_hero_text_highlight">"Stay healthy"</string>
+
+    <!-- Highlight text of report_message_text (must be exactly as in this text) -->
+    <string name="report_message_text_highlight">"An infection"</string>
+
+    <!-- QR-Scanner: request for scan text -->
+    <string name="qrscanner_scan_qr_text">"Scan QR code to check in"</string>
+
+    <!-- QR Code Scanner: no valid code text -->
+    <string name="qrscanner_error">"No valid code!"</string>
+
+    <!-- Reports: no reports information title -->
+    <string name="no_report_information_title">"No potential infections have been reported within the last 14 days"</string>
+
+    <!-- No report Information : Additional text -->
+    <string name="no_report_information_text">"Stay healthy"</string>
+
+    <!-- Reports: Information title -->
+    <string name="report_information_title">"Potential infection within the last 14 days"</string>
+
+    <!-- Reports: Information text -->
+    <string name="report_information_text">"You could be infectious without realising it."</string>
+
+    <!-- Report Information What to do Button title -->
+    <string name="report_information_button_title">"What to do?"</string>
+
+    <!-- Info Text that is displayed below the info about a new report. -->
+    <string name="report_message_days_ago">"{NUMBER} days ago"</string>
 </resources>

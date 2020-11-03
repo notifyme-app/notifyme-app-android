@@ -11,7 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		tools:context=".ui.MainFragment">
+		tools:context=".MainFragment">
 
 		<ImageView
 			android:layout_width="match_parent"
@@ -25,45 +25,21 @@
 			android:layout_height="match_parent"
 			android:orientation="vertical">
 
-			<androidx.cardview.widget.CardView
-				android:id="@+id/header"
-				style="@style/N2Step.Card"
+			<include
+				android:id="@+id/fragment_main_reports_header_no_report"
+				layout="@layout/header_no_report" />
+
+			<include
+				android:id="@+id/fragment_main_reports_header"
+				layout="@layout/header_reports"
+				android:visibility="gone" />
+
+			<androidx.constraintlayout.widget.Barrier
+				android:id="@+id/header_barrier"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginHorizontal="@dimen/spacing_large"
-				android:layout_marginTop="@dimen/spacing_medium"
-				app:layout_constraintTop_toTopOf="parent">
-
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:orientation="horizontal">
-
-					<ImageView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/spacing_large"
-						android:src="@drawable/ic_check_filled" />
-
-					<TextView
-						style="@style/N2Step.Text.Status.Secondary"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:layout_marginHorizontal="@dimen/spacing_medium"
-						android:layout_weight="1"
-						android:text="@string/no_report_title" />
-
-					<ImageView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/spacing_large"
-						android:layout_marginEnd="@dimen/spacing_large"
-						android:src="@drawable/ic_chevron_right" />
-
-				</LinearLayout>
-
-			</androidx.cardview.widget.CardView>
+				android:layout_height="0dp"
+				app:barrierDirection="bottom"
+				app:constraint_referenced_ids="fragment_main_reports_header_no_report,fragment_main_reports_header" />
 
 			<TextView
 				android:id="@+id/fragment_main_splash_text"
@@ -73,17 +49,19 @@
 				android:layout_marginHorizontal="@dimen/spacing_huge"
 				android:layout_marginTop="@dimen/spacing_large"
 				android:text="@string/no_report_hero_text"
-				android:textSize="@dimen/text_size_splash_title"
-				app:layout_constraintTop_toBottomOf="@+id/header" />
+				app:layout_constraintTop_toBottomOf="@+id/header_barrier" />
 
 			<ImageView
+				android:id="@+id/fragment_main_image"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_height="0dp"
 				android:layout_marginVertical="@dimen/spacing_large"
 				android:layout_marginEnd="@dimen/spacing_very_large"
 				android:src="@drawable/ic_start_screen"
 				app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
 				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
+				app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
 				app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
 				app:layout_constraintVertical_weight="1" />
 

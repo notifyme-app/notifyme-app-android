@@ -1,4 +1,4 @@
-package ch.ubique.n2step.app.utils;
+package ch.ubique.n2step.app.qr;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
