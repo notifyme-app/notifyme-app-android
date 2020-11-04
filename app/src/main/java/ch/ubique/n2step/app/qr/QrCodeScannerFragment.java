@@ -25,6 +25,8 @@ import java.util.concurrent.Executors;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import ch.ubique.n2step.app.R;
+import ch.ubique.n2step.sdk.N2STEP;
+import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
@@ -110,6 +112,13 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void onQRCodeFound(String qrCodeData) {
+		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData);
+		if (venueInfo == null){
+			//TODO: Show that this is not a valid code.
+		}
+		else{
+
+		}
 		//TODO: Do stuff with QR Code
 		requireActivity().runOnUiThread(() -> {
 			if (toast != null) {

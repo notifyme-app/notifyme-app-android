@@ -76,5 +76,8 @@ dependencies {
 	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 	implementation "androidx.camera:camera-view:1.0.0-alpha18"
 	implementation "com.google.zxing:core:3.4.0"
+	implementation(name: 'n2step-sdk-release', ext: 'aar')
+	implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+
 
 }
