@@ -22,6 +22,9 @@ allprojects {
 		maven {
 			url  "https://dl.bintray.com/terl/lazysodium-maven"
 		}
+		maven {
+			url "https://dl.bintray.com/n2step/n2step-sdk-android/"
+		}
 	}
 }
 
