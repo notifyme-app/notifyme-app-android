@@ -94,7 +94,7 @@ dependencies {
 	implementation "androidx.camera:camera-view:1.0.0-alpha18"
 	implementation "com.google.zxing:core:3.4.0"
 
-	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-3'
+	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-6'
 
 
 }

@@ -52,7 +52,7 @@
     <string name="report_message_text">"An infection could have occured"</string>
 
     <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
-    <string name="no_report_hero_text_highlight">"Stay healthy"</string>
+    <string name="no_report_hero_text_highlight">"stay healthy"</string>
 
     <!-- Highlight text of report_message_text (must be exactly as in this text) -->
     <string name="report_message_text_highlight">"An infection"</string>
@@ -82,4 +82,35 @@
     <!-- Info Text that is displayed below the info about a new report. -->
     <!-- Fuzzy -->
     <string name="report_message_days_ago">"{NUMBER} days ago"</string>
+
+    <!-- Homescreen: Label you are checked in -->
+    <string name="homescreen_checkedin_label">"You are checked in"</string>
+
+    <!-- Edit Checkin ViewController: your checkin at -->
+    <string name="edit_controller_your_checkin">"Your check-in at"</string>
+
+    <!-- Edit Check in: DatePicker from label -->
+    <string name="datepicker_from">"From"</string>
+
+    <!-- Edit Check in: DatePicker to label -->
+    <string name="datepicker_to">"To"</string>
+
+    <!-- Edit Checkin: add comment label -->
+    <string name="edit_mode_addcomment">"Add comment"</string>
+
+    <!-- Edit Mode: Add comment placeholder text -->
+    <!-- Fuzzy -->
+    <string name="edit_mode_comment_placeholder">"eg. Who were you with?"</string>
+
+    <!-- Done Button Title -->
+    <!-- Fuzzy -->
+    <string name="done_button">"Done"</string>
+
+    <!-- Edit CheckIn: Text for not showing in diary option -->
+    <string name="diary_option_title">"Don't show in diary"</string>
+
+    <!-- Edit CheckIn: Text that is shown when not showing in diary is set -->
+    <string name="diary_option_subtext">"This Check-in will not be shown in the diary.
+
+Nevertheless the app stores this entry during 14 days to warn you in case of potential infection."</string>
 </resources>
