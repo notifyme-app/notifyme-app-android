@@ -36,7 +36,7 @@ public class MainFragment extends Fragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 		super.onCreate(savedInstanceState);
 	}
 

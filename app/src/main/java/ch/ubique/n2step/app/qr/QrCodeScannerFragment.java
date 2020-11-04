@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +16,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,18 +24,21 @@ import java.util.concurrent.Executors;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
+import ch.ubique.n2step.app.checkin.CheckInDialogFragment;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
 	private final static String TAG = QrCodeScannerFragment.class.getCanonicalName();
+
+	private MainViewModel viewModel;
 	private PreviewView previewView;
 	private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 	private ExecutorService cameraExecutor;
 	private ImageButton flashButton;
-	private Toast toast;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
 
@@ -45,15 +48,18 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		viewModel.isQrScanningEnabled = true;
 		cameraExecutor = Executors.newSingleThreadExecutor();
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		previewView = view.findViewById(R.id.camera_preview);
 		flashButton = view.findViewById(R.id.fragment_qr_scanner_flash_button);
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		startCameraAndQrAnalyzer();
 	}
@@ -111,22 +117,22 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	@Override
-	public void onQRCodeFound(String qrCodeData) {
+	public synchronized void onQRCodeFound(String qrCodeData) {
+		if (!viewModel.isQrScanningEnabled) return;
 		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData);
-		if (venueInfo == null){
-			//TODO: Show that this is not a valid code.
+		if (venueInfo == null) {
+			//TODO: Show that this is not a valid code in the UI.
+		} else {
+			viewModel.isQrScanningEnabled = false;
+			viewModel.setCurrentVenue(venueInfo);
+			showCheckInDialog();
 		}
-		else{
+	}
 
-		}
-		//TODO: Do stuff with QR Code
-		requireActivity().runOnUiThread(() -> {
-			if (toast != null) {
-				toast.cancel();
-			}
-			toast = Toast.makeText(requireContext(), qrCodeData, Toast.LENGTH_SHORT);
-			toast.show();
-		});
+	private void showCheckInDialog() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.add(CheckInDialogFragment.newInstance(), CheckInDialogFragment.class.getCanonicalName())
+				.commit();
 	}
 
 }
