@@ -3,6 +3,23 @@ plugins {
 	id 'org.sonarqube' version '3.0'
 }
 
+ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
+ext.readPropertyWithDefault = { paramName, defaultValue ->
+	if (project.hasProperty(paramName)) {
+		return project.getProperties().get(paramName)
+	} else {
+		Properties properties = new Properties()
+		if (project.rootProject.file('local.properties').exists()) {
+			properties.load(project.rootProject.file('local.properties').newDataInputStream())
+		}
+		if (properties.getProperty(paramName) != null) {
+			return properties.getProperty(paramName)
+		} else {
+			return defaultValue
+		}
+	}
+}
+
 android {
 	compileSdkVersion 30
 	buildToolsVersion "29.0.3"
@@ -30,10 +47,10 @@ android {
 
 	signingConfigs {
 		release {
-			storeFile file("TODO")
-			storePassword "TODO"
+			storeFile file(readPropertyWithDefault('keystoreFile', 'testKeystore'))
+			storePassword readProperty('keystorePassword')
 			keyAlias 'keyAlias'
-			keyPassword "TODO"
+			keyPassword readProperty('keyAliasPassword')
 		}
 	}
 
