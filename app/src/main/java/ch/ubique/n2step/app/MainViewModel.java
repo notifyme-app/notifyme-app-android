@@ -5,18 +5,19 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+import ch.ubique.n2step.app.model.CheckInState;
 import ch.ubique.n2step.app.model.Report;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class MainViewModel extends ViewModel {
 
 	public MutableLiveData<ArrayList<Report>> reports = new MutableLiveData(getReports());
 
-	public VenueInfo currentVenue = null;
+	public CheckInState checkInState = null;
 	public boolean isQrScanningEnabled = true;
 
-	public void setCurrentVenue(VenueInfo venue) {
-		currentVenue = venue;
+	public void setCheckInState(CheckInState checkInState) {
+		//TODO: Make sure this is persisted
+		this.checkInState = checkInState;
 	}
 
 	private ArrayList<Report> getReports() {

@@ -21,6 +21,8 @@
 	<dimen name="button_radius">36dp</dimen>
 	<dimen name="button_height">72dp</dimen>
 	<dimen name="outlined_button_stroke_width">5dp</dimen>
+	<dimen name="edit_text_stroke_width">2dp</dimen>
+	<dimen name="edit_text_radius">3dp</dimen>
 
 	<dimen name="card_elevation">10dp</dimen>
 	<dimen name="qr_scanner_indicator_size">50dp</dimen>

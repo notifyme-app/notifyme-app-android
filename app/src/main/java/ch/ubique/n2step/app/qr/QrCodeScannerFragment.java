@@ -31,6 +31,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkin.CheckInDialogFragment;
+import ch.ubique.n2step.app.model.CheckInState;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
@@ -144,7 +145,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 			//TODO: Show that this is not a valid code in the UI.
 		} else {
 			viewModel.isQrScanningEnabled = false;
-			viewModel.setCurrentVenue(venueInfo);
+			viewModel.setCheckInState(new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis()));
 			showCheckInDialog();
 		}
 	}
