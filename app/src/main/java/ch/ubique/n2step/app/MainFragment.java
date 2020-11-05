@@ -2,7 +2,6 @@ package ch.ubique.n2step.app;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.pm.PackageManager;
