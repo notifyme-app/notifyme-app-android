@@ -2,15 +2,18 @@ package ch.ubique.n2step.app;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import ch.ubique.n2step.app.checkin.CheckedInFragment;
 import ch.ubique.n2step.app.reports.ReportsFragment;
 import ch.ubique.n2step.app.qr.QrCodeScannerFragment;
 import ch.ubique.n2step.app.utils.StringUtils;
@@ -20,11 +23,13 @@ public class MainFragment extends Fragment {
 	private static final int PERMISSION_REQUEST_CAMERA = 13;
 
 	private MainViewModel viewModel;
-	private View checkInButton;
+	private Button checkInButton;
+	private Button checkOutButton;
 	private View reportsHeader;
 	private View noReportsHeader;
 	private TextView splashText;
 	private View mainImageView;
+	private View checkedInLabel;
 
 
 	public MainFragment() { super(R.layout.fragment_main); }
@@ -43,14 +48,30 @@ public class MainFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		checkInButton = view.findViewById(R.id.fragment_main_check_in_button);
+		checkOutButton = view.findViewById(R.id.fragment_main_check_out_button);
 		reportsHeader = view.findViewById(R.id.fragment_main_reports_header);
 		noReportsHeader = view.findViewById(R.id.fragment_main_reports_header_no_report);
 		splashText = view.findViewById(R.id.fragment_main_splash_text);
 		mainImageView = view.findViewById(R.id.fragment_main_image);
+		checkedInLabel = view.findViewById(R.id.fragment_main_checked_in_label);
 
-		checkInButton.setOnClickListener(v -> requestCameraAndShowQRCodeScanner());
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
+
+		if (viewModel.checkInState != null) {
+			checkOutButton.setOnClickListener(v -> showCheckedInScreen());
+			checkInButton.setVisibility(View.GONE);
+			checkOutButton.setVisibility(View.VISIBLE);
+			checkedInLabel.setVisibility(View.VISIBLE);
+			viewModel.timeSinceCheckIn
+					.observe(getViewLifecycleOwner(), duration -> checkOutButton.setText(StringUtils.getDurationString(duration)));
+			viewModel.startCheckInTimer();
+		} else {
+			checkInButton.setOnClickListener(v -> requestCameraAndShowQRCodeScanner());
+			checkInButton.setVisibility(View.VISIBLE);
+			checkOutButton.setVisibility(View.GONE);
+			checkedInLabel.setVisibility(View.GONE);
+		}
 
 		viewModel.reports.observe(getViewLifecycleOwner(), reports -> {
 			if (reports == null || reports.isEmpty()) {
@@ -100,6 +121,14 @@ public class MainFragment extends Fragment {
 				//TODO: Handle Camera Permission Denied case
 			}
 		}
+	}
+
+	private void showCheckedInScreen() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.replace(R.id.container, CheckedInFragment.newInstance())
+				.addToBackStack(CheckedInFragment.class.getCanonicalName())
+				.commit();
 	}
 
 	private void showQRCodeScanner() {

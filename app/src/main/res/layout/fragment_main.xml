@@ -10,6 +10,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="@color/white"
 		android:orientation="vertical"
 		tools:context=".MainFragment">
 
@@ -35,7 +36,7 @@
 				android:visibility="gone" />
 
 			<androidx.constraintlayout.widget.Barrier
-				android:id="@+id/header_barrier"
+				android:id="@+id/fragment_main_header_barrier"
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
 				app:barrierDirection="bottom"
@@ -49,7 +50,7 @@
 				android:layout_marginHorizontal="@dimen/spacing_huge"
 				android:layout_marginTop="@dimen/spacing_large"
 				android:text="@string/no_report_hero_text"
-				app:layout_constraintTop_toBottomOf="@+id/header_barrier" />
+				app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier" />
 
 			<ImageView
 				android:id="@+id/fragment_main_image"
@@ -65,13 +66,32 @@
 				app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
 				app:layout_constraintVertical_weight="1" />
 
+			<androidx.constraintlayout.widget.Barrier
+				android:id="@+id/fragment_main_footer_barrier"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				app:barrierDirection="top"
+				app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label" />
+
+			<TextView
+				android:id="@+id/fragment_main_checked_in_label"
+				style="@style/N2Step.Text.Status.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_huge"
+				android:text="@string/homescreen_checkedin_label"
+				app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
+				app:layout_constraintStart_toStartOf="parent" />
+
 			<LinearLayout
 				android:id="@+id/fragment_main_buttons_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
 				android:orientation="horizontal"
-				android:padding="@dimen/spacing_large"
+				android:paddingHorizontal="@dimen/spacing_large"
+				android:paddingTop="@dimen/spacing_medium"
+				android:paddingBottom="@dimen/spacing_large"
 				app:layout_constraintBottom_toBottomOf="parent">
 
 				<Button
@@ -80,8 +100,20 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:drawableStart="@drawable/ic_qr"
-					android:text="@string/checkin_title" />
+					android:text="@string/checkin_title"
+					app:icon="@drawable/ic_qr" />
+
+				<Button
+					android:visibility="gone"
+					android:id="@+id/fragment_main_check_out_button"
+					style="@style/N2Step.Button.Outlined"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="00:12"
+					android:textSize="@dimen/text_size_splash_title"
+					app:icon="@drawable/ic_check_filled"
+					app:iconTint="@color/primary" />
 
 				<ImageButton
 					style="@style/N2Step.ImageButton"

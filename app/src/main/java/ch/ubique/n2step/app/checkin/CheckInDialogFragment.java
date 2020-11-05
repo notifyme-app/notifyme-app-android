@@ -72,6 +72,7 @@ public class CheckInDialogFragment extends DialogFragment {
 
 		checkInButton.setOnClickListener(v -> {
 			dismiss();
+			viewModel.startCheckInTimer();
 			showCheckedInFragment();
 		});
 		closeButton.setOnClickListener(v -> {

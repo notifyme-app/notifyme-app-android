@@ -10,11 +10,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkout.CheckOutFragment;
+import ch.ubique.n2step.app.utils.StringUtils;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckedInFragment extends Fragment {
@@ -53,23 +55,16 @@ public class CheckedInFragment extends Fragment {
 		checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
 
-		//TODO: Make sure this is updated every minute
-		toolbar.setTitle(getDuration());
+		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
+
+		viewModel.startCheckInTimer();
+		viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(), duration -> toolbar.setTitle(StringUtils.getDurationString(duration)));
 
 		nameTextView.setText(venueInfo.getName());
 		locationTextView.setText(venueInfo.getLocation());
 		roomTextView.setText(venueInfo.getRoom());
 
 		checkOutButton.setOnClickListener(v -> showCheckOutFragment());
-	}
-
-	private String getDuration() {
-		long duration = viewModel.checkInState.getCheckOutTime() - viewModel.checkInState.getCheckOutTime();
-		return String.format("%02d:%02d",
-				TimeUnit.MILLISECONDS.toHours(duration),
-				TimeUnit.MILLISECONDS.toMinutes(duration) -
-						TimeUnit.MINUTES.toMinutes(TimeUnit.MILLISECONDS.toHours(duration))
-		);
 	}
 
 	private void showCheckOutFragment() {

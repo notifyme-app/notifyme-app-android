@@ -142,7 +142,6 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData);
 		if (venueInfo == null) {
 			getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
-			//TODO: Show that this is not a valid code in the UI.
 		} else {
 			viewModel.isQrScanningEnabled = false;
 			viewModel.setCheckInState(new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis()));
