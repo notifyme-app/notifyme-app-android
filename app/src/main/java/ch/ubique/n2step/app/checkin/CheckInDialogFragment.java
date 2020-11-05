@@ -71,9 +71,9 @@ public class CheckInDialogFragment extends DialogFragment {
 		roomTextView.setText(venueInfo.getRoom());
 
 		checkInButton.setOnClickListener(v -> {
-			dismiss();
 			viewModel.startCheckInTimer();
 			showCheckedInFragment();
+			dismiss();
 		});
 		closeButton.setOnClickListener(v -> {
 			dismiss();
