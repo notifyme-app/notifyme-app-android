@@ -52,7 +52,7 @@
     <string name="report_message_text">"An infection could have occured"</string>
 
     <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
-    <string name="no_report_hero_text_highlight">"Stay healthy"</string>
+    <string name="no_report_hero_text_highlight">"stay healthy"</string>
 
     <!-- Highlight text of report_message_text (must be exactly as in this text) -->
     <string name="report_message_text_highlight">"An infection"</string>
@@ -80,4 +80,66 @@
 
     <!-- Info Text that is displayed below the info about a new report. -->
     <string name="report_message_days_ago">"{NUMBER} days ago"</string>
+
+    <!-- Homescreen: Label you are checked in -->
+    <string name="homescreen_checkedin_label">"You are checked in"</string>
+
+    <!-- Edit Checkin ViewController: your checkin at -->
+    <string name="edit_controller_your_checkin">"Your check-in at"</string>
+
+    <!-- Edit Check in: DatePicker from label -->
+    <string name="datepicker_from">"From"</string>
+
+    <!-- Edit Check in: DatePicker to label -->
+    <string name="datepicker_to">"To"</string>
+
+    <!-- Edit Checkin: add comment label -->
+    <string name="edit_mode_addcomment">"Add comment"</string>
+
+    <!-- Edit Mode: Add comment placeholder text -->
+    <string name="edit_mode_comment_placeholder">"eg. Who were you with?"</string>
+
+    <!-- Done Button Title -->
+    <string name="done_button">"Done"</string>
+
+    <!-- Edit CheckIn: Text for not showing in diary option -->
+    <string name="diary_option_title">"Don't show in diary"</string>
+
+    <!-- Edit CheckIn: Text that is shown when not showing in diary is set -->
+    <string name="diary_option_subtext">"This Check-in will not be shown in the diary.
+
+Nevertheless the app stores this entry during 14 days to warn you in case of potential infection."</string>
+
+    <!-- Check In: Set Reminder title -->
+    <string name="checkin_set_reminder">"Set reminder"</string>
+
+    <!-- Reminder: Option Off -->
+    <string name="reminder_option_off">"off"</string>
+
+    <!-- Reminder Option one hour -->
+    <string name="reminder_option_1h">"1 h"</string>
+
+    <!-- Reminder Option 2 hours -->
+    <string name="reminder_option_2h">"2 h"</string>
+
+    <!-- Edit Checkin: Remove from diary button title -->
+    <string name="remove_from_diary_button">"Hide from diary"</string>
+
+    <!-- Remove from Diary Warning view title -->
+    <string name="remove_diary_warning_title">"Warning"</string>
+
+    <!-- Remove from diary warning view explanation text -->
+    <string name="remove_diary_warning_text">"You are about to remove “{LOCATION_INFO}” from your diary. This action is irreversible.* Please confirm you are sure about this."</string>
+
+    <!-- Remove from diary warning view remove button title -->
+    <string name="remove_diary_remove_now_button">"Hide now"</string>
+
+    <!-- Remove from diary warning start text -->
+    <string name="remove_diary_warning_star_text">"The app stores this entry during 14 days to warn you in case of potential infections."</string>
+
+    <!-- Report: 1 day ago singular -->
+    <string name="report_message_one_day_ago">"1 day ago"</string>
+
+    <!-- Notification Channel name on Android Devices (Only visible in System Settings) -->
+    <string name="android_notification_channel_name">"Exposure Notifications"</string>
 </resources>

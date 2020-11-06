@@ -19,6 +19,8 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 public class CheckInDialogFragment extends DialogFragment {
 
 	private MainViewModel viewModel;
+	VenueInfo venueInfo;
+
 	private View closeButton;
 	private TextView nameTextView;
 	private TextView locationTextView;
@@ -34,6 +36,7 @@ public class CheckInDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		venueInfo = viewModel.checkInState.getVenueInfo();
 		super.onCreate(savedInstanceState);
 	}
 
@@ -61,19 +64,29 @@ public class CheckInDialogFragment extends DialogFragment {
 		venueTypeIcon = view.findViewById(R.id.check_in_dialog_venue_type_icon);
 		checkInButton = view.findViewById(R.id.check_in_dialog_check_in_button);
 
-		VenueInfo venueInfo = viewModel.currentVenue;
-
 		//TODO: Set venueType icon
 
 		nameTextView.setText(venueInfo.getName());
 		locationTextView.setText(venueInfo.getLocation());
 		roomTextView.setText(venueInfo.getRoom());
 
+		checkInButton.setOnClickListener(v -> {
+			viewModel.startCheckInTimer();
+			showCheckedInFragment();
+			dismiss();
+		});
 		closeButton.setOnClickListener(v -> {
 			dismiss();
-			viewModel.setCurrentVenue(null);
+			viewModel.setCheckInState(null);
 		});
 		super.onViewCreated(view, savedInstanceState);
+	}
+
+	private void showCheckedInFragment() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.replace(R.id.container, CheckedInFragment.newInstance())
+				.commit();
 	}
 
 	@Override

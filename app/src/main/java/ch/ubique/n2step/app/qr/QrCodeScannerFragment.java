@@ -1,9 +1,15 @@
 package ch.ubique.n2step.app.qr;
 
+import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -24,9 +30,11 @@ import java.util.concurrent.Executors;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import ch.ubique.n2step.app.BuildConfig;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkin.CheckInDialogFragment;
+import ch.ubique.n2step.app.model.CheckInState;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
@@ -39,6 +47,11 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 	private ExecutorService cameraExecutor;
 	private ImageButton flashButton;
+	private TextView invalidCodeText;
+	private View topLeftIndicator;
+	private View topRightIndicator;
+	private View bottomRightIndicator;
+	private View bottomLeftIndicator;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
 
@@ -58,7 +71,12 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		previewView = view.findViewById(R.id.camera_preview);
 		flashButton = view.findViewById(R.id.fragment_qr_scanner_flash_button);
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		invalidCodeText = view.findViewById(R.id.qr_code_scanner_invalid_code_text);
+		topLeftIndicator = view.findViewById(R.id.qr_code_scanner_top_left_indicator);
+		topRightIndicator = view.findViewById(R.id.qr_code_scanner_top_right_indicator);
+		bottomLeftIndicator = view.findViewById(R.id.qr_code_scanner_bottom_left_indicator);
+		bottomRightIndicator = view.findViewById(R.id.qr_code_scanner_bottom_right_indicator);
+		Toolbar toolbar = view.findViewById(R.id.fragment_reports_toolbar);
 
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		startCameraAndQrAnalyzer();
@@ -117,16 +135,47 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	@Override
+	public void noQRCodeFound() {
+		getActivity().runOnUiThread(() -> indicateInvalidQrCode(false));
+	}
+
+	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
 		if (!viewModel.isQrScanningEnabled) return;
-		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData);
+		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 		if (venueInfo == null) {
-			//TODO: Show that this is not a valid code in the UI.
+			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
+				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
+				startActivity(openBrowserIntent);
+			} else {
+				getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
+			}
 		} else {
 			viewModel.isQrScanningEnabled = false;
-			viewModel.setCurrentVenue(venueInfo);
+			viewModel.setCheckInState(new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis()));
 			showCheckInDialog();
 		}
+	}
+
+	private void indicateInvalidQrCode(boolean invalid) {
+		int color = R.color.primary;
+		if (invalid) {
+			invalidCodeText.setVisibility(View.VISIBLE);
+			color = R.color.tertiary;
+		} else {
+			invalidCodeText.setVisibility(View.INVISIBLE);
+		}
+		setIndicatorColor(topLeftIndicator, color);
+		setIndicatorColor(topRightIndicator, color);
+		setIndicatorColor(bottomLeftIndicator, color);
+		setIndicatorColor(bottomRightIndicator, color);
+	}
+
+	private void setIndicatorColor(View indicator, @ColorRes int color) {
+		LayerDrawable drawable = (LayerDrawable) indicator.getBackground();
+		GradientDrawable stroke = (GradientDrawable) drawable.findDrawableByLayerId(R.id.indicator);
+		stroke.setStroke(getResources().getDimensionPixelSize(R.dimen.qr_scanner_indicator_stroke_width),
+				getResources().getColor(color, null));
 	}
 
 	private void showCheckInDialog() {

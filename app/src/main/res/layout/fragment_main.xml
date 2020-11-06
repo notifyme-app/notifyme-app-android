@@ -1,99 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/fragment_main_swipe_refresh_layout"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:fillViewport="true">
+	android:layout_height="match_parent">
 
-	<FrameLayout
+	<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		tools:context=".MainFragment">
+		android:layout_height="match_parent"
+		android:fillViewport="true">
 
-		<ImageView
+		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_gravity="bottom"
-			android:adjustViewBounds="true"
-			android:src="@drawable/ic_oval" />
-
-		<androidx.constraintlayout.widget.ConstraintLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
-
-			<include
-				android:id="@+id/fragment_main_reports_header_no_report"
-				layout="@layout/header_no_report" />
-
-			<include
-				android:id="@+id/fragment_main_reports_header"
-				layout="@layout/header_reports"
-				android:visibility="gone" />
-
-			<androidx.constraintlayout.widget.Barrier
-				android:id="@+id/header_barrier"
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				app:barrierDirection="bottom"
-				app:constraint_referenced_ids="fragment_main_reports_header_no_report,fragment_main_reports_header" />
-
-			<TextView
-				android:id="@+id/fragment_main_splash_text"
-				style="@style/N2Step.Text.Title.Mega"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginHorizontal="@dimen/spacing_huge"
-				android:layout_marginTop="@dimen/spacing_large"
-				android:text="@string/no_report_hero_text"
-				app:layout_constraintTop_toBottomOf="@+id/header_barrier" />
+			android:background="@color/white"
+			android:orientation="vertical"
+			tools:context=".MainFragment">
 
 			<ImageView
-				android:id="@+id/fragment_main_image"
-				android:layout_width="wrap_content"
-				android:layout_height="0dp"
-				android:layout_marginVertical="@dimen/spacing_large"
-				android:layout_marginEnd="@dimen/spacing_very_large"
-				android:src="@drawable/ic_start_screen"
-				app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
-				app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
-				app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
-				app:layout_constraintVertical_weight="1" />
-
-			<LinearLayout
-				android:id="@+id/fragment_main_buttons_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
-				android:orientation="horizontal"
-				android:padding="@dimen/spacing_large"
-				app:layout_constraintBottom_toBottomOf="parent">
+				android:adjustViewBounds="true"
+				android:src="@drawable/ic_oval" />
 
-				<Button
-					android:id="@+id/fragment_main_check_in_button"
-					style="@style/N2Step.Button"
-					android:layout_width="0dp"
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/fragment_main_reports_header_no_report"
+					layout="@layout/header_no_report" />
+
+				<include
+					android:id="@+id/fragment_main_reports_header"
+					layout="@layout/header_reports"
+					android:visibility="gone" />
+
+				<androidx.constraintlayout.widget.Barrier
+					android:id="@+id/fragment_main_header_barrier"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					app:barrierDirection="bottom"
+					app:constraint_referenced_ids="fragment_main_reports_header_no_report,fragment_main_reports_header" />
+
+				<TextView
+					android:id="@+id/fragment_main_splash_text"
+					style="@style/N2Step.Text.Title.Mega"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:drawableStart="@drawable/ic_qr"
-					android:text="@string/checkin_title" />
+					android:layout_marginHorizontal="@dimen/spacing_huge"
+					android:layout_marginTop="@dimen/spacing_large"
+					android:text="@string/no_report_hero_text"
+					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier" />
 
-				<ImageButton
-					style="@style/N2Step.ImageButton"
-					android:layout_width="@dimen/button_height"
-					android:layout_height="@dimen/button_height"
-					android:layout_marginStart="@dimen/spacing_medium"
-					android:src="@drawable/ic_diary" />
+				<ImageView
+					android:id="@+id/fragment_main_image"
+					android:layout_width="wrap_content"
+					android:layout_height="0dp"
+					android:layout_marginVertical="@dimen/spacing_large"
+					android:layout_marginEnd="@dimen/spacing_very_large"
+					android:src="@drawable/ic_start_screen"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
+					app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
+					app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
+					app:layout_constraintVertical_weight="1" />
 
-			</LinearLayout>
+				<androidx.constraintlayout.widget.Barrier
+					android:id="@+id/fragment_main_footer_barrier"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					app:barrierDirection="top"
+					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label" />
 
-		</androidx.constraintlayout.widget.ConstraintLayout>
+				<TextView
+					android:id="@+id/fragment_main_checked_in_label"
+					style="@style/N2Step.Text.Status.Small"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/spacing_huge"
+					android:text="@string/homescreen_checkedin_label"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
+					app:layout_constraintStart_toStartOf="parent" />
 
-	</FrameLayout>
+				<LinearLayout
+					android:id="@+id/fragment_main_buttons_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/spacing_large"
+					android:paddingTop="@dimen/spacing_medium"
+					android:paddingBottom="@dimen/spacing_large"
+					app:layout_constraintBottom_toBottomOf="parent">
 
-</ScrollView>
+					<Button
+						android:id="@+id/fragment_main_check_in_button"
+						style="@style/N2Step.Button"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/checkin_title"
+						app:icon="@drawable/ic_qr" />
+
+					<Button
+						android:id="@+id/fragment_main_check_out_button"
+						style="@style/N2Step.Button.Outlined"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="00:12"
+						android:textSize="@dimen/text_size_splash_title"
+						android:visibility="gone"
+						app:icon="@drawable/ic_check_filled"
+						app:iconTint="@color/primary" />
+
+					<ImageButton
+						style="@style/N2Step.ImageButton"
+						android:layout_width="@dimen/button_height"
+						android:layout_height="@dimen/button_height"
+						android:layout_marginStart="@dimen/spacing_medium"
+						android:src="@drawable/ic_diary" />
+
+				</LinearLayout>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+		</FrameLayout>
+
+	</ScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

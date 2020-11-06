@@ -49,12 +49,11 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 		// Catch all kinds of dubious exceptions that zxing throws
 		catch (FormatException e) {
 			Log.w(TAG, "Caught FormatException");
-			e.printStackTrace();
 		} catch (ChecksumException e) {
 			Log.w(TAG, "Caught ChecksumException");
-			e.printStackTrace();
 		} catch (NotFoundException e) {
 			// Do nothing
+			listener.noQRCodeFound();
 		} finally {
 			// Must be called else new images won't be received or camera may stall (depending on back pressure setting)
 			image.close();
@@ -62,14 +61,17 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 	}
 
 	private void checkQrCode(Result qrCode) {
-		//TODO check QR Code format and covert to QrCodeData object
 		if (qrCode != null) {
 			listener.onQRCodeFound(qrCode.getText());
+		} else {
+			listener.noQRCodeFound();
 		}
 	}
 
 	public interface Listener {
 		void onQRCodeFound(String qrCodeData);
+
+		void noQRCodeFound();
 
 	}
 

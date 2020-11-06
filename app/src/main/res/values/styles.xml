@@ -55,8 +55,16 @@
 		<item name="android:textAllCaps">true</item>
 	</style>
 
+	<style name="N2Step.Text.Status.Small">
+		<item name="android:textSize">@dimen/text_size_small</item>
+	</style>
+
 	<style name="N2Step.Text.Status.White">
 		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="N2Step.Text.Status.Primary">
+		<item name="android:textColor">@color/primary</item>
 	</style>
 
 	<style name="N2Step.Text.Status.Secondary">
@@ -65,6 +73,10 @@
 
 	<style name="N2Step.Text.Status.Tertiary">
 		<item name="android:textColor">@color/tertiary</item>
+	</style>
+
+	<style name="N2Step.Text.Status.Tertiary.Small">
+		<item name="android:textSize">@dimen/text_size_small</item>
 	</style>
 
 	<style name="N2Step.Button" parent="Widget.MaterialComponents.Button">
@@ -124,6 +136,13 @@
 		<item name="android:clickable">false</item>
 		<item name="cardElevation">0dp</item>
 		<item name="cardBackgroundColor">@color/tertiary</item>
+	</style>
+
+	<style name="N2Step.EditText" parent="Widget.AppCompat.EditText">
+		<item name="android:background">@drawable/bg_edit_text</item>
+		<item name="android:textSize">@dimen/text_size_normal</item>
+		<item name="android:textColor">@color/main</item>
+		<item name="android:padding">@dimen/spacing_medium</item>
 	</style>
 
 </resources>

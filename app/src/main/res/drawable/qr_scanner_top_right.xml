@@ -2,6 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<item
+		android:id="@+id/indicator"
 		android:bottom="@dimen/qr_scanner_indicator_stroke_width_inverse"
 		android:start="@dimen/qr_scanner_indicator_stroke_width_inverse">
 

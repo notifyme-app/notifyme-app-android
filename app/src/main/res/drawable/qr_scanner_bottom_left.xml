@@ -2,8 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<item
-		android:top="@dimen/qr_scanner_indicator_stroke_width_inverse"
-		android:end="@dimen/qr_scanner_indicator_stroke_width_inverse">
+		android:id="@+id/indicator"
+		android:end="@dimen/qr_scanner_indicator_stroke_width_inverse"
+		android:top="@dimen/qr_scanner_indicator_stroke_width_inverse">
 
 		<shape android:shape="rectangle">
 			<solid android:color="@android:color/transparent" />

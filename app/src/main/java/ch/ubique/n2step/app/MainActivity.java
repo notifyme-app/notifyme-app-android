@@ -3,6 +3,9 @@ package ch.ubique.n2step.app;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+
+import ch.ubique.n2step.app.network.KeyLoadWorker;
+
 public class MainActivity extends AppCompatActivity {
 
 	@Override
@@ -14,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 					.replace(R.id.container, MainFragment.newInstance())
 					.commitNow();
 		}
+		KeyLoadWorker.startKeyLoadWorker(this);
 	}
 
 }
