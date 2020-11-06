@@ -55,7 +55,7 @@ public class NotificationHelper {
 				.setAutoCancel(true)
 				.setContentTitle(context.getString(R.string.app_name))
 				.setContentText(message)
-				.setSmallIcon(R.drawable.ic_flash_on)
+				.setSmallIcon(R.drawable.ic_notification)
 				.setColor(ContextCompat.getColor(context, R.color.primary))
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
 		return builder.build();
