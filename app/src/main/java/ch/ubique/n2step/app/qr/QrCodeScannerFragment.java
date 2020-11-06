@@ -62,9 +62,14 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		viewModel.isQrScanningEnabled = true;
 		cameraExecutor = Executors.newSingleThreadExecutor();
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		viewModel.isQrScanningEnabled = true;
+		super.onResume();
 	}
 
 	@Override
@@ -145,6 +150,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 		if (venueInfo == null) {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
+				viewModel.isQrScanningEnabled = false;
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
 				startActivity(openBrowserIntent);
 			} else {

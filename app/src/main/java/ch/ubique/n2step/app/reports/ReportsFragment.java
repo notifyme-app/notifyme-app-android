@@ -13,12 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.reports.items.ItemNoReportsHeader;
+import ch.ubique.n2step.app.reports.items.ItemReport;
+import ch.ubique.n2step.app.reports.items.ItemReportsDayHeader;
 import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.ReportsRecyclerItem;
+import ch.ubique.n2step.app.utils.StringUtils;
+import ch.ubique.n2step.sdk.model.Exposure;
 
 public class ReportsFragment extends Fragment {
 
@@ -49,21 +54,29 @@ public class ReportsFragment extends Fragment {
 		recyclerView.setAdapter(recyclerAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		viewModel.exposures.observe(getViewLifecycleOwner(), reports -> {
+		viewModel.exposures.observe(getViewLifecycleOwner(), exposures -> {
 			ArrayList<ReportsRecyclerItem> items = new ArrayList<>();
 
-			if (reports == null || reports.isEmpty()) {
+			if (exposures == null || exposures.isEmpty()) {
 				toolbar.setTitle(R.string.no_report_title);
 				items.add(new ItemNoReportsHeader());
-			} else if (reports.size() == 1) {
+			} else if (exposures.size() == 1) {
 				toolbar.setTitle(R.string.report_title_singular);
 				items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
 			} else {
-				toolbar.setTitle(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(reports.size())));
+				toolbar.setTitle(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(exposures.size())));
 				items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
 			}
 
-			//TODO: Add reports here
+			String daysAgoString = "";
+			for (Exposure exposure : exposures) {
+				String newDaysAgoString = StringUtils.getDaysAgoString(exposure.getStartTime(), getContext());
+				if (!newDaysAgoString.equals(daysAgoString)) {
+					daysAgoString = newDaysAgoString;
+					items.add(new ItemReportsDayHeader(daysAgoString));
+				}
+				items.add(new ItemReport(exposure));
+			}
 
 			recyclerAdapter.setData(items);
 		});

@@ -21,6 +21,10 @@
 		<item name="android:fontFamily">@font/inter_light</item>
 	</style>
 
+	<style name="N2Step.Text.Primary">
+		<item name="android:textColor">@color/primary</item>
+	</style>
+
 	<style name="N2Step.Text.White">
 		<item name="android:textColor">@color/white</item>
 	</style>
@@ -121,7 +125,11 @@
 		<item name="cardElevation">@dimen/card_elevation</item>
 		<item name="android:minHeight">@dimen/button_height</item>
 		<item name="cardCornerRadius">@dimen/button_radius</item>
+	</style>
 
+	<style name="N2Step.Card.Small">
+		<item name="android:minHeight">0dp</item>
+		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
 	</style>
 
 	<style name="N2Step.Card.Secondary">

@@ -101,6 +101,8 @@ public class MainFragment extends Fragment {
 					((TextView) reportsHeader.findViewById(R.id.reports_header_title))
 							.setText(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(reports.size())));
 				}
+				((TextView) reportsHeader.findViewById(R.id.reports_header_days_ago))
+						.setText(StringUtils.getDaysAgoString(reports.get(0).getStartTime(), getContext()));
 			}
 		});
 

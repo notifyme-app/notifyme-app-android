@@ -15,6 +15,7 @@ import java.util.Calendar;
 import ch.ubique.n2step.app.MainFragment;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
+import ch.ubique.n2step.app.utils.StringUtils;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
@@ -72,21 +73,10 @@ public class CheckOutFragment extends Fragment {
 	}
 
 	private void refreshTimeTextViews() {
-		Calendar checkIn = Calendar.getInstance();
-		checkIn.setTimeInMillis(viewModel.checkInState.getCheckInTime());
-		fromTime.setText(prependZero(checkIn.get(Calendar.HOUR_OF_DAY)) + "  :  " + prependZero(checkIn.get(Calendar.MINUTE)));
-		Calendar checkOut = Calendar.getInstance();
-		checkOut.setTimeInMillis(viewModel.checkInState.getCheckOutTime());
-		toTime.setText(prependZero(checkOut.get(Calendar.HOUR_OF_DAY)) + "  :  " + prependZero(checkOut.get(Calendar.MINUTE)));
+		fromTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckInTime(), "  :  "));
+		toTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckOutTime(), "  :  "));
 	}
 
-	private String prependZero(int timeUnit) {
-		if (timeUnit < 10) {
-			return "0" + timeUnit;
-		} else {
-			return String.valueOf(timeUnit);
-		}
-	}
 
 	private void showTimePicker(boolean isFromTime) {
 

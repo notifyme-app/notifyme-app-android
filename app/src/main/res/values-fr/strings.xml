@@ -142,4 +142,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Notification Channel name on Android Devices (Only visible in System Settings) -->
     <string name="android_notification_channel_name">"Exposure Notifications"</string>
+
+    <!-- Info Text that is displayed below the info about a new report today. -->
+    <string name="report_message_today">"Today"</string>
 </resources>

@@ -12,6 +12,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ch.ubique.n2step.app.model.CheckInState;
@@ -91,7 +93,9 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	private void refreshExposures() {
-		exposures.setValue(N2STEP.getExposures(getApplication()));
+		List<Exposure> exposuresUnsorted = N2STEP.getExposures(getApplication());
+		Collections.sort(exposuresUnsorted, (e1, e2) -> Long.compare(e1.getStartTime(), e2.getStartTime()));
+		exposures.setValue(exposuresUnsorted);
 	}
 
 	@Override

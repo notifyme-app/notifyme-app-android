@@ -18,6 +18,9 @@
 	<dimen name="text_size_normal">16sp</dimen>
 	<dimen name="text_size_small">13sp</dimen>
 
+	<dimen name="diary_entry_corner_radius">6dp</dimen>
+	<dimen name="diary_entry_icon_size">36dp</dimen>
+
 	<dimen name="button_radius">36dp</dimen>
 	<dimen name="button_height">72dp</dimen>
 	<dimen name="outlined_button_stroke_width">5dp</dimen>
