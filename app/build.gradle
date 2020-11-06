@@ -40,10 +40,13 @@ android {
 		dev {
 			applicationIdSuffix '.dev'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.n2s.ch/"'
-
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.n2s.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.n2s.ch"'
 		}
 		prod {
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.n2s.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.n2s.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.n2s.ch"'
 		}
 	}
 
@@ -124,7 +127,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-12'
+	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-15'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -1,7 +1,9 @@
 package ch.ubique.n2step.app.qr;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,7 @@ import java.util.concurrent.Executors;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import ch.ubique.n2step.app.BuildConfig;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkin.CheckInDialogFragment;
@@ -139,9 +142,14 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
 		if (!viewModel.isQrScanningEnabled) return;
-		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData);
+		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 		if (venueInfo == null) {
-			getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
+			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
+				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
+				startActivity(openBrowserIntent);
+			} else {
+				getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
+			}
 		} else {
 			viewModel.isQrScanningEnabled = false;
 			viewModel.setCheckInState(new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis()));
