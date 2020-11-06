@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ReportsFragment extends Fragment {
 	private MainViewModel viewModel;
 	private ReportsRecyclerAdapter recyclerAdapter = new ReportsRecyclerAdapter();
 	private Toolbar toolbar;
+	private SwipeRefreshLayout swipeRefreshLayout;
 
 	public ReportsFragment() { super(R.layout.fragment_reports); }
 
@@ -39,9 +41,11 @@ public class ReportsFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = (Toolbar) view.findViewById(R.id.fragment_reports_toolbar);
+		swipeRefreshLayout = view.findViewById(R.id.fragment_reports_swipe_refresh_layout);
+
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
-		RecyclerView recyclerView = view.findViewById(R.id.reports_recycler_view);
+		RecyclerView recyclerView = view.findViewById(R.id.fragment_reports_recycler_view);
 		recyclerView.setAdapter(recyclerAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -63,6 +67,11 @@ public class ReportsFragment extends Fragment {
 
 			recyclerAdapter.setData(items);
 		});
+
+		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
+
+		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
+				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
 	}
 
 }

@@ -73,7 +73,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		topRightIndicator = view.findViewById(R.id.qr_code_scanner_top_right_indicator);
 		bottomLeftIndicator = view.findViewById(R.id.qr_code_scanner_bottom_left_indicator);
 		bottomRightIndicator = view.findViewById(R.id.qr_code_scanner_bottom_right_indicator);
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.fragment_reports_toolbar);
 
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		startCameraAndQrAnalyzer();

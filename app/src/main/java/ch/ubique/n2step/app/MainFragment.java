@@ -106,13 +106,8 @@ public class MainFragment extends Fragment {
 
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
-		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState -> {
-			if (loadingState == MainViewModel.LoadingState.LOADING) {
-				swipeRefreshLayout.setRefreshing(true);
-			} else {
-				swipeRefreshLayout.setRefreshing(false);
-			}
-		});
+		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
+				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
 	}
 
 	private void requestCameraAndShowQRCodeScanner() {
