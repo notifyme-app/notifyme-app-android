@@ -2,7 +2,6 @@ package ch.ubique.n2step.app.reports;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +45,7 @@ public class ReportsFragment extends Fragment {
 		recyclerView.setAdapter(recyclerAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		viewModel.reports.observe(getViewLifecycleOwner(), reports -> {
+		viewModel.exposures.observe(getViewLifecycleOwner(), reports -> {
 			ArrayList<ReportsRecyclerItem> items = new ArrayList<>();
 
 			if (reports == null || reports.isEmpty()) {

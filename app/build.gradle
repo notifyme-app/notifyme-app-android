@@ -1,6 +1,7 @@
 plugins {
 	id 'com.android.application'
 	id 'org.sonarqube' version '3.0'
+	id 'com.google.protobuf'
 }
 
 ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
@@ -38,8 +39,11 @@ android {
 	productFlavors {
 		dev {
 			applicationIdSuffix '.dev'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.n2s.ch/"'
+
 		}
 		prod {
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.n2s.ch/"'
 		}
 	}
 
@@ -76,6 +80,28 @@ sonarqube {
 	}
 }
 
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.0.0'
+	}
+	plugins {
+		javalite {
+			artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+		}
+	}
+	generateProtoTasks {
+		all().each { task ->
+			task.builtins {
+				remove java
+			}
+			task.plugins {
+				javalite {}
+			}
+		}
+	}
+}
+
+
 dependencies {
 
 	implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -84,6 +110,7 @@ dependencies {
 	implementation 'androidx.fragment:fragment:1.2.5'
 	implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 	implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+	implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 	testImplementation 'junit:junit:4.+'
 	androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 	androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -94,9 +121,16 @@ dependencies {
 	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 	implementation "androidx.camera:camera-view:1.0.0-alpha18"
 	implementation "com.google.zxing:core:3.4.0"
+
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-11'
+	implementation 'ch.ubique.n2step:n2step-sdk-android:0.1-dev-12'
+
+	implementation 'androidx.work:work-runtime:2.4.0'
+	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+	implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 
 }

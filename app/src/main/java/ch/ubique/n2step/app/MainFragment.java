@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import ch.ubique.n2step.app.checkin.CheckedInFragment;
 import ch.ubique.n2step.app.reports.ReportsFragment;
@@ -29,6 +30,7 @@ public class MainFragment extends Fragment {
 	private TextView splashText;
 	private View mainImageView;
 	private View checkedInLabel;
+	private SwipeRefreshLayout swipeRefreshLayout;
 
 
 	public MainFragment() { super(R.layout.fragment_main); }
@@ -53,6 +55,7 @@ public class MainFragment extends Fragment {
 		splashText = view.findViewById(R.id.fragment_main_splash_text);
 		mainImageView = view.findViewById(R.id.fragment_main_image);
 		checkedInLabel = view.findViewById(R.id.fragment_main_checked_in_label);
+		swipeRefreshLayout = view.findViewById(R.id.fragment_main_swipe_refresh_layout);
 
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
@@ -72,7 +75,7 @@ public class MainFragment extends Fragment {
 			checkedInLabel.setVisibility(View.GONE);
 		}
 
-		viewModel.reports.observe(getViewLifecycleOwner(), reports -> {
+		viewModel.exposures.observe(getViewLifecycleOwner(), reports -> {
 			if (reports == null || reports.isEmpty()) {
 				noReportsHeader.setVisibility(View.VISIBLE);
 				reportsHeader.setVisibility(View.GONE);
@@ -98,6 +101,16 @@ public class MainFragment extends Fragment {
 					((TextView) reportsHeader.findViewById(R.id.reports_header_title))
 							.setText(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(reports.size())));
 				}
+			}
+		});
+
+		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
+
+		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState -> {
+			if (loadingState == MainViewModel.LoadingState.LOADING) {
+				swipeRefreshLayout.setRefreshing(true);
+			} else {
+				swipeRefreshLayout.setRefreshing(false);
 			}
 		});
 	}

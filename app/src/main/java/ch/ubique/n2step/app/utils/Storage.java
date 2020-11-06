@@ -11,6 +11,7 @@ public class Storage {
 
 	private static final String KEY_SHARED_PREFERENCES_STORAGE = "KEY_SHARED_PREFERENCES_STORAGE";
 	private static final String KEY_CURRENT_CHECK_IN = "KEY_CURRENT_CHECK_IN";
+	private static final String KEY_LAST_SYNC = "KEY_LAST_SYNC";
 
 	private static Storage instance;
 
@@ -34,6 +35,14 @@ public class Storage {
 
 	public CheckInState getCurrentVenue() {
 		return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInState.class);
+	}
+
+	public void setLastSync(long lastSync) {
+		sharedPreferences.edit().putLong(KEY_LAST_SYNC, lastSync).apply();
+	}
+
+	public long getLastSync() {
+		return sharedPreferences.getLong(KEY_LAST_SYNC, 0);
 	}
 
 }

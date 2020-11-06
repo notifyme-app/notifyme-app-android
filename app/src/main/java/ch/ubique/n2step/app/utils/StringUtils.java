@@ -21,8 +21,7 @@ public class StringUtils {
 	public static String getDurationString(long duration) {
 		return String.format(Locale.GERMAN, "%02d:%02d",
 				TimeUnit.MILLISECONDS.toHours(duration),
-				TimeUnit.MILLISECONDS.toMinutes(duration) -
-						TimeUnit.MINUTES.toMinutes(TimeUnit.MILLISECONDS.toHours(duration))
+				TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration)))
 		);
 	}
 
