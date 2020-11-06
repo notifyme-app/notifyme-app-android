@@ -19,6 +19,7 @@ public class KeyLoadWorker extends Worker {
 
 	public static final String NEW_NOTIFICATION = "NEW_NOTIFICATION";
 	private static final String WORK_TAG = "ch.ubique.n2step.app.network.SyncWorker";
+	private static final int DAYS_TO_KEEP_VENUE_VISITS = 10;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;
 
 
@@ -52,6 +53,7 @@ public class KeyLoadWorker extends Worker {
 			new NotificationHelper(getApplicationContext()).showExposureNotification();
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
+		N2STEP.cleanupOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
 
 		return Result.success();
 	}
