@@ -15,6 +15,8 @@ import java.util.Calendar;
 import ch.ubique.n2step.app.MainFragment;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
+import ch.ubique.n2step.app.model.DiaryEntry;
+import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.StringUtils;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.VenueInfo;
@@ -106,9 +108,11 @@ public class CheckOutFragment extends Fragment {
 	}
 
 	private void saveEntry() {
-		long id = N2STEP.addVenueVisit(viewModel.checkInState.getCheckInTime(), viewModel.checkInState.getCheckOutTime(),
-				venueInfo.getNotificationKey(), venueInfo.getPublicKey(), getContext());
-		//TODO: Save entry to Diary
+		long checkIn = viewModel.checkInState.getCheckInTime();
+		long checkOut = viewModel.checkInState.getCheckOutTime();
+		String comment = commentEditText.getText().toString();
+		long id = N2STEP.addVenueVisit(checkIn, checkOut, venueInfo.getNotificationKey(), venueInfo.getPublicKey(), getContext());
+		DiaryStorage.getInstance(getContext()).addEntry(new DiaryEntry(id, checkIn, checkOut, venueInfo, comment));
 		viewModel.setCheckInState(null);
 	}
 
