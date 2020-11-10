@@ -10,6 +10,7 @@ import androidx.work.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.NotificationHelper;
 import ch.ubique.n2step.sdk.N2STEP;
 import ch.ubique.n2step.sdk.model.Exposure;
@@ -54,6 +55,7 @@ public class KeyLoadWorker extends Worker {
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
 		N2STEP.cleanupOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
+		DiaryStorage.getInstance(getApplicationContext()).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
 
 		return Result.success();
 	}
