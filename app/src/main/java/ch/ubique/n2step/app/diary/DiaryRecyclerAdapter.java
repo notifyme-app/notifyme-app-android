@@ -1,4 +1,4 @@
-package ch.ubique.n2step.app.reports;
+package ch.ubique.n2step.app.diary;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.app.reports.items.ItemNoReportsHeader;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisit;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
-import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.n2step.app.utils.StringUtils;
 import ch.ubique.n2step.sdk.model.VenueInfo;
 
-public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	List<VenueVisitRecyclerItem> items = new ArrayList<>();
 
@@ -34,12 +32,6 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		VenueVisitRecyclerItem.ViewType type = VenueVisitRecyclerItem.ViewType.values()[viewType];
 
 		switch (type) {
-			case NO_REPORTS_HEADER:
-				return new NoReportsHeaderViewHolder(
-						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_no_reports_header, parent, false));
-			case REPORTS_HEADER:
-				return new ReportsHeaderViewHolder(
-						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reports_header, parent, false));
 			case REPORTS_DAY_HEADER:
 				return new DayHeaderViewHolder(
 						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_venue_visits_day_header, parent, false));
@@ -56,12 +48,6 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		VenueVisitRecyclerItem item = items.get(position);
 
 		switch (item.getViewType()) {
-			case NO_REPORTS_HEADER:
-				((NoReportsHeaderViewHolder) holder).bind((ItemNoReportsHeader) item);
-				break;
-			case REPORTS_HEADER:
-				((ReportsHeaderViewHolder) holder).bind((ItemReportsHeader) item);
-				break;
 			case REPORTS_DAY_HEADER:
 				((DayHeaderViewHolder) holder).bind((ItemVenueVisitDayHeader) item);
 				break;
@@ -83,15 +69,6 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 
-	public class NoReportsHeaderViewHolder extends RecyclerView.ViewHolder {
-
-		public NoReportsHeaderViewHolder(View itemView) {super(itemView);}
-
-		public void bind(ItemNoReportsHeader item) { }
-
-	}
-
-
 	public class DayHeaderViewHolder extends RecyclerView.ViewHolder {
 
 		private TextView dayLabel;
@@ -103,17 +80,6 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		public void bind(ItemVenueVisitDayHeader item) {
 			dayLabel.setText(item.getDayLabel());
-		}
-
-	}
-
-
-	public class ReportsHeaderViewHolder extends RecyclerView.ViewHolder {
-
-		public ReportsHeaderViewHolder(View itemView) {super(itemView);}
-
-		public void bind(ItemReportsHeader item) {
-			itemView.findViewById(R.id.reports_what_to_do_button).setOnClickListener(item.getClickListener());
 		}
 
 	}
@@ -137,17 +103,20 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		}
 
 		public void bind(ItemVenueVisit item) {
-			if (item.getDiaryEntry() != null) {
-				VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
-				nameTextView.setText(venueInfo.getName());
-				locationTextView.setText(venueInfo.getLocation() + ", " + venueInfo.getRoom());
+
+			VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
+			nameTextView.setText(venueInfo.getName());
+			locationTextView.setText(venueInfo.getLocation() + ", " + venueInfo.getRoom());
+			String start = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getArrivalTime(), ":");
+			String end = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getDepartureTime(), ":");
+			timeTextView.setText(start + " — " + end);
+			if (item.getExposure() == null) {
+				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_filled));
+			} else {
+				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 			}
 			//TODO: Display correct venue type icon
 			venueTypeIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_tea));
-			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
-			String start = StringUtils.getHourMinuteTimeString(item.getExposure().getStartTime(), ":");
-			String end = StringUtils.getHourMinuteTimeString(item.getExposure().getEndTime(), ":");
-			timeTextView.setText(start + " — " + end);
 			itemView.setOnClickListener(item.getOnClickListener());
 		}
 

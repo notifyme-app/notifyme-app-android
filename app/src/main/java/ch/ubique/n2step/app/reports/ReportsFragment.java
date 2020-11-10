@@ -13,24 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
+import ch.ubique.n2step.app.diary.DiaryFragment;
 import ch.ubique.n2step.app.reports.items.ItemNoReportsHeader;
-import ch.ubique.n2step.app.reports.items.ItemReport;
-import ch.ubique.n2step.app.reports.items.ItemReportsDayHeader;
+import ch.ubique.n2step.app.reports.items.ItemVenueVisit;
+import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
-import ch.ubique.n2step.app.reports.items.ReportsRecyclerItem;
+import ch.ubique.n2step.app.reports.items.VenueVisitRecyclerItem;
+import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.StringUtils;
 import ch.ubique.n2step.sdk.model.Exposure;
 
 public class ReportsFragment extends Fragment {
 
+	public final static String TAG = ReportsFragment.class.getCanonicalName();
+
 	private MainViewModel viewModel;
 	private ReportsRecyclerAdapter recyclerAdapter = new ReportsRecyclerAdapter();
 	private Toolbar toolbar;
 	private SwipeRefreshLayout swipeRefreshLayout;
+	private DiaryStorage diaryStorage;
 
 	public ReportsFragment() { super(R.layout.fragment_reports); }
 
@@ -54,8 +58,9 @@ public class ReportsFragment extends Fragment {
 		recyclerView.setAdapter(recyclerAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+		diaryStorage = DiaryStorage.getInstance(getContext());
 		viewModel.exposures.observe(getViewLifecycleOwner(), exposures -> {
-			ArrayList<ReportsRecyclerItem> items = new ArrayList<>();
+			ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
 
 			if (exposures == null || exposures.isEmpty()) {
 				toolbar.setTitle(R.string.no_report_title);
@@ -73,9 +78,9 @@ public class ReportsFragment extends Fragment {
 				String newDaysAgoString = StringUtils.getDaysAgoString(exposure.getStartTime(), getContext());
 				if (!newDaysAgoString.equals(daysAgoString)) {
 					daysAgoString = newDaysAgoString;
-					items.add(new ItemReportsDayHeader(daysAgoString));
+					items.add(new ItemVenueVisitDayHeader(daysAgoString));
 				}
-				items.add(new ItemReport(exposure));
+				items.add(new ItemVenueVisit(exposure, diaryStorage.getDiaryEntryWithId(exposure.getId()), null));
 			}
 
 			recyclerAdapter.setData(items);

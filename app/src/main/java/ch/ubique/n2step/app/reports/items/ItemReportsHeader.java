@@ -2,7 +2,7 @@ package ch.ubique.n2step.app.reports.items;
 
 import android.view.View;
 
-public class ItemReportsHeader extends ReportsRecyclerItem {
+public class ItemReportsHeader extends VenueVisitRecyclerItem {
 
 	private View.OnClickListener clickListener;
 

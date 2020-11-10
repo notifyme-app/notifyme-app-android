@@ -21,7 +21,7 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckedInFragment extends Fragment {
 
-	private final static String TAG = CheckedInFragment.class.getCanonicalName();
+	public final static String TAG = CheckedInFragment.class.getCanonicalName();
 
 	private MainViewModel viewModel;
 	private VenueInfo venueInfo;
@@ -58,7 +58,8 @@ public class CheckedInFragment extends Fragment {
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 
 		viewModel.startCheckInTimer();
-		viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(), duration -> toolbar.setTitle(StringUtils.getDurationString(duration)));
+		viewModel.timeSinceCheckIn
+				.observe(getViewLifecycleOwner(), duration -> toolbar.setTitle(StringUtils.getDurationString(duration)));
 
 		nameTextView.setText(venueInfo.getName());
 		locationTextView.setText(venueInfo.getLocation());

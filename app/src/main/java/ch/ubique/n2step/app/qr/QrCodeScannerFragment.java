@@ -40,7 +40,7 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
-	private final static String TAG = QrCodeScannerFragment.class.getCanonicalName();
+	public final static String TAG = QrCodeScannerFragment.class.getCanonicalName();
 
 	private MainViewModel viewModel;
 	private PreviewView previewView;

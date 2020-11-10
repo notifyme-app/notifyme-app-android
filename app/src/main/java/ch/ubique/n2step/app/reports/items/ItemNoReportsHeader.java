@@ -1,6 +1,6 @@
 package ch.ubique.n2step.app.reports.items;
 
-public class ItemNoReportsHeader extends ReportsRecyclerItem {
+public class ItemNoReportsHeader extends VenueVisitRecyclerItem {
 
 	@Override
 	public ViewType getViewType() {

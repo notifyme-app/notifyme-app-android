@@ -122,6 +122,7 @@
 						app:iconTint="@color/primary" />
 
 					<ImageButton
+						android:id="@+id/fragment_main_diary_button"
 						style="@style/N2Step.ImageButton"
 						android:layout_width="@dimen/button_height"
 						android:layout_height="@dimen/button_height"

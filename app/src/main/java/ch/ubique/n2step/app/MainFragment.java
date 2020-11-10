@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import ch.ubique.n2step.app.checkin.CheckedInFragment;
+import ch.ubique.n2step.app.diary.DiaryFragment;
 import ch.ubique.n2step.app.reports.ReportsFragment;
 import ch.ubique.n2step.app.qr.QrCodeScannerFragment;
 import ch.ubique.n2step.app.utils.StringUtils;
@@ -23,15 +24,6 @@ public class MainFragment extends Fragment {
 	private static final int PERMISSION_REQUEST_CAMERA = 13;
 
 	private MainViewModel viewModel;
-	private Button checkInButton;
-	private Button checkOutButton;
-	private View reportsHeader;
-	private View noReportsHeader;
-	private TextView splashText;
-	private View mainImageView;
-	private View checkedInLabel;
-	private SwipeRefreshLayout swipeRefreshLayout;
-
 
 	public MainFragment() { super(R.layout.fragment_main); }
 
@@ -48,14 +40,15 @@ public class MainFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		checkInButton = view.findViewById(R.id.fragment_main_check_in_button);
-		checkOutButton = view.findViewById(R.id.fragment_main_check_out_button);
-		reportsHeader = view.findViewById(R.id.fragment_main_reports_header);
-		noReportsHeader = view.findViewById(R.id.fragment_main_reports_header_no_report);
-		splashText = view.findViewById(R.id.fragment_main_splash_text);
-		mainImageView = view.findViewById(R.id.fragment_main_image);
-		checkedInLabel = view.findViewById(R.id.fragment_main_checked_in_label);
-		swipeRefreshLayout = view.findViewById(R.id.fragment_main_swipe_refresh_layout);
+		Button checkInButton = view.findViewById(R.id.fragment_main_check_in_button);
+		Button checkOutButton = view.findViewById(R.id.fragment_main_check_out_button);
+		View reportsHeader = view.findViewById(R.id.fragment_main_reports_header);
+		View noReportsHeader = view.findViewById(R.id.fragment_main_reports_header_no_report);
+		TextView splashText = view.findViewById(R.id.fragment_main_splash_text);
+		View mainImageView = view.findViewById(R.id.fragment_main_image);
+		View checkedInLabel = view.findViewById(R.id.fragment_main_checked_in_label);
+		SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.fragment_main_swipe_refresh_layout);
+		View diaryButton = view.findViewById(R.id.fragment_main_diary_button);
 
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
@@ -106,6 +99,8 @@ public class MainFragment extends Fragment {
 			}
 		});
 
+		diaryButton.setOnClickListener(v -> showDiary());
+
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
@@ -136,7 +131,7 @@ public class MainFragment extends Fragment {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, CheckedInFragment.newInstance())
-				.addToBackStack(CheckedInFragment.class.getCanonicalName())
+				.addToBackStack(CheckedInFragment.TAG)
 				.commit();
 	}
 
@@ -144,7 +139,7 @@ public class MainFragment extends Fragment {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, QrCodeScannerFragment.newInstance())
-				.addToBackStack(QrCodeScannerFragment.class.getCanonicalName())
+				.addToBackStack(QrCodeScannerFragment.TAG)
 				.commit();
 	}
 
@@ -152,7 +147,15 @@ public class MainFragment extends Fragment {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, ReportsFragment.newInstance())
-				.addToBackStack(ReportsFragment.class.getCanonicalName())
+				.addToBackStack(ReportsFragment.TAG)
+				.commit();
+	}
+
+	private void showDiary() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.replace(R.id.container, DiaryFragment.newInstance())
+				.addToBackStack(DiaryFragment.TAG)
 				.commit();
 	}
 

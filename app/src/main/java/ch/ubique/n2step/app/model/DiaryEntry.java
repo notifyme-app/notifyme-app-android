@@ -4,14 +4,14 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class DiaryEntry {
 	private long id;
-	private long arrialTime;
+	private long arrivalTime;
 	private long departureTime;
 	private VenueInfo venueInfo;
 	private String comment;
 
-	public DiaryEntry(long id, long arrialTime, long departureTime, VenueInfo venueInfo, String comment) {
+	public DiaryEntry(long id, long arrivalTime, long departureTime, VenueInfo venueInfo, String comment) {
 		this.id = id;
-		this.arrialTime = arrialTime;
+		this.arrivalTime = arrivalTime;
 		this.departureTime = departureTime;
 		this.venueInfo = venueInfo;
 		this.comment = comment;
@@ -21,8 +21,8 @@ public class DiaryEntry {
 		return id;
 	}
 
-	public long getArrialTime() {
-		return arrialTime;
+	public long getArrivalTime() {
+		return arrivalTime;
 	}
 
 	public long getDepartureTime() {
