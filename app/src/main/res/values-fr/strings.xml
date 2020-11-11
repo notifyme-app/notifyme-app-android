@@ -151,4 +151,16 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Text that is displayed to the user in the biometric authentication popup. -->
     <string name="authenticate_for_diary">"Authenticate yourself to access the diary"</string>
+
+    <!-- Notification Channel name for Reminders on Android Devices (Only visible in System Settings) -->
+    <string name="android_reminder_channel_name">"Reminders"</string>
+
+    <!-- Reminder Option with an amount of hours -->
+    <string name="reminder_option_hours">"{HOURS} h"</string>
+
+    <!-- Reminder Option with an amount of minutes -->
+    <string name="reminder_option_minutes">"{MINUTES}'"</string>
+
+    <!-- Warning that is displayed on the Main Screen if a non productive build is used. -->
+    <string name="non_productive_warning">"Attention: This is a non Productive Test Version"</string>
 </resources>

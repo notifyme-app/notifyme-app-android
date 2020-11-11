@@ -65,7 +65,7 @@
 					android:layout_marginVertical="@dimen/spacing_large"
 					android:layout_marginEnd="@dimen/spacing_very_large"
 					android:src="@drawable/ic_start_screen"
-					app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_footer_barrier"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
 					app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
@@ -77,7 +77,19 @@
 					android:layout_width="match_parent"
 					android:layout_height="0dp"
 					app:barrierDirection="top"
-					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label" />
+					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label,fragment_main_non_productive_info" />
+
+				<TextView
+					android:id="@+id/fragment_main_non_productive_info"
+					style="@style/NotifyMe.Text.Status.Tertiary.Small"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/spacing_small"
+					android:paddingHorizontal="@dimen/spacing_huge"
+					android:text="@string/non_productive_warning"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_checked_in_label"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent" />
 
 				<TextView
 					android:id="@+id/fragment_main_checked_in_label"
