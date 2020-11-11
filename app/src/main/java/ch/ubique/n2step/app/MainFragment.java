@@ -21,6 +21,8 @@ import ch.ubique.n2step.app.utils.StringUtils;
 
 public class MainFragment extends Fragment {
 
+	public final static String TAG = MainFragment.class.getCanonicalName();
+
 	private static final int PERMISSION_REQUEST_CAMERA = 13;
 
 	private MainViewModel viewModel;

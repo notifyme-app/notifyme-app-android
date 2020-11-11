@@ -186,7 +186,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	private void showCheckInDialog() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.add(CheckInDialogFragment.newInstance(), CheckInDialogFragment.class.getCanonicalName())
+				.add(CheckInDialogFragment.newInstance(), CheckInDialogFragment.TAG)
 				.commit();
 	}
 

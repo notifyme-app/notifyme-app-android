@@ -18,6 +18,8 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckInDialogFragment extends DialogFragment {
 
+	public final static String TAG = CheckInDialogFragment.class.getCanonicalName();
+
 	private MainViewModel viewModel;
 	VenueInfo venueInfo;
 
