@@ -5,6 +5,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,18 +32,22 @@ public class StringUtils {
 		);
 	}
 
+	public static String getCheckOutDateString(Context context, long checkInTime, long checkOutTime) {
+		DateFormat dateFormat = new SimpleDateFormat("EEEE, dd. MMMM");
+		String checkInDate = dateFormat.format(new Date(checkInTime));
+		String checkOutDate = dateFormat.format(new Date(checkOutTime));
+		if (checkInDate.equals(checkOutDate)) {
+			return checkInDate;
+		} else {
+			return context.getResources().getString(R.string.checkout_from_to_date).replace("{DATE1}", checkInDate)
+					.replace("{DATE2}", "\n" + checkOutDate);
+		}
+	}
+
 	public static String getHourMinuteTimeString(long timeStamp, String delimiter) {
 		Calendar time = Calendar.getInstance();
 		time.setTimeInMillis(timeStamp);
 		return prependZero(time.get(Calendar.HOUR_OF_DAY)) + delimiter + prependZero(time.get(Calendar.MINUTE));
-	}
-
-	private static String prependZero(int timeUnit) {
-		if (timeUnit < 10) {
-			return "0" + timeUnit;
-		} else {
-			return String.valueOf(timeUnit);
-		}
 	}
 
 	public static String getDaysAgoString(long timeStamp, Context context) {
@@ -56,6 +62,14 @@ public class StringUtils {
 				return context.getResources().getString(R.string.report_message_days_ago)
 						.replace("{NUMBER}", String.valueOf(daysAgo));
 			}
+		}
+	}
+
+	private static String prependZero(int timeUnit) {
+		if (timeUnit < 10) {
+			return "0" + timeUnit;
+		} else {
+			return String.valueOf(timeUnit);
 		}
 	}
 

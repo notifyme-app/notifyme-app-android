@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="language_code">"de"</string>
-    <string name="app_name">"N2Step"</string>
+    <string name="app_name">"NotifyMe"</string>
 
     <!-- Title of Checkin Screen -->
     <string name="checkin_title">"Check-In"</string>
@@ -145,4 +145,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Info Text that is displayed below the info about a new report today. -->
     <string name="report_message_today">"Today"</string>
+
+    <!-- Checkout date label if event spans over more than one day -->
+    <string name="checkout_from_to_date">"{DATE1} to {DATE2}"</string>
 </resources>

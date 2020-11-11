@@ -23,7 +23,9 @@ import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckOutFragment extends Fragment {
 
-	private final static String TAG = CheckOutFragment.class.getCanonicalName();
+	public final static String TAG = CheckOutFragment.class.getCanonicalName();
+
+	private final static long ONE_DAY_IN_MILLIS = 24 * 60 * 60 * 1000;
 
 	private MainViewModel viewModel;
 	private VenueInfo venueInfo;
@@ -35,6 +37,7 @@ public class CheckOutFragment extends Fragment {
 	private EditText commentEditText;
 	private TextView fromTime;
 	private TextView toTime;
+	private TextView dateTextView;
 
 	public CheckOutFragment() { super(R.layout.fragment_check_out); }
 
@@ -58,6 +61,7 @@ public class CheckOutFragment extends Fragment {
 		commentEditText = view.findViewById(R.id.check_out_fragment_comment_edit_text);
 		fromTime = view.findViewById(R.id.check_out_fragment_from_text_view);
 		toTime = view.findViewById(R.id.check_out_fragment_to_text_view);
+		dateTextView = view.findViewById(R.id.check_out_fragment_date);
 
 		nameTextView.setText(venueInfo.getName());
 		locationTextView.setText(venueInfo.getLocation());
@@ -77,6 +81,8 @@ public class CheckOutFragment extends Fragment {
 	private void refreshTimeTextViews() {
 		fromTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckInTime(), "  :  "));
 		toTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckOutTime(), "  :  "));
+		dateTextView.setText(StringUtils.getCheckOutDateString(getContext(), viewModel.checkInState.getCheckInTime(),
+				viewModel.checkInState.getCheckOutTime()));
 	}
 
 
@@ -101,9 +107,14 @@ public class CheckOutFragment extends Fragment {
 			} else {
 				viewModel.checkInState.setCheckOutTime(time.getTimeInMillis());
 			}
+			if (viewModel.checkInState.getCheckOutTime() < viewModel.checkInState.getCheckInTime()) {
+				viewModel.checkInState.setCheckOutTime(viewModel.checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS);
+			} else if (viewModel.checkInState.getCheckInTime() < viewModel.checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS) {
+				viewModel.checkInState.setCheckOutTime(viewModel.checkInState.getCheckOutTime() - ONE_DAY_IN_MILLIS);
+			}
 			refreshTimeTextViews();
 		}, hour, minute, true);
-		timePicker.setTitle("Select Time");
+
 		timePicker.show();
 	}
 
@@ -120,7 +131,7 @@ public class CheckOutFragment extends Fragment {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, MainFragment.newInstance())
-				.addToBackStack(MainFragment.class.getCanonicalName())
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 

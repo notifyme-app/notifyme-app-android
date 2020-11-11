@@ -66,6 +66,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
 				android:text="Thursday, October 22" />
 
 			<LinearLayout
@@ -138,12 +139,6 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_small"
 				android:hint="@string/edit_mode_comment_placeholder" />
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/spacing_large"
-				android:text="TODO: Don't Show in Diary Option" />
 
 		</LinearLayout>
 

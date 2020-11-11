@@ -10,6 +10,7 @@
 		<item name="android:statusBarColor">@color/white</item>
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+		<item name="android:timePickerDialogTheme">@style/N2Step.TimePicker</item>
 	</style>
 
 	<!-- Text -->
@@ -151,6 +152,19 @@
 		<item name="android:textSize">@dimen/text_size_normal</item>
 		<item name="android:textColor">@color/main</item>
 		<item name="android:padding">@dimen/spacing_medium</item>
+	</style>
+
+	<style name="N2Step.TimePicker" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">@color/primary</item>
+		<item name="android:colorAccent">@color/primary</item>
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary</item>
+		<item name="buttonBarButtonStyle">@color/primary</item>
+		<item name="android:buttonBarButtonStyle">@style/N2Step.TimePicker.Button</item>
+	</style>
+
+	<style name="N2Step.TimePicker.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+		<item name="android:textColor">@color/primary</item>
 	</style>
 
 </resources>
