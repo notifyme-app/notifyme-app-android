@@ -148,4 +148,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Checkout date label if event spans over more than one day -->
     <string name="checkout_from_to_date">"{DATE1} to {DATE2}"</string>
+
+    <!-- Text that is displayed to the user in the biometric authentication popup. -->
+    <string name="authenticate_for_diary">"Authenticate yourself to access the diary"</string>
 </resources>

@@ -1,7 +1,9 @@
 package ch.ubique.n2step.app;
 
 import androidx.annotation.NonNull;
+import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.concurrent.Executor;
 
 import ch.ubique.n2step.app.checkin.CheckedInFragment;
 import ch.ubique.n2step.app.diary.DiaryFragment;
@@ -101,7 +105,7 @@ public class MainFragment extends Fragment {
 			}
 		});
 
-		diaryButton.setOnClickListener(v -> showDiary());
+		diaryButton.setOnClickListener(v -> authenticateAndShowDiary());
 
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
@@ -153,12 +157,28 @@ public class MainFragment extends Fragment {
 				.commit();
 	}
 
-	private void showDiary() {
-		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-				.replace(R.id.container, DiaryFragment.newInstance())
-				.addToBackStack(DiaryFragment.TAG)
-				.commit();
+	private void authenticateAndShowDiary() {
+		Executor executor = ContextCompat.getMainExecutor(getContext());
+		BiometricPrompt biometricPrompt =
+				new BiometricPrompt(requireActivity(), executor, new BiometricPrompt.AuthenticationCallback() {
+					@Override
+					public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+						super.onAuthenticationSucceeded(result);
+						requireActivity().getSupportFragmentManager().beginTransaction()
+								.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter,
+										R.anim.slide_pop_exit)
+								.replace(R.id.container, DiaryFragment.newInstance())
+								.addToBackStack(DiaryFragment.TAG)
+								.commit();
+					}
+				});
+
+		BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+				.setTitle(getString(R.string.authenticate_for_diary))
+				.setDeviceCredentialAllowed(true)
+				.build();
+
+		biometricPrompt.authenticate(promptInfo);
 	}
 
 }

@@ -16,7 +16,6 @@ import java.util.List;
 
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.app.checkout.CheckOutFragment;
 import ch.ubique.n2step.app.model.DiaryEntry;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisit;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
@@ -41,8 +40,8 @@ public class DiaryFragment extends Fragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 		super.onCreate(savedInstanceState);
+		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 	}
 
 	@Override
