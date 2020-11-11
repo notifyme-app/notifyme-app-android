@@ -1,6 +1,6 @@
 package ch.ubique.n2step.app.model;
 
-import ch.ubique.n2step.sdk.model.VenueInfo;
+import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 public class DiaryEntry {
 	private long id;

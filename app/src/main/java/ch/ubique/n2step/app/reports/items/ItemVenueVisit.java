@@ -2,22 +2,23 @@ package ch.ubique.n2step.app.reports.items;
 
 import android.view.View;
 
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
+
 import ch.ubique.n2step.app.model.DiaryEntry;
-import ch.ubique.n2step.sdk.model.Exposure;
 
 public class ItemVenueVisit extends VenueVisitRecyclerItem {
 
-	private Exposure exposure;
+	private ExposureEvent exposure;
 	private DiaryEntry diaryEntry;
 	private View.OnClickListener onClickListener;
 
-	public ItemVenueVisit(Exposure exposure, DiaryEntry diaryEntry, View.OnClickListener onClickListener) {
+	public ItemVenueVisit(ExposureEvent exposure, DiaryEntry diaryEntry, View.OnClickListener onClickListener) {
 		this.exposure = exposure;
 		this.diaryEntry = diaryEntry;
 		this.onClickListener = onClickListener;
 	}
 
-	public Exposure getExposure() {
+	public ExposureEvent getExposure() {
 		return exposure;
 	}
 

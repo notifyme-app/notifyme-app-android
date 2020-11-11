@@ -12,22 +12,22 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.crowdnotifier.android.sdk.CrowdNotifier;
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.n2step.app.model.CheckInState;
 import ch.ubique.n2step.app.network.WebServiceController;
 import ch.ubique.n2step.app.utils.Storage;
-import ch.ubique.n2step.sdk.N2STEP;
-import ch.ubique.n2step.sdk.model.Exposure;
 
 import static ch.ubique.n2step.app.network.KeyLoadWorker.NEW_NOTIFICATION;
 
 public class MainViewModel extends AndroidViewModel {
 
 
-	public MutableLiveData<List<Exposure>> exposures = new MutableLiveData<>();
+	public MutableLiveData<List<ExposureEvent>> exposures = new MutableLiveData<>();
 	public MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
 	public CheckInState checkInState;
@@ -85,7 +85,7 @@ public class MainViewModel extends AndroidViewModel {
 			if (traceKeys == null) {
 				traceKeyLoadingState.setValue(LoadingState.FAILURE);
 			} else {
-				N2STEP.checkForMatches(traceKeys, getApplication());
+				CrowdNotifier.checkForMatches(traceKeys, getApplication());
 				refreshExposures();
 				traceKeyLoadingState.setValue(LoadingState.SUCCESS);
 			}
@@ -93,7 +93,7 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	private void refreshExposures() {
-		List<Exposure> exposuresUnsorted = N2STEP.getExposures(getApplication());
+		List<ExposureEvent> exposuresUnsorted = CrowdNotifier.getExposureEvents(getApplication());
 		Collections.sort(exposuresUnsorted, (e1, e2) -> Long.compare(e1.getStartTime(), e2.getStartTime()));
 		exposures.setValue(exposuresUnsorted);
 	}

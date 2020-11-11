@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
+
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.model.DiaryEntry;
@@ -22,7 +24,6 @@ import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.n2step.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.StringUtils;
-import ch.ubique.n2step.sdk.model.Exposure;
 
 public class DiaryFragment extends Fragment {
 
@@ -75,8 +76,8 @@ public class DiaryFragment extends Fragment {
 		});
 	}
 
-	private Exposure getExposureWithId(List<Exposure> exposures, long id) {
-		for (Exposure exposure : exposures) {
+	private ExposureEvent getExposureWithId(List<ExposureEvent> exposures, long id) {
+		for (ExposureEvent exposure : exposures) {
 			if (exposure.getId() == id) {
 				return exposure;
 			}
