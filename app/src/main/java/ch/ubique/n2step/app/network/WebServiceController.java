@@ -6,16 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.internal.$Gson$Preconditions;
+import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 
 import ch.ubique.n2step.app.BuildConfig;
 import ch.ubique.n2step.app.model.ProblematicEventOuterClass;
 import ch.ubique.n2step.app.utils.Storage;
-import ch.ubique.n2step.sdk.model.ProblematicEventInfo;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 

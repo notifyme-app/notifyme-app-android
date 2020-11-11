@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.reports.items.ItemNoReportsHeader;
+import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisit;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
-import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.n2step.app.utils.StringUtils;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

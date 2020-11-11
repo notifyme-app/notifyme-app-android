@@ -12,9 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckInDialogFragment extends DialogFragment {
 

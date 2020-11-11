@@ -3,18 +3,18 @@ package ch.ubique.n2step.app.network;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
-
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.work.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.crowdnotifier.android.sdk.CrowdNotifier;
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
+import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
+
 import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.NotificationHelper;
-import ch.ubique.n2step.sdk.N2STEP;
-import ch.ubique.n2step.sdk.model.Exposure;
-import ch.ubique.n2step.sdk.model.ProblematicEventInfo;
 
 public class KeyLoadWorker extends Worker {
 
@@ -49,12 +49,12 @@ public class KeyLoadWorker extends Worker {
 
 		List<ProblematicEventInfo> problematicEventInfos = new WebServiceController(getApplicationContext()).loadTraceKeys();
 		if (problematicEventInfos == null) return Result.retry();
-		List<Exposure> exposures = N2STEP.checkForMatches(problematicEventInfos, getApplicationContext());
+		List<ExposureEvent> exposures = CrowdNotifier.checkForMatches(problematicEventInfos, getApplicationContext());
 		if (!exposures.isEmpty()) {
 			new NotificationHelper(getApplicationContext()).showExposureNotification();
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
-		N2STEP.cleanupOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
+		CrowdNotifier.cleanUpOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
 		DiaryStorage.getInstance(getApplicationContext()).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
 
 		return Result.success();

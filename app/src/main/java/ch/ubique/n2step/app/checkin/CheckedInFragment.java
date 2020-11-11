@@ -10,14 +10,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
+import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkout.CheckOutFragment;
 import ch.ubique.n2step.app.utils.StringUtils;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckedInFragment extends Fragment {
 

@@ -14,17 +14,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
+
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.app.diary.DiaryFragment;
 import ch.ubique.n2step.app.reports.items.ItemNoReportsHeader;
+import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisit;
 import ch.ubique.n2step.app.reports.items.ItemVenueVisitDayHeader;
-import ch.ubique.n2step.app.reports.items.ItemReportsHeader;
 import ch.ubique.n2step.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.StringUtils;
-import ch.ubique.n2step.sdk.model.Exposure;
 
 public class ReportsFragment extends Fragment {
 
@@ -74,7 +74,7 @@ public class ReportsFragment extends Fragment {
 			}
 
 			String daysAgoString = "";
-			for (Exposure exposure : exposures) {
+			for (ExposureEvent exposure : exposures) {
 				String newDaysAgoString = StringUtils.getDaysAgoString(exposure.getStartTime(), getContext());
 				if (!newDaysAgoString.equals(daysAgoString)) {
 					daysAgoString = newDaysAgoString;

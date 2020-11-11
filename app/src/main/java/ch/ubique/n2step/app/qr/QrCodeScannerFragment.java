@@ -30,13 +30,14 @@ import java.util.concurrent.Executors;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.crowdnotifier.android.sdk.CrowdNotifier;
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
 import ch.ubique.n2step.app.BuildConfig;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.checkin.CheckInDialogFragment;
 import ch.ubique.n2step.app.model.CheckInState;
-import ch.ubique.n2step.sdk.N2STEP;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
@@ -147,7 +148,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
 		if (!viewModel.isQrScanningEnabled) return;
-		VenueInfo venueInfo = N2STEP.getInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
+		VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 		if (venueInfo == null) {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
 				viewModel.isQrScanningEnabled = false;

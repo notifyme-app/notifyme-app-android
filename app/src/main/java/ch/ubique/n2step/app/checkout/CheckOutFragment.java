@@ -12,14 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
 
+import org.crowdnotifier.android.sdk.CrowdNotifier;
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
 import ch.ubique.n2step.app.MainFragment;
 import ch.ubique.n2step.app.MainViewModel;
 import ch.ubique.n2step.app.R;
 import ch.ubique.n2step.app.model.DiaryEntry;
 import ch.ubique.n2step.app.utils.DiaryStorage;
 import ch.ubique.n2step.app.utils.StringUtils;
-import ch.ubique.n2step.sdk.N2STEP;
-import ch.ubique.n2step.sdk.model.VenueInfo;
 
 public class CheckOutFragment extends Fragment {
 
@@ -122,7 +123,8 @@ public class CheckOutFragment extends Fragment {
 		long checkIn = viewModel.checkInState.getCheckInTime();
 		long checkOut = viewModel.checkInState.getCheckOutTime();
 		String comment = commentEditText.getText().toString();
-		long id = N2STEP.addVenueVisit(checkIn, checkOut, venueInfo.getNotificationKey(), venueInfo.getPublicKey(), getContext());
+		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, venueInfo.getNotificationKey(), venueInfo.getPublicKey(),
+				getContext());
 		DiaryStorage.getInstance(getContext()).addEntry(new DiaryEntry(id, checkIn, checkOut, venueInfo, comment));
 		viewModel.setCheckInState(null);
 	}

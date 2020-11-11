@@ -16,8 +16,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 
+import org.crowdnotifier.android.sdk.model.DayDate;
+
 import ch.ubique.n2step.app.model.DiaryEntry;
-import ch.ubique.n2step.sdk.model.DayDate;
 
 public class DiaryStorage {
 
