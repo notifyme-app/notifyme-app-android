@@ -18,7 +18,7 @@
 			android:layout_height="wrap_content"
 			android:background="@color/white"
 			android:orientation="vertical"
-			tools:context=".MainFragment">
+			tools:context="ch.ubique.notifyme.MainFragment">
 
 			<ImageView
 				android:layout_width="match_parent"
@@ -50,7 +50,7 @@
 
 				<TextView
 					android:id="@+id/fragment_main_splash_text"
-					style="@style/N2Step.Text.Title.Mega"
+					style="@style/NotifyMe.Text.Title.Mega"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/spacing_huge"
@@ -81,7 +81,7 @@
 
 				<TextView
 					android:id="@+id/fragment_main_checked_in_label"
-					style="@style/N2Step.Text.Status.Small"
+					style="@style/NotifyMe.Text.Status.Small"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="@dimen/spacing_huge"
@@ -102,7 +102,7 @@
 
 					<Button
 						android:id="@+id/fragment_main_check_in_button"
-						style="@style/N2Step.Button"
+						style="@style/NotifyMe.Button"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
@@ -111,7 +111,7 @@
 
 					<Button
 						android:id="@+id/fragment_main_check_out_button"
-						style="@style/N2Step.Button.Outlined"
+						style="@style/NotifyMe.Button.Outlined"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
@@ -123,7 +123,7 @@
 
 					<ImageButton
 						android:id="@+id/fragment_main_diary_button"
-						style="@style/N2Step.ImageButton"
+						style="@style/NotifyMe.ImageButton"
 						android:layout_width="@dimen/button_height"
 						android:layout_height="@dimen/button_height"
 						android:layout_marginStart="@dimen/spacing_medium"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<style name="N2StepTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+	<style name="NotifyMeTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 		<item name="colorPrimary">@color/primary</item>
 		<item name="colorPrimaryDark">@color/secondary</item>
 		<item name="colorAccent">@color/tertiary</item>
@@ -10,81 +10,81 @@
 		<item name="android:statusBarColor">@color/white</item>
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
-		<item name="android:timePickerDialogTheme">@style/N2Step.TimePicker</item>
+		<item name="android:timePickerDialogTheme">@style/NotifyMe.TimePicker</item>
 	</style>
 
 	<!-- Text -->
 
-	<style name="N2Step.Text" parent="TextAppearance.AppCompat">
+	<style name="NotifyMe.Text" parent="TextAppearance.AppCompat">
 		<item name="android:textSize">@dimen/text_size_normal</item>
 		<item name="android:textColor">@color/main</item>
 		<item name="android:lineSpacingMultiplier">1.1</item>
 		<item name="android:fontFamily">@font/inter_light</item>
 	</style>
 
-	<style name="N2Step.Text.Primary">
+	<style name="NotifyMe.Text.Primary">
 		<item name="android:textColor">@color/primary</item>
 	</style>
 
-	<style name="N2Step.Text.White">
+	<style name="NotifyMe.Text.White">
 		<item name="android:textColor">@color/white</item>
 	</style>
 
-	<style name="N2Step.Text.Title">
+	<style name="NotifyMe.Text.Title">
 		<item name="android:textSize">@dimen/text_size_splash_title</item>
 		<item name="android:fontFamily">@font/inter_bold</item>
 		<item name="android:textStyle">bold</item>
 	</style>
 
-	<style name="N2Step.Text.Title.White">
+	<style name="NotifyMe.Text.Title.White">
 		<item name="android:textColor">@color/white</item>
 	</style>
 
-	<style name="N2Step.Text.Title.Mega">
+	<style name="NotifyMe.Text.Title.Mega">
 		<item name="android:textSize">@dimen/text_size_title_mega</item>
 	</style>
 
-	<style name="N2Step.Text.Title.Mega.Tertiary">
+	<style name="NotifyMe.Text.Title.Mega.Tertiary">
 		<item name="android:textColor">@color/tertiary</item>
 	</style>
 
-	<style name="N2Step.Text.Subtitle">
+	<style name="NotifyMe.Text.Subtitle">
 		<item name="android:fontFamily">@font/inter_bold</item>
 		<item name="android:textStyle">bold</item>
 	</style>
 
-	<style name="N2Step.Text.Status">
+	<style name="NotifyMe.Text.Status">
 		<item name="android:letterSpacing">0.075</item>
 		<item name="android:fontFamily">@font/inter_bold</item>
 		<item name="android:textStyle">bold</item>
 		<item name="android:textAllCaps">true</item>
 	</style>
 
-	<style name="N2Step.Text.Status.Small">
+	<style name="NotifyMe.Text.Status.Small">
 		<item name="android:textSize">@dimen/text_size_small</item>
 	</style>
 
-	<style name="N2Step.Text.Status.White">
+	<style name="NotifyMe.Text.Status.White">
 		<item name="android:textColor">@color/white</item>
 	</style>
 
-	<style name="N2Step.Text.Status.Primary">
+	<style name="NotifyMe.Text.Status.Primary">
 		<item name="android:textColor">@color/primary</item>
 	</style>
 
-	<style name="N2Step.Text.Status.Secondary">
+	<style name="NotifyMe.Text.Status.Secondary">
 		<item name="android:textColor">@color/secondary</item>
 	</style>
 
-	<style name="N2Step.Text.Status.Tertiary">
+	<style name="NotifyMe.Text.Status.Tertiary">
 		<item name="android:textColor">@color/tertiary</item>
 	</style>
 
-	<style name="N2Step.Text.Status.Tertiary.Small">
+	<style name="NotifyMe.Text.Status.Tertiary.Small">
 		<item name="android:textSize">@dimen/text_size_small</item>
 	</style>
 
-	<style name="N2Step.Button" parent="Widget.MaterialComponents.Button">
+	<style name="NotifyMe.Button" parent="Widget.MaterialComponents.Button">
 		<item name="android:textColor">@color/white</item>
 		<item name="android:textAllCaps">true</item>
 		<item name="android:fontFamily">@font/inter_bold</item>
@@ -99,7 +99,7 @@
 		<item name="android:paddingEnd">@dimen/spacing_huge</item>
 	</style>
 
-	<style name="N2Step.Button.Outlined" parent="N2Step.Button">
+	<style name="NotifyMe.Button.Outlined">
 		<item name="android:textColor">@color/primary</item>
 		<item name="android:foreground">@drawable/ripple_button</item>
 		<item name="android:background">@drawable/bg_button_outlined</item>
@@ -109,7 +109,7 @@
 		<item name="android:paddingEnd">@dimen/spacing_huge</item>
 	</style>
 
-	<style name="N2Step.ImageButton" parent="Widget.AppCompat.ImageButton">
+	<style name="NotifyMe.ImageButton" parent="Widget.AppCompat.ImageButton">
 		<item name="android:background">@drawable/bg_button_white</item>
 		<item name="android:stateListAnimator">@null</item>
 		<item name="android:height">@dimen/button_height</item>
@@ -119,7 +119,7 @@
 		<item name="android:paddingEnd">@dimen/spacing_huge</item>
 	</style>
 
-	<style name="N2Step.Card" parent="Widget.MaterialComponents.CardView">
+	<style name="NotifyMe.Card" parent="Widget.MaterialComponents.CardView">
 		<item name="android:focusable">true</item>
 		<item name="android:clickable">true</item>
 		<item name="android:foreground">?android:attr/selectableItemBackground</item>
@@ -128,42 +128,42 @@
 		<item name="cardCornerRadius">@dimen/button_radius</item>
 	</style>
 
-	<style name="N2Step.Card.Small">
+	<style name="NotifyMe.Card.Small">
 		<item name="android:minHeight">0dp</item>
 		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
 	</style>
 
-	<style name="N2Step.Card.Secondary">
+	<style name="NotifyMe.Card.Secondary">
 		<item name="android:focusable">false</item>
 		<item name="android:clickable">false</item>
 		<item name="cardElevation">0dp</item>
 		<item name="cardBackgroundColor">@color/secondary</item>
 	</style>
 
-	<style name="N2Step.Card.Tertiary">
+	<style name="NotifyMe.Card.Tertiary">
 		<item name="android:focusable">false</item>
 		<item name="android:clickable">false</item>
 		<item name="cardElevation">0dp</item>
 		<item name="cardBackgroundColor">@color/tertiary</item>
 	</style>
 
-	<style name="N2Step.EditText" parent="Widget.AppCompat.EditText">
+	<style name="NotifyMe.EditText" parent="Widget.AppCompat.EditText">
 		<item name="android:background">@drawable/bg_edit_text</item>
 		<item name="android:textSize">@dimen/text_size_normal</item>
 		<item name="android:textColor">@color/main</item>
 		<item name="android:padding">@dimen/spacing_medium</item>
 	</style>
 
-	<style name="N2Step.TimePicker" parent="Theme.AppCompat.Light.Dialog">
+	<style name="NotifyMe.TimePicker" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">@color/primary</item>
 		<item name="android:colorAccent">@color/primary</item>
 		<item name="colorPrimary">@color/primary</item>
 		<item name="colorPrimaryDark">@color/primary</item>
 		<item name="buttonBarButtonStyle">@color/primary</item>
-		<item name="android:buttonBarButtonStyle">@style/N2Step.TimePicker.Button</item>
+		<item name="android:buttonBarButtonStyle">@style/NotifyMe.TimePicker.Button</item>
 	</style>
 
-	<style name="N2Step.TimePicker.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+	<style name="NotifyMe.TimePicker.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
 		<item name="android:textColor">@color/primary</item>
 	</style>
 

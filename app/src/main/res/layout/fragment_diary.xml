@@ -11,7 +11,7 @@
 		android:background="@color/white"
 		app:navigationIcon="@drawable/ic_arrow_back"
 		app:title="@string/diary_title"
-		app:titleTextAppearance="@style/N2Step.Text.Title" />
+		app:titleTextAppearance="@style/NotifyMe.Text.Title" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/fragment_diary_recycler_view"

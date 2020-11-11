@@ -12,7 +12,7 @@
 		android:background="@color/white"
 		app:navigationIcon="@drawable/ic_arrow_back"
 		app:title="00:12"
-		app:titleTextAppearance="@style/N2Step.Text.Title" />
+		app:titleTextAppearance="@style/NotifyMe.Text.Title" />
 
 	<ImageView
 		android:id="@+id/checked_in_fragment_venue_type_icon"
@@ -24,7 +24,7 @@
 
 	<TextView
 		android:id="@+id/checked_in_fragment_name"
-		style="@style/N2Step.Text.Title"
+		style="@style/NotifyMe.Text.Title"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
@@ -33,7 +33,7 @@
 
 	<TextView
 		android:id="@+id/checked_in_fragment_location"
-		style="@style/N2Step.Text.Subtitle"
+		style="@style/NotifyMe.Text.Subtitle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
@@ -42,7 +42,7 @@
 
 	<TextView
 		android:id="@+id/checked_in_fragment_room"
-		style="@style/N2Step.Text"
+		style="@style/NotifyMe.Text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
@@ -51,7 +51,7 @@
 
 	<Button
 		android:id="@+id/checked_in_fragment_check_out_button"
-		style="@style/N2Step.Button"
+		style="@style/NotifyMe.Button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/N2Step.Card"
+	style="@style/NotifyMe.Card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_margin="@dimen/spacing_medium"
@@ -39,7 +39,7 @@
 
 			<TextView
 				android:id="@+id/check_in_dialog_name"
-				style="@style/N2Step.Text.Title"
+				style="@style/NotifyMe.Text.Title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -48,7 +48,7 @@
 
 			<TextView
 				android:id="@+id/check_in_dialog_location"
-				style="@style/N2Step.Text.Subtitle"
+				style="@style/NotifyMe.Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -57,7 +57,7 @@
 
 			<TextView
 				android:id="@+id/check_in_dialog_room"
-				style="@style/N2Step.Text"
+				style="@style/NotifyMe.Text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -66,7 +66,7 @@
 
 			<Button
 				android:id="@+id/check_in_dialog_check_in_button"
-				style="@style/N2Step.Button.Outlined"
+				style="@style/NotifyMe.Button.Outlined"
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
 				android:layout_marginTop="@dimen/spacing_large"

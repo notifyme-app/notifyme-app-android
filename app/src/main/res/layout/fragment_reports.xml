@@ -13,7 +13,7 @@
 		android:background="@color/white"
 		app:navigationIcon="@drawable/ic_arrow_back"
 		app:title="@string/no_report_title"
-		app:titleTextAppearance="@style/N2Step.Text.Title" />
+		app:titleTextAppearance="@style/NotifyMe.Text.Title" />
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/fragment_reports_swipe_refresh_layout"

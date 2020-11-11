@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	style="@style/N2Step.Card"
+	style="@style/NotifyMe.Card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginHorizontal="@dimen/spacing_large"
@@ -27,7 +27,7 @@
 
 			<TextView
 				android:id="@+id/reports_header_title"
-				style="@style/N2Step.Text.Status.Tertiary"
+				style="@style/NotifyMe.Text.Status.Tertiary"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/spacing_medium"
@@ -43,7 +43,7 @@
 
 		<TextView
 			android:id="@+id/reports_header_text"
-			style="@style/N2Step.Text.Title.Mega"
+			style="@style/NotifyMe.Text.Title.Mega"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_huge"
@@ -51,7 +51,7 @@
 
 		<TextView
 			android:id="@+id/reports_header_days_ago"
-			style="@style/N2Step.Text"
+			style="@style/NotifyMe.Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginVertical="@dimen/spacing_large"
