@@ -9,7 +9,7 @@
   <br />
 </div>
 
-[Download Android App](https://install.appcenter.ms/orgs/n2step/apps/n2step-app-android/distribution_groups/internal)
+[Download Android App](https://install.appcenter.ms/orgs/notify-me/apps/notifyme-app-android/distribution_groups/public)
 
 ## Introduction
 
@@ -34,7 +34,7 @@ The full set of documents for CrowdNotifier is at https://github.com/CrowdNotifi
 
 ## Installation and Building
 
-The application can be downloaded and installed from  [here](https://install.appcenter.ms/orgs/n2step/apps/n2step-app-android/distribution_groups/internal).
+The application can be downloaded and installed from  [here](https://install.appcenter.ms/orgs/notify-me/apps/notifyme-app-android/distribution_groups/public).
 
 The project can be opened with Android Studio 4.1 or later or you can build the project with Gradle using
 ```sh

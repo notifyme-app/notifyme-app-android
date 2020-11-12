@@ -22,5 +22,5 @@ jobs:
       with:
         appName: ${{secrets.APPCENTER_ORGANIZATION}}/${{secrets.APPCENTER_APP}}
         token: ${{secrets.APPCENTER_API_TOKEN}}
-        group: Internal
+        group: public
         file: app/build/outputs/apk/prod/release/app-prod-release.apk
