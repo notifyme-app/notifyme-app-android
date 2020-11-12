@@ -162,5 +162,5 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="reminder_option_minutes">"{MINUTES}'"</string>
 
     <!-- Warning that is displayed on the Main Screen if a non productive build is used. -->
-    <string name="non_productive_warning">"Attention: This is a non Productive Test Version"</string>
+    <string name="non_productive_warning">"Diese App dient als Vorschau und ist nicht produktiv verwendbar."</string>
 </resources>
