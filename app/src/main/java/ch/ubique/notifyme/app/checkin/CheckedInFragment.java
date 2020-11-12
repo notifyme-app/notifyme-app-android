@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
+import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;

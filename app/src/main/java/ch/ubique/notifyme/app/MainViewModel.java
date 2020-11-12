@@ -18,7 +18,7 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
-import ch.ubique.notifyme.app.checkin.ReminderOption;
+import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.network.WebServiceController;
 import ch.ubique.notifyme.app.utils.Storage;

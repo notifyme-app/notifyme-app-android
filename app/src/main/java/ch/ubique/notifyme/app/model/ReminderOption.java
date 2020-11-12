@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.checkin;
+package ch.ubique.notifyme.app.model;
 
 import android.content.Context;
 import androidx.annotation.IdRes;

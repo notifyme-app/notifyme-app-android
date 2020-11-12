@@ -2,8 +2,6 @@ package ch.ubique.notifyme.app.model;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
-import ch.ubique.notifyme.app.checkin.ReminderOption;
-
 public class CheckInState {
 	private boolean isCheckedIn;
 	private VenueInfo venueInfo;
