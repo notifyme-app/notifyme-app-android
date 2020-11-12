@@ -39,14 +39,14 @@ android {
 	productFlavors {
 		dev {
 			applicationIdSuffix '.dev'
-			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.n2s.ch/"'
-			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.n2s.ch"'
-			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.n2s.ch"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
 		}
 		prod {
-			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.n2s.ch/"'
-			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.n2s.ch"'
-			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.n2s.ch"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
 		}
 	}
 
