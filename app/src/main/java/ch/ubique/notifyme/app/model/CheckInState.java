@@ -5,16 +5,23 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.checkin.ReminderOption;
 
 public class CheckInState {
+	private boolean isCheckedIn;
 	private VenueInfo venueInfo;
 	private long checkInTime;
 	private long checkOutTime;
 	ReminderOption selectedTimerOption;
 
-	public CheckInState(VenueInfo venueInfo, long checkInTime, long checkOutTime, ReminderOption selectedTimerOption) {
+	public CheckInState(boolean isCheckedIn, VenueInfo venueInfo, long checkInTime, long checkOutTime,
+			ReminderOption selectedTimerOption) {
+		this.isCheckedIn = isCheckedIn;
 		this.venueInfo = venueInfo;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
 		this.selectedTimerOption = selectedTimerOption;
+	}
+
+	public boolean isCheckedIn() {
+		return isCheckedIn;
 	}
 
 	public VenueInfo getVenueInfo() {
@@ -31,6 +38,10 @@ public class CheckInState {
 
 	public ReminderOption getSelectedTimerOption() {
 		return selectedTimerOption;
+	}
+
+	public void setCheckedIn(boolean checkedIn) {
+		isCheckedIn = checkedIn;
 	}
 
 	public void setCheckInTime(long checkInTime) {

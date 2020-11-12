@@ -39,7 +39,7 @@ public class CheckInDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		venueInfo = viewModel.checkInState.getVenueInfo();
+		venueInfo = viewModel.getCheckInState().getVenueInfo();
 		super.onCreate(savedInstanceState);
 	}
 
@@ -75,12 +75,12 @@ public class CheckInDialogFragment extends DialogFragment {
 
 		checkInButton.setOnClickListener(v -> {
 			viewModel.startCheckInTimer();
+			viewModel.setCheckedIn(true);
 			showCheckedInFragment();
 			dismiss();
 		});
 		closeButton.setOnClickListener(v -> {
 			dismiss();
-			viewModel.setCheckInState(null);
 		});
 		super.onViewCreated(view, savedInstanceState);
 	}
@@ -94,13 +94,13 @@ public class CheckInDialogFragment extends DialogFragment {
 
 	@Override
 	public void onCancel(@NonNull DialogInterface dialog) {
-		viewModel.isQrScanningEnabled = true;
+		viewModel.setQrScanningEnabled(true);
 		super.onCancel(dialog);
 	}
 
 	@Override
 	public void dismiss() {
-		viewModel.isQrScanningEnabled = true;
+		viewModel.setQrScanningEnabled(true);
 		super.dismiss();
 	}
 

@@ -44,7 +44,7 @@ public class CheckedInFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		venueInfo = viewModel.checkInState.getVenueInfo();
+		venueInfo = viewModel.getCheckInState().getVenueInfo();
 		super.onCreate(savedInstanceState);
 	}
 

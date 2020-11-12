@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
 
-		if (viewModel.checkInState != null) {
+		if (viewModel.isCheckedIn()) {
 			checkOutButton.setOnClickListener(v -> showCheckedInScreen());
 			checkInButton.setVisibility(View.GONE);
 			checkOutButton.setVisibility(View.VISIBLE);

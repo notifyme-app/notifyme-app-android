@@ -31,8 +31,8 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<List<ExposureEvent>> exposures = new MutableLiveData<>();
 	public MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
-	public CheckInState checkInState;
-	public boolean isQrScanningEnabled = true;
+	private CheckInState checkInState;
+	private boolean isQrScanningEnabled = true;
 
 
 	private Storage storage;
@@ -78,6 +78,30 @@ public class MainViewModel extends AndroidViewModel {
 	public void setCheckInState(CheckInState checkInState) {
 		storage.setCurrentVenue(checkInState);
 		this.checkInState = checkInState;
+	}
+
+	public CheckInState getCheckInState() {
+		return checkInState;
+	}
+
+	public void setCheckedIn(boolean checkedIn) {
+		if (checkInState != null) checkInState.setCheckedIn(checkedIn);
+	}
+
+	public boolean isCheckedIn() {
+		if (checkInState == null) {
+			return false;
+		} else {
+			return checkInState.isCheckedIn();
+		}
+	}
+
+	public boolean isQrScanningEnabled() {
+		return isQrScanningEnabled;
+	}
+
+	public void setQrScanningEnabled(boolean qrScanningEnabled) {
+		isQrScanningEnabled = qrScanningEnabled;
 	}
 
 	public void refreshTraceKeys() {

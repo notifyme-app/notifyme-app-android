@@ -70,7 +70,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void onResume() {
-		viewModel.isQrScanningEnabled = true;
+		viewModel.setQrScanningEnabled(true);
 		super.onResume();
 	}
 
@@ -148,20 +148,20 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
-		if (!viewModel.isQrScanningEnabled) return;
+		if (!viewModel.isQrScanningEnabled()) return;
 		VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 		if (venueInfo == null) {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
-				viewModel.isQrScanningEnabled = false;
+				viewModel.setQrScanningEnabled(false);
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
 				startActivity(openBrowserIntent);
 			} else {
 				getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
 			}
 		} else {
-			viewModel.isQrScanningEnabled = false;
-			viewModel.setCheckInState(
-					new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis(), ReminderOption.OFF));
+			viewModel.setQrScanningEnabled(false);
+			viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
+					ReminderOption.OFF));
 			showCheckInDialog();
 		}
 	}

@@ -18,6 +18,7 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
@@ -31,6 +32,7 @@ public class CheckOutFragment extends Fragment {
 
 	private MainViewModel viewModel;
 	private VenueInfo venueInfo;
+	private CheckInState checkInState;
 
 	private TextView nameTextView;
 	private TextView locationTextView;
@@ -50,7 +52,8 @@ public class CheckOutFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		venueInfo = viewModel.checkInState.getVenueInfo();
+		checkInState = viewModel.getCheckInState();
+		venueInfo = checkInState.getVenueInfo();
 		super.onCreate(savedInstanceState);
 	}
 
@@ -68,7 +71,7 @@ public class CheckOutFragment extends Fragment {
 		nameTextView.setText(venueInfo.getName());
 		locationTextView.setText(venueInfo.getLocation());
 		roomTextView.setText(venueInfo.getRoom());
-		viewModel.checkInState.setCheckOutTime(System.currentTimeMillis());
+		checkInState.setCheckOutTime(System.currentTimeMillis());
 		refreshTimeTextViews();
 
 		fromTime.setOnClickListener(v -> showTimePicker(true));
@@ -82,10 +85,10 @@ public class CheckOutFragment extends Fragment {
 	}
 
 	private void refreshTimeTextViews() {
-		fromTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckInTime(), "  :  "));
-		toTime.setText(StringUtils.getHourMinuteTimeString(viewModel.checkInState.getCheckOutTime(), "  :  "));
-		dateTextView.setText(StringUtils.getCheckOutDateString(getContext(), viewModel.checkInState.getCheckInTime(),
-				viewModel.checkInState.getCheckOutTime()));
+		fromTime.setText(StringUtils.getHourMinuteTimeString(checkInState.getCheckInTime(), "  :  "));
+		toTime.setText(StringUtils.getHourMinuteTimeString(checkInState.getCheckOutTime(), "  :  "));
+		dateTextView.setText(StringUtils.getCheckOutDateString(getContext(), checkInState.getCheckInTime(),
+				checkInState.getCheckOutTime()));
 	}
 
 
@@ -95,9 +98,9 @@ public class CheckOutFragment extends Fragment {
 		//TODO: Make sure that Check In Time is always earlier than Check Out Time
 		Calendar time = Calendar.getInstance();
 		if (isFromTime) {
-			time.setTimeInMillis(viewModel.checkInState.getCheckInTime());
+			time.setTimeInMillis(checkInState.getCheckInTime());
 		} else {
-			time.setTimeInMillis(viewModel.checkInState.getCheckOutTime());
+			time.setTimeInMillis(checkInState.getCheckOutTime());
 		}
 		int hour = time.get(Calendar.HOUR_OF_DAY);
 		int minute = time.get(Calendar.MINUTE);
@@ -106,14 +109,15 @@ public class CheckOutFragment extends Fragment {
 			time.set(Calendar.HOUR_OF_DAY, selectedHour);
 			time.set(Calendar.MINUTE, selectedMinute);
 			if (isFromTime) {
-				viewModel.checkInState.setCheckInTime(time.getTimeInMillis());
+				checkInState.setCheckInTime(time.getTimeInMillis());
 			} else {
-				viewModel.checkInState.setCheckOutTime(time.getTimeInMillis());
+				checkInState.setCheckOutTime(time.getTimeInMillis());
 			}
-			if (viewModel.checkInState.getCheckOutTime() < viewModel.checkInState.getCheckInTime()) {
-				viewModel.checkInState.setCheckOutTime(viewModel.checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS);
-			} else if (viewModel.checkInState.getCheckInTime() < viewModel.checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS) {
-				viewModel.checkInState.setCheckOutTime(viewModel.checkInState.getCheckOutTime() - ONE_DAY_IN_MILLIS);
+			if (checkInState.getCheckOutTime() < checkInState.getCheckInTime()) {
+				checkInState.setCheckOutTime(checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS);
+			} else if (checkInState.getCheckInTime() <
+					checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS) {
+				checkInState.setCheckOutTime(checkInState.getCheckOutTime() - ONE_DAY_IN_MILLIS);
 			}
 			refreshTimeTextViews();
 		}, hour, minute, true);
@@ -122,8 +126,8 @@ public class CheckOutFragment extends Fragment {
 	}
 
 	private void saveEntry() {
-		long checkIn = viewModel.checkInState.getCheckInTime();
-		long checkOut = viewModel.checkInState.getCheckOutTime();
+		long checkIn = checkInState.getCheckInTime();
+		long checkOut = checkInState.getCheckOutTime();
 		String comment = commentEditText.getText().toString();
 		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, venueInfo.getNotificationKey(), venueInfo.getPublicKey(),
 				getContext());
