@@ -20,6 +20,7 @@ import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
+import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class CheckOutFragment extends Fragment {
@@ -74,6 +75,7 @@ public class CheckOutFragment extends Fragment {
 		toTime.setOnClickListener(v -> showTimePicker(false));
 
 		doneButton.setOnClickListener(v -> {
+			ReminderHelper.removeReminder(getContext());
 			saveEntry();
 			showStartScreen();
 		});

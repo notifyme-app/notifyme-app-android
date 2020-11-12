@@ -18,6 +18,7 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
+import ch.ubique.notifyme.app.checkin.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.network.WebServiceController;
 import ch.ubique.notifyme.app.utils.Storage;
@@ -96,6 +97,15 @@ public class MainViewModel extends AndroidViewModel {
 		List<ExposureEvent> exposuresUnsorted = CrowdNotifier.getExposureEvents(getApplication());
 		Collections.sort(exposuresUnsorted, (e1, e2) -> Long.compare(e1.getStartTime(), e2.getStartTime()));
 		exposures.setValue(exposuresUnsorted);
+	}
+
+	public ReminderOption getSelectedReminderOption() {
+		return checkInState.getSelectedTimerOption();
+	}
+
+	public void setSelectedReminderOption(ReminderOption selectedReminderOption) {
+		this.checkInState.setSelectedTimerOption(selectedReminderOption);
+		storage.setCurrentVenue(checkInState);
 	}
 
 	@Override

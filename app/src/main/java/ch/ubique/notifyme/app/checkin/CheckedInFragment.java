@@ -10,8 +10,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
+import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
@@ -46,13 +50,27 @@ public class CheckedInFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		nameTextView = view.findViewById(R.id.checked_in_fragment_name);
-		locationTextView = view.findViewById(R.id.checked_in_fragment_location);
-		roomTextView = view.findViewById(R.id.checked_in_fragment_room);
-		venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
-		checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
-		toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
 
+		TextView nameTextView = view.findViewById(R.id.checked_in_fragment_name);
+		TextView locationTextView = view.findViewById(R.id.checked_in_fragment_location);
+		TextView roomTextView = view.findViewById(R.id.checked_in_fragment_room);
+		ImageView venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
+		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
+		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
+		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.checked_in_fragment_toggle_group);
+		for (ReminderOption option : ReminderOption.values()) {
+			((MaterialButton) view.findViewById(option.getToggleButtonId())).setText(option.getName(getContext()));
+		}
+
+		toggleGroup.check(viewModel.getSelectedReminderOption().getToggleButtonId());
+
+		toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+			if (isChecked) {
+				ReminderOption selectedReminderOption = ReminderOption.getReminderOptionForToggleButtonId(checkedId);
+				ReminderHelper.setReminder(System.currentTimeMillis() + selectedReminderOption.getDelayMillis(), getContext());
+				viewModel.setSelectedReminderOption(selectedReminderOption);
+			}
+		});
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 
 		viewModel.startCheckInTimer();

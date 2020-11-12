@@ -2,15 +2,19 @@ package ch.ubique.notifyme.app.model;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
-public class CheckInState {
-	VenueInfo venueInfo;
-	long checkInTime;
-	long checkOutTime;
+import ch.ubique.notifyme.app.checkin.ReminderOption;
 
-	public CheckInState(VenueInfo venueInfo, long checkInTime, long checkOutTime) {
+public class CheckInState {
+	private VenueInfo venueInfo;
+	private long checkInTime;
+	private long checkOutTime;
+	ReminderOption selectedTimerOption;
+
+	public CheckInState(VenueInfo venueInfo, long checkInTime, long checkOutTime, ReminderOption selectedTimerOption) {
 		this.venueInfo = venueInfo;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
+		this.selectedTimerOption = selectedTimerOption;
 	}
 
 	public VenueInfo getVenueInfo() {
@@ -25,12 +29,20 @@ public class CheckInState {
 		return checkOutTime;
 	}
 
+	public ReminderOption getSelectedTimerOption() {
+		return selectedTimerOption;
+	}
+
 	public void setCheckInTime(long checkInTime) {
 		this.checkInTime = checkInTime;
 	}
 
 	public void setCheckOutTime(long checkOutTime) {
 		this.checkOutTime = checkOutTime;
+	}
+
+	public void setSelectedTimerOption(ReminderOption selectedTimerOption) {
+		this.selectedTimerOption = selectedTimerOption;
 	}
 
 }

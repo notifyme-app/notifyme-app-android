@@ -14,55 +14,108 @@
 		app:title="00:12"
 		app:titleTextAppearance="@style/NotifyMe.Text.Title" />
 
-	<ImageView
-		android:id="@+id/checked_in_fragment_venue_type_icon"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_huge"
-		android:src="@drawable/ic_tea_big" />
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-	<TextView
-		android:id="@+id/checked_in_fragment_name"
-		style="@style/NotifyMe.Text.Title"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_huge"
-		android:text="Cyber Cafe SV" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/spacing_large"
+			android:orientation="vertical">
 
-	<TextView
-		android:id="@+id/checked_in_fragment_location"
-		style="@style/NotifyMe.Text.Subtitle"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_very_small"
-		android:text="EPFL Campus" />
+			<ImageView
+				android:id="@+id/checked_in_fragment_venue_type_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:src="@drawable/ic_tea_big" />
 
-	<TextView
-		android:id="@+id/checked_in_fragment_room"
-		style="@style/NotifyMe.Text"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_medium"
-		android:text="Lausanne" />
+			<TextView
+				android:id="@+id/checked_in_fragment_name"
+				style="@style/NotifyMe.Text.Title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:text="Cyber Cafe SV" />
 
-	<Button
-		android:id="@+id/checked_in_fragment_check_out_button"
-		style="@style/NotifyMe.Button"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_huge"
-		android:text="@string/checkout_button_title" />
+			<TextView
+				android:id="@+id/checked_in_fragment_location"
+				style="@style/NotifyMe.Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_very_small"
+				android:text="EPFL Campus" />
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:layout_marginTop="@dimen/spacing_huge"
-		android:text="TODO: Implement Reminder" />
+			<TextView
+				android:id="@+id/checked_in_fragment_room"
+				style="@style/NotifyMe.Text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:text="Lausanne" />
+
+			<Button
+				android:id="@+id/checked_in_fragment_check_out_button"
+				style="@style/NotifyMe.Button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:text="@string/checkout_button_title" />
+
+			<TextView
+				style="@style/NotifyMe.Text.Status.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:text="@string/checkin_set_reminder" />
+
+			<com.google.android.material.button.MaterialButtonToggleGroup
+				android:id="@+id/checked_in_fragment_toggle_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:layout_marginBottom="@dimen/spacing_large"
+				app:selectionRequired="true"
+				app:singleSelection="true">
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_1"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="Off"
+					android:textAllCaps="true" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_2"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="30'" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_3"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="1h" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_4"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="2h" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_5"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="4h" />
+
+			</com.google.android.material.button.MaterialButtonToggleGroup>
+
+		</LinearLayout>
+
+	</ScrollView>
 
 </LinearLayout>
