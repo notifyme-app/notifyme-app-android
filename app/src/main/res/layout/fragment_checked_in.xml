@@ -52,7 +52,7 @@
 
 			<TextView
 				android:id="@+id/checked_in_fragment_room"
-				style="@style/N2Step.Text"
+				style="@style/NotifyMe.Text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -61,7 +61,7 @@
 
 			<Button
 				android:id="@+id/checked_in_fragment_check_out_button"
-				style="@style/N2Step.Button"
+				style="@style/NotifyMe.Button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -69,7 +69,7 @@
 				android:text="@string/checkout_button_title" />
 
 			<TextView
-				style="@style/N2Step.Text.Status.Small"
+				style="@style/NotifyMe.Text.Status.Small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"

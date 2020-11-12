@@ -37,6 +37,7 @@ import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
+import ch.ubique.notifyme.app.checkin.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
@@ -159,7 +160,8 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 			}
 		} else {
 			viewModel.isQrScanningEnabled = false;
-			viewModel.setCheckInState(new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis()));
+			viewModel.setCheckInState(
+					new CheckInState(venueInfo, System.currentTimeMillis(), System.currentTimeMillis(), ReminderOption.OFF));
 			showCheckInDialog();
 		}
 	}

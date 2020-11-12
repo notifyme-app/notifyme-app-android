@@ -1,10 +1,10 @@
-package ch.ubique.n2step.app.checkin;
+package ch.ubique.notifyme.app.checkin;
 
 import android.content.Context;
 import androidx.annotation.IdRes;
 
-import ch.ubique.n2step.app.R;
-import ch.ubique.n2step.app.utils.ReminderHelper;
+import ch.ubique.notifyme.app.R;
+
 
 public enum ReminderOption {
 

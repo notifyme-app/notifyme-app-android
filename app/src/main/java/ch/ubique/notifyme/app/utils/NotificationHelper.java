@@ -17,7 +17,8 @@ import ch.ubique.notifyme.app.R;
 
 public class NotificationHelper {
 
-	private final String CHANNEL_ID = "ExposureNotificaitons";
+	private final String CHANNEL_ID_EXPOSURE_NOTIFICATION = "ExposureNotificaitons";
+	private final String CHANNEL_ID_REMINDER = "Reminders";
 
 	private Context context;
 
@@ -27,11 +28,11 @@ public class NotificationHelper {
 	}
 
 
-	private void createNotificationChannel() {
+	private void createNotificationChannel(String channelId, String channelName) {
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		if (Build.VERSION.SDK_INT >= 26) {
 			NotificationChannel channel =
-					new NotificationChannel(CHANNEL_ID, context.getString(R.string.android_notification_channel_name),
+					new NotificationChannel(channelId, channelName,
 							NotificationManager.IMPORTANCE_DEFAULT);
 			notificationManager.createNotificationChannel(channel);
 		}
@@ -44,8 +45,8 @@ public class NotificationHelper {
 				.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
-	private Notification createNotification(String message, PendingIntent pendingIntent) {
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+	private Notification createNotification(String message, PendingIntent pendingIntent, String channelId) {
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true)
 				.setContentTitle(context.getString(R.string.app_name))
@@ -59,11 +60,22 @@ public class NotificationHelper {
 
 	public void showExposureNotification() {
 
-		createNotificationChannel();
+		createNotificationChannel(CHANNEL_ID_EXPOSURE_NOTIFICATION, context.getString(R.string.android_notification_channel_name));
 		PendingIntent pendingIntent = createPendingIntent();
 		String message = "New Message";
 
-		Notification notification = createNotification(message, pendingIntent);
+		Notification notification = createNotification(message, pendingIntent, CHANNEL_ID_EXPOSURE_NOTIFICATION);
+		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(message.hashCode(), notification);
+	}
+
+	public void showReminderNotification() {
+		//TODO: Add quick actions to reminder and make sure to directly open CheckOut Fragment
+		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name));
+		PendingIntent pendingIntent = createPendingIntent();
+		String message = "Reminder";
+
+		Notification notification = createNotification(message, pendingIntent, CHANNEL_ID_REMINDER);
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(message.hashCode(), notification);
 	}

@@ -1,4 +1,4 @@
-package ch.ubique.n2step.app.utils;
+package ch.ubique.notifyme.app.utils;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
