@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Language code: Technical code used in app (translations filled in by Ubique) -->
     <string name="language_code">"en"</string>
+
+    <!-- Name of the app -->
     <string name="app_name">"NotifyMe"</string>
 
     <!-- Title of Checkin Screen -->
@@ -167,4 +171,40 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Warning that is displayed on the Main Screen if a non productive build is used. -->
     <string name="non_productive_warning">"This app provides a preview of the NotifyMe app and is not meant for production"</string>
+
+    <!-- Reminder: Option 4 hours -->
+    <string name="reminder_option_4h">"4 h"</string>
+
+    <!-- Reminder: Option 30min -->
+    <string name="reminder_option_30min">"30'"</string>
+
+    <!-- Checkin: Reminder Alert title when permission to send reminders not given -->
+    <string name="checkin_reminder_settings_alert_title">"The reminder could not be set"</string>
+
+    <!-- Checkin: Reminder Alert message when permission to send reminders not given -->
+    <string name="checkin_reminder_settings_alert_message">"In order to send you reminders the app needs the permission to send notifications. You can enable the permission for notifications in the app settings."</string>
+
+    <!-- Check In Reminder Alert Open Settings button -->
+    <string name="checkin_reminder_option_open_settings">"Open app settings"</string>
+
+    <!-- Cancel button title -->
+    <string name="cancel">"Cancel"</string>
+
+    <!-- QR Scanner: camera has no permission explanation text -->
+    <string name="qr_scanner_no_camera_permission">"Access to your camera is needed to scan QR codes"</string>
+
+    <!-- Title for an exposure notification. -->
+    <string name="exposure_notification_title">"New message"</string>
+
+    <!-- Body text for an exposure notification. -->
+    <string name="exposure_notification_body">"Open the app to read the message"</string>
+
+    <!-- Close button title in the top right corner to close the new exposure screen. -->
+    <string name="new_exposure_close_button">"Close"</string>
+
+    <!-- Header text above the personal notes in the new exposure screen. -->
+    <string name="new_exposure_notes_header">"Your Notes"</string>
+
+    <!-- Header text above the location details in the new exposure screen. -->
+    <string name="new_exposure_location_header">"Where"</string>
 </resources>

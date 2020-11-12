@@ -18,8 +18,10 @@ import ch.ubique.notifyme.app.R;
 public class NotificationHelper {
 
 	public static final String NOTIFICATION_TYPE = "NOTIFICATION_TYPE";
-	public static final int EXPOSURE_NOTIFICATION_REQUEST_CODE = 19;
-	public static final int REMINDER_REQUEST_CODE = 20;
+	public static final String EXPOSURE_ID = "EXPOSURE_ID";
+
+	public static final int EXPOSURE_NOTIFICATION_TYPE = 19;
+	public static final int REMINDER_TYPE = 20;
 
 	private final String CHANNEL_ID_EXPOSURE_NOTIFICATION = "ExposureNotificaitons";
 	private final String CHANNEL_ID_REMINDER = "Reminders";
@@ -42,12 +44,22 @@ public class NotificationHelper {
 		}
 	}
 
-	private PendingIntent createPendingIntent(int requestCode) {
+	private PendingIntent createReminderPendingIntent() {
 		Intent intent = new Intent(context, MainActivity.class);
-		intent.putExtra(NOTIFICATION_TYPE, requestCode);
+		intent.putExtra(NOTIFICATION_TYPE, REMINDER_TYPE);
 		return TaskStackBuilder.create(context)
 				.addNextIntentWithParentStack(intent)
-				.getPendingIntent(requestCode, PendingIntent.FLAG_UPDATE_CURRENT);
+				.getPendingIntent(REMINDER_TYPE, PendingIntent.FLAG_UPDATE_CURRENT);
+	}
+
+	private PendingIntent createExposurePendingIntent(long exposureId) {
+		Intent intent = new Intent(context, MainActivity.class);
+		intent.putExtra(NOTIFICATION_TYPE, EXPOSURE_NOTIFICATION_TYPE);
+		intent.putExtra(EXPOSURE_ID, exposureId);
+		intent.setAction(Long.toString(exposureId));
+		return TaskStackBuilder.create(context)
+				.addNextIntentWithParentStack(intent)
+				.getPendingIntent(EXPOSURE_NOTIFICATION_TYPE, PendingIntent.FLAG_ONE_SHOT);
 	}
 
 	private Notification createNotification(String title, String message, PendingIntent pendingIntent, String channelId) {
@@ -63,13 +75,12 @@ public class NotificationHelper {
 	}
 
 
-	public void showExposureNotification() {
+	public void showExposureNotification(long exposureId) {
 
 		createNotificationChannel(CHANNEL_ID_EXPOSURE_NOTIFICATION, context.getString(R.string.android_notification_channel_name));
-		PendingIntent pendingIntent = createPendingIntent(EXPOSURE_NOTIFICATION_REQUEST_CODE);
-		//TODO: Set correct exposure notification contents
-		String title = "Title";
-		String message = "New Message";
+		PendingIntent pendingIntent = createExposurePendingIntent(exposureId);
+		String title = context.getString(R.string.exposure_notification_title);
+		String message = context.getString(R.string.exposure_notification_body);
 
 		Notification notification = createNotification(title, message, pendingIntent, CHANNEL_ID_EXPOSURE_NOTIFICATION);
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -79,7 +90,7 @@ public class NotificationHelper {
 	public void showReminderNotification() {
 		//TODO: Add quick actions to reminder and make sure to directly open CheckOut Fragment
 		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name));
-		PendingIntent pendingIntent = createPendingIntent(REMINDER_REQUEST_CODE);
+		PendingIntent pendingIntent = createReminderPendingIntent();
 		String title = context.getString(R.string.checkout_reminder_title);
 		String message = context.getString(R.string.checkout_reminder_text);
 

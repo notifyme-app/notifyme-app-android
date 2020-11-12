@@ -33,6 +33,7 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
 	private CheckInState checkInState;
 	private boolean isQrScanningEnabled = true;
+	private ExposureEvent selectedExposure = null;
 
 
 	private Storage storage;
@@ -131,6 +132,14 @@ public class MainViewModel extends AndroidViewModel {
 	public void setSelectedReminderOption(ReminderOption selectedReminderOption) {
 		this.checkInState.setSelectedTimerOption(selectedReminderOption);
 		storage.setCurrentVenue(checkInState);
+	}
+
+	public ExposureEvent getSelectedExposure() {
+		return selectedExposure;
+	}
+
+	public void setSelectedExposure(ExposureEvent selectedExposure) {
+		this.selectedExposure = selectedExposure;
 	}
 
 	@Override

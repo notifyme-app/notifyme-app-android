@@ -19,7 +19,7 @@ import ch.ubique.notifyme.app.utils.NotificationHelper;
 public class KeyLoadWorker extends Worker {
 
 	public static final String NEW_NOTIFICATION = "NEW_NOTIFICATION";
-	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.SyncWorker";
+	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.KeyLoadWorker";
 	private static final int DAYS_TO_KEEP_VENUE_VISITS = 14;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;
 
@@ -51,7 +51,9 @@ public class KeyLoadWorker extends Worker {
 		if (problematicEventInfos == null) return Result.retry();
 		List<ExposureEvent> exposures = CrowdNotifier.checkForMatches(problematicEventInfos, getApplicationContext());
 		if (!exposures.isEmpty()) {
-			new NotificationHelper(getApplicationContext()).showExposureNotification();
+			for (ExposureEvent exposureEvent : exposures) {
+				new NotificationHelper(getApplicationContext()).showExposureNotification(exposureEvent.getId());
+			}
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
 		CrowdNotifier.cleanUpOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
