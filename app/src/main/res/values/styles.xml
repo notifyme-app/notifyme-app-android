@@ -167,7 +167,7 @@
 		<item name="android:textColor">@color/primary</item>
 	</style>
 
-	<style name="N2Step.ToggleButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+	<style name="NotifyMe.ToggleButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_weight">1</item>
 		<item name="android:textAllCaps">false</item>

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
@@ -57,6 +58,9 @@ public class CheckedInFragment extends Fragment {
 		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
 		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.checked_in_fragment_toggle_group);
+		for (ReminderOption option : ReminderOption.values()) {
+			((MaterialButton) view.findViewById(option.getToggleButtonId())).setText(option.getName(getContext()));
+		}
 
 		toggleGroup.check(viewModel.getSelectedReminderOption().getToggleButtonId());
 

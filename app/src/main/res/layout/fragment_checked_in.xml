@@ -34,7 +34,7 @@
 
 			<TextView
 				android:id="@+id/checked_in_fragment_name"
-		        style="@style/NotifyMe.Text"
+				style="@style/NotifyMe.Text.Title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -43,7 +43,7 @@
 
 			<TextView
 				android:id="@+id/checked_in_fragment_location"
-		        style="@style/NotifyMe.Button"
+				style="@style/NotifyMe.Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -88,23 +88,29 @@
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/checked_in_fragment_toggle_button_1"
-					style="@style/N2Step.ToggleButton"
-					android:text="Off" />
+					style="@style/NotifyMe.ToggleButton"
+					android:text="Off"
+					android:textAllCaps="true" />
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/checked_in_fragment_toggle_button_2"
-					style="@style/N2Step.ToggleButton"
+					style="@style/NotifyMe.ToggleButton"
 					android:text="30'" />
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/checked_in_fragment_toggle_button_3"
-					style="@style/N2Step.ToggleButton"
+					style="@style/NotifyMe.ToggleButton"
 					android:text="1h" />
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/checked_in_fragment_toggle_button_4"
-					style="@style/N2Step.ToggleButton"
+					style="@style/NotifyMe.ToggleButton"
 					android:text="2h" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/checked_in_fragment_toggle_button_5"
+					style="@style/NotifyMe.ToggleButton"
+					android:text="4h" />
 
 			</com.google.android.material.button.MaterialButtonToggleGroup>
 
