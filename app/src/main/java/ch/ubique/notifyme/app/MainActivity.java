@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 		if (getIntent().hasExtra(NOTIFICATION_TYPE)) {
 			int notificationType = getIntent().getIntExtra(NOTIFICATION_TYPE, 0);
-			if (notificationType == REMINDER_TYPE) {
+			if (notificationType == REMINDER_TYPE && viewModel.isCheckedIn()) {
 				showCheckedInScreen();
 			} else if (notificationType == EXPOSURE_NOTIFICATION_TYPE) {
 				long id = getIntent().getLongExtra(EXPOSURE_ID, -1);
