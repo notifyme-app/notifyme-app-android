@@ -115,8 +115,7 @@ public class CheckOutFragment extends Fragment {
 			}
 			if (checkInState.getCheckOutTime() < checkInState.getCheckInTime()) {
 				checkInState.setCheckOutTime(checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS);
-			} else if (checkInState.getCheckInTime() <
-					checkInState.getCheckOutTime() + ONE_DAY_IN_MILLIS) {
+			} else if (checkInState.getCheckInTime() + ONE_DAY_IN_MILLIS < checkInState.getCheckOutTime()) {
 				checkInState.setCheckOutTime(checkInState.getCheckOutTime() - ONE_DAY_IN_MILLIS);
 			}
 			refreshTimeTextViews();
