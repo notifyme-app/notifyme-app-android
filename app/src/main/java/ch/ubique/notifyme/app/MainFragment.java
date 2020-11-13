@@ -169,7 +169,7 @@ public class MainFragment extends Fragment {
 										R.anim.slide_pop_exit)
 								.replace(R.id.container, DiaryFragment.newInstance())
 								.addToBackStack(DiaryFragment.TAG)
-								.commit();
+								.commitAllowingStateLoss();
 					}
 				});
 
