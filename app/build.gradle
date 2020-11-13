@@ -77,8 +77,9 @@ android {
 
 sonarqube {
 	properties {
-		property "sonar.projectKey", "UbiqueInnovation_n2step-app-android"
-		property "sonar.organization", "ubique-github"
+		property "sonar.projectName", "NotifyMe App Android"
+		property "sonar.projectKey", "notifyme-app_notifyme-app-android"
+		property "sonar.organization", "notifyme-app"
 		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
