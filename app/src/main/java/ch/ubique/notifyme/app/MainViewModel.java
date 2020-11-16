@@ -86,6 +86,7 @@ public class MainViewModel extends AndroidViewModel {
 
 	public void setCheckedIn(boolean checkedIn) {
 		if (checkInState != null) checkInState.setCheckedIn(checkedIn);
+		storage.setCurrentVenue(checkInState);
 	}
 
 	public boolean isCheckedIn() {
