@@ -80,6 +80,7 @@ public class CheckInDialogFragment extends DialogFragment {
 			dismiss();
 		});
 		closeButton.setOnClickListener(v -> {
+			viewModel.setQrScanningEnabled(true);
 			dismiss();
 		});
 		super.onViewCreated(view, savedInstanceState);
@@ -96,12 +97,6 @@ public class CheckInDialogFragment extends DialogFragment {
 	public void onCancel(@NonNull DialogInterface dialog) {
 		viewModel.setQrScanningEnabled(true);
 		super.onCancel(dialog);
-	}
-
-	@Override
-	public void dismiss() {
-		viewModel.setQrScanningEnabled(true);
-		super.dismiss();
 	}
 
 }
