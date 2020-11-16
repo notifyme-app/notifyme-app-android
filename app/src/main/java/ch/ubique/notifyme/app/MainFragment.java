@@ -1,6 +1,7 @@
 package ch.ubique.notifyme.app;
 
 import androidx.annotation.NonNull;
+import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -158,27 +159,36 @@ public class MainFragment extends Fragment {
 	}
 
 	private void authenticateAndShowDiary() {
-		Executor executor = ContextCompat.getMainExecutor(getContext());
+		Executor executor = ContextCompat.getMainExecutor(requireContext());
 		BiometricPrompt biometricPrompt =
 				new BiometricPrompt(requireActivity(), executor, new BiometricPrompt.AuthenticationCallback() {
 					@Override
 					public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
 						super.onAuthenticationSucceeded(result);
-						requireActivity().getSupportFragmentManager().beginTransaction()
-								.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter,
-										R.anim.slide_pop_exit)
-								.replace(R.id.container, DiaryFragment.newInstance())
-								.addToBackStack(DiaryFragment.TAG)
-								.commitAllowingStateLoss();
+						showDiary();
 					}
 				});
 
-		BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-				.setTitle(getString(R.string.authenticate_for_diary))
-				.setDeviceCredentialAllowed(true)
-				.build();
+		if (BiometricManager.from(requireContext()).canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL |
+				BiometricManager.Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS) {
+			BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+					.setTitle(getString(R.string.authenticate_for_diary))
+					.setAllowedAuthenticators(
+							BiometricManager.Authenticators.DEVICE_CREDENTIAL | BiometricManager.Authenticators.BIOMETRIC_WEAK)
+					.build();
+			biometricPrompt.authenticate(promptInfo);
+		} else {
+			showDiary();
+		}
+	}
 
-		biometricPrompt.authenticate(promptInfo);
+	private void showDiary() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter,
+						R.anim.slide_pop_exit)
+				.replace(R.id.container, DiaryFragment.newInstance())
+				.addToBackStack(DiaryFragment.TAG)
+				.commitAllowingStateLoss();
 	}
 
 }
