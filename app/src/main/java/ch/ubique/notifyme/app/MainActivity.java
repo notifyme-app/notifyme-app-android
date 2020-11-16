@@ -1,6 +1,7 @@
 package ch.ubique.notifyme.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 
@@ -39,6 +40,22 @@ public class MainActivity extends AppCompatActivity {
 				.replace(R.id.container, CheckedInFragment.newInstance())
 				.addToBackStack(CheckedInFragment.TAG)
 				.commit();
+	}
+
+	@Override
+	public void onBackPressed() {
+		Fragment currentFragment =
+				getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1);
+		if (currentFragment instanceof BackPressListener) {
+			boolean interceptedByFragment = ((BackPressListener) currentFragment).onBackPressed();
+			if (interceptedByFragment) return;
+		}
+		super.onBackPressed();
+	}
+
+	public interface BackPressListener {
+		boolean onBackPressed();
+
 	}
 
 }

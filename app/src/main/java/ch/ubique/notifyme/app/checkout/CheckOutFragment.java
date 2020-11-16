@@ -138,7 +138,6 @@ public class CheckOutFragment extends Fragment {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, MainFragment.newInstance())
-				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 

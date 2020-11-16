@@ -24,7 +24,7 @@ import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainActivity.BackPressListener {
 
 	public final static String TAG = MainFragment.class.getCanonicalName();
 
@@ -189,6 +189,12 @@ public class MainFragment extends Fragment {
 				.replace(R.id.container, DiaryFragment.newInstance())
 				.addToBackStack(DiaryFragment.TAG)
 				.commitAllowingStateLoss();
+	}
+
+	@Override
+	public boolean onBackPressed() {
+		requireActivity().finish();
+		return true;
 	}
 
 }
