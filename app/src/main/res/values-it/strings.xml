@@ -8,16 +8,16 @@
     <string name="app_name">"NotifyMe"</string>
 
     <!-- Title of Checkin Screen -->
-    <string name="checkin_title">"Check-In"</string>
+    <string name="checkin_title">"Check-in"</string>
 
     <!-- Title of diary screen -->
     <string name="diary_title">"Diary"</string>
 
     <!-- Homescreen: Title of checkin button -->
-    <string name="checkin_button_title">"Check-In"</string>
+    <string name="checkin_button_title">"Check-in"</string>
 
     <!-- Homescreen: No Reports title -->
-    <string name="no_report_title">"No report"</string>
+    <string name="no_report_title">"No reports"</string>
 
     <!-- Check-In: scan code -->
     <string name="checkin_scan_code">"Scan QR code to check in"</string>
@@ -29,13 +29,13 @@
     <string name="NSFaceIDUsageDescription">"Enabling Face ID allows you to securely access your diary."</string>
 
     <!-- iOS FaceID: Text that is shown as reason for Face ID -->
-    <string name="face_id_reason_text">"Scan your face to see your diary"</string>
+    <string name="face_id_reason_text">"Authenticate yourself to access the diary"</string>
 
     <!-- Homescreen: Text with no report -->
     <string name="no_report_hero_text">"Enjoy your day and stay healthy"</string>
 
     <!-- Reminder Notification Title -->
-    <string name="checkout_reminder_title">"Checkout Reminder"</string>
+    <string name="checkout_reminder_title">"Check-Out Reminder"</string>
 
     <!-- Reminder Checkout Text -->
     <string name="checkout_reminder_text">"Do you want to check out?"</string>
@@ -44,7 +44,7 @@
     <string name="check_in_now_button_title">"Check In Now"</string>
 
     <!-- CheckIn: Check out Button title -->
-    <string name="checkout_button_title">"Check out"</string>
+    <string name="checkout_button_title">"Check-Out"</string>
 
     <!-- Title for 1 report -->
     <string name="report_title_singular">"1 report"</string>
@@ -53,7 +53,7 @@
     <string name="report_title_plural">"{NUMBER} reports"</string>
 
     <!-- Reports: Infection text -->
-    <string name="report_message_text">"An infection could have occured"</string>
+    <string name="report_message_text">"An infection could have occurred"</string>
 
     <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
     <string name="no_report_hero_text_highlight">"stay healthy"</string>
@@ -110,7 +110,7 @@
     <string name="diary_option_title">"Don't show in diary"</string>
 
     <!-- Edit CheckIn: Text that is shown when not showing in diary is set -->
-    <string name="diary_option_subtext">"This Check-in will not be shown in the diary.
+    <string name="diary_option_subtext">"This check-in will not be shown in the diary.
 
 Nevertheless the app stores this entry during 14 days to warn you in case of potential infection."</string>
 
@@ -119,12 +119,6 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Reminder: Option Off -->
     <string name="reminder_option_off">"off"</string>
-
-    <!-- Reminder Option one hour -->
-    <string name="reminder_option_1h">"1 h"</string>
-
-    <!-- Reminder Option 2 hours -->
-    <string name="reminder_option_2h">"2 h"</string>
 
     <!-- Edit Checkin: Remove from diary button title -->
     <string name="remove_from_diary_button">"Hide from diary"</string>
@@ -145,7 +139,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="report_message_one_day_ago">"1 day ago"</string>
 
     <!-- Notification Channel name on Android Devices (Only visible in System Settings) -->
-    <string name="android_notification_channel_name">"Exposure Notifications"</string>
+    <string name="android_notification_channel_name">"Reports"</string>
 
     <!-- Info Text that is displayed below the info about a new report today. -->
     <string name="report_message_today">"Today"</string>
@@ -157,7 +151,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="authenticate_for_diary">"Authenticate yourself to access the diary"</string>
 
     <!-- Notification Channel name for Reminders on Android Devices (Only visible in System Settings) -->
-    <string name="android_reminder_channel_name">"Reminders"</string>
+    <string name="android_reminder_channel_name">"Check-Out Reminder"</string>
 
     <!-- Reminder Option with an amount of hours -->
     <string name="reminder_option_hours">"{HOURS} h"</string>
@@ -166,13 +160,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="reminder_option_minutes">"{MINUTES}'"</string>
 
     <!-- Warning that is displayed on the Main Screen if a non productive build is used. -->
-    <string name="non_productive_warning">"This app provides a preview of the NotifyMe app and is not meant for production"</string>
-
-    <!-- Reminder: Option 4 hours -->
-    <string name="reminder_option_4h">"4 h"</string>
-
-    <!-- Reminder: Option 30min -->
-    <string name="reminder_option_30min">"30'"</string>
+    <string name="non_productive_warning">"This app provides a preview of the NotifyMe app and is not meant for production."</string>
 
     <!-- Checkin: Reminder Alert title when permission to send reminders not given -->
     <string name="checkin_reminder_settings_alert_title">"The reminder could not be set"</string>
@@ -203,4 +191,53 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
 
     <!-- Header text above the location details in the new exposure screen. -->
     <string name="new_exposure_location_header">"Where"</string>
+
+    <!-- Version text in the Imprint (Webview) -->
+    <string name="imprint_webview_version_text"></string>
+
+    <!-- Title publisher in imprint -->
+    <string name="imprint_webview_publisher_title"></string>
+
+    <!-- Text about Ubique in the imprint -->
+    <string name="imprint_webview_ubique_about_text"></string>
+
+    <!-- Title in collaboration with in imprint -->
+    <string name="imprint_webview_collaboration_title"></string>
+
+    <!-- CrowdNotifier Paper text -->
+    <string name="imprint_webview_paper_text"></string>
+
+    <!-- CrowdNotifier Paper link -->
+    <string name="imprint_webview_paper_link"></string>
+    <string name="imprint_webview_more_info_title"></string>
+    <string name="imprint_webview_more_info_link"></string>
+    <string name="imprint_webview_legal_title"></string>
+    <string name="imprint_webview_legal_link_text"></string>
+    <string name="imprint_webview_legal_link_url"></string>
+    <string name="imprint_webview_sourcecode_title"></string>
+    <string name="imprint_webview_sourcecode_text"></string>
+    <string name="imprint_webview_sourcecode_link"></string>
+    <string name="generator_title"></string>
+    <string name="generator_category_label"></string>
+    <string name="generator_category_other"></string>
+    <string name="generator_category_meeting_room"></string>
+    <string name="generator_category_cafeteria"></string>
+    <string name="generator_category_private_party"></string>
+    <string name="generator_title_label"></string>
+    <string name="generator_title_placeholder"></string>
+    <string name="generator_subtitle_label"></string>
+    <string name="generator_subtitle_placeholder"></string>
+    <string name="generator_addition_label"></string>
+    <string name="generator_addition_placeholder"></string>
+    <string name="generator_generation_button_label"></string>
+    <string name="generator_back"></string>
+    <string name="generator_public_bulletpoint_1"></string>
+    <string name="generator_public_bulletpoint_2"></string>
+    <string name="generator_public_bulletpoint_3"></string>
+    <string name="generator_private_bulletpoint_1"></string>
+    <string name="generator_private_bulletpoint_2"></string>
+    <string name="generator_private_bulletpoint_3"></string>
+    <string name="generator_pdf_button"></string>
+    <string name="generator_public_qr_title"></string>
+    <string name="generator_private_qr_title"></string>
 </resources>
