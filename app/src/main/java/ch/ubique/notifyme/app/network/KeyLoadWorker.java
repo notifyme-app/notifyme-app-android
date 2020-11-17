@@ -20,7 +20,7 @@ public class KeyLoadWorker extends Worker {
 
 	public static final String NEW_NOTIFICATION = "NEW_NOTIFICATION";
 	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.SyncWorker";
-	private static final int DAYS_TO_KEEP_VENUE_VISITS = 10;
+	private static final int DAYS_TO_KEEP_VENUE_VISITS = 14;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;
 
 
