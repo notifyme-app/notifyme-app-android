@@ -27,36 +27,36 @@
 
 			<TextView
 				style="@style/NotifyMe.Text.Status.Small"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
+				android:gravity="center"
 				android:text="@string/edit_controller_your_checkin" />
 
 			<TextView
 				android:id="@+id/check_out_fragment_name"
 				style="@style/NotifyMe.Text.Title"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
 				android:text="Cyber Cafe SV" />
 
 			<TextView
 				android:id="@+id/check_out_fragment_location"
 				style="@style/NotifyMe.Text.Subtitle"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/spacing_very_small"
+				android:gravity="center"
 				android:text="EPFL Campus" />
 
 			<TextView
 				android:id="@+id/check_out_fragment_room"
 				style="@style/NotifyMe.Text"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
 				android:text="Lausanne" />
 
 			<TextView
