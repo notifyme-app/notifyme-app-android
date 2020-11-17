@@ -129,6 +129,7 @@
 	</style>
 
 	<style name="NotifyMe.Card.Small">
+		<item name="cardElevation">@dimen/small_card_elevation</item>
 		<item name="android:minHeight">0dp</item>
 		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
 	</style>
