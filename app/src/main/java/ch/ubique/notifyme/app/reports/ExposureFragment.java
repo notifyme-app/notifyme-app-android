@@ -54,7 +54,8 @@ public class ExposureFragment extends Fragment {
 		ImageView venueTypeIcon = view.findViewById(R.id.fragment_exposure_venue_type_icon);
 		TextView notesHeader = view.findViewById(R.id.fragment_exposure_notes_header);
 		TextView notes = view.findViewById(R.id.fragment_exposure_notes_textview);
-		TextView message = view.findViewById(R.id.fragment_exposure_what_to_do);
+		TextView message = view.findViewById(R.id.fragment_exposure_infobox_text);
+		View infobox = view.findViewById(R.id.fragment_exposure_infobox);
 
 		closeButton.setOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		header.setText(StringUtils
@@ -66,7 +67,12 @@ public class ExposureFragment extends Fragment {
 		String endTime = StringUtils.getHourMinuteTimeString(exposure.getEndTime(), ":");
 		timeTextView.setText(startTime + " — " + endTime);
 
-		//TODO: Set remote message
+		if (exposure.getMessage() != null) {
+			message.setText(exposure.getMessage());
+			infobox.setVisibility(View.VISIBLE);
+		} else {
+			infobox.setVisibility(View.GONE);
+		}
 
 		if (diaryEntry != null) {
 			nameTextView.setText(diaryEntry.getVenueInfo().getName());

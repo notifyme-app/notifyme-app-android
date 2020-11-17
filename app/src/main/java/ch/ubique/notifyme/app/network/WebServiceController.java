@@ -79,7 +79,7 @@ public class WebServiceController {
 			ArrayList<ProblematicEventInfo> problematicEventInfos = new ArrayList<>();
 			for (ProblematicEventOuterClass.ProblematicEvent event : problematicEventWrapper.getEventsList()) {
 				problematicEventInfos.add(new ProblematicEventInfo(event.getSecretKey().toByteArray(), event.getStartTime(),
-						event.getEndTime()));
+						event.getEndTime(), event.getMessage().toByteArray()));
 			}
 			return problematicEventInfos;
 		} catch (IOException e) {

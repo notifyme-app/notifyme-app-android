@@ -40,7 +40,8 @@
 				<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/spacing_medium"
+					android:layout_marginHorizontal="@dimen/spacing_medium"
+					android:layout_marginVertical="@dimen/spacing_large"
 					android:orientation="vertical">
 
 					<TextView
@@ -56,7 +57,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="@dimen/spacing_small"
-						android:src="@drawable/ic_time"
+						android:src="@drawable/ic_calendar"
 						app:layout_constraintStart_toStartOf="parent"
 						app:layout_constraintTop_toBottomOf="@id/fragment_exposure_days_ago" />
 
@@ -98,7 +99,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="@dimen/spacing_small"
-						android:src="@drawable/ic_time"
+						android:src="@drawable/ic_meeting"
 						app:layout_constraintStart_toStartOf="parent"
 						app:layout_constraintTop_toBottomOf="@id/fragment_exposure_where_header" />
 
@@ -149,6 +150,7 @@
 			</androidx.cardview.widget.CardView>
 
 			<androidx.cardview.widget.CardView
+				android:id="@+id/fragment_exposure_infobox"
 				style="@style/NotifyMe.Card.Tertiary.Light"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -161,18 +163,18 @@
 					android:orientation="vertical">
 
 					<TextView
-						android:id="@+id/fragment_exposure_what_to_do_header"
+						android:id="@+id/fragment_exposure_infobox_header"
 						style="@style/NotifyMe.Text.Status.Tertiary"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="@string/report_information_button_title" />
 
 					<TextView
-						android:id="@+id/fragment_exposure_what_to_do"
+						android:id="@+id/fragment_exposure_infobox_text"
 						style="@style/NotifyMe.Text"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/spacing_small"
+						android:layout_marginTop="@dimen/spacing_very_small"
 						tools:text="Please call the EPFL-Infoline to receive further instructions." />
 
 				</LinearLayout>
