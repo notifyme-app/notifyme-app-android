@@ -93,6 +93,8 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 		private TextView locationTextView;
 		private ImageView statusIcon;
 		private ImageView venueTypeIcon;
+		private View infoBox;
+		private TextView infoBoxText;
 
 		public VenueVisitViewHolder(View itemView) {
 			super(itemView);
@@ -101,6 +103,8 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 			this.locationTextView = itemView.findViewById(R.id.item_diary_entry_location);
 			this.statusIcon = itemView.findViewById(R.id.item_diary_entry_status_icon);
 			this.venueTypeIcon = itemView.findViewById(R.id.item_diary_entry_icon);
+			this.infoBox = itemView.findViewById(R.id.item_diary_entry_infobox);
+			this.infoBoxText = itemView.findViewById(R.id.item_diary_entry_infobox_text);
 		}
 
 		public void bind(ItemVenueVisit item) {
@@ -112,8 +116,15 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 			String end = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getDepartureTime(), ":");
 			timeTextView.setText(start + " — " + end);
 			if (item.getExposure() == null) {
+				infoBox.setVisibility(View.GONE);
 				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_filled));
 			} else {
+				if (item.getExposure().getMessage() != null && !item.getExposure().getMessage().isEmpty()) {
+					infoBox.setVisibility(View.VISIBLE);
+					infoBoxText.setText(item.getExposure().getMessage());
+				} else {
+					infoBox.setVisibility(View.GONE);
+				}
 				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 			}
 			//TODO: Display correct venue type icon

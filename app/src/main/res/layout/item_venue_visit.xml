@@ -11,14 +11,13 @@
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginVertical="@dimen/spacing_small"
-		android:layout_marginStart="@dimen/spacing_medium_large"
-		android:layout_marginEnd="@dimen/spacing_small">
+		android:layout_margin="@dimen/spacing_small">
 
 		<ImageView
 			android:id="@+id/item_diary_entry_icon"
 			android:layout_width="@dimen/diary_entry_icon_size"
 			android:layout_height="@dimen/diary_entry_icon_size"
+			android:layout_marginStart="@dimen/spacing_small"
 			android:src="@drawable/ic_tea"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +31,7 @@
 			app:layout_constraintTop_toTopOf="parent" />
 
 		<LinearLayout
+			android:id="@+id/item_diary_entry_info_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
@@ -64,6 +64,39 @@
 				tools:text="10:01 - 11:35" />
 
 		</LinearLayout>
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/item_diary_entry_infobox"
+			style="@style/NotifyMe.Card.Tertiary.Light"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			app:layout_constraintTop_toBottomOf="@id/item_diary_entry_info_container">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/spacing_medium"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/item_diary_entry_infobox_header"
+					style="@style/NotifyMe.Text.Status.Tertiary"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/report_information_button_title" />
+
+				<TextView
+					android:id="@+id/item_diary_entry_infobox_text"
+					style="@style/NotifyMe.Text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/spacing_very_small"
+					tools:text="Please call the EPFL-Infoline to receive further instructions." />
+
+			</LinearLayout>
+
+		</androidx.cardview.widget.CardView>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

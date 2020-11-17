@@ -113,9 +113,7 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		public ReportsHeaderViewHolder(View itemView) {super(itemView);}
 
-		public void bind(ItemReportsHeader item) {
-			itemView.findViewById(R.id.reports_what_to_do_button).setOnClickListener(item.getClickListener());
-		}
+		public void bind(ItemReportsHeader item) { }
 
 	}
 
@@ -127,6 +125,8 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		private TextView locationTextView;
 		private ImageView statusIcon;
 		private ImageView venueTypeIcon;
+		private View infoBox;
+		private TextView infoBoxText;
 
 		public VenueVisitViewHolder(View itemView) {
 			super(itemView);
@@ -135,6 +135,8 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			this.locationTextView = itemView.findViewById(R.id.item_diary_entry_location);
 			this.statusIcon = itemView.findViewById(R.id.item_diary_entry_status_icon);
 			this.venueTypeIcon = itemView.findViewById(R.id.item_diary_entry_icon);
+			this.infoBox = itemView.findViewById(R.id.item_diary_entry_infobox);
+			this.infoBoxText = itemView.findViewById(R.id.item_diary_entry_infobox_text);
 		}
 
 		public void bind(ItemVenueVisit item) {
@@ -150,6 +152,14 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			String end = StringUtils.getHourMinuteTimeString(item.getExposure().getEndTime(), ":");
 			timeTextView.setText(start + " — " + end);
 			itemView.setOnClickListener(item.getOnClickListener());
+
+			if (item.getExposure().getMessage() != null && !item.getExposure().getMessage().isEmpty()) {
+				infoBox.setVisibility(View.VISIBLE);
+				infoBoxText.setText(item.getExposure().getMessage());
+			} else {
+				infoBox.setVisibility(View.GONE);
+			}
+			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 		}
 
 	}

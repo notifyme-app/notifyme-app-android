@@ -109,6 +109,17 @@
 		<item name="android:paddingEnd">@dimen/spacing_huge</item>
 	</style>
 
+	<style name="NotifyMe.Button.Borderless" parent="NotifyMe.Text.Primary">
+		<item name="android:textAllCaps">true</item>
+		<item name="android:fontFamily">@font/inter_bold</item>
+		<item name="android:textColor">@color/primary</item>
+		<item name="android:foreground">?android:attr/selectableItemBackground</item>
+		<item name="android:paddingBottom">@dimen/spacing_medium_large</item>
+		<item name="android:paddingTop">@dimen/spacing_medium_large</item>
+		<item name="android:paddingStart">@dimen/spacing_medium_large</item>
+		<item name="android:paddingEnd">@dimen/spacing_medium_large</item>
+	</style>
+
 	<style name="NotifyMe.ImageButton" parent="Widget.AppCompat.ImageButton">
 		<item name="android:background">@drawable/bg_button_white</item>
 		<item name="android:stateListAnimator">@null</item>
@@ -146,6 +157,21 @@
 		<item name="android:clickable">false</item>
 		<item name="cardElevation">0dp</item>
 		<item name="cardBackgroundColor">@color/tertiary</item>
+	</style>
+
+	<style name="NotifyMe.Card.Grey">
+		<item name="android:minHeight">0dp</item>
+		<item name="android:focusable">false</item>
+		<item name="android:clickable">false</item>
+		<item name="cardElevation">0dp</item>
+		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
+		<item name="cardBackgroundColor">@color/light_grey</item>
+	</style>
+
+	<style name="NotifyMe.Card.Tertiary.Light">
+		<item name="android:minHeight">0dp</item>
+		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
+		<item name="cardBackgroundColor">@color/tertiary_light</item>
 	</style>
 
 	<style name="NotifyMe.EditText" parent="Widget.AppCompat.EditText">

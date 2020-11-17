@@ -27,32 +27,6 @@
 			android:layout_height="wrap_content"
 			android:text="@string/report_information_text" />
 
-		<LinearLayout
-			android:id="@+id/reports_what_to_do_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="end"
-			android:clickable="true"
-			android:focusable="true"
-			android:foreground="?android:selectableItemBackground"
-			android:orientation="horizontal"
-			android:padding="@dimen/spacing_medium">
-
-			<TextView
-				style="@style/NotifyMe.Text.Status.White"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/spacing_medium"
-				android:text="@string/report_information_button_title" />
-
-			<ImageView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_chevron_right"
-				app:tint="@color/white" />
-
-		</LinearLayout>
-
 	</LinearLayout>
 
 </androidx.cardview.widget.CardView>
