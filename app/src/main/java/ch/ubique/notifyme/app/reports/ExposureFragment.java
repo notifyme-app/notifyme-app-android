@@ -77,8 +77,14 @@ public class ExposureFragment extends Fragment {
 		if (diaryEntry != null) {
 			nameTextView.setText(diaryEntry.getVenueInfo().getName());
 			locationTextView.setText(diaryEntry.getVenueInfo().getLocation() + ", " + diaryEntry.getVenueInfo().getRoom());
+
+			if (diaryEntry.getComment() != null && !diaryEntry.getComment().isEmpty()) {
+				notes.setText(diaryEntry.getComment());
+			} else {
+				notes.setVisibility(View.GONE);
+				notesHeader.setVisibility(View.GONE);
+			}
 			//TODO: Set Venue Type Icon
-			notes.setText(diaryEntry.getComment());
 		} else {
 			nameTextView.setVisibility(View.GONE);
 			whereLabel.setVisibility(View.GONE);

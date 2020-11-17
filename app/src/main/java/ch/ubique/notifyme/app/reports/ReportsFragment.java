@@ -44,13 +44,13 @@ public class ReportsFragment extends Fragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		toolbar = (Toolbar) view.findViewById(R.id.fragment_reports_toolbar);
+		toolbar = view.findViewById(R.id.fragment_reports_toolbar);
 		swipeRefreshLayout = view.findViewById(R.id.fragment_reports_swipe_refresh_layout);
 
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
@@ -73,14 +73,17 @@ public class ReportsFragment extends Fragment {
 				items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
 			}
 
-			String daysAgoString = "";
-			for (ExposureEvent exposure : exposures) {
-				String newDaysAgoString = StringUtils.getDaysAgoString(exposure.getStartTime(), getContext());
-				if (!newDaysAgoString.equals(daysAgoString)) {
-					daysAgoString = newDaysAgoString;
-					items.add(new ItemVenueVisitDayHeader(daysAgoString));
+			if (exposures != null) {
+				String daysAgoString = "";
+				for (ExposureEvent exposureEvent : exposures) {
+					String newDaysAgoString = StringUtils.getDaysAgoString(exposureEvent.getStartTime(), getContext());
+					if (!newDaysAgoString.equals(daysAgoString)) {
+						daysAgoString = newDaysAgoString;
+						items.add(new ItemVenueVisitDayHeader(daysAgoString));
+					}
+					items.add(new ItemVenueVisit(exposureEvent, diaryStorage.getDiaryEntryWithId(exposureEvent.getId()),
+							v -> showExposureScreen(exposureEvent)));
 				}
-				items.add(new ItemVenueVisit(exposure, diaryStorage.getDiaryEntryWithId(exposure.getId()), null));
 			}
 
 			recyclerAdapter.setData(items);
@@ -90,6 +93,15 @@ public class ReportsFragment extends Fragment {
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+	}
+
+	private void showExposureScreen(ExposureEvent exposureEvent) {
+		viewModel.setSelectedExposure(exposureEvent);
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.replace(R.id.container, ExposureFragment.newInstance())
+				.addToBackStack(ExposureFragment.TAG)
+				.commit();
 	}
 
 }

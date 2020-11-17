@@ -42,7 +42,7 @@ public class DiaryFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 	}
 
 	@Override

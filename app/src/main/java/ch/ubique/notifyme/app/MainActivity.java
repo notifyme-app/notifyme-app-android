@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
 				long id = getIntent().getLongExtra(EXPOSURE_ID, -1);
 				ExposureEvent exposureEvent = getExposureWithId(id);
 				if (exposureEvent != null) {
-					viewModel.setSelectedExposure(exposureEvent);
-					showExposureScreen();
+					showExposureScreen(exposureEvent);
 				}
 			}
 		}
@@ -70,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
 				.commit();
 	}
 
-	private void showExposureScreen() {
+	private void showExposureScreen(ExposureEvent exposureEvent) {
+		viewModel.setSelectedExposure(exposureEvent);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, ExposureFragment.newInstance())
 				.addToBackStack(ExposureFragment.TAG)
