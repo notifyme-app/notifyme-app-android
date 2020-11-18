@@ -37,4 +37,16 @@ public class DiaryEntry {
 		return comment;
 	}
 
+	public void setArrivalTime(long arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public void setDepartureTime(long departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 }

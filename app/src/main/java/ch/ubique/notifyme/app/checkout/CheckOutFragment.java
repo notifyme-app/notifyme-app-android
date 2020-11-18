@@ -91,11 +91,8 @@ public class CheckOutFragment extends Fragment {
 				checkInState.getCheckOutTime()));
 	}
 
-
 	private void showTimePicker(boolean isFromTime) {
 
-		//TODO: Here we will also need some way to specify the Date
-		//TODO: Make sure that Check In Time is always earlier than Check Out Time
 		Calendar time = Calendar.getInstance();
 		if (isFromTime) {
 			time.setTimeInMillis(checkInState.getCheckInTime());

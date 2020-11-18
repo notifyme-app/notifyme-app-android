@@ -35,7 +35,6 @@ public class MainViewModel extends AndroidViewModel {
 	private boolean isQrScanningEnabled = true;
 	private ExposureEvent selectedExposure = null;
 
-
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
 	private Runnable timeUpdateRunnable;
@@ -120,9 +119,9 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	private void refreshExposures() {
-		List<ExposureEvent> exposuresUnsorted = CrowdNotifier.getExposureEvents(getApplication());
-		Collections.sort(exposuresUnsorted, (e1, e2) -> Long.compare(e1.getStartTime(), e2.getStartTime()));
-		exposures.setValue(exposuresUnsorted);
+		List<ExposureEvent> newExposures = CrowdNotifier.getExposureEvents(getApplication());
+		Collections.sort(newExposures, (e1, e2) -> Long.compare(e2.getStartTime(), e1.getStartTime()));
+		exposures.setValue(newExposures);
 	}
 
 	public ReminderOption getSelectedReminderOption() {

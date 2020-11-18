@@ -35,6 +35,7 @@ public class ExposureFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		//TODO: Refactor this to Fragment argument instead of going over ViewModel
 		this.exposure = viewModel.getSelectedExposure();
 		this.diaryEntry = DiaryStorage.getInstance(getContext()).getDiaryEntryWithId(exposure.getId());
 		super.onCreate(savedInstanceState);

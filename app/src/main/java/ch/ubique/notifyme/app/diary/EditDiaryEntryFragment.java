@@ -1,0 +1,155 @@
+package ch.ubique.notifyme.app.diary;
+
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.Calendar;
+
+import org.crowdnotifier.android.sdk.CrowdNotifier;
+
+import ch.ubique.notifyme.app.MainViewModel;
+import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.app.model.DiaryEntry;
+import ch.ubique.notifyme.app.utils.DiaryStorage;
+import ch.ubique.notifyme.app.utils.StringUtils;
+
+public class EditDiaryEntryFragment extends Fragment {
+
+	public final static String TAG = EditDiaryEntryFragment.class.getCanonicalName();
+
+	private final static long ONE_DAY_IN_MILLIS = 24 * 60 * 60 * 1000;
+	private final static String ARG_SHOW_HIDE_IN_DIARY_BUTTON = "ARG_SHOW_HIDE_IN_DIARY_BUTTON";
+	private final static String ARG_DIARY_ENTRY_ID = "ARG_DIARY_ENTRY_ID";
+
+	private MainViewModel viewModel;
+	private DiaryStorage diaryStorage;
+	private DiaryEntry diaryEntry;
+	boolean showHideInDiaryButton;
+
+	private TextView nameTextView;
+	private TextView locationTextView;
+	private TextView roomTextView;
+	private View doneButton;
+	private EditText commentEditText;
+	private TextView fromTime;
+	private TextView toTime;
+	private TextView dateTextView;
+	private View hideInDiaryButton;
+
+
+	public EditDiaryEntryFragment() { super(R.layout.fragment_edit_diary_entry); }
+
+	public static EditDiaryEntryFragment newInstance(boolean showHideInDiaryButton, long diaryEntryId) {
+		EditDiaryEntryFragment fragment = new EditDiaryEntryFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(ARG_SHOW_HIDE_IN_DIARY_BUTTON, showHideInDiaryButton);
+		args.putLong(ARG_DIARY_ENTRY_ID, diaryEntryId);
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		diaryStorage = DiaryStorage.getInstance(requireContext());
+		long diaryEntryId = getArguments().getLong(ARG_DIARY_ENTRY_ID);
+		diaryEntry = diaryStorage.getDiaryEntryWithId(diaryEntryId);
+		showHideInDiaryButton = getArguments().getBoolean(ARG_SHOW_HIDE_IN_DIARY_BUTTON);
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		nameTextView = view.findViewById(R.id.edit_diary_entry_name);
+		locationTextView = view.findViewById(R.id.edit_diary_entry_location);
+		roomTextView = view.findViewById(R.id.edit_diary_entry_room);
+		doneButton = view.findViewById(R.id.edit_diary_entry_done_button);
+		commentEditText = view.findViewById(R.id.edit_diary_entry_comment_edit_text);
+		fromTime = view.findViewById(R.id.edit_diary_entry_from_text_view);
+		toTime = view.findViewById(R.id.edit_diary_entry_to_text_view);
+		dateTextView = view.findViewById(R.id.edit_diary_entry_date);
+		hideInDiaryButton = view.findViewById(R.id.edit_diary_entry_hide_from_diary_button);
+
+		nameTextView.setText(diaryEntry.getVenueInfo().getName());
+		locationTextView.setText(diaryEntry.getVenueInfo().getLocation());
+		roomTextView.setText(diaryEntry.getVenueInfo().getRoom());
+
+		refreshTimeTextViews();
+
+		fromTime.setOnClickListener(v -> showTimePicker(true));
+		toTime.setOnClickListener(v -> showTimePicker(false));
+		commentEditText.setText(diaryEntry.getComment());
+
+		if (showHideInDiaryButton) {
+			hideInDiaryButton.setVisibility(View.VISIBLE);
+			hideInDiaryButton.setOnClickListener(v -> hideInDiary());
+		} else {
+			hideInDiaryButton.setVisibility(View.GONE);
+		}
+
+		doneButton.setOnClickListener(v -> {
+			saveEntry();
+			requireActivity().getSupportFragmentManager().popBackStack();
+		});
+	}
+
+	private void refreshTimeTextViews() {
+		fromTime.setText(StringUtils.getHourMinuteTimeString(diaryEntry.getArrivalTime(), "  :  "));
+		toTime.setText(StringUtils.getHourMinuteTimeString(diaryEntry.getDepartureTime(), "  :  "));
+		dateTextView.setText(StringUtils.getCheckOutDateString(getContext(), diaryEntry.getArrivalTime(),
+				diaryEntry.getDepartureTime()));
+	}
+
+	private void showTimePicker(boolean isFromTime) {
+
+		Calendar time = Calendar.getInstance();
+		if (isFromTime) {
+			time.setTimeInMillis(diaryEntry.getArrivalTime());
+		} else {
+			time.setTimeInMillis(diaryEntry.getDepartureTime());
+		}
+		int hour = time.get(Calendar.HOUR_OF_DAY);
+		int minute = time.get(Calendar.MINUTE);
+		TimePickerDialog timePicker;
+		timePicker = new TimePickerDialog(getContext(), (picker, selectedHour, selectedMinute) -> {
+			time.set(Calendar.HOUR_OF_DAY, selectedHour);
+			time.set(Calendar.MINUTE, selectedMinute);
+			if (isFromTime) {
+				diaryEntry.setArrivalTime(time.getTimeInMillis());
+			} else {
+				diaryEntry.setDepartureTime(time.getTimeInMillis());
+			}
+			if (diaryEntry.getDepartureTime() < diaryEntry.getArrivalTime()) {
+				diaryEntry.setDepartureTime(diaryEntry.getDepartureTime() + ONE_DAY_IN_MILLIS);
+			} else if (diaryEntry.getArrivalTime() + ONE_DAY_IN_MILLIS < diaryEntry.getDepartureTime()) {
+				diaryEntry.setDepartureTime(diaryEntry.getDepartureTime() - ONE_DAY_IN_MILLIS);
+			}
+			refreshTimeTextViews();
+		}, hour, minute, true);
+
+		timePicker.show();
+	}
+
+	private void saveEntry() {
+		String comment = commentEditText.getText().toString();
+		diaryEntry.setComment(comment);
+		CrowdNotifier.updateCheckIn(diaryEntry.getId(), diaryEntry.getArrivalTime(), diaryEntry.getDepartureTime(),
+				diaryEntry.getVenueInfo().getNotificationKey(), diaryEntry.getVenueInfo().getPublicKey(), getContext());
+		diaryStorage.updateEntry(diaryEntry);
+	}
+
+
+	private void hideInDiary() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.add(HideInDiaryDialogFragment.newInstance(diaryEntry.getId()), HideInDiaryDialogFragment.TAG)
+				.commit();
+	}
+
+}

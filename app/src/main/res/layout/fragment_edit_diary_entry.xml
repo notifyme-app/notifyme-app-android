@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:id="@+id/edit_diary_entry_done_button"
+		style="@style/NotifyMe.Text.Status.Primary"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end"
+		android:background="?selectableItemBackground"
+		android:padding="@dimen/spacing_large"
+		android:text="@string/done_button" />
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingHorizontal="@dimen/spacing_very_large"
+			android:paddingBottom="@dimen/spacing_large">
+
+			<TextView
+				style="@style/NotifyMe.Text.Status.Small"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="@string/edit_controller_your_checkin" />
+
+			<TextView
+				android:id="@+id/edit_diary_entry_name"
+				style="@style/NotifyMe.Text.Title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
+				android:text="Cyber Cafe SV" />
+
+			<TextView
+				android:id="@+id/edit_diary_entry_location"
+				style="@style/NotifyMe.Text.Subtitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_very_small"
+				android:gravity="center"
+				android:text="EPFL Campus" />
+
+			<TextView
+				android:id="@+id/edit_diary_entry_room"
+				style="@style/NotifyMe.Text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
+				android:text="Lausanne" />
+
+			<TextView
+				android:id="@+id/edit_diary_entry_date"
+				style="@style/NotifyMe.Text.Subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:gravity="center"
+				android:text="Thursday, October 22" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_large"
+				android:orientation="horizontal">
+
+				<TextView
+					style="@style/NotifyMe.Text.Status.Small"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/datepicker_from" />
+
+				<TextView
+					style="@style/NotifyMe.Text.Status.Small"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/datepicker_to" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_small"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/edit_diary_entry_from_text_view"
+					style="@style/NotifyMe.Text.Status.Primary"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/spacing_tiny_small"
+					android:layout_weight="1"
+					android:background="@color/light_grey"
+					android:foreground="?android:selectableItemBackground"
+					android:gravity="center"
+					android:paddingVertical="@dimen/spacing_medium"
+					android:text="07  :  56" />
+
+				<TextView
+					android:id="@+id/edit_diary_entry_to_text_view"
+					style="@style/NotifyMe.Text.Status.Primary"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/spacing_tiny_small"
+					android:layout_weight="1"
+					android:background="@color/light_grey"
+					android:foreground="?android:selectableItemBackground"
+					android:gravity="center"
+					android:paddingVertical="@dimen/spacing_medium"
+					android:text="08  :  13" />
+
+			</LinearLayout>
+
+			<TextView
+				style="@style/NotifyMe.Text.Status.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_medium"
+				android:text="@string/edit_mode_addcomment" />
+
+			<EditText
+				android:id="@+id/edit_diary_entry_comment_edit_text"
+				style="@style/NotifyMe.EditText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/spacing_small"
+				android:hint="@string/edit_mode_comment_placeholder" />
+
+			<Button
+				android:id="@+id/edit_diary_entry_hide_from_diary_button"
+				style="@style/NotifyMe.Button.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:text="@string/remove_from_diary_button" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>

@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 
 import org.crowdnotifier.android.sdk.model.DayDate;
+import org.crowdnotifier.android.sdk.model.EncryptedVenueVisit;
 
 import ch.ubique.notifyme.app.model.DiaryEntry;
 
@@ -52,11 +53,30 @@ public class DiaryStorage {
 		return instance;
 	}
 
-	public boolean addEntry(DiaryEntry exposure) {
-		List<DiaryEntry> exposureList = getEntries();
-		if (hasExposureWithId(exposure.getId())) return false;
-		exposureList.add(exposure);
-		saveToPrefs(exposureList);
+	public boolean addEntry(DiaryEntry diaryEntry) {
+		List<DiaryEntry> diaryEntries = getEntries();
+		if (hasExposureWithId(diaryEntry.getId())) return false;
+		diaryEntries.add(diaryEntry);
+		saveToPrefs(diaryEntries);
+		return true;
+	}
+
+	public boolean updateEntry(DiaryEntry newDiaryEntry) {
+		List<DiaryEntry> diaryEntries = getEntries();
+		DiaryEntry oldDiaryEntry = getDiaryEntryWithId(diaryEntries, newDiaryEntry.getId());
+		if (oldDiaryEntry == null) return false;
+		diaryEntries.remove(oldDiaryEntry);
+		diaryEntries.add(newDiaryEntry);
+		saveToPrefs(diaryEntries);
+		return true;
+	}
+
+	public boolean removeEntry(long id) {
+		List<DiaryEntry> diaryEntries = getEntries();
+		DiaryEntry diaryEntry = getDiaryEntryWithId(diaryEntries, id);
+		if (diaryEntry == null) return false;
+		diaryEntries.remove(diaryEntry);
+		saveToPrefs(diaryEntries);
 		return true;
 	}
 
@@ -65,7 +85,11 @@ public class DiaryStorage {
 	}
 
 	public DiaryEntry getDiaryEntryWithId(long id) {
-		for (DiaryEntry exposure : getEntries()) {
+		return getDiaryEntryWithId(getEntries(), id);
+	}
+
+	private DiaryEntry getDiaryEntryWithId(List<DiaryEntry> diaryEntries, long id) {
+		for (DiaryEntry exposure : diaryEntries) {
 			if (exposure.getId() == id) {
 				return exposure;
 			}

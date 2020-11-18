@@ -19,6 +19,7 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
+import ch.ubique.notifyme.app.reports.ExposureFragment;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
@@ -47,7 +48,7 @@ public class DiaryFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		toolbar = (Toolbar) view.findViewById(R.id.fragment_diary_toolbar);
+		toolbar = view.findViewById(R.id.fragment_diary_toolbar);
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 
 		RecyclerView recyclerView = view.findViewById(R.id.fragment_diary_recycler_view);
@@ -58,7 +59,7 @@ public class DiaryFragment extends Fragment {
 			ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
 
 			List<DiaryEntry> diaryEntries = DiaryStorage.getInstance(getContext()).getEntries();
-			Collections.sort(diaryEntries, (d1, d2) -> Long.compare(d1.getArrivalTime(), d2.getArrivalTime()));
+			Collections.sort(diaryEntries, (d1, d2) -> Long.compare(d2.getArrivalTime(), d1.getArrivalTime()));
 
 			String daysAgoString = "";
 			for (DiaryEntry diaryEntry : diaryEntries) {
@@ -67,9 +68,8 @@ public class DiaryFragment extends Fragment {
 					daysAgoString = newDaysAgoString;
 					items.add(new ItemVenueVisitDayHeader(daysAgoString));
 				}
-				items.add(new ItemVenueVisit(getExposureWithId(exposures, diaryEntry.getId()), diaryEntry, v -> {
-					//TODO: Implement diary entry click
-				}));
+				items.add(new ItemVenueVisit(getExposureWithId(exposures, diaryEntry.getId()), diaryEntry,
+						v -> onDiaryEntryClicked(diaryEntry, getExposureWithId(exposures, diaryEntry.getId()))));
 			}
 
 			recyclerAdapter.setData(items);
@@ -83,6 +83,23 @@ public class DiaryFragment extends Fragment {
 			}
 		}
 		return null;
+	}
+
+	private void onDiaryEntryClicked(DiaryEntry diaryEntry, ExposureEvent exposureEvent) {
+		if (exposureEvent != null) {
+			viewModel.setSelectedExposure(exposureEvent);
+			requireActivity().getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.replace(R.id.container, ExposureFragment.newInstance())
+					.addToBackStack(ExposureFragment.TAG)
+					.commit();
+		} else {
+			requireActivity().getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.replace(R.id.container, EditDiaryEntryFragment.newInstance(true, diaryEntry.getId()))
+					.addToBackStack(EditDiaryEntryFragment.TAG)
+					.commit();
+		}
 	}
 
 }
