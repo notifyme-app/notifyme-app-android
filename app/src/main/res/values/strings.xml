@@ -244,4 +244,12 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="generator_pdf_button"></string>
     <string name="generator_public_qr_title"></string>
     <string name="generator_private_qr_title"></string>
+    <string name="generator_missing_input"></string>
+    <string name="upload_title"></string>
+    <string name="upload_period_label"></string>
+    <string name="upload_period_from_label"></string>
+    <string name="upload_period_to_label"></string>
+    <string name="upload_note_label"></string>
+    <string name="upload_note_placeholder"></string>
+    <string name="upload_upload_button"></string>
 </resources>

@@ -56,7 +56,15 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View checkedInLabel = view.findViewById(R.id.fragment_main_checked_in_label);
 		SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.fragment_main_swipe_refresh_layout);
 		View diaryButton = view.findViewById(R.id.fragment_main_diary_button);
+		TextView appNameTextView = view.findViewById(R.id.fragment_main_app_name);
+		View infoButton = view.findViewById(R.id.fragment_main_info_button);
 
+		String appName = getString(R.string.app_name);
+		appNameTextView.setText(StringUtils.getTwoColoredString(appName, appName.substring(appName.length() - 2),
+				getResources().getColor(R.color.primary, null)));
+		infoButton.setOnClickListener(v -> {
+			//TODO: Show impressum
+		});
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
 

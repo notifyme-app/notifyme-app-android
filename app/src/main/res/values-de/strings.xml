@@ -242,4 +242,12 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
 QR-Code"</string>
     <string name="generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
 QR-Code"</string>
+    <string name="generator_missing_input">"Bitte Pflichtfeld ausfüllen"</string>
+    <string name="upload_title">"Meldung über eine mögliche Ansteckung"</string>
+    <string name="upload_period_label">"Betroffener Zeitraum"</string>
+    <string name="upload_period_from_label">"Von"</string>
+    <string name="upload_period_to_label">"Bis"</string>
+    <string name="upload_note_label">"Hinweis an die Besucher"</string>
+    <string name="upload_note_placeholder">"Was sollen die Besucher tun?"</string>
+    <string name="upload_upload_button">"Besucher informieren"</string>
 </resources>

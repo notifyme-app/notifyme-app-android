@@ -8,13 +8,13 @@
     <string name="app_name">"NotifyMe"</string>
 
     <!-- Title of Checkin Screen -->
-    <string name="checkin_title">"Enregistrements"</string>
+    <string name="checkin_title">"Check-In"</string>
 
     <!-- Title of diary screen -->
     <string name="diary_title">"Journal"</string>
 
     <!-- Homescreen: Title of checkin button -->
-    <string name="checkin_button_title">"Enregistrer"</string>
+    <string name="checkin_button_title">"Check-in"</string>
 
     <!-- Homescreen: No Reports title -->
     <string name="no_report_title">"Pas de rapports"</string>
@@ -32,14 +32,14 @@
     <string name="face_id_reason_text">"Authentifiez-vous pour accéder au journal"</string>
 
     <!-- Homescreen: Text with no report -->
-    <string name="no_report_hero_text">"Bonne journée et restez en bonne santé
+    <string name="no_report_hero_text">"Prenez soin de vous
 "</string>
 
     <!-- Reminder Notification Title -->
-    <string name="checkout_reminder_title">"Profitez de votre journée et restez en bonne santé"</string>
+    <string name="checkout_reminder_title">"Quitter le lieu - rappel"</string>
 
     <!-- Reminder Checkout Text -->
-    <string name="checkout_reminder_text">"Quitter le lieu - rappel"</string>
+    <string name="checkout_reminder_text">"Voulez-vous quitter le lieu?"</string>
 
     <!-- Check In Confirm: Button title -->
     <string name="check_in_now_button_title">"Enregistrez-vous maintenant"</string>
@@ -54,10 +54,10 @@
     <string name="report_title_plural">"{NUMBER} rapports"</string>
 
     <!-- Reports: Infection text -->
-    <string name="report_message_text">"Vous courez le risque d'avoir été exposé au virus."</string>
+    <string name="report_message_text">"Il y a un risque d'infection"</string>
 
     <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
-    <string name="no_report_hero_text_highlight">"Restez en bonne santé"</string>
+    <string name="no_report_hero_text_highlight">"de vous"</string>
 
     <!-- Highlight text of report_message_text (must be exactly as in this text) -->
     <string name="report_message_text_highlight">"Une infection"</string>
@@ -111,7 +111,7 @@
     <string name="diary_option_title">"Ne pas afficher dans mon journal"</string>
 
     <!-- Edit CheckIn: Text that is shown when not showing in diary is set -->
-    <string name="diary_option_subtext">"Cet enregistrement ne sera pas affiché dans votre journal.
+    <string name="diary_option_subtext">"Ce check-in ne sera pas affiché dans votre journal.
 
 Cependant, l'application sauvegarde cette information pendant 14  jours afin de pouvoir vous avertir au cas où vous courez le risque d'avoir été exposé au virus"</string>
 
@@ -119,7 +119,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="checkin_set_reminder">"Configurer un rappel"</string>
 
     <!-- Reminder: Option Off -->
-    <string name="reminder_option_off">"Désactiver"</string>
+    <string name="reminder_option_off">"Off"</string>
 
     <!-- Edit Checkin: Remove from diary button title -->
     <string name="remove_from_diary_button">"Occulter du journal"</string>
@@ -134,7 +134,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="remove_diary_remove_now_button">"Occulter maintenant"</string>
 
     <!-- Remove from diary warning start text -->
-    <string name="remove_diary_warning_star_text">"l'App store sauvegarde cette information pendant 14 jours afin de pouvoir vous avertir au cas où vous courez le risque d'avoir été exposé au virus. Cet enregistrement ne sera pas affiché dans votre journal."</string>
+    <string name="remove_diary_warning_star_text">"l'Application sauvegarde cette information pendant 14 jours afin de pouvoir vous avertir au cas où il y a un risque d'infection."</string>
 
     <!-- Report: 1 day ago singular -->
     <string name="report_message_one_day_ago">"Il y a un jour"</string>
@@ -167,10 +167,10 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="checkin_reminder_settings_alert_title">"Le rappel n'a pas pu être configuré"</string>
 
     <!-- Checkin: Reminder Alert message when permission to send reminders not given -->
-    <string name="checkin_reminder_settings_alert_message">"Afin de pouvoir vous envoyer des rappels, NotifyMe nécessite votre autorisation pour l'envoi de notification. Vous pouvez activer les notifications dans les configurations de l'application."</string>
+    <string name="checkin_reminder_settings_alert_message">"Afin de pouvoir vous envoyer des rappels, NotifyMe nécessite votre autorisation pour l'envoi de notifications."</string>
 
     <!-- Check In Reminder Alert Open Settings button -->
-    <string name="checkin_reminder_option_open_settings">"Ouvrir les configurations de l'application"</string>
+    <string name="checkin_reminder_option_open_settings">"Ajuster"</string>
 
     <!-- Cancel button title -->
     <string name="cancel">"Annuler"</string>
@@ -194,25 +194,25 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="new_exposure_location_header">"Où"</string>
 
     <!-- Version text in the Imprint (Webview) -->
-    <string name="imprint_webview_version_text"></string>
+    <string name="imprint_webview_version_text">"Version"</string>
 
     <!-- Title publisher in imprint -->
-    <string name="imprint_webview_publisher_title"></string>
+    <string name="imprint_webview_publisher_title">"Éditeur"</string>
 
     <!-- Text about Ubique in the imprint -->
-    <string name="imprint_webview_ubique_about_text"></string>
+    <string name="imprint_webview_ubique_about_text">"Ubique est spécialisé dans le développement d'applications mobiles conçues pour le consommateur final. En tant qu'entreprise reconnue dans la conception de produits basés sur des protocoles décentralisés, le travail d'Ubique se focalise sur la connexion entre l'utilisateur et la technologie avancée."</string>
 
     <!-- Title in collaboration with in imprint -->
-    <string name="imprint_webview_collaboration_title"></string>
+    <string name="imprint_webview_collaboration_title">"En collaboration avec"</string>
 
     <!-- CrowdNotifier Paper text -->
-    <string name="imprint_webview_paper_text"></string>
+    <string name="imprint_webview_paper_text">"Ce projet est basé sur l'article CrowdNotifier de Wouter Lueks (EPFL) et al.:"</string>
 
     <!-- CrowdNotifier Paper link -->
-    <string name="imprint_webview_paper_link"></string>
-    <string name="imprint_webview_more_info_title"></string>
-    <string name="imprint_webview_more_info_link"></string>
-    <string name="imprint_webview_legal_title"></string>
+    <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
+    <string name="imprint_webview_more_info_title">"Informations supplémentaires"</string>
+    <string name="imprint_webview_more_info_link">"https://notify-me.ch"</string>
+    <string name="imprint_webview_legal_title">"juridique"</string>
     <string name="imprint_webview_legal_link_text"></string>
     <string name="imprint_webview_legal_link_url"></string>
     <string name="imprint_webview_sourcecode_title"></string>
@@ -241,4 +241,12 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="generator_pdf_button"></string>
     <string name="generator_public_qr_title"></string>
     <string name="generator_private_qr_title"></string>
+    <string name="generator_missing_input"></string>
+    <string name="upload_title"></string>
+    <string name="upload_period_label"></string>
+    <string name="upload_period_from_label"></string>
+    <string name="upload_period_to_label"></string>
+    <string name="upload_note_label"></string>
+    <string name="upload_note_placeholder"></string>
+    <string name="upload_upload_button"></string>
 </resources>
