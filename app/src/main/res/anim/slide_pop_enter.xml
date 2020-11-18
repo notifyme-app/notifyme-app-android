@@ -1,17 +1,12 @@
-<!--
-  ~ Copyright (c) 2020 Ubique Innovation AG <https://www.ubique.ch>
-  ~
-  ~ This Source Code Form is subject to the terms of the Mozilla Public
-  ~ License, v. 2.0. If a copy of the MPL was not distributed with this
-  ~ file, You can obtain one at https://mozilla.org/MPL/2.0/.
-  ~
-  ~ SPDX-License-Identifier: MPL-2.0
-  -->
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
 
-<set>
-	<translate xmlns:android="http://schemas.android.com/apk/res/android"
-		android:fromXDelta="-10%"
-		android:toXDelta="0"
-		android:interpolator="@android:anim/accelerate_interpolator"
-		android:duration="@android:integer/config_shortAnimTime"/>
+	<objectAnimator
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:duration="150"
+		android:propertyName="x"
+		android:valueFrom="-1000"
+		android:valueTo="0"
+		android:valueType="floatType" />
+
 </set>
