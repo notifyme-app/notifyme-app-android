@@ -81,6 +81,7 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	public void setData(List<VenueVisitRecyclerItem> items) {
+		//TODO: Add DiffUtil
 		this.items.clear();
 		this.items.addAll(items);
 		notifyDataSetChanged();
@@ -126,7 +127,7 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		public ErrorViewHolder(View itemView) {super(itemView);}
 
 		public void bind(ItemError item) {
-			ErrorHelper.updateErrorView(itemView, item.getErrorState(), item.getCustomButtonAction());
+			ErrorHelper.updateErrorView(itemView, item.getErrorState(), item.getCustomButtonAction(), itemView.getContext());
 		}
 
 	}

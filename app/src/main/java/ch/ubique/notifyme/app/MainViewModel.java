@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -40,7 +41,7 @@ public class MainViewModel extends AndroidViewModel {
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
 	private Runnable timeUpdateRunnable;
-	private final long UPDATE_INTERVAL = 60000;
+	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 60000;
 	private WebServiceController webServiceController = new WebServiceController(getApplication());
 
 
@@ -71,10 +72,10 @@ public class MainViewModel extends AndroidViewModel {
 			} else {
 				timeSinceCheckIn.setValue(0L);
 			}
-			handler.postDelayed(timeUpdateRunnable, UPDATE_INTERVAL);
+			handler.postDelayed(timeUpdateRunnable, CHECK_IN_TIME_UPDATE_INTERVAL);
 		};
-		handler.postDelayed(timeUpdateRunnable,
-				UPDATE_INTERVAL - (System.currentTimeMillis() - checkInState.getCheckInTime() % UPDATE_INTERVAL));
+		handler.postDelayed(timeUpdateRunnable, CHECK_IN_TIME_UPDATE_INTERVAL -
+				(System.currentTimeMillis() - checkInState.getCheckInTime() % CHECK_IN_TIME_UPDATE_INTERVAL));
 		timeSinceCheckIn.setValue(System.currentTimeMillis() - checkInState.getCheckInTime());
 	}
 
@@ -121,9 +122,13 @@ public class MainViewModel extends AndroidViewModel {
 		});
 	}
 
-	private void refreshErrors() {
+	public void refreshErrors() {
+		boolean notificationsEnabled = NotificationManagerCompat.from(getApplication()).areNotificationsEnabled();
+
 		if (traceKeyLoadingState.getValue() == LoadingState.FAILURE) {
 			errorState.setValue(ErrorState.NETWORK);
+		} else if (!notificationsEnabled) {
+			errorState.setValue(ErrorState.NOTIFICATIONS_DISABLED);
 		} else {
 			errorState.setValue(null);
 		}

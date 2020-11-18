@@ -52,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 		KeyLoadWorker.startKeyLoadWorker(this);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		viewModel.refreshErrors();
+	}
+
 	private ExposureEvent getExposureWithId(long id) {
 		List<ExposureEvent> exposureEvents = CrowdNotifier.getExposureEvents(this);
 		for (ExposureEvent exposureEvent : exposureEvents) {

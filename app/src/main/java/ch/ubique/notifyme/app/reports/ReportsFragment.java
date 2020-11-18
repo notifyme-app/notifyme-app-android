@@ -21,6 +21,7 @@ import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
+import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
@@ -72,7 +73,11 @@ public class ReportsFragment extends Fragment {
 		ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
 
 		if (errorState != null) {
-			items.add(new ItemError(errorState, () -> viewModel.refreshTraceKeys()));
+			if (errorState == ErrorState.NETWORK) {
+				items.add(new ItemError(errorState, () -> viewModel.refreshTraceKeys()));
+			} else {
+				items.add(new ItemError(errorState, null));
+			}
 		}
 
 		if (exposures == null || exposures.isEmpty()) {

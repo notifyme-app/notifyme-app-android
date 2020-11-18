@@ -26,6 +26,7 @@ import ch.ubique.notifyme.app.diary.DiaryFragment;
 import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
 import ch.ubique.notifyme.app.utils.ErrorHelper;
+import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
@@ -134,7 +135,11 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				mainImageView.setVisibility(View.GONE);
 				errorViewSmall.setVisibility(View.VISIBLE);
 				errorView.setVisibility(View.VISIBLE);
-				ErrorHelper.updateErrorView(errorView, errorState, () -> viewModel.refreshTraceKeys());
+				if (errorState == ErrorState.NETWORK) {
+					ErrorHelper.updateErrorView(errorView, errorState, () -> viewModel.refreshTraceKeys(), requireContext());
+				} else {
+					ErrorHelper.updateErrorView(errorView, errorState, null, requireContext());
+				}
 			}
 		});
 
