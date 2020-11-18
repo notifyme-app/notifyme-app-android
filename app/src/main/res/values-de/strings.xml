@@ -250,4 +250,14 @@ QR-Code"</string>
     <string name="upload_note_label">"Hinweis an die Besucher"</string>
     <string name="upload_note_placeholder">"Was sollen die Besucher tun?"</string>
     <string name="upload_upload_button">"Besucher informieren"</string>
+    <string name="error_network_title">"Netzwerk Fehler"</string>
+    <string name="error_network_text">"Überprüfen Sie Ihre Internet Verbindung."</string>
+    <string name="error_notification_deactivated_title">"Mitteilungen deaktiviert"</string>
+    <string name="error_notification_deactivated_text">"Ändern Sie die Einstellungen, um bei einer Meldung direkt informiert zu werden."</string>
+    <string name="error_background_refresh_title">"Hintergrundaktualisierung ausgeschaltet"</string>
+    <string name="error_background_refresh_text">"Ändern Sie die Einstellungen, um bei einer neuen Meldung auch ausserhalb der App informiert zu werden."</string>
+    <string name="error_camera_permission_title">"Kein Zugriff auf Kamera"</string>
+    <string name="error_camera_permission_text">"Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können."</string>
+    <string name="error_action_change_settings">"Einstellungen ändern"</string>
+    <string name="error_action_retry">"Erneut versuchen"</string>
 </resources>

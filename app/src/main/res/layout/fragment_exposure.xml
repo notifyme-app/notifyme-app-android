@@ -34,7 +34,7 @@
 				android:text="@string/report_message_text" />
 
 			<androidx.cardview.widget.CardView
-				style="@style/NotifyMe.Card.Grey"
+				style="@style/NotifyMe.Card.Grey.Small"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_large">

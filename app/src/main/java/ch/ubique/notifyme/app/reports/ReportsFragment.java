@@ -13,17 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.reports.items.ItemNoReportsHeader;
-import ch.ubique.notifyme.app.reports.items.ItemReportsHeader;
-import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
-import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
-import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
+import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
+import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class ReportsFragment extends Fragment {
@@ -59,40 +57,49 @@ public class ReportsFragment extends Fragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		diaryStorage = DiaryStorage.getInstance(getContext());
-		viewModel.exposures.observe(getViewLifecycleOwner(), exposures -> {
-			ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
-
-			if (exposures == null || exposures.isEmpty()) {
-				toolbar.setTitle(R.string.no_report_title);
-				items.add(new ItemNoReportsHeader());
-			} else if (exposures.size() == 1) {
-				toolbar.setTitle(R.string.report_title_singular);
-				items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
-			} else {
-				toolbar.setTitle(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(exposures.size())));
-				items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
-			}
-
-			if (exposures != null) {
-				String daysAgoString = "";
-				for (ExposureEvent exposureEvent : exposures) {
-					String newDaysAgoString = StringUtils.getDaysAgoString(exposureEvent.getStartTime(), getContext());
-					if (!newDaysAgoString.equals(daysAgoString)) {
-						daysAgoString = newDaysAgoString;
-						items.add(new ItemVenueVisitDayHeader(daysAgoString));
-					}
-					items.add(new ItemVenueVisit(exposureEvent, diaryStorage.getDiaryEntryWithId(exposureEvent.getId()),
-							v -> showExposureScreen(exposureEvent)));
-				}
-			}
-
-			recyclerAdapter.setData(items);
-		});
+		viewModel.exposures
+				.observe(getViewLifecycleOwner(), exposures -> publishRecyclerItems(exposures, viewModel.errorState.getValue()));
+		viewModel.errorState
+				.observe(getViewLifecycleOwner(), errorState -> publishRecyclerItems(viewModel.exposures.getValue(), errorState));
 
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+	}
+
+	private void publishRecyclerItems(List<ExposureEvent> exposures, ErrorState errorState) {
+		ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
+
+		if (errorState != null) {
+			items.add(new ItemError(errorState, () -> viewModel.refreshTraceKeys()));
+		}
+
+		if (exposures == null || exposures.isEmpty()) {
+			toolbar.setTitle(R.string.no_report_title);
+			items.add(new ItemNoReportsHeader());
+		} else if (exposures.size() == 1) {
+			toolbar.setTitle(R.string.report_title_singular);
+			items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
+		} else {
+			toolbar.setTitle(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(exposures.size())));
+			items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
+		}
+
+		if (exposures != null) {
+			String daysAgoString = "";
+			for (ExposureEvent exposureEvent : exposures) {
+				String newDaysAgoString = StringUtils.getDaysAgoString(exposureEvent.getStartTime(), getContext());
+				if (!newDaysAgoString.equals(daysAgoString)) {
+					daysAgoString = newDaysAgoString;
+					items.add(new ItemVenueVisitDayHeader(daysAgoString));
+				}
+				items.add(new ItemVenueVisit(exposureEvent, diaryStorage.getDiaryEntryWithId(exposureEvent.getId()),
+						v -> showExposureScreen(exposureEvent)));
+			}
+		}
+
+		recyclerAdapter.setData(items);
 	}
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {

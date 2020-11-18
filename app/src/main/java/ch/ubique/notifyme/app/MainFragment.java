@@ -16,12 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.List;
 import java.util.concurrent.Executor;
+
+import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.diary.DiaryFragment;
 import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
+import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
@@ -58,6 +62,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View diaryButton = view.findViewById(R.id.fragment_main_diary_button);
 		TextView appNameTextView = view.findViewById(R.id.fragment_main_app_name);
 		View infoButton = view.findViewById(R.id.fragment_main_info_button);
+		View errorView = view.findViewById(R.id.no_reports_header_error_view);
+		View errorViewSmall = view.findViewById(R.id.reports_header_error_view);
 
 		String appName = getString(R.string.app_name);
 		appNameTextView.setText(StringUtils.getTwoColoredString(appName, appName.substring(appName.length() - 2),
@@ -111,6 +117,24 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				}
 				((TextView) reportsHeader.findViewById(R.id.reports_header_days_ago))
 						.setText(StringUtils.getDaysAgoString(reports.get(0).getStartTime(), getContext()));
+			}
+		});
+
+		viewModel.errorState.observe(getViewLifecycleOwner(), errorState -> {
+			if (errorState == null) {
+				List<ExposureEvent> reports = viewModel.exposures.getValue();
+				if (reports == null || reports.isEmpty()) {
+					splashText.setVisibility(View.VISIBLE);
+					mainImageView.setVisibility(View.VISIBLE);
+				}
+				errorViewSmall.setVisibility(View.GONE);
+				errorView.setVisibility(View.GONE);
+			} else {
+				splashText.setVisibility(View.GONE);
+				mainImageView.setVisibility(View.GONE);
+				errorViewSmall.setVisibility(View.VISIBLE);
+				errorView.setVisibility(View.VISIBLE);
+				ErrorHelper.updateErrorView(errorView, errorState, () -> viewModel.refreshTraceKeys());
 			}
 		});
 
@@ -192,8 +216,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showDiary() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter,
-						R.anim.slide_pop_exit)
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, DiaryFragment.newInstance())
 				.addToBackStack(DiaryFragment.TAG)
 				.commitAllowingStateLoss();

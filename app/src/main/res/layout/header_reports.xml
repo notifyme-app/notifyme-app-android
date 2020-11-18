@@ -51,8 +51,18 @@
 			style="@style/NotifyMe.Text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginVertical="@dimen/spacing_large"
+			android:layout_marginTop="@dimen/spacing_large"
 			android:text="@string/report_message_days_ago" />
+
+		<ImageButton
+			android:id="@+id/reports_header_error_view"
+			style="@style/NotifyMe.ImageButton.Grey"
+			android:layout_width="@dimen/button_height"
+			android:layout_height="@dimen/button_height"
+			android:layout_gravity="end"
+			android:clickable="false"
+			android:focusable="false"
+			android:src="@drawable/ic_error" />
 
 	</LinearLayout>
 
