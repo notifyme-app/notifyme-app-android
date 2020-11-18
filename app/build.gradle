@@ -33,6 +33,8 @@ android {
 		versionName "0.1"
 		resConfigs "en", "fr", "de", "it"
 
+		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
+
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 

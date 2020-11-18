@@ -123,6 +123,7 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	public void refreshErrors() {
+		//TODO: Also check for disabled notification channels
 		boolean notificationsEnabled = NotificationManagerCompat.from(getApplication()).areNotificationsEnabled();
 
 		if (traceKeyLoadingState.getValue() == LoadingState.FAILURE) {
