@@ -1,6 +1,8 @@
 package ch.ubique.notifyme.app.qr;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import androidx.camera.core.Preview;
 import androidx.camera.core.TorchState;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -39,10 +42,13 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
+import ch.ubique.notifyme.app.utils.ErrorHelper;
+import ch.ubique.notifyme.app.utils.ErrorState;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
 	public final static String TAG = QrCodeScannerFragment.class.getCanonicalName();
+	private static final int PERMISSION_REQUEST_CAMERA = 13;
 
 	private MainViewModel viewModel;
 	private PreviewView previewView;
@@ -54,6 +60,8 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private View topRightIndicator;
 	private View bottomRightIndicator;
 	private View bottomLeftIndicator;
+	private View errorView;
+	private View mainView;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
 
@@ -75,6 +83,17 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) !=
+				PackageManager.PERMISSION_GRANTED) {
+			requestPermissions(new String[] { Manifest.permission.CAMERA }, PERMISSION_REQUEST_CAMERA);
+		} else {
+			startCameraAndQrAnalyzer();
+		}
+	}
+
+	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		previewView = view.findViewById(R.id.camera_preview);
 		flashButton = view.findViewById(R.id.fragment_qr_scanner_flash_button);
@@ -83,10 +102,11 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		topRightIndicator = view.findViewById(R.id.qr_code_scanner_top_right_indicator);
 		bottomLeftIndicator = view.findViewById(R.id.qr_code_scanner_bottom_left_indicator);
 		bottomRightIndicator = view.findViewById(R.id.qr_code_scanner_bottom_right_indicator);
-		Toolbar toolbar = view.findViewById(R.id.fragment_reports_toolbar);
+		errorView = view.findViewById(R.id.fragment_qr_scanner_error_view);
+		mainView = view.findViewById(R.id.fragment_qr_scanner_main_view);
+		Toolbar toolbar = view.findViewById(R.id.fragment_qr_scanner_toolbar);
 
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
-		startCameraAndQrAnalyzer();
 	}
 
 
@@ -183,6 +203,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private void setIndicatorColor(View indicator, @ColorRes int color) {
 		LayerDrawable drawable = (LayerDrawable) indicator.getBackground();
 		GradientDrawable stroke = (GradientDrawable) drawable.findDrawableByLayerId(R.id.indicator);
+		if (getContext() == null) return;
 		stroke.setStroke(getResources().getDimensionPixelSize(R.dimen.qr_scanner_indicator_stroke_width),
 				getResources().getColor(color, null));
 	}
@@ -191,6 +212,22 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.add(CheckInDialogFragment.newInstance(), CheckInDialogFragment.TAG)
 				.commit();
+	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == PERMISSION_REQUEST_CAMERA) {
+			if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				mainView.setVisibility(View.VISIBLE);
+				errorView.setVisibility(View.GONE);
+				startCameraAndQrAnalyzer();
+			} else {
+				errorView.setVisibility(View.VISIBLE);
+				ErrorHelper.updateErrorView(errorView, ErrorState.CAMERA_ACCESS_DENIED, null, getContext());
+				mainView.setVisibility(View.GONE);
+			}
+		}
 	}
 
 }

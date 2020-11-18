@@ -2,17 +2,16 @@
 
 <!-- TODO: Improve this layout for small devices-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/light_grey"
-	android:orientation="vertical"
 	tools:context="ch.ubique.notifyme.app.qr.QrCodeScannerFragment">
 
 	<androidx.appcompat.widget.Toolbar
-		android:id="@+id/fragment_reports_toolbar"
+		android:id="@+id/fragment_qr_scanner_toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@color/white"
@@ -21,9 +20,29 @@
 		app:title="@string/checkin_title"
 		app:titleTextAppearance="@style/NotifyMe.Text.Title" />
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<LinearLayout
+		android:id="@+id/fragment_qr_scanner_error_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="0dp"
+		android:orientation="vertical"
+		android:visibility="gone"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/fragment_qr_scanner_toolbar">
+
+		<include
+			layout="@layout/item_error_status"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_huge" />
+
+	</LinearLayout>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/fragment_qr_scanner_main_view"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/fragment_qr_scanner_toolbar">
 
 		<TextView
 			android:id="@+id/qr_code_scanner_explanation"
@@ -108,4 +127,5 @@
 			app:layout_constraintEnd_toEndOf="parent" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

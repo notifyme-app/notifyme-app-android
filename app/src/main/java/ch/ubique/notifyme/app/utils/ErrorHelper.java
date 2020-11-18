@@ -28,13 +28,23 @@ public class ErrorHelper {
 		buttonView.setOnClickListener(v -> executeErrorAction(errorState, customButtonClickAction, context));
 	}
 
-	public static void executeErrorAction(ErrorState errorState, Runnable customButtonClickAction, Context context) {
+	private static void executeErrorAction(ErrorState errorState, Runnable customButtonClickAction, Context context) {
 		if (customButtonClickAction != null) customButtonClickAction.run();
 		switch (errorState) {
 			case NOTIFICATIONS_DISABLED:
 				openNotificationSettings(context);
 				break;
+			case CAMERA_ACCESS_DENIED:
+				openApplicationSettings(context);
+				break;
 		}
+	}
+
+	private static void openApplicationSettings(Context context) {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+		intent.setData(uri);
+		context.startActivity(intent);
 	}
 
 	private static void openNotificationSettings(Context context) {

@@ -3,11 +3,8 @@ package ch.ubique.notifyme.app;
 import androidx.annotation.NonNull;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +29,6 @@ import ch.ubique.notifyme.app.utils.StringUtils;
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
 
 	public final static String TAG = MainFragment.class.getCanonicalName();
-
-	private static final int PERMISSION_REQUEST_CAMERA = 13;
 
 	private MainViewModel viewModel;
 
@@ -84,7 +79,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 					.observe(getViewLifecycleOwner(), duration -> checkOutButton.setText(StringUtils.getDurationString(duration)));
 			viewModel.startCheckInTimer();
 		} else {
-			checkInButton.setOnClickListener(v -> requestCameraAndShowQRCodeScanner());
+			checkInButton.setOnClickListener(v -> showQRCodeScanner());
 			checkInButton.setVisibility(View.VISIBLE);
 			checkOutButton.setVisibility(View.GONE);
 			checkedInLabel.setVisibility(View.GONE);
@@ -149,26 +144,6 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
-	}
-
-	private void requestCameraAndShowQRCodeScanner() {
-		if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) ==
-				PackageManager.PERMISSION_GRANTED) {
-			showQRCodeScanner();
-		} else {
-			requestPermissions(new String[] { Manifest.permission.CAMERA }, PERMISSION_REQUEST_CAMERA);
-		}
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		if (requestCode == PERMISSION_REQUEST_CAMERA) {
-			if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				showQRCodeScanner();
-			} else {
-				//TODO: Handle Camera Permission Denied case
-			}
-		}
 	}
 
 	private void showCheckedInScreen() {
