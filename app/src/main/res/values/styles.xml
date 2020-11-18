@@ -80,6 +80,10 @@
 		<item name="android:textColor">@color/tertiary</item>
 	</style>
 
+	<style name="NotifyMe.Text.Status.Error">
+		<item name="android:textColor">@color/error_red</item>
+	</style>
+
 	<style name="NotifyMe.Text.Status.Tertiary.Small">
 		<item name="android:textSize">@dimen/text_size_small</item>
 	</style>
@@ -132,6 +136,10 @@
 		<item name="android:paddingEnd">@dimen/spacing_huge</item>
 	</style>
 
+	<style name="NotifyMe.ImageButton.Grey" parent="Widget.AppCompat.ImageButton">
+		<item name="android:background">@drawable/bg_button_light_grey</item>
+	</style>
+
 	<style name="NotifyMe.Card" parent="Widget.MaterialComponents.CardView">
 		<item name="android:focusable">true</item>
 		<item name="android:clickable">true</item>
@@ -166,8 +174,11 @@
 		<item name="android:focusable">false</item>
 		<item name="android:clickable">false</item>
 		<item name="cardElevation">0dp</item>
-		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
 		<item name="cardBackgroundColor">@color/light_grey</item>
+	</style>
+
+	<style name="NotifyMe.Card.Grey.Small">
+		<item name="cardCornerRadius">@dimen/diary_entry_corner_radius</item>
 	</style>
 
 	<style name="NotifyMe.Card.Tertiary.Light">

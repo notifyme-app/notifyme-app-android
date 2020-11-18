@@ -43,8 +43,9 @@ public class WebServiceController {
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				if (response.isSuccessful()) {
 					callback.onTraceKeysLoaded(handleSuccessfulResponse(response));
+				} else {
+					callback.onTraceKeysLoaded(null);
 				}
-				callback.onTraceKeysLoaded(null);
 			}
 
 			@Override

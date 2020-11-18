@@ -21,6 +21,7 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.network.WebServiceController;
+import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION;
@@ -31,6 +32,7 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<List<ExposureEvent>> exposures = new MutableLiveData<>();
 	public MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
+	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
 	private CheckInState checkInState;
 	private boolean isQrScanningEnabled = true;
 	private ExposureEvent selectedExposure = null;
@@ -57,6 +59,7 @@ public class MainViewModel extends AndroidViewModel {
 		checkInState = storage.getCurrentVenue();
 		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,
 				new IntentFilter(NEW_NOTIFICATION));
+		traceKeyLoadingState.observeForever(loadingState -> { if (loadingState != LoadingState.LOADING) refreshErrors(); });
 	}
 
 
@@ -116,6 +119,15 @@ public class MainViewModel extends AndroidViewModel {
 				traceKeyLoadingState.setValue(LoadingState.SUCCESS);
 			}
 		});
+	}
+
+	private void refreshErrors() {
+		if (traceKeyLoadingState.getValue() == LoadingState.FAILURE) {
+			errorState.setValue(ErrorState.NETWORK);
+		} else {
+			errorState.setValue(null);
+		}
+		//TODO: check if other errors are present and update the errorState
 	}
 
 	private void refreshExposures() {

@@ -15,11 +15,8 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.reports.items.ItemNoReportsHeader;
-import ch.ubique.notifyme.app.reports.items.ItemReportsHeader;
-import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
-import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
-import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
+import ch.ubique.notifyme.app.reports.items.*;
+import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -47,6 +44,9 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			case REPORT:
 				return new VenueVisitViewHolder(
 						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_venue_visit, parent, false));
+			case ERROR:
+				return new ErrorViewHolder(
+						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_error_status, parent, false));
 			default:
 				return null;
 		}
@@ -68,6 +68,9 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				break;
 			case REPORT:
 				((VenueVisitViewHolder) holder).bind((ItemVenueVisit) item);
+				break;
+			case ERROR:
+				((ErrorViewHolder) holder).bind((ItemError) item);
 				break;
 		}
 	}
@@ -114,6 +117,17 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		public ReportsHeaderViewHolder(View itemView) {super(itemView);}
 
 		public void bind(ItemReportsHeader item) { }
+
+	}
+
+
+	public class ErrorViewHolder extends RecyclerView.ViewHolder {
+
+		public ErrorViewHolder(View itemView) {super(itemView);}
+
+		public void bind(ItemError item) {
+			ErrorHelper.updateErrorView(itemView, item.getErrorState(), item.getCustomButtonAction());
+		}
 
 	}
 

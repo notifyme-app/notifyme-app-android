@@ -6,6 +6,7 @@
 	<color name="secondary">#00a690</color>
 	<color name="tertiary">#f34e70</color>
 	<color name="tertiary_light">#fdedf0</color>
+	<color name="error_red">#e20008</color>
 
 	<color name="primary_dark">#292859</color>
 	<color name="white_interaction">#E6E6E6</color>
