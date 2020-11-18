@@ -23,9 +23,6 @@ allprojects {
 		maven {
 			url  "https://dl.bintray.com/terl/lazysodium-maven"
 		}
-		maven {
-			url "https://dl.bintray.com/crowdnotifier/crowdnotifier-sdk-android/"
-		}
 	}
 }
 
