@@ -60,6 +60,7 @@
 			android:paddingBottom="@dimen/spacing_large">
 
 			<ImageView
+				android:id="@+id/edit_diary_entry_venue_type_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"

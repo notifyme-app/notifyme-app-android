@@ -2,7 +2,6 @@ package ch.ubique.notifyme.app.checkin;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,7 +46,6 @@ public class CheckedInFragment extends Fragment {
 
 		TextView titleTextView = view.findViewById(R.id.checked_in_fragment_title);
 		TextView subtitleTextView = view.findViewById(R.id.checked_in_fragment_subtitle);
-		ImageView venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
 		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
 		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.checked_in_fragment_toggle_group);

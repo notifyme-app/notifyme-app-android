@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.crowdnotifier.android.sdk.model.Qr;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -159,9 +161,10 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
 				nameTextView.setText(venueInfo.getTitle());
 				locationTextView.setText(venueInfo.getSubtitle());
+				venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+			} else {
+				venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(Qr.QRCodeContent.VenueType.OTHER));
 			}
-			//TODO: Display correct venue type icon
-			venueTypeIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_tea));
 			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 			String start = StringUtils.getHourMinuteTimeString(item.getExposure().getStartTime(), ":");
 			String end = StringUtils.getHourMinuteTimeString(item.getExposure().getEndTime(), ":");

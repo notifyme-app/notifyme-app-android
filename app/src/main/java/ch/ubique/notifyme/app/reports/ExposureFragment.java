@@ -16,6 +16,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class ExposureFragment extends Fragment {
 
@@ -78,6 +79,7 @@ public class ExposureFragment extends Fragment {
 		if (diaryEntry != null) {
 			nameTextView.setText(diaryEntry.getVenueInfo().getTitle());
 			locationTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
+			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(diaryEntry.getVenueInfo().getVenueType()));
 
 			if (diaryEntry.getComment() != null && !diaryEntry.getComment().isEmpty()) {
 				notes.setText(diaryEntry.getComment());
@@ -85,7 +87,6 @@ public class ExposureFragment extends Fragment {
 				notes.setVisibility(View.GONE);
 				notesHeader.setVisibility(View.GONE);
 			}
-			//TODO: Set Venue Type Icon
 		} else {
 			nameTextView.setVisibility(View.GONE);
 			whereLabel.setVisibility(View.GONE);

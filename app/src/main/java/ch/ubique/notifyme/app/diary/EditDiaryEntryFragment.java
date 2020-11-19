@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class EditDiaryEntryFragment extends Fragment {
 
@@ -39,6 +41,7 @@ public class EditDiaryEntryFragment extends Fragment {
 	private TextView toTime;
 	private TextView dateTextView;
 	private View hideInDiaryButton;
+	private ImageView venueTypeIcon;
 
 
 	public EditDiaryEntryFragment() { super(R.layout.fragment_edit_diary_entry); }
@@ -72,9 +75,11 @@ public class EditDiaryEntryFragment extends Fragment {
 		toTime = view.findViewById(R.id.edit_diary_entry_to_text_view);
 		dateTextView = view.findViewById(R.id.edit_diary_entry_date);
 		hideInDiaryButton = view.findViewById(R.id.edit_diary_entry_hide_from_diary_button);
+		venueTypeIcon = view.findViewById(R.id.edit_diary_entry_venue_type_icon);
 
 		titleTextView.setText(diaryEntry.getVenueInfo().getTitle());
 		subtitleTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
+		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(diaryEntry.getVenueInfo().getVenueType()));
 
 		refreshTimeTextViews();
 

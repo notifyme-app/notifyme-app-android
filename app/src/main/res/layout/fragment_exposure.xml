@@ -99,8 +99,8 @@
 
 					<ImageView
 						android:id="@+id/fragment_exposure_venue_type_icon"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_width="@dimen/diary_entry_icon_size"
+						android:layout_height="@dimen/diary_entry_icon_size"
 						android:layout_marginTop="@dimen/spacing_small"
 						android:src="@drawable/ic_meeting"
 						app:layout_constraintStart_toStartOf="parent"

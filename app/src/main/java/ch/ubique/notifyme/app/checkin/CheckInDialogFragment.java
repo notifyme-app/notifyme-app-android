@@ -17,6 +17,7 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class CheckInDialogFragment extends DialogFragment {
 
@@ -71,10 +72,9 @@ public class CheckInDialogFragment extends DialogFragment {
 		venueTypeIcon = view.findViewById(R.id.check_in_dialog_venue_type_icon);
 		checkInButton = view.findViewById(R.id.check_in_dialog_check_in_button);
 
-		//TODO: Set venueType icon
-
 		titleTextView.setText(venueInfo.getTitle());
 		subtitleTextView.setText(venueInfo.getSubtitle());
+		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
 
 		checkInButton.setOnClickListener(v -> {
 			viewModel.startCheckInTimer();

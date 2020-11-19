@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class CheckOutFragment extends Fragment {
 
@@ -42,6 +44,7 @@ public class CheckOutFragment extends Fragment {
 	private TextView fromTime;
 	private TextView toTime;
 	private TextView dateTextView;
+	private ImageView venueTypeIcon;
 
 	public CheckOutFragment() { super(R.layout.fragment_check_out); }
 
@@ -67,9 +70,12 @@ public class CheckOutFragment extends Fragment {
 		fromTime = view.findViewById(R.id.check_out_fragment_from_text_view);
 		toTime = view.findViewById(R.id.check_out_fragment_to_text_view);
 		dateTextView = view.findViewById(R.id.check_out_fragment_date);
+		venueTypeIcon = view.findViewById(R.id.check_out_fragment_venue_type_icon);
 
 		titleTextView.setText(venueInfo.getTitle());
 		subtitleTextView.setText(venueInfo.getSubtitle());
+		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+
 		checkInState.setCheckOutTime(System.currentTimeMillis());
 		refreshTimeTextViews();
 

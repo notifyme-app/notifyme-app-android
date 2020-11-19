@@ -43,7 +43,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:layout_marginTop="@dimen/spacing_huge"
-					android:src="@drawable/ic_tea_big" />
+					android:src="@drawable/ic_illus_checked_in_time" />
 
 				<TextView
 					android:id="@+id/checked_in_fragment_title"

@@ -19,6 +19,7 @@ import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -127,8 +128,7 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 				}
 				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 			}
-			//TODO: Display correct venue type icon
-			venueTypeIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_tea));
+			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
 			itemView.setOnClickListener(item.getOnClickListener());
 		}
 
