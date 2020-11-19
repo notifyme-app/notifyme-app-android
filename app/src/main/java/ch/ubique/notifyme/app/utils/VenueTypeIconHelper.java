@@ -15,8 +15,22 @@ public class VenueTypeIconHelper {
 				return R.drawable.ic_illus_caffeteria;
 			case MEETING_ROOM:
 				return R.drawable.ic_illus_meeting;
-			case PRIVATE_PARTY:
+			case PRIVATE_EVENT:
 				return R.drawable.ic_illus_private_event;
+			case CANTEEN:
+				return R.drawable.ic_illus_canteen;
+			case LIBRARY:
+				return R.drawable.ic_illus_library;
+			case LECTURE_ROOM:
+				return R.drawable.ic_illus_lecture_room;
+			case SHOP:
+				return R.drawable.ic_illus_shop;
+			case GYM:
+				return R.drawable.ic_illus_gym;
+			case KITCHEN_AREA:
+				return R.drawable.ic_illus_kitchen_area;
+			case OFFICE_SPACE:
+				return R.drawable.ic_illus_office_space;
 			default:
 				return R.drawable.ic_illus_other;
 		}

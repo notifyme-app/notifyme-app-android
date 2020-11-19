@@ -132,7 +132,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-32'
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-33'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
