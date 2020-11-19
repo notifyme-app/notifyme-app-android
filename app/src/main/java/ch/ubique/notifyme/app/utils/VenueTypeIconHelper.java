@@ -18,7 +18,7 @@ public class VenueTypeIconHelper {
 			case PRIVATE_PARTY:
 				return R.drawable.ic_illus_private_event;
 			default:
-				return R.drawable.ic_illus_meeting;
+				return R.drawable.ic_illus_other;
 		}
 	}
 
