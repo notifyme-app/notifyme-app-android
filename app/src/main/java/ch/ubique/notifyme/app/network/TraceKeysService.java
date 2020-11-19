@@ -10,6 +10,6 @@ public interface TraceKeysService {
 
 	@Headers("Accept: application/protobuf")
 	@GET("v1/traceKeys")
-	Call<ResponseBody> getTraceKeys(@Query("lastSync") long lastSync);
+	Call<ResponseBody> getTraceKeys(@Query("lastKeyBundleTag") long lastKeyBundleTag);
 
 }

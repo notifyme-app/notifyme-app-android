@@ -19,6 +19,8 @@ import retrofit2.Retrofit;
 
 public class WebServiceController {
 
+	private static final String KEY_BUNDLE_TAG_HEADER = "x-key-bundle-tag";
+
 	private TraceKeysService traceKeysService;
 	private Storage storage;
 
@@ -38,7 +40,7 @@ public class WebServiceController {
 	}
 
 	public void loadTraceKeysAsync(Callback callback) {
-		traceKeysService.getTraceKeys(storage.getLastSync()).enqueue(new retrofit2.Callback<ResponseBody>() {
+		traceKeysService.getTraceKeys(storage.getLastKeyBundleTag()).enqueue(new retrofit2.Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				if (response.isSuccessful()) {
@@ -57,7 +59,7 @@ public class WebServiceController {
 
 	public List<ProblematicEventInfo> loadTraceKeys() {
 		try {
-			Response<ResponseBody> response = traceKeysService.getTraceKeys(storage.getLastSync()).execute();
+			Response<ResponseBody> response = traceKeysService.getTraceKeys(storage.getLastKeyBundleTag()).execute();
 			if (response.isSuccessful()) {
 				return handleSuccessfulResponse(response);
 			}
@@ -69,12 +71,8 @@ public class WebServiceController {
 
 	private List<ProblematicEventInfo> handleSuccessfulResponse(Response<ResponseBody> response) {
 		try {
-
-			//TODO: Uncomment these two lines
-				/*
-				Date d = response.headers().getDate("date");
-				Storage.getInstance(getApplicationContext()).setLastSync(d.getTime());
-				 */
+			long keyBundleTag = Long.parseLong(response.headers().get(KEY_BUNDLE_TAG_HEADER));
+			storage.setLastKeyBundleTag(keyBundleTag);
 			ProblematicEventOuterClass.ProblematicEventWrapper problematicEventWrapper =
 					ProblematicEventOuterClass.ProblematicEventWrapper.parseFrom(response.body().byteStream());
 			ArrayList<ProblematicEventInfo> problematicEventInfos = new ArrayList<>();
