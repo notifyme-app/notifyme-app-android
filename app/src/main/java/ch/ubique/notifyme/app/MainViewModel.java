@@ -41,7 +41,7 @@ public class MainViewModel extends AndroidViewModel {
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
 	private Runnable timeUpdateRunnable;
-	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 60000;
+	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 1000;
 	private WebServiceController webServiceController = new WebServiceController(getApplication());
 
 

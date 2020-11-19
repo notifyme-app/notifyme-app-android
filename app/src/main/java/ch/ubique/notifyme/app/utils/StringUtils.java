@@ -17,6 +17,8 @@ import ch.ubique.notifyme.app.R;
 
 public class StringUtils {
 
+	private static final long ONE_HOUR = 60 * 60 * 1000;
+
 	public static SpannableString getTwoColoredString(String wholeString, String substring, int substringColor) {
 
 		SpannableString spannable = new SpannableString(wholeString);
@@ -27,10 +29,18 @@ public class StringUtils {
 	}
 
 	public static String getDurationString(long duration) {
-		return String.format(Locale.GERMAN, "%02d:%02d",
-				TimeUnit.MILLISECONDS.toHours(duration),
-				TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration)))
-		);
+		if (duration >= ONE_HOUR) {
+			return String.format(Locale.GERMAN, "%02d:%02d:%02d",
+					TimeUnit.MILLISECONDS.toHours(duration),
+					TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration))),
+					TimeUnit.MILLISECONDS.toSeconds(duration - TimeUnit.MINUTES.toMillis(TimeUnit.MILLISECONDS.toMinutes(duration)))
+			);
+		} else {
+			return String.format(Locale.GERMAN, "%02d:%02d",
+					TimeUnit.MILLISECONDS.toMinutes(duration),
+					TimeUnit.MILLISECONDS.toSeconds(duration - TimeUnit.MINUTES.toMillis(TimeUnit.MILLISECONDS.toMinutes(duration)))
+			);
+		}
 	}
 
 	public static String getCheckOutDateString(Context context, long checkInTime, long checkOutTime) {
