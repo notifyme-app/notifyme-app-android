@@ -212,7 +212,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
     <string name="imprint_webview_more_info_title">"Informations supplémentaires"</string>
     <string name="imprint_webview_more_info_link">"https://notify-me.ch"</string>
-    <string name="imprint_webview_legal_title">"juridique"</string>
+    <string name="imprint_webview_legal_title">"Indications légales"</string>
     <string name="imprint_webview_legal_link_text">"Protection des données et conditions d'utilisation"</string>
     <string name="imprint_webview_legal_link_url">"www.notify-me.ch/legal"</string>
     <string name="imprint_webview_sourcecode_title">"Code source"</string>
@@ -225,16 +225,16 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="generator_category_cafeteria">"Cafétéria"</string>
     <string name="generator_category_private_party">"Soirée privée"</string>
     <string name="generator_title_label">"Titre"</string>
-    <string name="generator_title_placeholder">"e.g. Nom de pièce ou d'événement"</string>
+    <string name="generator_title_placeholder">"p. ex. Nom de pièce ou d'événement"</string>
     <string name="generator_subtitle_label">"Sous-titre"</string>
-    <string name="generator_subtitle_placeholder">"e.g. Organisation ou organisateur·trice"</string>
+    <string name="generator_subtitle_placeholder">"p. ex. Organisation ou organisateur·trice"</string>
     <string name="generator_addition_label">"Additif"</string>
-    <string name="generator_addition_placeholder">"e.g. Bâtiment ou lieu"</string>
+    <string name="generator_addition_placeholder">"p. ex. Bâtiment ou lieu"</string>
     <string name="generator_generation_button_label">"Générer un code QR"</string>
     <string name="generator_back">"Retour"</string>
     <string name="generator_public_bulletpoint_1">"Avec ce code QR les visiteurs peuvent s'enregistrer sur place."</string>
     <string name="generator_public_bulletpoint_2">"Le code peut être scanné avec NotifyMe"</string>
-    <string name="generator_public_bulletpoint_3">"Les check-ins ne sont pas sauvegardés de manière centrale. Aucunes données personnelles ne sont saisies."</string>
+    <string name="generator_public_bulletpoint_3">"Aucune données personnelles ne sont saisies. Les enregistrements ne sont pas visibles pour les propriétaires de lieux."</string>
     <string name="generator_private_bulletpoint_1">"Ce code QR informe les visiteurs en cas incident."</string>
     <string name="generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
     <string name="generator_private_bulletpoint_3">"Seulement une clé de déchiffrement est publiée. Aucune information n'est transmise à l'organisateur."</string>
@@ -250,14 +250,30 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="upload_note_label">"Indication au visiteur"</string>
     <string name="upload_note_placeholder">"Que faire?"</string>
     <string name="upload_upload_button">"Informer le visiteur"</string>
-    <string name="error_network_title"></string>
-    <string name="error_network_text"></string>
-    <string name="error_notification_deactivated_title"></string>
-    <string name="error_notification_deactivated_text"></string>
-    <string name="error_background_refresh_title"></string>
-    <string name="error_background_refresh_text"></string>
-    <string name="error_camera_permission_title"></string>
-    <string name="error_camera_permission_text"></string>
-    <string name="error_action_change_settings"></string>
-    <string name="error_action_retry"></string>
+    <string name="error_network_title">"Erreur de réseau"</string>
+    <string name="error_network_text">"Vérifiez votre connexion internet."</string>
+    <string name="error_notification_deactivated_title">"Notifications désactivées"</string>
+    <string name="error_notification_deactivated_text">"Changez les réglages pour être informé immédiatement au cas où vous avez un rapport."</string>
+    <string name="error_background_refresh_title">"Mise à jour éteinte."</string>
+    <string name="error_background_refresh_text">"Changez les réglages pour également être informé des rapports en dehors de l'application."</string>
+    <string name="error_camera_permission_title">"Pas d'accès à la caméra"</string>
+    <string name="error_camera_permission_text">"L'application a besoin d'avoir accès à la caméra pour pouvoir scanner le code QR."</string>
+    <string name="error_action_change_settings">"Changer les réglages"</string>
+    <string name="error_action_retry">"Réessayer"</string>
+    <string name="upload_success_message">"Information successful"</string>
+    <string name="upload_error_message">"Information failed"</string>
+    <string name="upload_missing_payload">"Pas de code privé trouvé. Scannez un code QR valable."</string>
+
+    <!-- Titel einer generischen Fehleranzeige -->
+    <string name="error_title">"Error"</string>
+
+    <!-- Fehlermeldung, wenn man bereits eingecheckt ist -->
+    <string name="error_already_checked_in">"You are already checked in."</string>
+
+    <!-- Titel eines Ok-Buttons -->
+    <string name="ok_button">"Ok"</string>
+    <string name="landing_description"></string>
+    <string name="landing_app_store_link"></string>
+    <string name="landing_play_store_link"></string>
+    <string name="generator_pdf_created_on_format"></string>
 </resources>

@@ -220,42 +220,60 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="generator_title">"Generate a QR code demo"</string>
     <string name="generator_category_label">"Category"</string>
     <string name="generator_category_other">"Other"</string>
-    <string name="generator_category_meeting_room"></string>
-    <string name="generator_category_cafeteria"></string>
-    <string name="generator_category_private_party"></string>
-    <string name="generator_title_label"></string>
-    <string name="generator_title_placeholder"></string>
-    <string name="generator_subtitle_label"></string>
-    <string name="generator_subtitle_placeholder"></string>
-    <string name="generator_addition_label"></string>
-    <string name="generator_addition_placeholder"></string>
-    <string name="generator_generation_button_label"></string>
-    <string name="generator_back"></string>
-    <string name="generator_public_bulletpoint_1"></string>
-    <string name="generator_public_bulletpoint_2"></string>
-    <string name="generator_public_bulletpoint_3"></string>
-    <string name="generator_private_bulletpoint_1"></string>
-    <string name="generator_private_bulletpoint_2"></string>
-    <string name="generator_private_bulletpoint_3"></string>
-    <string name="generator_pdf_button"></string>
-    <string name="generator_public_qr_title"></string>
-    <string name="generator_private_qr_title"></string>
-    <string name="generator_missing_input"></string>
-    <string name="upload_title"></string>
-    <string name="upload_period_label"></string>
-    <string name="upload_period_from_label"></string>
-    <string name="upload_period_to_label"></string>
-    <string name="upload_note_label"></string>
-    <string name="upload_note_placeholder"></string>
-    <string name="upload_upload_button"></string>
-    <string name="error_network_title"></string>
-    <string name="error_network_text"></string>
-    <string name="error_notification_deactivated_title"></string>
-    <string name="error_notification_deactivated_text"></string>
-    <string name="error_background_refresh_title"></string>
-    <string name="error_background_refresh_text"></string>
-    <string name="error_camera_permission_title"></string>
-    <string name="error_camera_permission_text"></string>
-    <string name="error_action_change_settings"></string>
-    <string name="error_action_retry"></string>
+    <string name="generator_category_meeting_room">"Meeting room"</string>
+    <string name="generator_category_cafeteria">"Cafeteria"</string>
+    <string name="generator_category_private_party">"Private party"</string>
+    <string name="generator_title_label">"Title"</string>
+    <string name="generator_title_placeholder">"e.g. Room or event name"</string>
+    <string name="generator_subtitle_label">"Subtitle"</string>
+    <string name="generator_subtitle_placeholder">"E.g. organization or organizer"</string>
+    <string name="generator_addition_label">"Addition"</string>
+    <string name="generator_addition_placeholder">"E.g. building or place"</string>
+    <string name="generator_generation_button_label">"Generate QR codes"</string>
+    <string name="generator_back">"Back"</string>
+    <string name="generator_public_bulletpoint_1">"This QR code enables visitors to check-in on site."</string>
+    <string name="generator_public_bulletpoint_2">"NotifyMe can't scan the code."</string>
+    <string name="generator_public_bulletpoint_3">"Check-ins are not registered. No private are seized."</string>
+    <string name="generator_private_bulletpoint_1">"This QR code informs visitors in case of an incident."</string>
+    <string name="generator_private_bulletpoint_2">"The code can be scanned with any QR code reader."</string>
+    <string name="generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer."</string>
+    <string name="generator_pdf_button">"Dowload PDF"</string>
+    <string name="generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
+QR Code"</string>
+    <string name="generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
+QR Code"</string>
+    <string name="generator_missing_input">"Please fill in the mandatory field"</string>
+    <string name="upload_title">"Report about a possible infection."</string>
+    <string name="upload_period_label">"Concerned time period"</string>
+    <string name="upload_period_from_label">"from"</string>
+    <string name="upload_period_to_label">"to"</string>
+    <string name="upload_note_label">"Advice to the visitor"</string>
+    <string name="upload_note_placeholder">"What should the visitors do?"</string>
+    <string name="upload_upload_button">"Inform visitors"</string>
+    <string name="error_network_title">"Connection error"</string>
+    <string name="error_network_text">"Check your internet connection"</string>
+    <string name="error_notification_deactivated_title">"Deactivate notifications"</string>
+    <string name="error_notification_deactivated_text">"Edit the app settings to be immediately informed when there is a report."</string>
+    <string name="error_background_refresh_title">"Background updates are off"</string>
+    <string name="error_background_refresh_text">"Edit the app settings to be informed when there is a report outside of the app as well."</string>
+    <string name="error_camera_permission_title">"No camera access"</string>
+    <string name="error_camera_permission_text">"The app needs camera access to scan the QR code."</string>
+    <string name="error_action_change_settings">"Edit settings"</string>
+    <string name="error_action_retry">"Try again"</string>
+    <string name="upload_success_message">"Information successful"</string>
+    <string name="upload_error_message">"Information failed"</string>
+    <string name="upload_missing_payload">"No private key found. Please scan a valid QR code."</string>
+
+    <!-- Titel einer generischen Fehleranzeige -->
+    <string name="error_title">"Error"</string>
+
+    <!-- Fehlermeldung, wenn man bereits eingecheckt ist -->
+    <string name="error_already_checked_in">"You are already checked in."</string>
+
+    <!-- Titel eines Ok-Buttons -->
+    <string name="ok_button">"Ok"</string>
+    <string name="landing_description"></string>
+    <string name="landing_app_store_link"></string>
+    <string name="landing_play_store_link"></string>
+    <string name="generator_pdf_created_on_format"></string>
 </resources>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
@@ -20,6 +21,7 @@ import ch.ubique.notifyme.app.R;
 public class CheckInDialogFragment extends DialogFragment {
 
 	public final static String TAG = CheckInDialogFragment.class.getCanonicalName();
+	private static final String ADD_CHECK_IN_TRANSACTION_TO_BACKSTACK_ARG = "ADD_CHECK_IN_TRANSACTION_TO_BACKSTACK_ARG";
 
 	private MainViewModel viewModel;
 	VenueInfo venueInfo;
@@ -31,8 +33,12 @@ public class CheckInDialogFragment extends DialogFragment {
 	private ImageView venueTypeIcon;
 	private View checkInButton;
 
-	public static CheckInDialogFragment newInstance() {
-		return new CheckInDialogFragment();
+	public static CheckInDialogFragment newInstance(boolean addCheckInTransactionToBackStack) {
+		CheckInDialogFragment fragment = new CheckInDialogFragment();
+		Bundle args = new Bundle();
+		args.putBoolean(ADD_CHECK_IN_TRANSACTION_TO_BACKSTACK_ARG, addCheckInTransactionToBackStack);
+		fragment.setArguments(args);
+		return fragment;
 	}
 
 
@@ -87,10 +93,13 @@ public class CheckInDialogFragment extends DialogFragment {
 	}
 
 	private void showCheckedInFragment() {
-		requireActivity().getSupportFragmentManager().beginTransaction()
+		boolean addToBackStack = getArguments().getBoolean(ADD_CHECK_IN_TRANSACTION_TO_BACKSTACK_ARG);
+
+		FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-				.replace(R.id.container, CheckedInFragment.newInstance())
-				.commit();
+				.replace(R.id.container, CheckedInFragment.newInstance());
+		if (addToBackStack) transaction.addToBackStack(CheckedInFragment.TAG);
+		transaction.commit();
 	}
 
 	@Override

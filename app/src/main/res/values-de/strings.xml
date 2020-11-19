@@ -115,7 +115,7 @@
 Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer möglichen Ansteckung zu warnen."</string>
 
     <!-- Check In: Set Reminder title -->
-    <string name="checkin_set_reminder">"Erinnerung setzen"</string>
+    <string name="checkin_set_reminder">"Check-out Erinnerung"</string>
 
     <!-- Reminder: Option Off -->
     <string name="reminder_option_off">"Aus"</string>
@@ -215,7 +215,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="imprint_webview_legal_link_text">"Datenschutz &amp;  Nutzungsbestimmungen"</string>
     <string name="imprint_webview_legal_link_url">"www.notify-me.ch/legal"</string>
     <string name="imprint_webview_sourcecode_title">"Quellcode"</string>
-    <string name="imprint_webview_sourcecode_text">"Den aktuellen Quellcode finden Sie auf github, veröffentlicht unter Public-License:"</string>
+    <string name="imprint_webview_sourcecode_text">"Den aktuellen Quellcode finden Sie auf GitHub, veröffentlicht unter Public-License:"</string>
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
     <string name="generator_title">"Demo QR-Codes erstellen"</string>
     <string name="generator_category_label">"Kategorie"</string>
@@ -243,21 +243,37 @@ QR-Code"</string>
     <string name="generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
 QR-Code"</string>
     <string name="generator_missing_input">"Bitte Pflichtfeld ausfüllen"</string>
-    <string name="upload_title">"Meldung über eine mögliche Ansteckung"</string>
+    <string name="upload_title">"Besucher informieren"</string>
     <string name="upload_period_label">"Betroffener Zeitraum"</string>
     <string name="upload_period_from_label">"Von"</string>
     <string name="upload_period_to_label">"Bis"</string>
     <string name="upload_note_label">"Hinweis an die Besucher"</string>
     <string name="upload_note_placeholder">"Was sollen die Besucher tun?"</string>
-    <string name="upload_upload_button">"Besucher informieren"</string>
+    <string name="upload_upload_button">"Jetzt informieren"</string>
     <string name="error_network_title">"Netzwerk Fehler"</string>
     <string name="error_network_text">"Überprüfen Sie Ihre Internet Verbindung."</string>
     <string name="error_notification_deactivated_title">"Mitteilungen deaktiviert"</string>
     <string name="error_notification_deactivated_text">"Ändern Sie die Einstellungen, um bei einer Meldung direkt informiert zu werden."</string>
     <string name="error_background_refresh_title">"Hintergrundaktualisierung ausgeschaltet"</string>
-    <string name="error_background_refresh_text">"Ändern Sie die Einstellungen, um bei einer neuen Meldung auch ausserhalb der App informiert zu werden."</string>
+    <string name="error_background_refresh_text">"Ändern Sie die Einstellungen, um bei einer Meldung direkt informiert zu werden."</string>
     <string name="error_camera_permission_title">"Kein Zugriff auf Kamera"</string>
     <string name="error_camera_permission_text">"Die App benötigt Zugriff auf die Kamera, um den QR-Code scannen zu können."</string>
     <string name="error_action_change_settings">"Einstellungen ändern"</string>
     <string name="error_action_retry">"Erneut versuchen"</string>
+    <string name="upload_success_message">"Upload erfolgreich"</string>
+    <string name="upload_error_message">"Upload fehlgeschlagen"</string>
+    <string name="upload_missing_payload">"Kein Private Key gefunden. Bitte einen gültigen QR-Code scannen."</string>
+
+    <!-- Titel einer generischen Fehleranzeige -->
+    <string name="error_title">"Fehler"</string>
+
+    <!-- Fehlermeldung, wenn man bereits eingecheckt ist -->
+    <string name="error_already_checked_in">"Sie sind bereits eingecheckt."</string>
+
+    <!-- Titel eines Ok-Buttons -->
+    <string name="ok_button">"Ok"</string>
+    <string name="landing_description">"Dezentral gespeicherte Check-Ins für Meetings &amp; Events"</string>
+    <string name="landing_app_store_link">"https://example.com"</string>
+    <string name="landing_play_store_link">"https://example.com"</string>
+    <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
 </resources>

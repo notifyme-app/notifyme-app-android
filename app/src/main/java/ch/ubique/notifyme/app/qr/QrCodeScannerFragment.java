@@ -163,7 +163,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void noQRCodeFound() {
-		getActivity().runOnUiThread(() -> indicateInvalidQrCode(false));
+		if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(false));
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
 				startActivity(openBrowserIntent);
 			} else {
-				getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
+				if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
 			}
 		} else {
 			viewModel.setQrScanningEnabled(false);
@@ -210,7 +210,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	private void showCheckInDialog() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.add(CheckInDialogFragment.newInstance(), CheckInDialogFragment.TAG)
+				.add(CheckInDialogFragment.newInstance(false), CheckInDialogFragment.TAG)
 				.commit();
 	}
 
