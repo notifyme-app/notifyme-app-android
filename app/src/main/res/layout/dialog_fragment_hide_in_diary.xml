@@ -58,7 +58,7 @@
 
 				<Button
 					android:id="@+id/hide_diary_entry_dialog_hide_button"
-					style="@style/NotifyMe.Button.Small"
+					style="@style/NotifyMe.Button.Small.Tertiary"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"

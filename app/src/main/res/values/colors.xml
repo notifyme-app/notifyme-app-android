@@ -9,6 +9,7 @@
 	<color name="error_red">#e20008</color>
 
 	<color name="primary_dark">#292859</color>
+	<color name="tertiary_dark">#d00e36</color>
 	<color name="white_interaction">#E6E6E6</color>
 
 	<color name="white">#FFFFFF</color>
