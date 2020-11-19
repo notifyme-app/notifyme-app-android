@@ -265,21 +265,24 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="upload_missing_payload">"Pas de code privé trouvé. Scannez un code QR valable."</string>
 
     <!-- Titel einer generischen Fehleranzeige -->
-    <string name="error_title">"Error"</string>
+    <string name="error_title">"Erreur"</string>
 
     <!-- Fehlermeldung, wenn man bereits eingecheckt ist -->
-    <string name="error_already_checked_in">"You are already checked in."</string>
+    <string name="error_already_checked_in">"Vous êtes déjà enregistré."</string>
 
     <!-- Titel eines Ok-Buttons -->
     <string name="ok_button">"Ok"</string>
-    <string name="landing_description">"Check-in for meetings and events."</string>
+    <string name="landing_description">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
     <string name="landing_app_store_link">"https://example.com"</string>
     <string name="landing_play_store_link">"https://example.com"</string>
-    <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
+    <string name="generator_pdf_created_on_format">"Créé le %d.%m.%Y à %H:%M h"</string>
 
     <!-- Title of the diary entry edit screen. -->
-    <string name="edit_controller_title">"Edit"</string>
+    <string name="edit_controller_title">"Éditer"</string>
 
     <!-- Save button title im checkout screen. -->
-    <string name="checkout_save_button_title">"Save"</string>
+    <string name="checkout_save_button_title">"Sauvegarder"</string>
+
+    <!-- Highlighted text part of app name: Me -->
+    <string name="app_name_highlight">"Me"</string>
 </resources>

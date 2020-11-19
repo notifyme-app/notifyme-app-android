@@ -283,4 +283,7 @@ QR-Code"</string>
 
     <!-- Save button title im checkout screen. -->
     <string name="checkout_save_button_title">"Sichern"</string>
+
+    <!-- Highlighted text part of app name: Me -->
+    <string name="app_name_highlight">"Me"</string>
 </resources>

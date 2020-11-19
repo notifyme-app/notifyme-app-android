@@ -2,6 +2,7 @@ package ch.ubique.notifyme.app.network;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.work.*;
@@ -46,9 +47,12 @@ public class KeyLoadWorker extends Worker {
 	@NonNull
 	@Override
 	public Result doWork() {
-
+		Log.d(WORK_TAG, "Started KeyLoadWorker");
 		List<ProblematicEventInfo> problematicEventInfos = new WebServiceController(getApplicationContext()).loadTraceKeys();
-		if (problematicEventInfos == null) return Result.retry();
+		if (problematicEventInfos == null) {
+			Log.d(WORK_TAG, "KeyLoadWorker failure");
+			return Result.retry();
+		}
 		List<ExposureEvent> exposures = CrowdNotifier.checkForMatches(problematicEventInfos, getApplicationContext());
 		if (!exposures.isEmpty()) {
 			for (ExposureEvent exposureEvent : exposures) {
@@ -59,6 +63,7 @@ public class KeyLoadWorker extends Worker {
 		CrowdNotifier.cleanUpOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
 		DiaryStorage.getInstance(getApplicationContext()).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
 
+		Log.d(WORK_TAG, "KeyLoadWorker success");
 		return Result.success();
 	}
 
