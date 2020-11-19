@@ -253,7 +253,7 @@ QR Code"</string>
     <string name="error_network_title">"Connection error"</string>
     <string name="error_network_text">"Check your internet connection"</string>
     <string name="error_notification_deactivated_title">"Deactivate notifications"</string>
-    <string name="error_notification_deactivated_text">"Edit the app settings to be immediately informed when there is a report."</string>
+    <string name="error_notification_deactivated_text">"Edit the app settings to receive report-notifications."</string>
     <string name="error_background_refresh_title">"Background updates are off"</string>
     <string name="error_background_refresh_text">"Edit the app settings to be informed when there is a report outside of the app as well."</string>
     <string name="error_camera_permission_title">"No camera access"</string>
@@ -272,8 +272,11 @@ QR Code"</string>
 
     <!-- Titel eines Ok-Buttons -->
     <string name="ok_button">"Ok"</string>
-    <string name="landing_description"></string>
+    <string name="landing_description">"Check-in for meetings and events."</string>
     <string name="landing_app_store_link"></string>
     <string name="landing_play_store_link"></string>
     <string name="generator_pdf_created_on_format"></string>
+
+    <!-- Title of the diary entry edit screen. -->
+    <string name="edit_controller_title"></string>
 </resources>

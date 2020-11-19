@@ -8,13 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 
-import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
@@ -28,15 +26,14 @@ public class EditDiaryEntryFragment extends Fragment {
 	private final static String ARG_SHOW_HIDE_IN_DIARY_BUTTON = "ARG_SHOW_HIDE_IN_DIARY_BUTTON";
 	private final static String ARG_DIARY_ENTRY_ID = "ARG_DIARY_ENTRY_ID";
 
-	private MainViewModel viewModel;
 	private DiaryStorage diaryStorage;
 	private DiaryEntry diaryEntry;
 	boolean showHideInDiaryButton;
 
-	private TextView nameTextView;
-	private TextView locationTextView;
-	private TextView roomTextView;
+	private TextView titleTextView;
+	private TextView subtitleTextView;
 	private View doneButton;
+	private View cancelButton;
 	private EditText commentEditText;
 	private TextView fromTime;
 	private TextView toTime;
@@ -58,7 +55,6 @@ public class EditDiaryEntryFragment extends Fragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 		diaryStorage = DiaryStorage.getInstance(requireContext());
 		long diaryEntryId = getArguments().getLong(ARG_DIARY_ENTRY_ID);
 		diaryEntry = diaryStorage.getDiaryEntryWithId(diaryEntryId);
@@ -67,19 +63,18 @@ public class EditDiaryEntryFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		nameTextView = view.findViewById(R.id.edit_diary_entry_name);
-		locationTextView = view.findViewById(R.id.edit_diary_entry_location);
-		roomTextView = view.findViewById(R.id.edit_diary_entry_room);
+		titleTextView = view.findViewById(R.id.edit_diary_entry_title);
+		subtitleTextView = view.findViewById(R.id.edit_diary_entry_subtitle);
 		doneButton = view.findViewById(R.id.edit_diary_entry_done_button);
+		cancelButton = view.findViewById(R.id.edit_diary_entry_cancel_button);
 		commentEditText = view.findViewById(R.id.edit_diary_entry_comment_edit_text);
 		fromTime = view.findViewById(R.id.edit_diary_entry_from_text_view);
 		toTime = view.findViewById(R.id.edit_diary_entry_to_text_view);
 		dateTextView = view.findViewById(R.id.edit_diary_entry_date);
 		hideInDiaryButton = view.findViewById(R.id.edit_diary_entry_hide_from_diary_button);
 
-		nameTextView.setText(diaryEntry.getVenueInfo().getName());
-		locationTextView.setText(diaryEntry.getVenueInfo().getLocation());
-		roomTextView.setText(diaryEntry.getVenueInfo().getRoom());
+		titleTextView.setText(diaryEntry.getVenueInfo().getName());
+		subtitleTextView.setText(diaryEntry.getVenueInfo().getLocation() + ", " + diaryEntry.getVenueInfo().getRoom());
 
 		refreshTimeTextViews();
 
@@ -96,6 +91,9 @@ public class EditDiaryEntryFragment extends Fragment {
 
 		doneButton.setOnClickListener(v -> {
 			saveEntry();
+			requireActivity().getSupportFragmentManager().popBackStack();
+		});
+		cancelButton.setOnClickListener(v -> {
 			requireActivity().getSupportFragmentManager().popBackStack();
 		});
 	}

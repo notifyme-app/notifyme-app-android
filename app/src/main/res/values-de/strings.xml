@@ -59,7 +59,7 @@
     <string name="no_report_hero_text_highlight">"gesund"</string>
 
     <!-- Highlight text of report_message_text (must be exactly as in this text) -->
-    <string name="report_message_text_highlight">"einer Ansteckung"</string>
+    <string name="report_message_text_highlight">"Ansteckung"</string>
 
     <!-- QR-Scanner: request for scan text -->
     <string name="qrscanner_scan_qr_text">"QR-Code scannen und einchecken"</string>
@@ -276,4 +276,7 @@ QR-Code"</string>
     <string name="landing_app_store_link">"https://example.com"</string>
     <string name="landing_play_store_link">"https://example.com"</string>
     <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
+
+    <!-- Title of the diary entry edit screen. -->
+    <string name="edit_controller_title">"Bearbeiten"</string>
 </resources>

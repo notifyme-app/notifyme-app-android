@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<TextView
-		android:id="@+id/edit_diary_entry_done_button"
-		style="@style/NotifyMe.Text.Status.Primary"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="end"
-		android:background="?selectableItemBackground"
-		android:padding="@dimen/spacing_large"
-		android:text="@string/done_button" />
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/edit_diary_entry_cancel_button"
+			style="@style/NotifyMe.Text.Status.Primary.Small.Thin"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:background="?selectableItemBackground"
+			android:padding="@dimen/spacing_large"
+			android:text="@string/cancel"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			style="@style/NotifyMe.Text.Status.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/edit_controller_title"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			android:id="@+id/edit_diary_entry_done_button"
+			style="@style/NotifyMe.Text.Status.Primary.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:background="?selectableItemBackground"
+			android:padding="@dimen/spacing_large"
+			android:text="@string/done_button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ScrollView
 		android:layout_width="match_parent"
@@ -25,15 +56,15 @@
 			android:paddingHorizontal="@dimen/spacing_very_large"
 			android:paddingBottom="@dimen/spacing_large">
 
-			<TextView
-				style="@style/NotifyMe.Text.Status.Small"
-				android:layout_width="match_parent"
+			<ImageView
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:gravity="center"
-				android:text="@string/edit_controller_your_checkin" />
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_very_large"
+				android:src="@drawable/ic_tea" />
 
 			<TextView
-				android:id="@+id/edit_diary_entry_name"
+				android:id="@+id/edit_diary_entry_title"
 				style="@style/NotifyMe.Text.Title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -42,30 +73,22 @@
 				android:text="Cyber Cafe SV" />
 
 			<TextView
-				android:id="@+id/edit_diary_entry_location"
-				style="@style/NotifyMe.Text.Subtitle"
+				android:id="@+id/edit_diary_entry_subtitle"
+				style="@style/NotifyMe.Text"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_very_small"
 				android:gravity="center"
-				android:text="EPFL Campus" />
-
-			<TextView
-				android:id="@+id/edit_diary_entry_room"
-				style="@style/NotifyMe.Text"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/spacing_medium"
-				android:gravity="center"
 				android:text="Lausanne" />
 
 			<TextView
+
 				android:id="@+id/edit_diary_entry_date"
 				style="@style/NotifyMe.Text.Subtitle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginTop="@dimen/spacing_medium"
+				android:layout_marginTop="@dimen/spacing_huge"
 				android:gravity="center"
 				android:text="Thursday, October 22" />
 

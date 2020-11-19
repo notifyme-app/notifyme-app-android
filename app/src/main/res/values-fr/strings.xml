@@ -243,7 +243,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 "</string>
     <string name="generator_private_qr_title">"Code QR &lt;span&gt;privé&lt;/span&gt;\"</string>
     <string name="generator_missing_input">"Veuillez remplir le champ obligatoire"</string>
-    <string name="upload_title">"Rapport d'une éventuelle infection"</string>
+    <string name="upload_title">"Informer le visiteur"</string>
     <string name="upload_period_label">"Période concernée"</string>
     <string name="upload_period_from_label">"de"</string>
     <string name="upload_period_to_label">"à"</string>
@@ -253,15 +253,15 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="error_network_title">"Erreur de réseau"</string>
     <string name="error_network_text">"Vérifiez votre connexion internet."</string>
     <string name="error_notification_deactivated_title">"Notifications désactivées"</string>
-    <string name="error_notification_deactivated_text">"Changez les réglages pour être informé immédiatement au cas où vous avez un rapport."</string>
+    <string name="error_notification_deactivated_text">"Changez les réglages pour être informé immédiatement au cas où vous avez reçu un rapport."</string>
     <string name="error_background_refresh_title">"Mise à jour éteinte."</string>
     <string name="error_background_refresh_text">"Changez les réglages pour également être informé des rapports en dehors de l'application."</string>
     <string name="error_camera_permission_title">"Pas d'accès à la caméra"</string>
     <string name="error_camera_permission_text">"L'application a besoin d'avoir accès à la caméra pour pouvoir scanner le code QR."</string>
     <string name="error_action_change_settings">"Changer les réglages"</string>
     <string name="error_action_retry">"Réessayer"</string>
-    <string name="upload_success_message">"Information successful"</string>
-    <string name="upload_error_message">"Information failed"</string>
+    <string name="upload_success_message">"Téléchargement réussi"</string>
+    <string name="upload_error_message">"Téléchargement échoué"</string>
     <string name="upload_missing_payload">"Pas de code privé trouvé. Scannez un code QR valable."</string>
 
     <!-- Titel einer generischen Fehleranzeige -->
@@ -272,8 +272,11 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Titel eines Ok-Buttons -->
     <string name="ok_button">"Ok"</string>
-    <string name="landing_description"></string>
+    <string name="landing_description">"Check-in for meetings and events."</string>
     <string name="landing_app_store_link"></string>
     <string name="landing_play_store_link"></string>
     <string name="generator_pdf_created_on_format"></string>
+
+    <!-- Title of the diary entry edit screen. -->
+    <string name="edit_controller_title"></string>
 </resources>
