@@ -207,6 +207,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 	private void showImpressum() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				//TODO: It would be nice to load this asynchronous
 				.replace(R.id.container, HtmlFragment
 						.newInstance(AssetUtil.getImpressumBaseUrl(getContext()), AssetUtil.getImpressumHtml(getContext())))
 				.addToBackStack(DiaryFragment.TAG)

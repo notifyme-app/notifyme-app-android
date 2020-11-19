@@ -1,6 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25">
-    <g fill="none" fill-rule="evenodd">
-        <path d="M0 0L24 0 24 24 0 24z" transform="translate(0 .605)"/>
-        <path fill="#63A0C7" d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" transform="translate(0 .605)"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="25px" viewBox="0 0 24 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic-link-external</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.254902 0 0 0 0 0.247059 0 0 0 0 0.552941 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g filter="url(#filter-1)" id="ic-link-external">
+            <g>
+                <polygon id="Path" points="0 0.605 24 0.605 24 24.605 0 24.605"></polygon>
+                <path d="M19,19.605 L5,19.605 L5,5.605 L12,5.605 L12,3.605 L5,3.605 C3.89,3.605 3,4.505 3,5.605 L3,19.605 C3,20.705 3.89,21.605 5,21.605 L19,21.605 C20.1,21.605 21,20.705 21,19.605 L21,12.605 L19,12.605 L19,19.605 Z M14,3.605 L14,5.605 L17.59,5.605 L7.76,15.435 L9.17,16.845 L19,7.015 L19,10.605 L21,10.605 L21,3.605 L14,3.605 Z" id="Shape" fill="#63A0C7" fill-rule="nonzero"></path>
+            </g>
+        </g>
     </g>
 </svg>

@@ -133,7 +133,6 @@ public class MainViewModel extends AndroidViewModel {
 		} else {
 			errorState.setValue(null);
 		}
-		//TODO: check if other errors are present and update the errorState
 	}
 
 	private void refreshExposures() {
