@@ -89,13 +89,15 @@ public class DiaryFragment extends Fragment {
 		if (exposureEvent != null) {
 			viewModel.setSelectedExposure(exposureEvent);
 			requireActivity().getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
+							R.anim.modal_pop_exit)
 					.replace(R.id.container, ExposureFragment.newInstance())
 					.addToBackStack(ExposureFragment.TAG)
 					.commit();
 		} else {
 			requireActivity().getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
+							R.anim.modal_pop_exit)
 					.replace(R.id.container, EditDiaryEntryFragment.newInstance(true, diaryEntry.getId()))
 					.addToBackStack(EditDiaryEntryFragment.TAG)
 					.commit();

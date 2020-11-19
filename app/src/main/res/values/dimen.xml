@@ -38,4 +38,6 @@
 	<dimen name="start_screen_image_min_height">100dp</dimen>
 	<dimen name="start_screen_image_max_height">320dp</dimen>
 
+	<dimen name="modal_elevation">11dp</dimen>
+
 </resources>

@@ -78,7 +78,8 @@ public class CheckedInFragment extends Fragment {
 
 	private void showCheckOutFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
+						R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
 				.addToBackStack(CheckOutFragment.TAG)
 				.commit();
