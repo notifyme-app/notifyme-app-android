@@ -20,8 +20,10 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.diary.DiaryFragment;
+import ch.ubique.notifyme.app.impressum.HtmlFragment;
 import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
+import ch.ubique.notifyme.app.utils.AssetUtil;
 import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.StringUtils;
@@ -65,7 +67,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		appNameTextView.setText(StringUtils.getTwoColoredString(appName, appName.substring(appName.length() - 2),
 				getResources().getColor(R.color.primary, null)));
 		infoButton.setOnClickListener(v -> {
-			//TODO: Show impressum
+			showImpressum();
 		});
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
@@ -201,6 +203,17 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				.addToBackStack(DiaryFragment.TAG)
 				.commitAllowingStateLoss();
 	}
+
+	private void showImpressum() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				//TODO: It would be nice to load this asynchronous
+				.replace(R.id.container, HtmlFragment
+						.newInstance(AssetUtil.getImpressumBaseUrl(getContext()), AssetUtil.getImpressumHtml(getContext())))
+				.addToBackStack(DiaryFragment.TAG)
+				.commitAllowingStateLoss();
+	}
+
 
 	@Override
 	public boolean onBackPressed() {

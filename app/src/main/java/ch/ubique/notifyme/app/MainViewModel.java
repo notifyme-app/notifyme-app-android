@@ -123,6 +123,7 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	public void refreshErrors() {
+		//TODO: Also check for disabled notification channels
 		boolean notificationsEnabled = NotificationManagerCompat.from(getApplication()).areNotificationsEnabled();
 
 		if (traceKeyLoadingState.getValue() == LoadingState.FAILURE) {
@@ -132,7 +133,6 @@ public class MainViewModel extends AndroidViewModel {
 		} else {
 			errorState.setValue(null);
 		}
-		//TODO: check if other errors are present and update the errorState
 	}
 
 	private void refreshExposures() {
