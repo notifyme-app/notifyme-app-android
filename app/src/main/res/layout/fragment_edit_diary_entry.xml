@@ -169,7 +169,7 @@
 
 			<Button
 				android:id="@+id/edit_diary_entry_hide_from_diary_button"
-				style="@style/NotifyMe.Button.Small"
+				style="@style/NotifyMe.Button.Outlined.Small.Tertiary"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"

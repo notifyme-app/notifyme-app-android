@@ -69,9 +69,9 @@ public class ExposureFragment extends Fragment {
 		String endTime = StringUtils.getHourMinuteTimeString(exposure.getEndTime(), ":");
 		timeTextView.setText(startTime + " — " + endTime);
 
-		if (exposure.getMessage() != null) {
-			message.setText(exposure.getMessage());
+		if (exposure.getMessage() != null && !exposure.getMessage().isEmpty()) {
 			infobox.setVisibility(View.VISIBLE);
+			message.setText(exposure.getMessage());
 		} else {
 			infobox.setVisibility(View.GONE);
 		}
