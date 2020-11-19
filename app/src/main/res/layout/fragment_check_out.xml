@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<TextView
-		android:id="@+id/check_out_fragment_done_button"
-		style="@style/NotifyMe.Text.Status.Primary"
-		android:layout_width="wrap_content"
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="end"
-		android:background="?selectableItemBackground"
-		android:padding="@dimen/spacing_large"
-		android:text="@string/done_button" />
+		android:background="@color/light_grey">
+
+		<TextView
+			android:id="@+id/check_out_fragment_cancel_button"
+			style="@style/NotifyMe.Text.Status.Primary.Small.Thin"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:background="?selectableItemBackground"
+			android:padding="@dimen/spacing_large"
+			android:text="@string/cancel"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			style="@style/NotifyMe.Text.Status.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/checkout_button_title"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			android:id="@+id/check_out_fragment_done_button"
+			style="@style/NotifyMe.Text.Status.Primary.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:background="?selectableItemBackground"
+			android:padding="@dimen/spacing_large"
+			android:text="@string/checkout_save_button_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ScrollView
 		android:layout_width="match_parent"
@@ -25,39 +58,31 @@
 			android:paddingHorizontal="@dimen/spacing_very_large"
 			android:paddingBottom="@dimen/spacing_large">
 
-			<TextView
-				style="@style/NotifyMe.Text.Status.Small"
-				android:layout_width="match_parent"
+			<ImageView
+				android:id="@+id/check_out_fragment_venue_type_icon"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:gravity="center"
-				android:text="@string/edit_controller_your_checkin" />
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_very_large"
+				android:src="@drawable/ic_tea" />
 
 			<TextView
-				android:id="@+id/check_out_fragment_name"
+				android:id="@+id/check_out_fragment_title"
 				style="@style/NotifyMe.Text.Title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_medium"
 				android:gravity="center"
-				android:text="Cyber Cafe SV" />
+				tools:text="Cyber Cafe SV" />
 
 			<TextView
-				android:id="@+id/check_out_fragment_location"
-				style="@style/NotifyMe.Text.Subtitle"
+				android:id="@+id/check_out_fragment_subtitle"
+				style="@style/NotifyMe.Text"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_very_small"
 				android:gravity="center"
-				android:text="EPFL Campus" />
-
-			<TextView
-				android:id="@+id/check_out_fragment_room"
-				style="@style/NotifyMe.Text"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/spacing_medium"
-				android:gravity="center"
-				android:text="Lausanne" />
+				tools:text="Lausanne" />
 
 			<TextView
 				android:id="@+id/check_out_fragment_date"
@@ -65,9 +90,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginTop="@dimen/spacing_medium"
+				android:layout_marginTop="@dimen/spacing_huge"
 				android:gravity="center"
-				android:text="Thursday, October 22" />
+				tools:text="Thursday, October 22" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -108,7 +133,7 @@
 					android:foreground="?android:selectableItemBackground"
 					android:gravity="center"
 					android:paddingVertical="@dimen/spacing_medium"
-					android:text="07  :  56" />
+					tools:text="07  :  56" />
 
 				<TextView
 					android:id="@+id/check_out_fragment_to_text_view"
@@ -121,7 +146,7 @@
 					android:foreground="?android:selectableItemBackground"
 					android:gravity="center"
 					android:paddingVertical="@dimen/spacing_medium"
-					android:text="08  :  13" />
+					tools:text="08  :  13" />
 
 			</LinearLayout>
 

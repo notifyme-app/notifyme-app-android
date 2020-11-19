@@ -275,8 +275,12 @@ QR-Code"</string>
     <string name="landing_description">"Dezentral gespeicherte Check-Ins für Meetings &amp; Events"</string>
     <string name="landing_app_store_link">"https://example.com"</string>
     <string name="landing_play_store_link">"https://example.com"</string>
-    <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
+    <string name="generator_pdf_created_on_format">"Erstellt am %d.%m.%Y um %H:%M Uhr
+"</string>
 
     <!-- Title of the diary entry edit screen. -->
     <string name="edit_controller_title">"Bearbeiten"</string>
+
+    <!-- Save button title im checkout screen. -->
+    <string name="checkout_save_button_title">"Sichern"</string>
 </resources>

@@ -29,13 +29,6 @@ public class CheckedInFragment extends Fragment {
 	private MainViewModel viewModel;
 	private VenueInfo venueInfo;
 
-	private TextView nameTextView;
-	private TextView locationTextView;
-	private TextView roomTextView;
-	private ImageView venueTypeIcon;
-	private View checkOutButton;
-	private Toolbar toolbar;
-
 	public CheckedInFragment() { super(R.layout.fragment_checked_in); }
 
 	public static CheckedInFragment newInstance() {
@@ -52,9 +45,8 @@ public class CheckedInFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-		TextView nameTextView = view.findViewById(R.id.checked_in_fragment_name);
-		TextView locationTextView = view.findViewById(R.id.checked_in_fragment_location);
-		TextView roomTextView = view.findViewById(R.id.checked_in_fragment_room);
+		TextView titleTextView = view.findViewById(R.id.checked_in_fragment_title);
+		TextView subtitleTextView = view.findViewById(R.id.checked_in_fragment_subtitle);
 		ImageView venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
 		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
@@ -78,9 +70,8 @@ public class CheckedInFragment extends Fragment {
 		viewModel.timeSinceCheckIn
 				.observe(getViewLifecycleOwner(), duration -> toolbar.setTitle(StringUtils.getDurationString(duration)));
 
-		nameTextView.setText(venueInfo.getName());
-		locationTextView.setText(venueInfo.getLocation());
-		roomTextView.setText(venueInfo.getRoom());
+		titleTextView.setText(venueInfo.getTitle());
+		subtitleTextView.setText(venueInfo.getSubtitle());
 
 		checkOutButton.setOnClickListener(v -> showCheckOutFragment());
 	}

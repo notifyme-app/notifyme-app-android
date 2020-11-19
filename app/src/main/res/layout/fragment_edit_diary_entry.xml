@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:background="@color/light_grey">
 
 		<TextView
 			android:id="@+id/edit_diary_entry_cancel_button"
@@ -70,7 +72,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_medium"
 				android:gravity="center"
-				android:text="Cyber Cafe SV" />
+				tools:text="Cyber Cafe SV" />
 
 			<TextView
 				android:id="@+id/edit_diary_entry_subtitle"
@@ -79,7 +81,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/spacing_very_small"
 				android:gravity="center"
-				android:text="Lausanne" />
+				tools:text="Lausanne" />
 
 			<TextView
 
@@ -90,7 +92,7 @@
 				android:layout_gravity="center"
 				android:layout_marginTop="@dimen/spacing_huge"
 				android:gravity="center"
-				android:text="Thursday, October 22" />
+				tools:text="Thursday, October 22" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -131,7 +133,7 @@
 					android:foreground="?android:selectableItemBackground"
 					android:gravity="center"
 					android:paddingVertical="@dimen/spacing_medium"
-					android:text="07  :  56" />
+					tools:text="07  :  56" />
 
 				<TextView
 					android:id="@+id/edit_diary_entry_to_text_view"
@@ -144,7 +146,7 @@
 					android:foreground="?android:selectableItemBackground"
 					android:gravity="center"
 					android:paddingVertical="@dimen/spacing_medium"
-					android:text="08  :  13" />
+					tools:text="08  :  13" />
 
 			</LinearLayout>
 

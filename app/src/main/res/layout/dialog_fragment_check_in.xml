@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	style="@style/NotifyMe.Card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -42,31 +43,22 @@
 					android:src="@drawable/ic_tea" />
 
 				<TextView
-					android:id="@+id/check_in_dialog_name"
+					android:id="@+id/check_in_dialog_title"
 					style="@style/NotifyMe.Text.Title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/spacing_large"
 					android:gravity="center"
-					android:text="Cyber Cafe SV" />
+					tools:text="Cyber Cafe SV" />
 
 				<TextView
-					android:id="@+id/check_in_dialog_location"
-					style="@style/NotifyMe.Text.Subtitle"
+					android:id="@+id/check_in_dialog_subtitle"
+					style="@style/NotifyMe.Text"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/spacing_very_small"
 					android:gravity="center"
-					android:text="EPFL Campus" />
-
-				<TextView
-					android:id="@+id/check_in_dialog_room"
-					style="@style/NotifyMe.Text"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/spacing_medium"
-					android:gravity="center"
-					android:text="Lausanne" />
+					tools:text="Lausanne" />
 
 				<Button
 					android:id="@+id/check_in_dialog_check_in_button"

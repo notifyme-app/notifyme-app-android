@@ -110,8 +110,8 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 		public void bind(ItemVenueVisit item) {
 
 			VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
-			nameTextView.setText(venueInfo.getName());
-			locationTextView.setText(venueInfo.getLocation() + ", " + venueInfo.getRoom());
+			nameTextView.setText(venueInfo.getTitle());
+			locationTextView.setText(venueInfo.getSubtitle());
 			String start = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getArrivalTime(), ":");
 			String end = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getDepartureTime(), ":");
 			timeTextView.setText(start + " — " + end);

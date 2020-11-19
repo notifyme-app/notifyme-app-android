@@ -157,8 +157,8 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		public void bind(ItemVenueVisit item) {
 			if (item.getDiaryEntry() != null) {
 				VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
-				nameTextView.setText(venueInfo.getName());
-				locationTextView.setText(venueInfo.getLocation() + ", " + venueInfo.getRoom());
+				nameTextView.setText(venueInfo.getTitle());
+				locationTextView.setText(venueInfo.getSubtitle());
 			}
 			//TODO: Display correct venue type icon
 			venueTypeIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_tea));

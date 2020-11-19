@@ -27,9 +27,8 @@ public class CheckInDialogFragment extends DialogFragment {
 	VenueInfo venueInfo;
 
 	private View closeButton;
-	private TextView nameTextView;
-	private TextView locationTextView;
-	private TextView roomTextView;
+	private TextView titleTextView;
+	private TextView subtitleTextView;
 	private ImageView venueTypeIcon;
 	private View checkInButton;
 
@@ -67,17 +66,15 @@ public class CheckInDialogFragment extends DialogFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		closeButton = view.findViewById(R.id.check_in_dialog_close_button);
-		nameTextView = view.findViewById(R.id.check_in_dialog_name);
-		locationTextView = view.findViewById(R.id.check_in_dialog_location);
-		roomTextView = view.findViewById(R.id.check_in_dialog_room);
+		titleTextView = view.findViewById(R.id.check_in_dialog_title);
+		subtitleTextView = view.findViewById(R.id.check_in_dialog_subtitle);
 		venueTypeIcon = view.findViewById(R.id.check_in_dialog_venue_type_icon);
 		checkInButton = view.findViewById(R.id.check_in_dialog_check_in_button);
 
 		//TODO: Set venueType icon
 
-		nameTextView.setText(venueInfo.getName());
-		locationTextView.setText(venueInfo.getLocation());
-		roomTextView.setText(venueInfo.getRoom());
+		titleTextView.setText(venueInfo.getTitle());
+		subtitleTextView.setText(venueInfo.getSubtitle());
 
 		checkInButton.setOnClickListener(v -> {
 			viewModel.startCheckInTimer();

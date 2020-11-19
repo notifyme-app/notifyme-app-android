@@ -73,8 +73,8 @@ public class EditDiaryEntryFragment extends Fragment {
 		dateTextView = view.findViewById(R.id.edit_diary_entry_date);
 		hideInDiaryButton = view.findViewById(R.id.edit_diary_entry_hide_from_diary_button);
 
-		titleTextView.setText(diaryEntry.getVenueInfo().getName());
-		subtitleTextView.setText(diaryEntry.getVenueInfo().getLocation() + ", " + diaryEntry.getVenueInfo().getRoom());
+		titleTextView.setText(diaryEntry.getVenueInfo().getTitle());
+		subtitleTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
 
 		refreshTimeTextViews();
 

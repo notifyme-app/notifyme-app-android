@@ -34,10 +34,10 @@ public class CheckOutFragment extends Fragment {
 	private VenueInfo venueInfo;
 	private CheckInState checkInState;
 
-	private TextView nameTextView;
-	private TextView locationTextView;
-	private TextView roomTextView;
+	private TextView titleTextView;
+	private TextView subtitleTextView;
 	private View doneButton;
+	private View cancelButton;
 	private EditText commentEditText;
 	private TextView fromTime;
 	private TextView toTime;
@@ -59,18 +59,17 @@ public class CheckOutFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		nameTextView = view.findViewById(R.id.check_out_fragment_name);
-		locationTextView = view.findViewById(R.id.check_out_fragment_location);
-		roomTextView = view.findViewById(R.id.check_out_fragment_room);
+		titleTextView = view.findViewById(R.id.check_out_fragment_title);
+		subtitleTextView = view.findViewById(R.id.check_out_fragment_subtitle);
 		doneButton = view.findViewById(R.id.check_out_fragment_done_button);
+		cancelButton = view.findViewById(R.id.check_out_fragment_cancel_button);
 		commentEditText = view.findViewById(R.id.check_out_fragment_comment_edit_text);
 		fromTime = view.findViewById(R.id.check_out_fragment_from_text_view);
 		toTime = view.findViewById(R.id.check_out_fragment_to_text_view);
 		dateTextView = view.findViewById(R.id.check_out_fragment_date);
 
-		nameTextView.setText(venueInfo.getName());
-		locationTextView.setText(venueInfo.getLocation());
-		roomTextView.setText(venueInfo.getRoom());
+		titleTextView.setText(venueInfo.getTitle());
+		subtitleTextView.setText(venueInfo.getSubtitle());
 		checkInState.setCheckOutTime(System.currentTimeMillis());
 		refreshTimeTextViews();
 
@@ -82,6 +81,7 @@ public class CheckOutFragment extends Fragment {
 			saveEntry();
 			showStartScreen();
 		});
+		cancelButton.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 	}
 
 	private void refreshTimeTextViews() {

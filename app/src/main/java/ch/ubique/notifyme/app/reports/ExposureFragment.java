@@ -76,8 +76,8 @@ public class ExposureFragment extends Fragment {
 		}
 
 		if (diaryEntry != null) {
-			nameTextView.setText(diaryEntry.getVenueInfo().getName());
-			locationTextView.setText(diaryEntry.getVenueInfo().getLocation() + ", " + diaryEntry.getVenueInfo().getRoom());
+			nameTextView.setText(diaryEntry.getVenueInfo().getTitle());
+			locationTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
 
 			if (diaryEntry.getComment() != null && !diaryEntry.getComment().isEmpty()) {
 				notes.setText(diaryEntry.getComment());
