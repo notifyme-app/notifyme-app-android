@@ -44,6 +44,45 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/fragment_qr_scanner_toolbar">
 
+		<androidx.camera.view.PreviewView
+			android:id="@+id/camera_preview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<View
+			android:id="@+id/qr_code_scanner_milk_top"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:background="@color/transparent_milk"
+			app:layout_constraintBottom_toTopOf="@id/qr_code_scanner_camera_hole"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<View
+			android:id="@+id/qr_code_scanner_milk_bottom"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:background="@color/transparent_milk"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/qr_code_scanner_camera_hole" />
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:background="@color/transparent_milk"
+			app:layout_constraintBottom_toTopOf="@id/qr_code_scanner_milk_bottom"
+			app:layout_constraintEnd_toStartOf="@id/qr_code_scanner_camera_hole"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/qr_code_scanner_milk_top" />
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:background="@color/transparent_milk"
+			app:layout_constraintBottom_toTopOf="@id/qr_code_scanner_milk_bottom"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/qr_code_scanner_camera_hole"
+			app:layout_constraintTop_toBottomOf="@id/qr_code_scanner_milk_top" />
+		
 		<TextView
 			android:id="@+id/qr_code_scanner_explanation"
 			style="@style/NotifyMe.Text"
@@ -54,6 +93,16 @@
 			android:text="@string/checkin_scan_code"
 			app:layout_constraintTop_toTopOf="parent" />
 
+		<View
+			android:id="@+id/qr_code_scanner_camera_hole"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_margin="@dimen/spacing_small"
+			app:layout_constraintBottom_toBottomOf="@id/camera_preview_container"
+			app:layout_constraintEnd_toEndOf="@id/camera_preview_container"
+			app:layout_constraintStart_toStartOf="@id/camera_preview_container"
+			app:layout_constraintTop_toTopOf="@id/camera_preview_container" />
+
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/camera_preview_container"
 			android:layout_width="match_parent"
@@ -62,12 +111,6 @@
 			android:layout_marginTop="@dimen/spacing_very_large"
 			app:layout_constraintDimensionRatio="1:1"
 			app:layout_constraintTop_toBottomOf="@id/qr_code_scanner_explanation">
-
-			<androidx.camera.view.PreviewView
-				android:id="@+id/camera_preview"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_margin="@dimen/spacing_small" />
 
 			<View
 				android:id="@+id/qr_code_scanner_top_right_indicator"
