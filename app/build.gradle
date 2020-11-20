@@ -1,0 +1,147 @@
+plugins {
+	id 'com.android.application'
+	id 'org.sonarqube' version '3.0'
+	id 'com.google.protobuf'
+}
+
+ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
+ext.readPropertyWithDefault = { paramName, defaultValue ->
+	if (project.hasProperty(paramName)) {
+		return project.getProperties().get(paramName)
+	} else {
+		Properties properties = new Properties()
+		if (project.rootProject.file('local.properties').exists()) {
+			properties.load(project.rootProject.file('local.properties').newDataInputStream())
+		}
+		if (properties.getProperty(paramName) != null) {
+			return properties.getProperty(paramName)
+		} else {
+			return defaultValue
+		}
+	}
+}
+
+android {
+	compileSdkVersion 30
+	buildToolsVersion "29.0.3"
+
+	defaultConfig {
+		applicationId "ch.ubique.notifyme"
+		minSdkVersion 23
+		targetSdkVersion 30
+		versionCode 1
+		versionName "0.1"
+		resConfigs "en", "fr", "de", "it"
+
+		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	productFlavors {
+		dev {
+			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
+			applicationIdSuffix '.dev'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
+		}
+		prod {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
+		}
+	}
+
+	flavorDimensions "version"
+
+	signingConfigs {
+		release {
+			storeFile file(readPropertyWithDefault('keystoreFile', 'testKeystore'))
+			storePassword readProperty('keystorePassword')
+			keyAlias 'keyAlias'
+			keyPassword readProperty('keyAliasPassword')
+		}
+	}
+
+	buildTypes {
+		release {
+			shrinkResources false
+			setMinifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectName", "NotifyMe App Android"
+		property "sonar.projectKey", "notifyme-app_notifyme-app-android"
+		property "sonar.organization", "notifyme-app"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
+}
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.0.0'
+	}
+	plugins {
+		javalite {
+			artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+		}
+	}
+	generateProtoTasks {
+		all().each { task ->
+			task.builtins {
+				remove java
+			}
+			task.plugins {
+				javalite {}
+			}
+		}
+	}
+}
+
+
+dependencies {
+
+	implementation 'androidx.appcompat:appcompat:1.2.0'
+	implementation 'com.google.android.material:material:1.2.1'
+	implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+	implementation 'androidx.fragment:fragment:1.2.5'
+	implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+	implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+	implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+	testImplementation 'junit:junit:4.+'
+	androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+	androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+	// QR code scanning
+	def camerax_version = "1.0.0-beta12"
+	implementation "androidx.camera:camera-camera2:${camerax_version}"
+	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+	implementation "androidx.camera:camera-view:1.0.0-alpha19"
+	//DO NOT UPDATE ZXING TO 3.4.0! (3.4.0 is not compatible with API Level 23 or lower)
+	implementation "com.google.zxing:core:3.3.0"
+
+	implementation 'com.google.code.gson:gson:2.8.6'
+
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-33'
+
+	implementation 'androidx.work:work-runtime:2.4.0'
+	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+	implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+	implementation 'androidx.security:security-crypto:1.0.0-rc03'
+	implementation 'androidx.biometric:biometric:1.1.0-rc01'
+
+
+}

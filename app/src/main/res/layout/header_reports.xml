@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/NotifyMe.Card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/spacing_large">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_check_filled"
+				app:tint="@color/tertiary" />
+
+			<TextView
+				android:id="@+id/reports_header_title"
+				style="@style/NotifyMe.Text.Status.Tertiary"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/spacing_medium"
+				android:layout_weight="1"
+				android:text="@string/report_title_singular" />
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_chevron_right" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/reports_header_text"
+			style="@style/NotifyMe.Text.Title.Mega"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_huge"
+			android:text="@string/report_message_text" />
+
+		<TextView
+			android:id="@+id/reports_header_days_ago"
+			style="@style/NotifyMe.Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:text="@string/report_message_days_ago" />
+
+		<ImageButton
+			android:id="@+id/reports_header_error_view"
+			style="@style/NotifyMe.ImageButton.Grey"
+			android:layout_width="@dimen/button_height"
+			android:layout_height="@dimen/button_height"
+			android:layout_gravity="end"
+			android:clickable="false"
+			android:focusable="false"
+			android:src="@drawable/ic_error" />
+
+	</LinearLayout>
+
+</androidx.cardview.widget.CardView>

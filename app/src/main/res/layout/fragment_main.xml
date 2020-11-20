@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/fragment_main_swipe_refresh_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white"
+			android:orientation="vertical"
+			tools:context="ch.ubique.notifyme.MainFragment">
+
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:adjustViewBounds="true"
+				android:src="@drawable/ic_oval" />
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+				<ImageView
+					android:id="@+id/fragment_main_info_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/spacing_small"
+					android:clickable="true"
+					android:focusable="true"
+					android:foreground="?android:selectableItemBackground"
+					android:padding="@dimen/spacing_medium"
+					android:src="@drawable/ic_info_outlined"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
+
+				<TextView
+					android:id="@+id/fragment_main_app_name"
+					style="@style/NotifyMe.Text.Subtitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/spacing_medium"
+					android:text="@string/app_name"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
+
+				<include
+					android:id="@+id/fragment_main_reports_header_no_report"
+					layout="@layout/header_no_report"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/spacing_large"
+					android:layout_marginTop="@dimen/spacing_medium"
+					app:layout_constraintTop_toBottomOf="@id/fragment_main_app_name" />
+
+				<include
+					android:id="@+id/fragment_main_reports_header"
+					layout="@layout/header_reports"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/spacing_large"
+					android:layout_marginTop="@dimen/spacing_medium"
+					android:visibility="gone"
+					app:layout_constraintTop_toBottomOf="@id/fragment_main_app_name" />
+
+				<androidx.constraintlayout.widget.Barrier
+					android:id="@+id/fragment_main_header_barrier"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					app:barrierDirection="bottom"
+					app:constraint_referenced_ids="fragment_main_reports_header_no_report,fragment_main_reports_header" />
+
+				<TextView
+					android:id="@+id/fragment_main_splash_text"
+					style="@style/NotifyMe.Text.Title.Mega"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/spacing_huge"
+					android:layout_marginTop="@dimen/spacing_large"
+					android:text="@string/no_report_hero_text"
+					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier" />
+
+				<ImageView
+					android:id="@+id/fragment_main_image"
+					android:layout_width="wrap_content"
+					android:layout_height="0dp"
+					android:layout_marginVertical="@dimen/spacing_large"
+					android:layout_marginEnd="@dimen/spacing_very_large"
+					android:src="@drawable/ic_start_screen"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_footer_barrier"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
+					app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
+					app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
+					app:layout_constraintVertical_weight="1" />
+
+				<androidx.constraintlayout.widget.Barrier
+					android:id="@+id/fragment_main_footer_barrier"
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					app:barrierDirection="top"
+					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label,fragment_main_non_productive_info" />
+
+				<TextView
+					android:id="@+id/fragment_main_non_productive_info"
+					style="@style/NotifyMe.Text.Status.Tertiary.Small"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/spacing_small"
+					android:paddingHorizontal="@dimen/spacing_huge"
+					android:text="@string/non_productive_warning"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_checked_in_label"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent" />
+
+				<TextView
+					android:id="@+id/fragment_main_checked_in_label"
+					style="@style/NotifyMe.Text.Status.Small"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/spacing_huge"
+					android:text="@string/homescreen_checkedin_label"
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_buttons_container"
+					app:layout_constraintStart_toStartOf="parent" />
+
+				<LinearLayout
+					android:id="@+id/fragment_main_buttons_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/spacing_large"
+					android:paddingTop="@dimen/spacing_medium"
+					android:paddingBottom="@dimen/spacing_large"
+					app:layout_constraintBottom_toBottomOf="parent">
+
+					<Button
+						android:id="@+id/fragment_main_check_in_button"
+						style="@style/NotifyMe.Button"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/checkin_title"
+						app:icon="@drawable/ic_qr" />
+
+					<Button
+						android:id="@+id/fragment_main_check_out_button"
+						style="@style/NotifyMe.Button.Outlined"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="00:12"
+						android:textSize="@dimen/text_size_splash_title"
+						android:visibility="gone"
+						app:icon="@drawable/ic_check_filled"
+						app:iconTint="@color/primary" />
+
+					<ImageButton
+						android:id="@+id/fragment_main_diary_button"
+						style="@style/NotifyMe.ImageButton"
+						android:layout_width="@dimen/button_height"
+						android:layout_height="@dimen/button_height"
+						android:layout_marginStart="@dimen/spacing_medium"
+						android:src="@drawable/ic_diary" />
+
+				</LinearLayout>
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+		</FrameLayout>
+
+	</ScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

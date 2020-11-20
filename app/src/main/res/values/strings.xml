@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Language code: Technical code used in app (translations filled in by Ubique) -->
+    <string name="language_code">"en"</string>
+
+    <!-- Name of the app -->
+    <string name="app_name">"NotifyMe"</string>
+
+    <!-- Title of Checkin Screen -->
+    <string name="checkin_title">"Check-in"</string>
+
+    <!-- Title of diary screen -->
+    <string name="diary_title">"Diary"</string>
+
+    <!-- Homescreen: Title of checkin button -->
+    <string name="checkin_button_title">"Check-in"</string>
+
+    <!-- Homescreen: No Reports title -->
+    <string name="no_report_title">"No reports"</string>
+
+    <!-- Check-In: scan code -->
+    <string name="checkin_scan_code">"Scan QR code to check in"</string>
+
+    <!-- iOS: Text bei Berechtigung für Kamera -->
+    <string name="NSCameraUsageDescription">"Your camera is used to scan the QR code."</string>
+
+    <!-- iOS Permission: Text to show for FaceID -->
+    <string name="NSFaceIDUsageDescription">"Enabling Face ID allows you to securely access your diary."</string>
+
+    <!-- iOS FaceID: Text that is shown as reason for Face ID -->
+    <string name="face_id_reason_text">"Authenticate yourself to access the diary"</string>
+
+    <!-- Homescreen: Text with no report -->
+    <string name="no_report_hero_text">"Enjoy your day and stay healthy"</string>
+
+    <!-- Reminder Notification Title -->
+    <string name="checkout_reminder_title">"Check-Out Reminder"</string>
+
+    <!-- Reminder Checkout Text -->
+    <string name="checkout_reminder_text">"Do you want to check out?"</string>
+
+    <!-- Check In Confirm: Button title -->
+    <string name="check_in_now_button_title">"Check In Now"</string>
+
+    <!-- CheckIn: Check out Button title -->
+    <string name="checkout_button_title">"Check-Out"</string>
+
+    <!-- Title for 1 report -->
+    <string name="report_title_singular">"1 report"</string>
+
+    <!-- Reports: Title for multiple reports -->
+    <string name="report_title_plural">"{NUMBER} reports"</string>
+
+    <!-- Reports: Infection text -->
+    <string name="report_message_text">"An infection could have occurred"</string>
+
+    <!-- Highlighted part of Term no_report_hero_text (has to match exactly) -->
+    <string name="no_report_hero_text_highlight">"stay healthy"</string>
+
+    <!-- Highlight text of report_message_text (must be exactly as in this text) -->
+    <string name="report_message_text_highlight">"An infection"</string>
+
+    <!-- QR-Scanner: request for scan text -->
+    <string name="qrscanner_scan_qr_text">"Scan QR code to check in"</string>
+
+    <!-- QR Code Scanner: no valid code text -->
+    <!-- Fuzzy -->
+    <string name="qrscanner_error">"No valid code!"</string>
+
+    <!-- Reports: no reports information title -->
+    <string name="no_report_information_title">"No potential infections have been reported within the last 14 days"</string>
+
+    <!-- No report Information : Additional text -->
+    <string name="no_report_information_text">"Stay healthy"</string>
+
+    <!-- Reports: Information title -->
+    <string name="report_information_title">"Potential infection within the last 14 days"</string>
+
+    <!-- Reports: Information text -->
+    <string name="report_information_text">"You could be infectious without realising it."</string>
+
+    <!-- Report Information What to do Button title -->
+    <string name="report_information_button_title">"What to do?"</string>
+
+    <!-- Info Text that is displayed below the info about a new report. -->
+    <!-- Fuzzy -->
+    <string name="report_message_days_ago">"{NUMBER} days ago"</string>
+
+    <!-- Homescreen: Label you are checked in -->
+    <string name="homescreen_checkedin_label">"You are checked in"</string>
+
+    <!-- Edit Checkin ViewController: your checkin at -->
+    <string name="edit_controller_your_checkin">"Your check-in at"</string>
+
+    <!-- Edit Check in: DatePicker from label -->
+    <string name="datepicker_from">"From"</string>
+
+    <!-- Edit Check in: DatePicker to label -->
+    <string name="datepicker_to">"To"</string>
+
+    <!-- Edit Checkin: add comment label -->
+    <string name="edit_mode_addcomment">"Add comment"</string>
+
+    <!-- Edit Mode: Add comment placeholder text -->
+    <!-- Fuzzy -->
+    <string name="edit_mode_comment_placeholder">"eg. Who were you with?"</string>
+
+    <!-- Done Button Title -->
+    <!-- Fuzzy -->
+    <string name="done_button">"Done"</string>
+
+    <!-- Edit CheckIn: Text for not showing in diary option -->
+    <string name="diary_option_title">"Don't show in diary"</string>
+
+    <!-- Edit CheckIn: Text that is shown when not showing in diary is set -->
+    <string name="diary_option_subtext">"This check-in will not be shown in the diary.
+
+Nevertheless the app stores this entry during 14 days to warn you in case of potential infection."</string>
+
+    <!-- Check In: Set Reminder title -->
+    <string name="checkin_set_reminder">"Set reminder"</string>
+
+    <!-- Reminder: Option Off -->
+    <string name="reminder_option_off">"off"</string>
+
+    <!-- Edit Checkin: Remove from diary button title -->
+    <string name="remove_from_diary_button">"Hide from diary"</string>
+
+    <!-- Remove from Diary Warning view title -->
+    <string name="remove_diary_warning_title">"Warning"</string>
+
+    <!-- Remove from diary warning view explanation text -->
+    <string name="remove_diary_warning_text">"You are about to remove “{LOCATION_INFO}” from your diary. This action is irreversible.* Please confirm you are sure about this."</string>
+
+    <!-- Remove from diary warning view remove button title -->
+    <string name="remove_diary_remove_now_button">"Hide now"</string>
+
+    <!-- Remove from diary warning start text -->
+    <string name="remove_diary_warning_star_text">"The app stores this entry during 14 days to warn you in case of potential infections."</string>
+
+    <!-- Report: 1 day ago singular -->
+    <string name="report_message_one_day_ago">"1 day ago"</string>
+
+    <!-- Notification Channel name on Android Devices (Only visible in System Settings) -->
+    <string name="android_notification_channel_name">"Reports"</string>
+
+    <!-- Info Text that is displayed below the info about a new report today. -->
+    <string name="report_message_today">"Today"</string>
+
+    <!-- Checkout date label if event spans over more than one day -->
+    <string name="checkout_from_to_date">"{DATE1} to {DATE2}"</string>
+
+    <!-- Text that is displayed to the user in the biometric authentication popup. -->
+    <string name="authenticate_for_diary">"Authenticate yourself to access the diary"</string>
+
+    <!-- Notification Channel name for Reminders on Android Devices (Only visible in System Settings) -->
+    <string name="android_reminder_channel_name">"Check-Out Reminder"</string>
+
+    <!-- Reminder Option with an amount of hours -->
+    <string name="reminder_option_hours">"{HOURS} h"</string>
+
+    <!-- Reminder Option with an amount of minutes -->
+    <string name="reminder_option_minutes">"{MINUTES}'"</string>
+
+    <!-- Warning that is displayed on the Main Screen if a non productive build is used. -->
+    <string name="non_productive_warning">"This app provides a preview of the NotifyMe app and is not meant for production."</string>
+
+    <!-- Checkin: Reminder Alert title when permission to send reminders not given -->
+    <string name="checkin_reminder_settings_alert_title">"The reminder could not be set"</string>
+
+    <!-- Checkin: Reminder Alert message when permission to send reminders not given -->
+    <string name="checkin_reminder_settings_alert_message">"In order to send you reminders the app needs the permission to send notifications. You can enable the permission for notifications in the app settings."</string>
+
+    <!-- Check In Reminder Alert Open Settings button -->
+    <string name="checkin_reminder_option_open_settings">"Open app settings"</string>
+
+    <!-- Cancel button title -->
+    <string name="cancel">"Cancel"</string>
+
+    <!-- QR Scanner: camera has no permission explanation text -->
+    <string name="qr_scanner_no_camera_permission">"Access to your camera is needed to scan QR codes"</string>
+
+    <!-- Title for an exposure notification. -->
+    <string name="exposure_notification_title">"New message"</string>
+
+    <!-- Body text for an exposure notification. -->
+    <string name="exposure_notification_body">"Open the app to read the message"</string>
+
+    <!-- Close button title in the top right corner to close the new exposure screen. -->
+    <string name="new_exposure_close_button">"Close"</string>
+
+    <!-- Header text above the personal notes in the new exposure screen. -->
+    <string name="new_exposure_notes_header">"Your Notes"</string>
+
+    <!-- Header text above the location details in the new exposure screen. -->
+    <string name="new_exposure_location_header">"Where"</string>
+
+    <!-- Version text in the Imprint (Webview) -->
+    <string name="imprint_webview_version_text">"Version"</string>
+
+    <!-- Title publisher in imprint -->
+    <string name="imprint_webview_publisher_title">"Publisher"</string>
+
+    <!-- Text about Ubique in the imprint -->
+    <string name="imprint_webview_ubique_about_text">"Ubique is specialised in developing mobile applications for end users. As a leading company in creating products based on decentralised protocols, Ubique lays a strong focus on the connection between user experience and advanced technology."</string>
+
+    <!-- Title in collaboration with in imprint -->
+    <string name="imprint_webview_collaboration_title">"In collaboration with"</string>
+
+    <!-- CrowdNotifier Paper text -->
+    <string name="imprint_webview_paper_text">"This project relies on the paper CrowdNotifier by Wouter Lueks (EPFL) et al.:"</string>
+
+    <!-- CrowdNotifier Paper link -->
+    <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
+    <string name="imprint_webview_more_info_title">"More information"</string>
+    <string name="imprint_webview_more_info_link">"www.notify-me.ch"</string>
+    <string name="imprint_webview_legal_title">"Legal"</string>
+    <string name="imprint_webview_legal_link_text">"Terms of use and privacy policy"</string>
+    <string name="imprint_webview_legal_link_url">"www.notify-me.ch/legal"</string>
+    <string name="imprint_webview_sourcecode_title">"Source code"</string>
+    <string name="imprint_webview_sourcecode_text">"The current source code is available under a Public License on GitHub:"</string>
+    <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
+    <string name="generator_title">"Generate a QR code demo"</string>
+    <string name="generator_category_label">"Category"</string>
+    <string name="generator_category_other">"Other"</string>
+    <string name="generator_category_meeting_room">"Meeting room"</string>
+    <string name="generator_category_cafeteria">"Cafeteria"</string>
+
+    <!-- Fuzzy -->
+    <string name="generator_category_private_event">"Private party"</string>
+    <string name="generator_title_label">"Title"</string>
+    <string name="generator_title_placeholder">"e.g. Room or event name"</string>
+    <string name="generator_subtitle_label">"Subtitle"</string>
+    <string name="generator_subtitle_placeholder">"E.g. organization or organizer"</string>
+    <string name="generator_addition_label">"Addition"</string>
+    <string name="generator_addition_placeholder">"E.g. building or place"</string>
+    <string name="generator_generation_button_label">"Generate QR codes"</string>
+    <string name="generator_back">"Back"</string>
+    <string name="generator_public_bulletpoint_1">"This QR code enables visitors to check-in on site."</string>
+    <string name="generator_public_bulletpoint_2">"NotifyMe can't scan the code."</string>
+    <string name="generator_public_bulletpoint_3">"Check-ins are not registered. No private are seized."</string>
+    <string name="generator_private_bulletpoint_1">"This QR code informs visitors in case of an incident."</string>
+    <string name="generator_private_bulletpoint_2">"The code can be scanned with any QR code reader."</string>
+    <string name="generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer."</string>
+    <string name="generator_pdf_button">"Dowload PDF"</string>
+    <string name="generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
+QR Code"</string>
+    <string name="generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
+QR Code"</string>
+    <string name="generator_missing_input">"Please fill in the mandatory field"</string>
+    <string name="upload_title">"Report about a possible infection."</string>
+    <string name="upload_period_label">"Concerned time period"</string>
+    <string name="upload_period_from_label">"from"</string>
+    <string name="upload_period_to_label">"to"</string>
+    <string name="upload_note_label">"Advice to the visitor"</string>
+    <string name="upload_note_placeholder">"What should the visitors do?"</string>
+    <string name="upload_upload_button">"Inform visitors"</string>
+    <string name="error_network_title">"Connection error"</string>
+    <string name="error_network_text">"Check your internet connection"</string>
+    <string name="error_notification_deactivated_title">"Deactivate notifications"</string>
+    <string name="error_notification_deactivated_text">"Edit the app settings to receive report-notifications."</string>
+    <string name="error_background_refresh_title">"Background updates are off"</string>
+    <string name="error_background_refresh_text">"Edit the app settings to be informed when there is a report outside of the app as well."</string>
+    <string name="error_camera_permission_title">"No camera access"</string>
+    <string name="error_camera_permission_text">"The app needs camera access to scan the QR code."</string>
+    <string name="error_action_change_settings">"Edit settings"</string>
+    <string name="error_action_retry">"Try again"</string>
+    <string name="upload_success_message">"Information successful"</string>
+    <string name="upload_error_message">"Information failed"</string>
+    <string name="upload_missing_payload">"No private key found. Please scan a valid QR code."</string>
+
+    <!-- Titel einer generischen Fehleranzeige -->
+    <string name="error_title">"Error"</string>
+
+    <!-- Fehlermeldung, wenn man bereits eingecheckt ist -->
+    <string name="error_already_checked_in">"You are already checked in."</string>
+
+    <!-- Titel eines Ok-Buttons -->
+    <string name="ok_button">"Ok"</string>
+    <string name="landing_description">"Check-in for meetings and events."</string>
+    <string name="landing_app_store_link">"https://example.com"</string>
+    <string name="landing_play_store_link">"https://example.com"</string>
+    <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
+
+    <!-- Title of the diary entry edit screen. -->
+    <string name="edit_controller_title">"Edit"</string>
+
+    <!-- Save button title im checkout screen. -->
+    <string name="checkout_save_button_title">"Save"</string>
+
+    <!-- Highlighted text part of app name: Me -->
+    <string name="app_name_highlight">"Me"</string>
+
+    <!-- Title of back button -->
+    <string name="back_button">"Back"</string>
+    <string name="generator_category_canteen"></string>
+    <string name="generator_category_library"></string>
+    <string name="generator_category_lecture_room"></string>
+    <string name="generator_category_shop"></string>
+    <string name="generator_category_gym"></string>
+    <string name="generator_category_kitchen_area"></string>
+    <string name="generator_category_office_space"></string>
+</resources>
