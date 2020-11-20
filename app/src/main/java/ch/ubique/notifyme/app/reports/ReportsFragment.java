@@ -108,11 +108,10 @@ public class ReportsFragment extends Fragment {
 	}
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {
-		viewModel.setSelectedExposure(exposureEvent);
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)
-				.replace(R.id.container, ExposureFragment.newInstance())
+				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
 				.addToBackStack(ExposureFragment.TAG)
 				.commit();
 	}

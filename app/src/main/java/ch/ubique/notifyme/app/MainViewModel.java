@@ -36,7 +36,6 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
 	private CheckInState checkInState;
 	private boolean isQrScanningEnabled = true;
-	private ExposureEvent selectedExposure = null;
 
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
@@ -141,6 +140,17 @@ public class MainViewModel extends AndroidViewModel {
 		exposures.setValue(newExposures);
 	}
 
+	public ExposureEvent getExposureWithId(long id) {
+		List<ExposureEvent> exposureEvents = exposures.getValue();
+		if (exposureEvents == null) return null;
+		for (ExposureEvent exposureEvent : exposureEvents) {
+			if (exposureEvent.getId() == id) {
+				return exposureEvent;
+			}
+		}
+		return null;
+	}
+
 	public ReminderOption getSelectedReminderOption() {
 		return checkInState.getSelectedTimerOption();
 	}
@@ -148,14 +158,6 @@ public class MainViewModel extends AndroidViewModel {
 	public void setSelectedReminderOption(ReminderOption selectedReminderOption) {
 		this.checkInState.setSelectedTimerOption(selectedReminderOption);
 		storage.setCurrentVenue(checkInState);
-	}
-
-	public ExposureEvent getSelectedExposure() {
-		return selectedExposure;
-	}
-
-	public void setSelectedExposure(ExposureEvent selectedExposure) {
-		this.selectedExposure = selectedExposure;
 	}
 
 	@Override

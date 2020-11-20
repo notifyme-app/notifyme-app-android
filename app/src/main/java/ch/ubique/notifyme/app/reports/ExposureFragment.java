@@ -21,6 +21,7 @@ import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 public class ExposureFragment extends Fragment {
 
 	public final static String TAG = ExposureFragment.class.getCanonicalName();
+	private static final String EXPOSURE_ID_ARG = "EXPOSURE_ID_ARG";
 
 	private MainViewModel viewModel;
 	private ExposureEvent exposure;
@@ -28,16 +29,19 @@ public class ExposureFragment extends Fragment {
 
 	public ExposureFragment() { super(R.layout.fragment_exposure); }
 
-	public static ExposureFragment newInstance() {
-		return new ExposureFragment();
+	public static ExposureFragment newInstance(long exposureId) {
+		ExposureFragment fragment = new ExposureFragment();
+		Bundle args = new Bundle();
+		args.putLong(EXPOSURE_ID_ARG, exposureId);
+		fragment.setArguments(args);
+		return fragment;
 	}
 
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		//TODO: Refactor this to Fragment argument instead of going over ViewModel
-		this.exposure = viewModel.getSelectedExposure();
+		this.exposure = viewModel.getExposureWithId(getArguments().getLong(EXPOSURE_ID_ARG));
 		this.diaryEntry = DiaryStorage.getInstance(getContext()).getDiaryEntryWithId(exposure.getId());
 		super.onCreate(savedInstanceState);
 	}

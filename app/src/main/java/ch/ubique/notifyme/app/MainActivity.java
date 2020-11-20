@@ -88,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {
-		viewModel.setSelectedExposure(exposureEvent);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, ExposureFragment.newInstance())
+				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
 				.addToBackStack(ExposureFragment.TAG)
 				.commit();
 	}
