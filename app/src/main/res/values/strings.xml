@@ -226,7 +226,9 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="generator_category_other">"Other"</string>
     <string name="generator_category_meeting_room">"Meeting room"</string>
     <string name="generator_category_cafeteria">"Cafeteria"</string>
-    <string name="generator_category_private_party">"Private party"</string>
+
+    <!-- Fuzzy -->
+    <string name="generator_category_private_event">"Private party"</string>
     <string name="generator_title_label">"Title"</string>
     <string name="generator_title_placeholder">"e.g. Room or event name"</string>
     <string name="generator_subtitle_label">"Subtitle"</string>
@@ -289,4 +291,14 @@ QR Code"</string>
 
     <!-- Highlighted text part of app name: Me -->
     <string name="app_name_highlight">"Me"</string>
+
+    <!-- Title of back button -->
+    <string name="back_button">"Back"</string>
+    <string name="generator_category_canteen"></string>
+    <string name="generator_category_library"></string>
+    <string name="generator_category_lecture_room"></string>
+    <string name="generator_category_shop"></string>
+    <string name="generator_category_gym"></string>
+    <string name="generator_category_kitchen_area"></string>
+    <string name="generator_category_office_space"></string>
 </resources>

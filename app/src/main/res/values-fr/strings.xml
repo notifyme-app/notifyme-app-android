@@ -17,7 +17,7 @@
     <string name="checkin_button_title">"Check-in"</string>
 
     <!-- Homescreen: No Reports title -->
-    <string name="no_report_title">"Pas de rapports"</string>
+    <string name="no_report_title">"Aucun rapport"</string>
 
     <!-- Check-In: scan code -->
     <string name="checkin_scan_code">"Scannez le code QR pour vous enregistrer"</string>
@@ -69,13 +69,13 @@
     <string name="qrscanner_error">"Le code n'est pas valide."</string>
 
     <!-- Reports: no reports information title -->
-    <string name="no_report_information_title">"Aucun risque d'infection n'a été signalé au cours des 14 derniers  jours."</string>
+    <string name="no_report_information_title">"Aucune signalisation ces 14 derniers jours."</string>
 
     <!-- No report Information : Additional text -->
     <string name="no_report_information_text">"Restez en bonne santé."</string>
 
     <!-- Reports: Information title -->
-    <string name="report_information_title">"Risque d'infection au cours des 14 derniers jours."</string>
+    <string name="report_information_title">"Risque d'infection ces 14 derniers jours."</string>
 
     <!-- Reports: Information text -->
     <string name="report_information_text">"Vous pourriez être contagieu·x·se sans le savoir."</string>
@@ -223,7 +223,9 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="generator_category_other">"Autre"</string>
     <string name="generator_category_meeting_room">"Salle de réunion"</string>
     <string name="generator_category_cafeteria">"Cafétéria"</string>
-    <string name="generator_category_private_party">"Soirée privée"</string>
+
+    <!-- Fuzzy -->
+    <string name="generator_category_private_event">"Soirée privée"</string>
     <string name="generator_title_label">"Titre"</string>
     <string name="generator_title_placeholder">"p. ex. Nom de pièce ou d'événement"</string>
     <string name="generator_subtitle_label">"Sous-titre"</string>
@@ -239,9 +241,11 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
     <string name="generator_private_bulletpoint_3">"Seulement une clé de déchiffrement est publiée. Aucune information n'est transmise à l'organisateur."</string>
     <string name="generator_pdf_button">"Télécharger PDF"</string>
-    <string name="generator_public_qr_title">"Code QR &lt;span&gt;publique&lt;/span&gt;\
+    <string name="generator_public_qr_title">"Code QR\
+&lt;span&gt;publique&lt;/span&gt;
 "</string>
-    <string name="generator_private_qr_title">"Code QR &lt;span&gt;privé&lt;/span&gt;\"</string>
+    <string name="generator_private_qr_title">"Code QR\
+&lt;span&gt;privé&lt;/span&gt;"</string>
     <string name="generator_missing_input">"Veuillez remplir le champ obligatoire"</string>
     <string name="upload_title">"Informer le visiteur"</string>
     <string name="upload_period_label">"Période concernée"</string>
@@ -285,4 +289,14 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Highlighted text part of app name: Me -->
     <string name="app_name_highlight">"Me"</string>
+
+    <!-- Title of back button -->
+    <string name="back_button">"Back"</string>
+    <string name="generator_category_canteen"></string>
+    <string name="generator_category_library"></string>
+    <string name="generator_category_lecture_room"></string>
+    <string name="generator_category_shop"></string>
+    <string name="generator_category_gym"></string>
+    <string name="generator_category_kitchen_area"></string>
+    <string name="generator_category_office_space"></string>
 </resources>

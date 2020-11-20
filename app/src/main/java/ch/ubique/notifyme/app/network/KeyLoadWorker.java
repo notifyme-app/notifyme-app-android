@@ -23,6 +23,7 @@ public class KeyLoadWorker extends Worker {
 	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.KeyLoadWorker";
 	private static final int DAYS_TO_KEEP_VENUE_VISITS = 14;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;
+	private static final String LOG_TAG = "KeyLoadWorker";
 
 
 	public static void startKeyLoadWorker(Context context) {
@@ -47,10 +48,10 @@ public class KeyLoadWorker extends Worker {
 	@NonNull
 	@Override
 	public Result doWork() {
-		Log.d(WORK_TAG, "Started KeyLoadWorker");
+		Log.d(LOG_TAG, "Started KeyLoadWorker");
 		List<ProblematicEventInfo> problematicEventInfos = new WebServiceController(getApplicationContext()).loadTraceKeys();
 		if (problematicEventInfos == null) {
-			Log.d(WORK_TAG, "KeyLoadWorker failure");
+			Log.d(LOG_TAG, "KeyLoadWorker failure");
 			return Result.retry();
 		}
 		List<ExposureEvent> exposures = CrowdNotifier.checkForMatches(problematicEventInfos, getApplicationContext());
@@ -63,7 +64,7 @@ public class KeyLoadWorker extends Worker {
 		CrowdNotifier.cleanUpOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
 		DiaryStorage.getInstance(getApplicationContext()).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
 
-		Log.d(WORK_TAG, "KeyLoadWorker success");
+		Log.d(LOG_TAG, "KeyLoadWorker success");
 		return Result.success();
 	}
 

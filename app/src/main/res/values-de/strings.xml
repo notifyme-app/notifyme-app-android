@@ -74,7 +74,7 @@
     <string name="no_report_information_text">"Bleiben Sie gesund."</string>
 
     <!-- Reports: Information title -->
-    <string name="report_information_title">"Mögliche Ansteckung in den letzten 14 Tagen."</string>
+    <string name="report_information_title">"Mögliche Ansteckung in den letzten 14 Tagen"</string>
 
     <!-- Reports: Information text -->
     <string name="report_information_text">"Sie könnten ansteckend sein, ohne es zu merken."</string>
@@ -222,7 +222,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="generator_category_other">"Andere"</string>
     <string name="generator_category_meeting_room">"Sitzungsraum"</string>
     <string name="generator_category_cafeteria">"Kafeteria"</string>
-    <string name="generator_category_private_party">"Private Party"</string>
+    <string name="generator_category_private_event">"Privater Event"</string>
     <string name="generator_title_label">"Titel"</string>
     <string name="generator_title_placeholder">"z.B. Raum- oder Eventname"</string>
     <string name="generator_subtitle_label">"Untertitel"</string>
@@ -286,4 +286,14 @@ QR-Code"</string>
 
     <!-- Highlighted text part of app name: Me -->
     <string name="app_name_highlight">"Me"</string>
+
+    <!-- Title of back button -->
+    <string name="back_button">"Zurück"</string>
+    <string name="generator_category_canteen">"Kantine"</string>
+    <string name="generator_category_library">"Bibliothek"</string>
+    <string name="generator_category_lecture_room">"Vorlesungssaal"</string>
+    <string name="generator_category_shop">"Laden"</string>
+    <string name="generator_category_gym">"Fitnesscenter"</string>
+    <string name="generator_category_kitchen_area">"Küchenbereich"</string>
+    <string name="generator_category_office_space">"Büroräume"</string>
 </resources>
