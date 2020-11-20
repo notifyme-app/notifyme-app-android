@@ -33,7 +33,7 @@
 	<dimen name="small_card_elevation">3dp</dimen>
 	<dimen name="qr_scanner_indicator_size">50dp</dimen>
 	<dimen name="qr_scanner_indicator_stroke_width">5dp</dimen>
-	<dimen name="qr_scanner_indicator_stroke_width_inverse">-5dp</dimen>
+	<dimen name="qr_scanner_indicator_stroke_width_inverse">-6dp</dimen>
 
 	<dimen name="start_screen_image_min_height">100dp</dimen>
 	<dimen name="start_screen_image_max_height">320dp</dimen>
