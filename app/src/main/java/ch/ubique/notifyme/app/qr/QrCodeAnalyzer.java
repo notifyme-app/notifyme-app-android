@@ -5,16 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.ChecksumException;
-import com.google.zxing.FormatException;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.PlanarYUVLuminanceSource;
-import com.google.zxing.Result;
+import java.nio.ByteBuffer;
+
+import com.google.zxing.*;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.multi.qrcode.QRCodeMultiReader;
-
-import java.nio.ByteBuffer;
 
 public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 
@@ -28,9 +23,29 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 
 	@Override
 	public void analyze(@NonNull ImageProxy image) {
-		ByteBuffer byteBuffer = image.getPlanes()[0].getBuffer();
-		byte[] imageData = new byte[byteBuffer.capacity()];
-		byteBuffer.get(imageData);
+
+		int width = image.getWidth();
+		int height = image.getHeight();
+		int ySize = width * height;
+
+		byte[] imageData = new byte[ySize];
+
+		ByteBuffer yBuffer = image.getPlanes()[0].getBuffer();
+
+		int rowStride = image.getPlanes()[0].getRowStride();
+		int pos = 0;
+
+		if (rowStride == width) { // likely
+			yBuffer.get(imageData, 0, ySize);
+			pos += ySize;
+		} else {
+			int yBufferPos = -rowStride; // not an actual position
+			for (; pos < ySize; pos += width) {
+				yBufferPos += rowStride;
+				yBuffer.position(yBufferPos);
+				yBuffer.get(imageData, pos, width);
+			}
+		}
 
 		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(
 				imageData,
