@@ -30,10 +30,10 @@ public class ErrorDialog extends AlertDialog {
 			closeButton.setVisibility(View.GONE);
 			ErrorHelper.updateErrorView(findViewById(R.id.dialog_error_container), errorState, null, getContext());
 		} else {
-			setCancelable(true);
-			closeButton.setVisibility(View.VISIBLE);
 			closeButton.setOnClickListener(v -> dismiss());
+			ErrorHelper.updateErrorView(findViewById(R.id.dialog_error_container), errorState, this::dismiss, getContext());
 		}
+
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
 	}

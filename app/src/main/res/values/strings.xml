@@ -327,5 +327,26 @@ QR Code"</string>
     <string name="qr_scanner_error_code_not_valid_anymore"></string>
 
     <!-- Onboarding: subtitle on first page -->
-    <string name="onboarding_subtitle"></string>
+    <string name="onboarding_subtitle">"Check-in for meetings and events."</string>
+
+    <!-- qr validity period label used in qr generator web app -->
+    <string name="qr_validity_period_label"></string>
+
+    <!-- qr validity period from label used in qr generator web app -->
+    <string name="qr_validity_period_from_label">"from"</string>
+
+    <!-- qr validity period to label used in qr generator web app -->
+    <string name="qr_validity_period_to_label">"to"</string>
+
+    <!-- error message: max qr validity period. used in qr generator web app -->
+    <string name="max_qr_validity_period_error"></string>
+
+    <!-- error message. used in qr generator web app -->
+    <string name="qr_validity_period_earliest_from_error"></string>
+
+    <!-- error message. generic, invalid time. used in qr generator web app -->
+    <string name="qr_validity_period_invalid_time"></string>
+
+    <!-- Warnungs Text, welcher angezeigt wird, wenn ein inkompatibler QR Code (mit einem neueren QR Code Format) gescannt wurde. -->
+    <string name="error_update_text"></string>
 </resources>

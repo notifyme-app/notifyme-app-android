@@ -35,6 +35,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
+import org.crowdnotifier.android.sdk.utils.QrUtils;
 
 import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainViewModel;
@@ -42,6 +43,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
+import ch.ubique.notifyme.app.utils.ErrorDialog;
 import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.ErrorState;
 
@@ -163,36 +165,62 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void noQRCodeFound() {
-		if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(false));
+		if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.VALID));
 	}
 
 	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
 		if (!viewModel.isQrScanningEnabled()) return;
-		VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-		if (venueInfo == null) {
+		try {
+			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
+			viewModel.setQrScanningEnabled(false);
+			viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
+					ReminderOption.OFF));
+			showCheckInDialog();
+		} catch (QrUtils.QRException e) {
+			handleInvalidQRCodeExceptions(qrCodeData, e);
+		}
+	}
+
+	private void handleInvalidQRCodeExceptions(String qrCodeData, QrUtils.QRException e) {
+		if (e instanceof QrUtils.InvalidQRCodeVersionException) {
+			if (getActivity() != null) getActivity().runOnUiThread(() -> {
+				viewModel.setQrScanningEnabled(false);
+				ErrorDialog errorDialog = new ErrorDialog(requireContext(), ErrorState.UPDATE_REQUIRED);
+				errorDialog.setOnDismissListener(v -> viewModel.setQrScanningEnabled(true));
+				errorDialog.setOnCancelListener(v -> viewModel.setQrScanningEnabled(true));
+				errorDialog.show();
+			});
+		} else if (e instanceof QrUtils.NotYetValidException) {
+			if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.NOT_YET_VALID));
+		} else if (e instanceof QrUtils.NotValidAnymoreException) {
+			if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.NOT_VALID_ANYMORE));
+		} else {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
 				viewModel.setQrScanningEnabled(false);
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
 				startActivity(openBrowserIntent);
 			} else {
-				if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(true));
+				if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.INVALID_FORMAT));
 			}
-		} else {
-			viewModel.setQrScanningEnabled(false);
-			viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
-					ReminderOption.OFF));
-			showCheckInDialog();
 		}
 	}
 
-	private void indicateInvalidQrCode(boolean invalid) {
+	private void indicateInvalidQrCode(QRScannerState qrScannerState) {
 		int color = R.color.primary;
-		if (invalid) {
+		if (qrScannerState == QRScannerState.VALID) {
+			invalidCodeText.setVisibility(View.INVISIBLE);
+		} else {
 			invalidCodeText.setVisibility(View.VISIBLE);
 			color = R.color.tertiary;
-		} else {
-			invalidCodeText.setVisibility(View.INVISIBLE);
+		}
+
+		if (qrScannerState == QRScannerState.INVALID_FORMAT) {
+			invalidCodeText.setText(R.string.qrscanner_error);
+		} else if (qrScannerState == QRScannerState.NOT_VALID_ANYMORE) {
+			invalidCodeText.setText(R.string.qr_scanner_error_code_not_valid_anymore);
+		} else if (qrScannerState == QRScannerState.NOT_YET_VALID) {
+			invalidCodeText.setText(R.string.qr_scanner_error_code_not_yet_valid);
 		}
 		setIndicatorColor(topLeftIndicator, color);
 		setIndicatorColor(topRightIndicator, color);
@@ -228,6 +256,10 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				mainView.setVisibility(View.GONE);
 			}
 		}
+	}
+
+	enum QRScannerState {
+		VALID, INVALID_FORMAT, NOT_YET_VALID, NOT_VALID_ANYMORE
 	}
 
 }

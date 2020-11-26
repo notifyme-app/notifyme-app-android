@@ -38,6 +38,7 @@ public class ErrorHelper {
 				openApplicationSettings(context);
 				break;
 			case FORCE_UPDATE_REQUIRED:
+			case UPDATE_REQUIRED:
 				updateApp(context);
 				break;
 		}

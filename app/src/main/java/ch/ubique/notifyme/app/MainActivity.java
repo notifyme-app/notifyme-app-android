@@ -13,6 +13,7 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
+import org.crowdnotifier.android.sdk.utils.QrUtils;
 
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
@@ -118,15 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 	private void checkValidCheckInIntent(String qrCodeData) {
-		VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-		if (venueInfo == null) {
-			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
-				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
-				startActivity(openBrowserIntent);
-			} else {
-				new ErrorDialog(this, ErrorState.NO_VALID_QR_CODE).show();
-			}
-		} else {
+		try {
+			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 			if (viewModel.isCheckedIn()) {
 				new ErrorDialog(this, ErrorState.ALREADY_CHECKED_IN).show();
 			} else {
@@ -135,6 +129,25 @@ public class MainActivity extends AppCompatActivity {
 				getSupportFragmentManager().beginTransaction()
 						.add(CheckInDialogFragment.newInstance(true), CheckInDialogFragment.TAG)
 						.commit();
+			}
+		} catch (QrUtils.QRException e) {
+			handleInvalidQRCodeExceptions(qrCodeData, e);
+		}
+	}
+
+	private void handleInvalidQRCodeExceptions(String qrCodeData, QrUtils.QRException e) {
+		if (e instanceof QrUtils.InvalidQRCodeVersionException) {
+			new ErrorDialog(this, ErrorState.UPDATE_REQUIRED).show();
+		} else if (e instanceof QrUtils.NotYetValidException) {
+			//TODO show an error here?
+		} else if (e instanceof QrUtils.NotValidAnymoreException) {
+			//TODO show an error here?
+		} else {
+			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
+				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
+				startActivity(openBrowserIntent);
+			} else {
+				new ErrorDialog(this, ErrorState.NO_VALID_QR_CODE).show();
 			}
 		}
 	}
