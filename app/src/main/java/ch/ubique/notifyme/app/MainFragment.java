@@ -62,6 +62,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View infoButton = view.findViewById(R.id.fragment_main_info_button);
 		View errorView = view.findViewById(R.id.no_reports_header_error_view);
 		View errorViewSmall = view.findViewById(R.id.reports_header_error_view);
+		View nonProductiveInfo = view.findViewById(R.id.fragment_main_non_productive_info);
 
 		String appName = getString(R.string.app_name);
 		appNameTextView.setText(StringUtils.getTwoColoredString(appName, appName.substring(appName.length() - 2),
@@ -146,6 +147,12 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+
+		if (BuildConfig.FLAVOR.equals("prod")) {
+			nonProductiveInfo.setVisibility(View.GONE);
+		} else {
+			nonProductiveInfo.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void showCheckedInScreen() {
