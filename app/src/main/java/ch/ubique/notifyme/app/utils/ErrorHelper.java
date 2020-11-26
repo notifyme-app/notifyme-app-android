@@ -37,7 +37,14 @@ public class ErrorHelper {
 			case CAMERA_ACCESS_DENIED:
 				openApplicationSettings(context);
 				break;
+			case UPDATE_REQUIRED:
+				updateApp(context);
+				break;
 		}
+	}
+
+	private static void updateApp(Context context) {
+		UrlUtil.openUrl(context, "market://details?id=" + context.getPackageName());
 	}
 
 	private static void openApplicationSettings(Context context) {
