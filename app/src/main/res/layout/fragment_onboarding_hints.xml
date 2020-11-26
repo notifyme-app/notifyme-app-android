@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/spacing_large">
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<Space
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
+			<ImageView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_weight="2"
+				android:adjustViewBounds="true"
+				android:src="@drawable/onboarding_hint" />
+
+			<Space
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/fragment_onboarding_hints_title"
+			style="@style/NotifyMe.Text.Title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:gravity="center"
+			android:text="@string/onboarding_hints_for_usage" />
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_error_tertiary" />
+
+			<TextView
+				style="@style/NotifyMe.Text.Tertiary"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_medium"
+				android:text="@string/onboarding_hint1" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_info_outlined" />
+
+			<TextView
+				style="@style/NotifyMe.Text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_medium"
+				android:text="@string/onboarding_hint2" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/fragment_onboarding_hints_link"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/spacing_very_large"
+			android:layout_marginTop="@dimen/spacing_medium"
+			android:layout_marginBottom="@dimen/spacing_medium"
+			android:background="@drawable/ripple_button"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/spacing_medium"
+			android:paddingVertical="@dimen/spacing_small">
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_link_external" />
+
+			<TextView
+				style="@style/NotifyMe.Text.Primary"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_small"
+				android:text="@string/onboarding_agb_link_title" />
+
+		</LinearLayout>
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="2" />
+
+		<Button
+			android:id="@+id/fragment_onboarding_hints_ok_button"
+			style="@style/NotifyMe.Button.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:text="@string/ok_button" />
+
+	</LinearLayout>
+
+</ScrollView>

@@ -26,6 +26,10 @@
 		<item name="android:textColor">@color/primary</item>
 	</style>
 
+	<style name="NotifyMe.Text.Tertiary">
+		<item name="android:textColor">@color/tertiary</item>
+	</style>
+
 	<style name="NotifyMe.Text.White">
 		<item name="android:textColor">@color/white</item>
 	</style>

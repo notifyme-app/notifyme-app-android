@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/spacing_large">
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:src="@drawable/ic_onboarding_introduction" />
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<TextView
+			android:id="@+id/fragment_onboarding_introduction_title"
+			style="@style/NotifyMe.Text.Title.Mega"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:gravity="center"
+			android:text="@string/app_name" />
+
+		<TextView
+			style="@style/NotifyMe.Text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/spacing_large"
+			android:layout_marginTop="@dimen/spacing_medium"
+			android:gravity="center"
+			android:text="@string/landing_description" />
+
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="3" />
+
+		<Button
+			android:id="@+id/fragment_onboarding_introduction_continue_button"
+			style="@style/NotifyMe.Button.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:text="@string/onboarding_continue_button" />
+
+	</LinearLayout>
+
+</ScrollView>

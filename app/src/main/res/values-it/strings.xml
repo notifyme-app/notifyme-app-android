@@ -288,11 +288,33 @@ QR Code"</string>
 
     <!-- Title of back button -->
     <string name="back_button">"Back"</string>
-    <string name="generator_category_canteen"></string>
-    <string name="generator_category_library"></string>
-    <string name="generator_category_lecture_room"></string>
-    <string name="generator_category_shop"></string>
-    <string name="generator_category_gym"></string>
-    <string name="generator_category_kitchen_area"></string>
-    <string name="generator_category_office_space"></string>
+    <string name="generator_category_canteen">"Canteen"</string>
+    <string name="generator_category_library">"Library"</string>
+    <string name="generator_category_lecture_room">"Lecture Room"</string>
+    <string name="generator_category_shop">"Shop"</string>
+    <string name="generator_category_gym">"Gym"</string>
+    <string name="generator_category_kitchen_area">"Kitchen Area"</string>
+    <string name="generator_category_office_space">"Office Space"</string>
+    <string name="error_force_update_title"></string>
+    <string name="error_force_update_text"></string>
+
+    <!-- Titel für den Update Button, wenn ein App Update notwending ist. -->
+    <string name="error_action_update"></string>
+
+    <!-- Weiter Button Title beim Onboarding -->
+    <string name="onboarding_continue_button">"Continue"</string>
+
+    <!-- Titel des Onboarding Screens mit Hinweisen zur Nutzung -->
+    <string name="onboarding_hints_for_usage"></string>
+
+    <!-- Der farbig markierte Teil des onboarding_hints_for_usage Strings. -->
+    <string name="onboarding_hints_for_usage_highlight"></string>
+
+    <!-- Erster Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
+    <string name="onboarding_hint1"></string>
+
+    <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
+    <string name="onboarding_hint2"></string>
+    <string name="onboarding_agb_link"></string>
+    <string name="onboarding_agb_link_title"></string>
 </resources>
