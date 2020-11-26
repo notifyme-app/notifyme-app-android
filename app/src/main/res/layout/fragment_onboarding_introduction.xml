@@ -42,7 +42,7 @@
 			android:layout_marginHorizontal="@dimen/spacing_large"
 			android:layout_marginTop="@dimen/spacing_medium"
 			android:gravity="center"
-			android:text="@string/landing_description" />
+			android:text="@string/onboarding_subtitle" />
 
 		<Space
 			android:layout_width="match_parent"

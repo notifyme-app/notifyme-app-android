@@ -17,14 +17,14 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class WebServiceController {
+public class TraceKeysServiceController {
 
 	private static final String KEY_BUNDLE_TAG_HEADER = "x-key-bundle-tag";
 
 	private TraceKeysService traceKeysService;
 	private Storage storage;
 
-	public WebServiceController(Context context) {
+	public TraceKeysServiceController(Context context) {
 
 		storage = Storage.getInstance(context);
 		String baseUrl = BuildConfig.PUBLISHED_KEYS_BASE_URL;

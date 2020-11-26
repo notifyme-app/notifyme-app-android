@@ -37,7 +37,7 @@ public class ErrorHelper {
 			case CAMERA_ACCESS_DENIED:
 				openApplicationSettings(context);
 				break;
-			case UPDATE_REQUIRED:
+			case FORCE_UPDATE_REQUIRED:
 				updateApp(context);
 				break;
 		}

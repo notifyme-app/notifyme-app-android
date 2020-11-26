@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 		if (onboardingCompleted) handleCustomIntents();
 
 		KeyLoadWorker.startKeyLoadWorker(this);
+
+		viewModel.forceUpdate.observe(this, forceUpdate -> {
+			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
+		});
 	}
 
 	@Override

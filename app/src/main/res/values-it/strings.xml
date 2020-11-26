@@ -317,4 +317,9 @@ QR Code"</string>
     <string name="onboarding_hint2"></string>
     <string name="onboarding_agb_link"></string>
     <string name="onboarding_agb_link_title"></string>
+    <string name="qr_scanner_error_code_not_yet_valid"></string>
+    <string name="qr_scanner_error_code_not_valid_anymore"></string>
+
+    <!-- Onboarding: subtitle on first page -->
+    <string name="onboarding_subtitle">"Check-in for meetings and events."</string>
 </resources>

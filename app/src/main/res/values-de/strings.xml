@@ -319,4 +319,9 @@ zur Nutzung"</string>
     <string name="onboarding_hint2">"Bitte lesen Sie auch die Allgemeinen Geschäftsbedingungen"</string>
     <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
     <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
+    <string name="qr_scanner_error_code_not_yet_valid">"Code noch nicht gültig"</string>
+    <string name="qr_scanner_error_code_not_valid_anymore">"Code nicht mehr gültig"</string>
+
+    <!-- Onboarding: subtitle on first page -->
+    <string name="onboarding_subtitle">"Check-in for meetings and events."</string>
 </resources>
