@@ -139,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
 		if (e instanceof QrUtils.InvalidQRCodeVersionException) {
 			new ErrorDialog(this, ErrorState.UPDATE_REQUIRED).show();
 		} else if (e instanceof QrUtils.NotYetValidException) {
-			//TODO show an error here?
+			new ErrorDialog(this, ErrorState.QR_CODE_NOT_YET_VALID).show();
 		} else if (e instanceof QrUtils.NotValidAnymoreException) {
-			//TODO show an error here?
+			new ErrorDialog(this, ErrorState.QR_CODE_NOT_VALID_ANYMORE).show();
 		} else {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
