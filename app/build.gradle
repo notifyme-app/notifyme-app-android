@@ -42,14 +42,14 @@ android {
 		dev {
 			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
 			applicationIdSuffix '.dev'
-			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-ws.notify-me.ch/v1/"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-config.notify-me.ch/v1/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
 		}
 		prod {
 			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
-			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-ws.notify-me.ch/v1/"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/v1/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
@@ -135,7 +135,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-36'
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-37'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
