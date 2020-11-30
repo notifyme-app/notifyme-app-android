@@ -78,7 +78,8 @@ public class TraceKeysServiceController {
 			ArrayList<ProblematicEventInfo> problematicEventInfos = new ArrayList<>();
 			for (ProblematicEventOuterClass.ProblematicEvent event : problematicEventWrapper.getEventsList()) {
 				problematicEventInfos.add(new ProblematicEventInfo(event.getSecretKey().toByteArray(), event.getStartTime(),
-						event.getEndTime(), event.getMessage().toByteArray(),event.getNonce().toByteArray()));
+						event.getEndTime(), event.getMessage().toByteArray(), event.getNonce().toByteArray(),
+						event.getR2().toByteArray()));
 			}
 			return problematicEventInfos;
 		} catch (IOException e) {

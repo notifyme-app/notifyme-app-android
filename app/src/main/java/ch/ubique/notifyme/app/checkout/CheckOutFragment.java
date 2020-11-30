@@ -131,8 +131,7 @@ public class CheckOutFragment extends Fragment {
 		long checkIn = checkInState.getCheckInTime();
 		long checkOut = checkInState.getCheckOutTime();
 		String comment = commentEditText.getText().toString();
-		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, venueInfo.getNotificationKey(), venueInfo.getPublicKey(),
-				getContext());
+		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, venueInfo, getContext());
 		DiaryStorage.getInstance(getContext()).addEntry(new DiaryEntry(id, checkIn, checkOut, venueInfo, comment));
 		viewModel.setCheckInState(null);
 	}
