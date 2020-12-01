@@ -213,46 +213,106 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="imprint_webview_more_info_link">"https://notify-me.ch"</string>
     <string name="imprint_webview_legal_title">"Indications légales"</string>
     <string name="imprint_webview_legal_link_text">"Protection des données et conditions d'utilisation"</string>
-    <string name="imprint_webview_legal_link_url">"www.notify-me.ch/legal"</string>
+    <string name="imprint_webview_legal_link_url">"www.notify-me.ch/agb"</string>
     <string name="imprint_webview_sourcecode_title">"Code source"</string>
     <string name="imprint_webview_sourcecode_text">"Le code source actuel publié sous Licence Publique est disponible sur GitHub:"</string>
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
-    <string name="generator_title">"Créer code QR démo"</string>
-    <string name="generator_category_label">"Catégorie"</string>
-    <string name="generator_category_other">"Autre"</string>
-    <string name="generator_category_meeting_room">"Salle de réunion"</string>
-    <string name="generator_category_cafeteria">"Cafétéria"</string>
 
     <!-- Fuzzy -->
-    <string name="generator_category_private_event">"Soirée privée"</string>
-    <string name="generator_title_label">"Titre"</string>
-    <string name="generator_title_placeholder">"p. ex. Nom de pièce ou d'événement"</string>
-    <string name="generator_subtitle_label">"Sous-titre"</string>
-    <string name="generator_subtitle_placeholder">"p. ex. Organisation ou organisateur·trice"</string>
-    <string name="generator_addition_label">"Additif"</string>
-    <string name="generator_addition_placeholder">"p. ex. Bâtiment ou lieu"</string>
-    <string name="generator_generation_button_label">"Générer un code QR"</string>
-    <string name="generator_back">"Retour"</string>
-    <string name="generator_public_bulletpoint_1">"Avec ce code QR les visiteurs peuvent s'enregistrer sur place."</string>
-    <string name="generator_public_bulletpoint_2">"Le code peut être scanné avec NotifyMe"</string>
-    <string name="generator_public_bulletpoint_3">"Aucune données personnelles ne sont saisies. Les enregistrements ne sont pas visibles pour les propriétaires de lieux."</string>
-    <string name="generator_private_bulletpoint_1">"Ce code QR informe les visiteurs en cas incident."</string>
-    <string name="generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
-    <string name="generator_private_bulletpoint_3">"Seulement une clé de déchiffrement est publiée. Aucune information n'est transmise à l'organisateur."</string>
-    <string name="generator_pdf_button">"Télécharger PDF"</string>
-    <string name="generator_public_qr_title">"Code QR\
+    <string name="web_generator_title">"Créer code QR démo"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_label">"Catégorie"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_other">"Autre"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_meeting_room">"Salle de réunion"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_cafeteria">"Cafétéria"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_private_event">"Soirée privée"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_title_label">"Titre"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_title_placeholder">"p. ex. Nom de pièce ou d'événement"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_subtitle_label">"Sous-titre"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_subtitle_placeholder">"p. ex. Organisation ou organisateur·trice"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_addition_label">"Additif"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_addition_placeholder">"p. ex. Bâtiment ou lieu"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_generation_button_label">"Générer un code QR"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_back">"Retour"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_public_bulletpoint_1">"Avec ce code QR les visiteurs peuvent s'enregistrer sur place."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_public_bulletpoint_2">"Le code peut être scanné avec NotifyMe"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_public_bulletpoint_3">"Aucune données personnelles ne sont saisies. Les enregistrements ne sont pas visibles pour les propriétaires de lieux."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_private_bulletpoint_1">"Ce code QR informe les visiteurs en cas incident."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_private_bulletpoint_3">"Seulement une clé de déchiffrement est publiée. Aucune information n'est transmise à l'organisateur."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_pdf_button">"Télécharger PDF"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_public_qr_title">"Code QR\
 &lt;span&gt;publique&lt;/span&gt;
 "</string>
-    <string name="generator_private_qr_title">"Code QR\
+
+    <!-- Fuzzy -->
+    <string name="web_generator_private_qr_title">"Code QR\
 &lt;span&gt;privé&lt;/span&gt;"</string>
-    <string name="generator_missing_input">"Veuillez remplir le champ obligatoire"</string>
-    <string name="upload_title">"Informer le visiteur"</string>
-    <string name="upload_period_label">"Période concernée"</string>
-    <string name="upload_period_from_label">"de"</string>
-    <string name="upload_period_to_label">"à"</string>
-    <string name="upload_note_label">"Indication au visiteur"</string>
-    <string name="upload_note_placeholder">"Que faire?"</string>
-    <string name="upload_upload_button">"Informer le visiteur"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_missing_input">"Veuillez remplir le champ obligatoire"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_title">"Informer le visiteur"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_period_label">"Période concernée"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_period_from_label">"de"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_period_to_label">"à"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_note_label">"Indication au visiteur"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_note_placeholder">"Que faire?"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_upload_button">"Informer le visiteur"</string>
     <string name="error_network_title">"Erreur de réseau"</string>
     <string name="error_network_text">"Vérifiez votre connexion internet."</string>
     <string name="error_notification_deactivated_title">"Notifications désactivées"</string>
@@ -263,9 +323,15 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="error_camera_permission_text">"Autorisez l'accès à votre caméra pour pouvoir scanner le code QR."</string>
     <string name="error_action_change_settings">"Modifier les paramètres"</string>
     <string name="error_action_retry">"Réessayer"</string>
-    <string name="upload_success_message">"Téléchargement réussi"</string>
-    <string name="upload_error_message">"Téléchargement échoué"</string>
-    <string name="upload_missing_payload">"Code privé invalable. Scannez un code QR valable."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_success_message">"Téléchargement réussi"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_error_message">"Téléchargement échoué"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_missing_payload">"Code privé invalable. Scannez un code QR valable."</string>
 
     <!-- Titel einer generischen Fehleranzeige -->
     <string name="error_title">"Erreur"</string>
@@ -275,10 +341,20 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Titel eines Ok-Buttons -->
     <string name="ok_button">"Ok"</string>
-    <string name="landing_description">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
-    <string name="landing_app_store_link">"https://example.com"</string>
-    <string name="landing_play_store_link">"https://example.com"</string>
-    <string name="generator_pdf_created_on_format">"Créé le %d.%m.%Y à %H:%M h"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_landing_description">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
+
+    <!-- Landing page: iOS app store link URL -->
+    <!-- Fuzzy -->
+    <string name="web_landing_app_store_link">"https://itunes.apple.com/app/id1537859001"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_landing_play_store_link">"https://example.com"</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <!-- Fuzzy -->
+    <string name="web_generator_pdf_created_on_format">"Créé le %d.%m.%Y à %H:%M h"</string>
 
     <!-- Title of the diary entry edit screen. -->
     <string name="edit_controller_title">"Éditer"</string>
@@ -291,59 +367,97 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Title of back button -->
     <string name="back_button">"Retour"</string>
-    <string name="generator_category_canteen">"Cantine"</string>
-    <string name="generator_category_library">"Bibliothèque"</string>
-    <string name="generator_category_lecture_room">"Auditoire"</string>
-    <string name="generator_category_shop">"Charger"</string>
-    <string name="generator_category_gym">"Centre de fitness"</string>
-    <string name="generator_category_kitchen_area">"Coin cuisine"</string>
-    <string name="generator_category_office_space">"Bureaux"</string>
-    <string name="error_force_update_title"></string>
-    <string name="error_force_update_text"></string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_canteen">"Cantine"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_library">"Bibliothèque"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_lecture_room">"Auditoire"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_shop">"Charger"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_gym">"Centre de fitness"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_kitchen_area">"Coin cuisine"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_category_office_space">"Bureaux"</string>
+    <string name="error_force_update_title">"Mise à jour nécessaire"</string>
+    <string name="error_force_update_text">"Une mise à jour est nécessaire pour que l'application puisse fonctionner."</string>
 
     <!-- Titel für den Update Button, wenn ein App Update notwending ist. -->
-    <string name="error_action_update"></string>
+    <string name="error_action_update">"Mettre à jour maintenant."</string>
 
     <!-- Weiter Button Title beim Onboarding -->
-    <string name="onboarding_continue_button">"Continue"</string>
+    <string name="onboarding_continue_button">"Continuer"</string>
 
     <!-- Titel des Onboarding Screens mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hints_for_usage"></string>
+    <string name="onboarding_hints_for_usage">"Indication d'utilisation"</string>
 
     <!-- Der farbig markierte Teil des onboarding_hints_for_usage Strings. -->
-    <string name="onboarding_hints_for_usage_highlight"></string>
+    <string name="onboarding_hints_for_usage_highlight">"Indication"</string>
 
     <!-- Erster Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint1"></string>
+    <string name="onboarding_hint1">"Cette application ne saisit pas des données de contacts obligatoirement et ne peut pas être utilisée à cet effet."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint2"></string>
-    <string name="onboarding_agb_link"></string>
-    <string name="onboarding_agb_link_title"></string>
-    <string name="qr_scanner_error_code_not_yet_valid"></string>
-    <string name="qr_scanner_error_code_not_valid_anymore"></string>
+    <string name="onboarding_hint2">"Veuillez aussi lire les conditions générales."</string>
+    <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
+    <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
+    <string name="qr_scanner_error_code_not_yet_valid">"Le code QR n'est pas valide."</string>
+    <string name="qr_scanner_error_code_not_valid_anymore">"Le code QR n'est plus valide."</string>
 
     <!-- Onboarding: subtitle on first page -->
     <string name="onboarding_subtitle">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
 
     <!-- qr validity period label used in qr generator web app -->
-    <string name="qr_validity_period_label"></string>
+    <string name="web_qr_validity_period_label">"Validité (24h max.)"</string>
 
     <!-- qr validity period from label used in qr generator web app -->
-    <string name="qr_validity_period_from_label">"de"</string>
+    <!-- Fuzzy -->
+    <string name="web_qr_validity_period_from_label">"de"</string>
 
     <!-- qr validity period to label used in qr generator web app -->
-    <string name="qr_validity_period_to_label">"à"</string>
+    <!-- Fuzzy -->
+    <string name="web_qr_validity_period_to_label">"à"</string>
 
-    <!-- error message: max qr validity period. used in qr generator web app -->
-    <string name="max_qr_validity_period_error"></string>
+    <!-- error message: %d is the number of hours, max qr validity period. used in qr generator web app -->
+    <string name="web_max_qr_validity_period_error">"La durée de validité maximale est %d heures."</string>
 
-    <!-- error message. used in qr generator web app -->
-    <string name="qr_validity_period_earliest_from_error"></string>
+    <!-- error message, %d is the number of days -->
+    <string name="web_qr_validity_period_earliest_from_error">"Les codes QR peuvent être générés maximum 12 jours en avance."</string>
 
     <!-- error message. generic, invalid time. used in qr generator web app -->
-    <string name="qr_validity_period_invalid_time"></string>
+    <string name="web_qr_validity_period_invalid_time">"Date/heure invalide."</string>
 
     <!-- Warnungs Text, welcher angezeigt wird, wenn ein inkompatibler QR Code (mit einem neueren QR Code Format) gescannt wurde. -->
-    <string name="error_update_text"></string>
+    <string name="error_update_text">"Ce code QR n'est pas compatible avec la version actuelle de l'application. Faite une mise à jour de l'application pour pouvoir scanner le Code QR."</string>
+    <string name="web_generator_date_label">"Valide le"</string>
+    <string name="web_generator_date_placeholder">"Choisir date"</string>
+    <string name="web_generator_validity_information">"Le code QR démo est uniquement valide le jour même."</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <string name="web_generator_code_validity_message">"Ce code QR démo est valable le **%d.%m.%Y**"</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <string name="web_pdf_code_valid_date_format">"%d.%m.%Y"</string>
+
+    <!-- https://flatpickr.js.org/formatting/ -->
+    <string name="web_date_picker_format">"d.m.Y"</string>
+
+    <!-- https://flatpickr.js.org/formatting/ -->
+    <string name="web_date_picker_format_with_time">"d.m.Y"</string>
+
+    <!-- For sharing on Twitter and Facebook -->
+    <string name="web_page_title">"NotifyMe"</string>
+
+    <!-- For sharing on Twitter and Facebook -->
+    <!-- Fuzzy -->
+    <string name="web_page_description">"Un système d'enregistrement décentralisé pour réunions, rencontres et événements."</string>
 </resources>

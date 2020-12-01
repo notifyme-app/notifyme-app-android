@@ -213,43 +213,43 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="imprint_webview_more_info_link">"www.notify-me.ch"</string>
     <string name="imprint_webview_legal_title">"Legal"</string>
     <string name="imprint_webview_legal_link_text">"Terms of use and privacy policy"</string>
-    <string name="imprint_webview_legal_link_url">"www.notify-me.ch/legal"</string>
+    <string name="imprint_webview_legal_link_url">"www.notify-me.ch/agb"</string>
     <string name="imprint_webview_sourcecode_title">"Source code"</string>
     <string name="imprint_webview_sourcecode_text">"The current source code is available under a Public License on GitHub:"</string>
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
-    <string name="generator_title">"Generate a QR code demo"</string>
-    <string name="generator_category_label">"Category"</string>
-    <string name="generator_category_other">"Other"</string>
-    <string name="generator_category_meeting_room">"Meeting room"</string>
-    <string name="generator_category_cafeteria">"Cafeteria"</string>
-    <string name="generator_category_private_event">"Private party"</string>
-    <string name="generator_title_label">"Title"</string>
-    <string name="generator_title_placeholder">"e.g. Room or event name"</string>
-    <string name="generator_subtitle_label">"Subtitle"</string>
-    <string name="generator_subtitle_placeholder">"E.g. organization or organizer"</string>
-    <string name="generator_addition_label">"Addition"</string>
-    <string name="generator_addition_placeholder">"E.g. building or place"</string>
-    <string name="generator_generation_button_label">"Generate QR codes"</string>
-    <string name="generator_back">"Back"</string>
-    <string name="generator_public_bulletpoint_1">"This QR code enables visitors to check-in on site."</string>
-    <string name="generator_public_bulletpoint_2">"NotifyMe can't scan the code."</string>
-    <string name="generator_public_bulletpoint_3">"Check-ins are not registered. No private are seized."</string>
-    <string name="generator_private_bulletpoint_1">"This QR code informs visitors in case of an incident."</string>
-    <string name="generator_private_bulletpoint_2">"The code can be scanned with any QR code reader."</string>
-    <string name="generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer."</string>
-    <string name="generator_pdf_button">"Dowload PDF"</string>
-    <string name="generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
+    <string name="web_generator_title">"Generate a QR code demo"</string>
+    <string name="web_generator_category_label">"Category"</string>
+    <string name="web_generator_category_other">"Other"</string>
+    <string name="web_generator_category_meeting_room">"Meeting room"</string>
+    <string name="web_generator_category_cafeteria">"Cafeteria"</string>
+    <string name="web_generator_category_private_event">"Private party"</string>
+    <string name="web_generator_title_label">"Title"</string>
+    <string name="web_generator_title_placeholder">"e.g. Room or event name"</string>
+    <string name="web_generator_subtitle_label">"Subtitle"</string>
+    <string name="web_generator_subtitle_placeholder">"E.g. organization or organizer"</string>
+    <string name="web_generator_addition_label">"Addition"</string>
+    <string name="web_generator_addition_placeholder">"E.g. building or place"</string>
+    <string name="web_generator_generation_button_label">"Generate QR codes"</string>
+    <string name="web_generator_back">"Back"</string>
+    <string name="web_generator_public_bulletpoint_1">"This QR code enables visitors to check-in on site."</string>
+    <string name="web_generator_public_bulletpoint_2">"NotifyMe can't scan the code."</string>
+    <string name="web_generator_public_bulletpoint_3">"Check-ins are not registered. No private are seized."</string>
+    <string name="web_generator_private_bulletpoint_1">"This QR code informs visitors in case of an incident."</string>
+    <string name="web_generator_private_bulletpoint_2">"The code can be scanned with any QR code reader."</string>
+    <string name="web_generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer."</string>
+    <string name="web_generator_pdf_button">"Dowload PDF"</string>
+    <string name="web_generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
 QR Code"</string>
-    <string name="generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
+    <string name="web_generator_private_qr_title">"&lt;span&gt;Private&lt;/span&gt;\
 QR Code"</string>
-    <string name="generator_missing_input">"Please fill in the mandatory field"</string>
-    <string name="upload_title">"Report about a possible infection."</string>
-    <string name="upload_period_label">"Concerned time period"</string>
-    <string name="upload_period_from_label">"from"</string>
-    <string name="upload_period_to_label">"to"</string>
-    <string name="upload_note_label">"Advice to the visitor"</string>
-    <string name="upload_note_placeholder">"What should the visitors do?"</string>
-    <string name="upload_upload_button">"Inform visitors"</string>
+    <string name="web_generator_missing_input">"Please fill in the mandatory field"</string>
+    <string name="web_upload_title">"Report about a possible infection."</string>
+    <string name="web_upload_period_label">"Concerned time period"</string>
+    <string name="web_upload_period_from_label">"from"</string>
+    <string name="web_upload_period_to_label">"to"</string>
+    <string name="web_upload_note_label">"Advice to the visitor"</string>
+    <string name="web_upload_note_placeholder">"What should the visitors do?"</string>
+    <string name="web_upload_upload_button">"Inform visitors"</string>
     <string name="error_network_title">"Connection error"</string>
     <string name="error_network_text">"Check your internet connection"</string>
     <string name="error_notification_deactivated_title">"Deactivate notifications"</string>
@@ -260,9 +260,9 @@ QR Code"</string>
     <string name="error_camera_permission_text">"The app needs camera access to scan the QR code."</string>
     <string name="error_action_change_settings">"Edit settings"</string>
     <string name="error_action_retry">"Try again"</string>
-    <string name="upload_success_message">"Information successful"</string>
-    <string name="upload_error_message">"Information failed"</string>
-    <string name="upload_missing_payload">"No private key found. Please scan a valid QR code."</string>
+    <string name="web_upload_success_message">"Information successful"</string>
+    <string name="web_upload_error_message">"Information failed"</string>
+    <string name="web_upload_missing_payload">"No private key found. Please scan a valid QR code."</string>
 
     <!-- Titel einer generischen Fehleranzeige -->
     <string name="error_title">"Error"</string>
@@ -272,10 +272,15 @@ QR Code"</string>
 
     <!-- Titel eines Ok-Buttons -->
     <string name="ok_button">"Ok"</string>
-    <string name="landing_description">"Check-in for meetings and events."</string>
-    <string name="landing_app_store_link">"https://example.com"</string>
-    <string name="landing_play_store_link">"https://example.com"</string>
-    <string name="generator_pdf_created_on_format">"Created on %d.%m.%Y at %H:%M"</string>
+    <string name="web_landing_description">"Check-in for meetings and events."</string>
+
+    <!-- Landing page: iOS app store link URL -->
+    <!-- Fuzzy -->
+    <string name="web_landing_app_store_link">"https://itunes.apple.com/app/id1537859001"</string>
+    <string name="web_landing_play_store_link">"https://example.com"</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <string name="web_generator_pdf_created_on_format">"Created on %e %B %Y at %H:%M"</string>
 
     <!-- Title of the diary entry edit screen. -->
     <string name="edit_controller_title">"Edit"</string>
@@ -288,59 +293,80 @@ QR Code"</string>
 
     <!-- Title of back button -->
     <string name="back_button">"Back"</string>
-    <string name="generator_category_canteen">"Canteen"</string>
-    <string name="generator_category_library">"Library"</string>
-    <string name="generator_category_lecture_room">"Lecture Room"</string>
-    <string name="generator_category_shop">"Shop"</string>
-    <string name="generator_category_gym">"Gym"</string>
-    <string name="generator_category_kitchen_area">"Kitchen Area"</string>
-    <string name="generator_category_office_space">"Office Space"</string>
-    <string name="error_force_update_title"></string>
-    <string name="error_force_update_text"></string>
+    <string name="web_generator_category_canteen">"Canteen"</string>
+    <string name="web_generator_category_library">"Library"</string>
+    <string name="web_generator_category_lecture_room">"Lecture Room"</string>
+    <string name="web_generator_category_shop">"Shop"</string>
+    <string name="web_generator_category_gym">"Gym"</string>
+    <string name="web_generator_category_kitchen_area">"Kitchen Area"</string>
+    <string name="web_generator_category_office_space">"Office Space"</string>
+    <string name="error_force_update_title">"Update required"</string>
+    <string name="error_force_update_text">"An update is required for the app to work effectively."</string>
 
     <!-- Titel für den Update Button, wenn ein App Update notwending ist. -->
-    <string name="error_action_update"></string>
+    <string name="error_action_update">"Update now"</string>
 
     <!-- Weiter Button Title beim Onboarding -->
     <string name="onboarding_continue_button">"Continue"</string>
 
     <!-- Titel des Onboarding Screens mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hints_for_usage"></string>
+    <string name="onboarding_hints_for_usage">"How to use"</string>
 
     <!-- Der farbig markierte Teil des onboarding_hints_for_usage Strings. -->
-    <string name="onboarding_hints_for_usage_highlight"></string>
+    <string name="onboarding_hints_for_usage_highlight">"Note"</string>
 
     <!-- Erster Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint1"></string>
+    <string name="onboarding_hint1">"This app does not collect obligatory contact data and cannot be used for this purpose."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint2"></string>
-    <string name="onboarding_agb_link"></string>
-    <string name="onboarding_agb_link_title"></string>
-    <string name="qr_scanner_error_code_not_yet_valid"></string>
-    <string name="qr_scanner_error_code_not_valid_anymore"></string>
+    <string name="onboarding_hint2">"Please read the terms and conditions as well"</string>
+    <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
+    <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
+    <string name="qr_scanner_error_code_not_yet_valid">"Code is not valid yet"</string>
+    <string name="qr_scanner_error_code_not_valid_anymore">"Code is not valid anymore"</string>
 
     <!-- Onboarding: subtitle on first page -->
     <string name="onboarding_subtitle">"Check-in for meetings and events."</string>
 
     <!-- qr validity period label used in qr generator web app -->
-    <string name="qr_validity_period_label"></string>
+    <string name="web_qr_validity_period_label">"Validity (24h max)"</string>
 
     <!-- qr validity period from label used in qr generator web app -->
-    <string name="qr_validity_period_from_label">"from"</string>
+    <string name="web_qr_validity_period_from_label">"from"</string>
 
     <!-- qr validity period to label used in qr generator web app -->
-    <string name="qr_validity_period_to_label">"to"</string>
+    <string name="web_qr_validity_period_to_label">"to"</string>
 
-    <!-- error message: max qr validity period. used in qr generator web app -->
-    <string name="max_qr_validity_period_error"></string>
+    <!-- error message: %d is the number of hours, max qr validity period. used in qr generator web app -->
+    <string name="web_max_qr_validity_period_error">"The maximum validity period is %d."</string>
 
-    <!-- error message. used in qr generator web app -->
-    <string name="qr_validity_period_earliest_from_error"></string>
+    <!-- error message, %d is the number of days -->
+    <string name="web_qr_validity_period_earliest_from_error">"QR codes can only be generated %d in advance."</string>
 
     <!-- error message. generic, invalid time. used in qr generator web app -->
-    <string name="qr_validity_period_invalid_time"></string>
+    <string name="web_qr_validity_period_invalid_time">"Invalid time"</string>
 
     <!-- Warnungs Text, welcher angezeigt wird, wenn ein inkompatibler QR Code (mit einem neueren QR Code Format) gescannt wurde. -->
-    <string name="error_update_text"></string>
+    <string name="error_update_text">"This QR code is not compatible with the current version of the app. Please update the app to scan it the code."</string>
+    <string name="web_generator_date_label">"Valid on"</string>
+    <string name="web_generator_date_placeholder">"Pick date"</string>
+    <string name="web_generator_validity_information">"The demo QR codes are only available on the same day."</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <string name="web_generator_code_validity_message">"This demo QR code is valid on **%e %B %Y**"</string>
+
+    <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
+    <string name="web_pdf_code_valid_date_format">"%e %B %Y"</string>
+
+    <!-- https://flatpickr.js.org/formatting/ -->
+    <string name="web_date_picker_format">"j F Y"</string>
+
+    <!-- https://flatpickr.js.org/formatting/ -->
+    <string name="web_date_picker_format_with_time">"j F Y H:i"</string>
+
+    <!-- For sharing on Twitter and Facebook -->
+    <string name="web_page_title">"NotifyMe"</string>
+
+    <!-- For sharing on Twitter and Facebook -->
+    <string name="web_page_description">"A decentralised check-in system for meetings and events"</string>
 </resources>
