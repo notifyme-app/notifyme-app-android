@@ -31,7 +31,7 @@ android {
 		targetSdkVersion 30
 		versionCode 1
 		versionName "0.1"
-		resConfigs "en", "fr", "de", "it"
+		resConfigs "en", "fr", "de"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
 
