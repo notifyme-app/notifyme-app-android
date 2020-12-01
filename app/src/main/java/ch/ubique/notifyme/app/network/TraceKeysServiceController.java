@@ -1,6 +1,7 @@
 package ch.ubique.notifyme.app.network;
 
 import android.content.Context;
+import android.os.Build;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +30,9 @@ public class TraceKeysServiceController {
 		storage = Storage.getInstance(context);
 		String baseUrl = BuildConfig.PUBLISHED_KEYS_BASE_URL;
 
+		String userAgent = BuildConfig.APPLICATION_ID + ";" + BuildConfig.VERSION_NAME + ";Android;" + Build.VERSION.RELEASE;
 		OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+		okHttpBuilder.networkInterceptors().add(new UserAgentInterceptor(userAgent));
 
 		Retrofit bucketRetrofit = new Retrofit.Builder()
 				.baseUrl(baseUrl)
