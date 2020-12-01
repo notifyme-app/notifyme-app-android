@@ -58,7 +58,6 @@ public class MainViewModel extends AndroidViewModel {
 	public MainViewModel(@NonNull Application application) {
 		super(application);
 		refreshExposures();
-		refreshTraceKeys();
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCurrentVenue();
 		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,

@@ -63,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}
-
+	
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onStart() {
+		super.onStart();
+		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
 	}
 
