@@ -144,7 +144,7 @@ public class EditDiaryEntryFragment extends Fragment {
 		String comment = commentEditText.getText().toString();
 		diaryEntry.setComment(comment);
 		CrowdNotifier.updateCheckIn(diaryEntry.getId(), diaryEntry.getArrivalTime(), diaryEntry.getDepartureTime(),
-				diaryEntry.getVenueInfo().getNotificationKey(), diaryEntry.getVenueInfo().getPublicKey(), getContext());
+				diaryEntry.getVenueInfo(), getContext());
 		diaryStorage.updateEntry(diaryEntry);
 	}
 

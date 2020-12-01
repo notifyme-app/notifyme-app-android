@@ -39,7 +39,7 @@ public class NotificationHelper {
 		if (Build.VERSION.SDK_INT >= 26) {
 			NotificationChannel channel =
 					new NotificationChannel(channelId, channelName,
-							NotificationManager.IMPORTANCE_DEFAULT);
+							NotificationManager.IMPORTANCE_HIGH);
 			notificationManager.createNotificationChannel(channel);
 		}
 	}

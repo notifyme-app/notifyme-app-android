@@ -49,7 +49,7 @@ public class KeyLoadWorker extends Worker {
 	@Override
 	public Result doWork() {
 		Log.d(LOG_TAG, "Started KeyLoadWorker");
-		List<ProblematicEventInfo> problematicEventInfos = new WebServiceController(getApplicationContext()).loadTraceKeys();
+		List<ProblematicEventInfo> problematicEventInfos = new TraceKeysServiceController(getApplicationContext()).loadTraceKeys();
 		if (problematicEventInfos == null) {
 			Log.d(LOG_TAG, "KeyLoadWorker failure");
 			return Result.retry();

@@ -21,7 +21,8 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
-import ch.ubique.notifyme.app.network.WebServiceController;
+import ch.ubique.notifyme.app.network.ConfigServiceController;
+import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
@@ -34,6 +35,7 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
 	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
+	public MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
 	private CheckInState checkInState;
 	private boolean isQrScanningEnabled = true;
 
@@ -41,7 +43,8 @@ public class MainViewModel extends AndroidViewModel {
 	private final Handler handler = new Handler(Looper.getMainLooper());
 	private Runnable timeUpdateRunnable;
 	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 1000;
-	private WebServiceController webServiceController = new WebServiceController(getApplication());
+	private TraceKeysServiceController traceKeysServiceController = new TraceKeysServiceController(getApplication());
+	private ConfigServiceController configServiceController = new ConfigServiceController(getApplication());
 
 
 	private BroadcastReceiver newNotificationBroadcastReceiver = new BroadcastReceiver() {
@@ -60,6 +63,7 @@ public class MainViewModel extends AndroidViewModel {
 		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,
 				new IntentFilter(NEW_NOTIFICATION));
 		traceKeyLoadingState.observeForever(loadingState -> { if (loadingState != LoadingState.LOADING) refreshErrors(); });
+		reloadConfig();
 	}
 
 
@@ -110,7 +114,7 @@ public class MainViewModel extends AndroidViewModel {
 
 	public void refreshTraceKeys() {
 		traceKeyLoadingState.setValue(LoadingState.LOADING);
-		webServiceController.loadTraceKeysAsync(traceKeys -> {
+		traceKeysServiceController.loadTraceKeysAsync(traceKeys -> {
 			if (traceKeys == null) {
 				traceKeyLoadingState.setValue(LoadingState.FAILURE);
 			} else {
@@ -158,6 +162,14 @@ public class MainViewModel extends AndroidViewModel {
 	public void setSelectedReminderOption(ReminderOption selectedReminderOption) {
 		this.checkInState.setSelectedTimerOption(selectedReminderOption);
 		storage.setCurrentVenue(checkInState);
+	}
+
+	public void reloadConfig() {
+		configServiceController.loadConfigAsync(configResponseModel -> {
+			if (configResponseModel != null) {
+				this.forceUpdate.setValue(configResponseModel.isForceUpdate());
+			}
+		});
 	}
 
 	@Override

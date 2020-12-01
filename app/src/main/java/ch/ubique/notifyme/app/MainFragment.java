@@ -62,13 +62,11 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View infoButton = view.findViewById(R.id.fragment_main_info_button);
 		View errorView = view.findViewById(R.id.no_reports_header_error_view);
 		View errorViewSmall = view.findViewById(R.id.reports_header_error_view);
+		View nonProductiveInfo = view.findViewById(R.id.fragment_main_non_productive_info);
 
-		String appName = getString(R.string.app_name);
-		appNameTextView.setText(StringUtils.getTwoColoredString(appName, appName.substring(appName.length() - 2),
-				getResources().getColor(R.color.primary, null)));
-		infoButton.setOnClickListener(v -> {
-			showImpressum();
-		});
+		appNameTextView.setText(StringUtils.getTwoColoredString(getString(R.string.app_name),
+				getString(R.string.app_name_highlight), getResources().getColor(R.color.primary, null)));
+		infoButton.setOnClickListener(v -> showImpressum());
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
 
@@ -93,8 +91,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				reportsHeader.setVisibility(View.GONE);
 				splashText.setVisibility(View.VISIBLE);
 				splashText.setText(StringUtils.getTwoColoredString(getString(R.string.no_report_hero_text),
-						getString(R.string.no_report_hero_text_highlight),
-						getResources().getColor(R.color.secondary, null)));
+						getString(R.string.no_report_hero_text_highlight), getResources().getColor(R.color.secondary, null)));
 
 				mainImageView.setVisibility(View.VISIBLE);
 			} else {
@@ -146,6 +143,12 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+
+		if (BuildConfig.FLAVOR.equals("prod")) {
+			nonProductiveInfo.setVisibility(View.GONE);
+		} else {
+			nonProductiveInfo.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void showCheckedInScreen() {

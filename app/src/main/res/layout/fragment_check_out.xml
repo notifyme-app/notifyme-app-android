@@ -42,7 +42,7 @@
 			android:layout_gravity="end"
 			android:background="?selectableItemBackground"
 			android:padding="@dimen/spacing_large"
-			android:text="@string/checkout_save_button_title"
+			android:text="@string/done_button"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 

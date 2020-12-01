@@ -1,6 +1,7 @@
 package ch.ubique.notifyme.app.network;
 
 import android.content.Context;
+import android.os.Build;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,19 +18,21 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class WebServiceController {
+public class TraceKeysServiceController {
 
 	private static final String KEY_BUNDLE_TAG_HEADER = "x-key-bundle-tag";
 
 	private TraceKeysService traceKeysService;
 	private Storage storage;
 
-	public WebServiceController(Context context) {
+	public TraceKeysServiceController(Context context) {
 
 		storage = Storage.getInstance(context);
 		String baseUrl = BuildConfig.PUBLISHED_KEYS_BASE_URL;
 
+		String userAgent = BuildConfig.APPLICATION_ID + ";" + BuildConfig.VERSION_NAME + ";Android;" + Build.VERSION.RELEASE;
 		OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+		okHttpBuilder.networkInterceptors().add(new UserAgentInterceptor(userAgent));
 
 		Retrofit bucketRetrofit = new Retrofit.Builder()
 				.baseUrl(baseUrl)
@@ -78,7 +81,8 @@ public class WebServiceController {
 			ArrayList<ProblematicEventInfo> problematicEventInfos = new ArrayList<>();
 			for (ProblematicEventOuterClass.ProblematicEvent event : problematicEventWrapper.getEventsList()) {
 				problematicEventInfos.add(new ProblematicEventInfo(event.getSecretKey().toByteArray(), event.getStartTime(),
-						event.getEndTime(), event.getMessage().toByteArray()));
+						event.getEndTime(), event.getMessage().toByteArray(), event.getNonce().toByteArray(),
+						event.getR2().toByteArray()));
 			}
 			return problematicEventInfos;
 		} catch (IOException e) {

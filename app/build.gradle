@@ -29,9 +29,9 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1
-		versionName "0.1"
-		resConfigs "en", "fr", "de", "it"
+		versionCode 1000
+		versionName "1.0"
+		resConfigs "en", "fr", "de"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
 
@@ -42,12 +42,14 @@ android {
 		dev {
 			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
 			applicationIdSuffix '.dev'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-config.notify-me.ch/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
 		}
 		prod {
 			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
@@ -133,7 +135,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:0.1-dev-33'
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:1.1'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'

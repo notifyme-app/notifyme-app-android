@@ -12,6 +12,7 @@ public class Storage {
 	private static final String KEY_SHARED_PREFERENCES_STORAGE = "KEY_SHARED_PREFERENCES_STORAGE";
 	private static final String KEY_CURRENT_CHECK_IN = "KEY_CURRENT_CHECK_IN";
 	private static final String KEY_LAST_KEY_BUNDLE_TAG = "KEY_LAST_KEY_BUNDLE_TAG";
+	private static final String KEY_ONBOARDING_COMPLETE = "KEY_ONBOARDING_COMPLETE";
 
 	private static Storage instance;
 
@@ -43,6 +44,14 @@ public class Storage {
 
 	public long getLastKeyBundleTag() {
 		return sharedPreferences.getLong(KEY_LAST_KEY_BUNDLE_TAG, 0);
+	}
+
+	public void setOnboardingCompleted(boolean completed) {
+		sharedPreferences.edit().putBoolean(KEY_ONBOARDING_COMPLETE, completed).apply();
+	}
+
+	public boolean getOnboardingCompleted() {
+		return sharedPreferences.getBoolean(KEY_ONBOARDING_COMPLETE, false);
 	}
 
 }

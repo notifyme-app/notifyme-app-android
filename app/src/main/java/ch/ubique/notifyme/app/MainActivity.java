@@ -13,15 +13,18 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
+import org.crowdnotifier.android.sdk.utils.QrUtils;
 
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.KeyLoadWorker;
+import ch.ubique.notifyme.app.onboarding.OnboardingIntroductionFragment;
 import ch.ubique.notifyme.app.reports.ExposureFragment;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
 import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_ID;
 import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_NOTIFICATION_TYPE;
@@ -31,21 +34,44 @@ import static ch.ubique.notifyme.app.utils.NotificationHelper.REMINDER_TYPE;
 public class MainActivity extends AppCompatActivity {
 
 	private MainViewModel viewModel;
-	private static String CHECK_IN_ACTION = "android.intent.action.CHECK_IN";
+	private Storage storage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 		setContentView(R.layout.activity_main);
 
+		storage = Storage.getInstance(this);
+
+		boolean onboardingCompleted = storage.getOnboardingCompleted();
+
 		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, MainFragment.newInstance())
-					.commitNow();
+			if (onboardingCompleted) {
+				showMainFragment();
+			} else {
+				showOnboarding();
+			}
 		}
 
+		//TODO: Handle intents also when Activity is not newly created, but the app was already opened
+		if (onboardingCompleted) handleCustomIntents();
+
+		KeyLoadWorker.startKeyLoadWorker(this);
+
+		viewModel.forceUpdate.observe(this, forceUpdate -> {
+			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
+		});
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		viewModel.refreshTraceKeys();
+		viewModel.refreshErrors();
+	}
+
+	private void handleCustomIntents() {
 		if (getIntent().hasExtra(NOTIFICATION_TYPE)) {
 			int notificationType = getIntent().getIntExtra(NOTIFICATION_TYPE, 0);
 			if (notificationType == REMINDER_TYPE && viewModel.isCheckedIn()) {
@@ -60,14 +86,6 @@ public class MainActivity extends AppCompatActivity {
 		} else if (getIntent().getData() != null) {
 			checkValidCheckInIntent(getIntent().getData().toString());
 		}
-
-		KeyLoadWorker.startKeyLoadWorker(this);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		viewModel.refreshErrors();
 	}
 
 	private ExposureEvent getExposureWithId(long id) {
@@ -78,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 		return null;
+	}
+
+	private void showMainFragment() {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, MainFragment.newInstance())
+				.commitNow();
 	}
 
 	private void showCheckedInScreen() {
@@ -96,15 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 	private void checkValidCheckInIntent(String qrCodeData) {
-		VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-		if (venueInfo == null) {
-			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
-				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
-				startActivity(openBrowserIntent);
-			} else {
-				new ErrorDialog(this, ErrorState.NO_VALID_QR_CODE).show();
-			}
-		} else {
+		try {
+			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 			if (viewModel.isCheckedIn()) {
 				new ErrorDialog(this, ErrorState.ALREADY_CHECKED_IN).show();
 			} else {
@@ -114,7 +131,32 @@ public class MainActivity extends AppCompatActivity {
 						.add(CheckInDialogFragment.newInstance(true), CheckInDialogFragment.TAG)
 						.commit();
 			}
+		} catch (QrUtils.QRException e) {
+			handleInvalidQRCodeExceptions(qrCodeData, e);
 		}
+	}
+
+	private void handleInvalidQRCodeExceptions(String qrCodeData, QrUtils.QRException e) {
+		if (e instanceof QrUtils.InvalidQRCodeVersionException) {
+			new ErrorDialog(this, ErrorState.UPDATE_REQUIRED).show();
+		} else if (e instanceof QrUtils.NotYetValidException) {
+			new ErrorDialog(this, ErrorState.QR_CODE_NOT_YET_VALID).show();
+		} else if (e instanceof QrUtils.NotValidAnymoreException) {
+			new ErrorDialog(this, ErrorState.QR_CODE_NOT_VALID_ANYMORE).show();
+		} else {
+			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
+				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
+				startActivity(openBrowserIntent);
+			} else {
+				new ErrorDialog(this, ErrorState.NO_VALID_QR_CODE).show();
+			}
+		}
+	}
+
+	private void showOnboarding() {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, OnboardingIntroductionFragment.newInstance())
+				.commit();
 	}
 
 
