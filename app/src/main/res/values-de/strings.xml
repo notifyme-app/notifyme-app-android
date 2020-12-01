@@ -212,7 +212,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="imprint_webview_more_info_title">"Weitere Informationen"</string>
     <string name="imprint_webview_more_info_link">"www.notify-me.ch"</string>
     <string name="imprint_webview_legal_title">"Rechtliches"</string>
-    <string name="imprint_webview_legal_link_text">"Datenschutz &amp;  Nutzungsbestimmungen"</string>
+    <string name="imprint_webview_legal_link_text">"Datenschutz &amp; Nutzungsbestimmungen"</string>
     <string name="imprint_webview_legal_link_url">"www.notify-me.ch/agb"</string>
     <string name="imprint_webview_sourcecode_title">"Quellcode"</string>
     <string name="imprint_webview_sourcecode_text">"Den aktuellen Quellcode finden Sie auf GitHub, veröffentlicht unter Public-License:"</string>
