@@ -97,7 +97,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:gravity="center"
-			android:text="@string/checkin_scan_code"
+			android:text="@string/qrscanner_scan_qr_text"
 			app:layout_constraintBottom_toTopOf="@id/space2"
 			app:layout_constraintTop_toBottomOf="@id/space1" />
 

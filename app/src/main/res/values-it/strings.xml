@@ -313,7 +313,7 @@ QR Code"</string>
     <string name="onboarding_hints_for_usage">"How to use"</string>
 
     <!-- Der farbig markierte Teil des onboarding_hints_for_usage Strings. -->
-    <string name="onboarding_hints_for_usage_highlight">"Note"</string>
+    <string name="onboarding_hints_for_usage_highlight">"How"</string>
 
     <!-- Erster Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
     <string name="onboarding_hint1">"This app does not collect obligatory contact data and cannot be used for this purpose."</string>
