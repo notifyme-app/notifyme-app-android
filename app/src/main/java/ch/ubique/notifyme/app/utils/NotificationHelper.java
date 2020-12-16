@@ -37,9 +37,7 @@ public class NotificationHelper {
 	private void createNotificationChannel(String channelId, String channelName) {
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		if (Build.VERSION.SDK_INT >= 26) {
-			NotificationChannel channel =
-					new NotificationChannel(channelId, channelName,
-							NotificationManager.IMPORTANCE_HIGH);
+			NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
 			notificationManager.createNotificationChannel(channel);
 		}
 	}

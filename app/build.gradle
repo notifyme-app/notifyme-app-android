@@ -54,6 +54,14 @@ android {
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
 		}
+		abn {
+			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
+			applicationIdSuffix '.abn'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
+		}
 	}
 
 	flavorDimensions "version"
