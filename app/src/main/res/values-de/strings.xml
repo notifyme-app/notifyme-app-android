@@ -80,7 +80,7 @@
     <string name="report_information_text">"Sie könnten ansteckend sein, ohne es zu merken."</string>
 
     <!-- Report Information What to do Button title -->
-    <string name="report_information_button_title">"Was soll ich tun?"</string>
+    <string name="report_information_button_title">"Hinweis"</string>
 
     <!-- Info Text that is displayed below the info about a new report. -->
     <string name="report_message_days_ago">"Vor {NUMBER} Tagen"</string>
@@ -205,7 +205,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="imprint_webview_collaboration_title">"In Zusammenarbeit mit"</string>
 
     <!-- CrowdNotifier Paper text -->
-    <string name="imprint_webview_paper_text">"Dieses Projekt basiert auf dem Paper CrowdNotifier by Wouter Lueks (EPFL) et al.:"</string>
+    <string name="imprint_webview_paper_text">"Dieses Projekt implementiert das Protokoll CrowdNotifier by Wouter Lueks (EPFL) et al."</string>
 
     <!-- CrowdNotifier Paper link -->
     <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
@@ -346,10 +346,10 @@ QR-Code"</string>
 
     <!-- Landing page: iOS app store link URL -->
     <!-- Fuzzy -->
-    <string name="web_landing_app_store_link">"https://itunes.apple.com/app/id1537859001"</string>
+    <string name="web_landing_app_store_link">"https://apps.apple.com/app/id1537859001"</string>
 
     <!-- Fuzzy -->
-    <string name="web_landing_play_store_link">"https://example.com"</string>
+    <string name="web_landing_play_store_link">"https://play.google.com/store/apps/details?id=ch.ubique.notifyme"</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <!-- Fuzzy -->

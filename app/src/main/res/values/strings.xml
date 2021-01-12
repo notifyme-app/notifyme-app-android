@@ -81,7 +81,7 @@
     <string name="report_information_text">"You could be infectious without realising it."</string>
 
     <!-- Report Information What to do Button title -->
-    <string name="report_information_button_title">"What to do?"</string>
+    <string name="report_information_button_title">"Advice"</string>
 
     <!-- Info Text that is displayed below the info about a new report. -->
     <!-- Fuzzy -->
@@ -209,7 +209,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="imprint_webview_collaboration_title">"In collaboration with"</string>
 
     <!-- CrowdNotifier Paper text -->
-    <string name="imprint_webview_paper_text">"This project relies on the paper CrowdNotifier by Wouter Lueks (EPFL) et al.:"</string>
+    <string name="imprint_webview_paper_text">"This project implements the protocol CrowdNotifier by Wouter Lueks (EPFL) et al."</string>
 
     <!-- CrowdNotifier Paper link -->
     <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
@@ -350,10 +350,10 @@ QR Code"</string>
 
     <!-- Landing page: iOS app store link URL -->
     <!-- Fuzzy -->
-    <string name="web_landing_app_store_link">"https://itunes.apple.com/app/id1537859001"</string>
+    <string name="web_landing_app_store_link">"https://apps.apple.com/app/id1537859001"</string>
 
     <!-- Fuzzy -->
-    <string name="web_landing_play_store_link">"https://example.com"</string>
+    <string name="web_landing_play_store_link">"https://play.google.com/store/apps/details?id=ch.ubique.notifyme"</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <!-- Fuzzy -->
