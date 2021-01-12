@@ -30,9 +30,26 @@ public class StringUtils {
 		return spannable;
 	}
 
+	/**
+	 * Formats a duration in milliseconds to a String of hours, minutes and seconds, or to only hours and minutes if the
+	 * duration is more than 10 hours
+	 * @param duration in milliseconds
+	 * @return a formatted duration String
+	 */
+	public static String getShortDurationString(long duration) {
+		if (duration >= 10 * ONE_HOUR) {
+			return String.format(Locale.GERMAN, "%1d:%02d",
+					TimeUnit.MILLISECONDS.toHours(duration),
+					TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration)))
+			);
+		} else {
+			return getDurationString(duration);
+		}
+	}
+
 	public static String getDurationString(long duration) {
 		if (duration >= ONE_HOUR) {
-			return String.format(Locale.GERMAN, "%02d:%02d:%02d",
+			return String.format(Locale.GERMAN, "%01d:%02d:%02d",
 					TimeUnit.MILLISECONDS.toHours(duration),
 					TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration))),
 					TimeUnit.MILLISECONDS.toSeconds(duration - TimeUnit.MINUTES.toMillis(TimeUnit.MILLISECONDS.toMinutes(duration)))
