@@ -17,7 +17,7 @@ import ch.ubique.notifyme.app.R;
 
 public class StringUtils {
 
-	private static final long ONE_HOUR = 60 * 60 * 1000;
+	private static final long ONE_HOUR = TimeUnit.HOURS.toMillis(1);
 
 	public static SpannableString getTwoColoredString(String wholeString, String substring, int substringColor) {
 
@@ -37,8 +37,8 @@ public class StringUtils {
 	 * @return a formatted duration String
 	 */
 	public static String getShortDurationString(long duration) {
-		if (duration >= 10 * ONE_HOUR) {
-			return String.format(Locale.GERMAN, "%1d:%02d",
+		if (duration >= TimeUnit.HOURS.toMillis(10)) {
+			return String.format(Locale.GERMAN, "%d:%02d",
 					TimeUnit.MILLISECONDS.toHours(duration),
 					TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration)))
 			);
@@ -49,7 +49,7 @@ public class StringUtils {
 
 	public static String getDurationString(long duration) {
 		if (duration >= ONE_HOUR) {
-			return String.format(Locale.GERMAN, "%01d:%02d:%02d",
+			return String.format(Locale.GERMAN, "%d:%02d:%02d",
 					TimeUnit.MILLISECONDS.toHours(duration),
 					TimeUnit.MILLISECONDS.toMinutes(duration - TimeUnit.HOURS.toMillis(TimeUnit.MILLISECONDS.toHours(duration))),
 					TimeUnit.MILLISECONDS.toSeconds(duration - TimeUnit.MINUTES.toMillis(TimeUnit.MILLISECONDS.toMinutes(duration)))

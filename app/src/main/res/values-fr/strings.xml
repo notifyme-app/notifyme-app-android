@@ -121,19 +121,19 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="reminder_option_off">"Off"</string>
 
     <!-- Edit Checkin: Remove from diary button title -->
-    <string name="remove_from_diary_button">"Occulter"</string>
+    <string name="remove_from_diary_button">"Cacher du journal"</string>
 
     <!-- Remove from Diary Warning view title -->
     <string name="remove_diary_warning_title">"Avertissement"</string>
 
     <!-- Remove from diary warning view explanation text -->
-    <string name="remove_diary_warning_text">"Vous êtes sur le point de supprimer “{LOCATION_INFO}” de votre journal. Cette démarche est irréversible. Veuillez confirmer cette action."</string>
+    <string name="remove_diary_warning_text">"Êtes-vous sûr de ne plus vouloir afficher “{LOCATION_INFO}” dans votre journal? Cette démarche est irréversible."</string>
 
     <!-- Remove from diary warning view remove button title -->
-    <string name="remove_diary_remove_now_button">"Occulter maintenant"</string>
+    <string name="remove_diary_remove_now_button">"Cacher du journal"</string>
 
     <!-- Remove from diary warning start text -->
-    <string name="remove_diary_warning_star_text">"l'Application grade cette information en arrière-plan pendant 14 jours afin de pouvoir vous avertir au cas où il y a un risque d'infection."</string>
+    <string name="remove_diary_warning_star_text">"l'Application garde cette information de manière cryptée en arrière-plan pendant 14 jours afin de pouvoir vous avertir au cas où il y a un risque d'infection."</string>
 
     <!-- Report: 1 day ago singular -->
     <string name="report_message_one_day_ago">"Il y a un jour"</string>
