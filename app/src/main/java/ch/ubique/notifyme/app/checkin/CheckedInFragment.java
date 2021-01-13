@@ -2,6 +2,7 @@ package ch.ubique.notifyme.app.checkin;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class CheckedInFragment extends Fragment {
 
@@ -46,6 +48,8 @@ public class CheckedInFragment extends Fragment {
 
 		TextView titleTextView = view.findViewById(R.id.checked_in_fragment_title);
 		TextView subtitleTextView = view.findViewById(R.id.checked_in_fragment_subtitle);
+		TextView timerTextView = view.findViewById(R.id.checked_in_fragment_timer);
+		ImageView venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
 		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
 		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.checked_in_fragment_toggle_group);
@@ -66,10 +70,11 @@ public class CheckedInFragment extends Fragment {
 
 		viewModel.startCheckInTimer();
 		viewModel.timeSinceCheckIn
-				.observe(getViewLifecycleOwner(), duration -> toolbar.setTitle(StringUtils.getDurationString(duration)));
+				.observe(getViewLifecycleOwner(), duration -> timerTextView.setText(StringUtils.getDurationString(duration)));
 
 		titleTextView.setText(venueInfo.getTitle());
 		subtitleTextView.setText(venueInfo.getSubtitle());
+		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
 
 		checkOutButton.setOnClickListener(v -> showCheckOutFragment());
 	}
