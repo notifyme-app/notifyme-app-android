@@ -41,7 +41,7 @@ public class HtmlFragment extends Fragment {
 		return fragment;
 	}
 
-	private HtmlFragment() {
+	public HtmlFragment() {
 		super(R.layout.fragment_html);
 	}
 
