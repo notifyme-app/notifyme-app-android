@@ -405,7 +405,7 @@ zur Nutzung"</string>
     <string name="onboarding_hints_for_usage_highlight">"Hinweis"</string>
 
     <!-- Erster Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint1">"Diese App kann nicht für die obligatorische Kontaktdatenerfassung verwendet werden, da Sie keinerlei Kontaktdaten erfasst."</string>
+    <string name="onboarding_hint1">"Diese App kann nicht für die obligatorische Kontaktdatenerfassung verwendet werden, da sie keinerlei Kontaktdaten erfasst."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
     <string name="onboarding_hint2">"Bitte lesen Sie auch die Allgemeinen Geschäftsbedingungen"</string>
@@ -473,4 +473,5 @@ zur Nutzung"</string>
     <!-- For sharing on Twitter and Facebook -->
     <!-- Fuzzy -->
     <string name="web_page_description">"Dezentral gespeicherte Check-Ins für Meetings &amp; Events"</string>
+    <string name="imprint_webview_feedback">"Fragen, Anregungen oder Feedback?"</string>
 </resources>

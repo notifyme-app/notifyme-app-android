@@ -44,7 +44,7 @@
     <string name="check_in_now_button_title">"Enregistrez-vous maintenant"</string>
 
     <!-- CheckIn: Check out Button title -->
-    <string name="checkout_button_title">"Quitter le lieu"</string>
+    <string name="checkout_button_title">"Check out"</string>
 
     <!-- Title for 1 report -->
     <string name="report_title_singular">"1 rapport"</string>
@@ -80,7 +80,7 @@
     <string name="report_information_text">"Vous pourriez être contagieu·x·se sans le savoir."</string>
 
     <!-- Report Information What to do Button title -->
-    <string name="report_information_button_title">"Indication"</string>
+    <string name="report_information_button_title">"Recommandation"</string>
 
     <!-- Info Text that is displayed below the info about a new report. -->
     <string name="report_message_days_ago">"Il y a {NUMBER} jours"</string>
@@ -210,7 +210,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <!-- CrowdNotifier Paper link -->
     <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
     <string name="imprint_webview_more_info_title">"Informations supplémentaires"</string>
-    <string name="imprint_webview_more_info_link">"https://notify-me.ch"</string>
+    <string name="imprint_webview_more_info_link">"www.notify-me.ch"</string>
     <string name="imprint_webview_legal_title">"Indications légales"</string>
     <string name="imprint_webview_legal_link_text">"Protection des données et conditions d'utilisation"</string>
     <string name="imprint_webview_legal_link_url">"www.notify-me.ch/agb"</string>
@@ -306,7 +306,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_upload_period_to_label">"à"</string>
 
     <!-- Fuzzy -->
-    <string name="web_upload_note_label">"Indication au visiteur"</string>
+    <string name="web_upload_note_label">"Recommandation au visiteur"</string>
 
     <!-- Fuzzy -->
     <string name="web_upload_note_placeholder">"Que faire?"</string>
@@ -460,4 +460,5 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <!-- For sharing on Twitter and Facebook -->
     <!-- Fuzzy -->
     <string name="web_page_description">"Un système d'enregistrement décentralisé pour réunions, rencontres et événements."</string>
+    <string name="imprint_webview_feedback">"Questions, suggestions ou réactions?"</string>
 </resources>
