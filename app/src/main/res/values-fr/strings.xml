@@ -44,7 +44,7 @@
     <string name="check_in_now_button_title">"Enregistrez-vous maintenant"</string>
 
     <!-- CheckIn: Check out Button title -->
-    <string name="checkout_button_title">"Quitter le lieu"</string>
+    <string name="checkout_button_title">"Check out"</string>
 
     <!-- Title for 1 report -->
     <string name="report_title_singular">"1 rapport"</string>
@@ -80,7 +80,7 @@
     <string name="report_information_text">"Vous pourriez être contagieu·x·se sans le savoir."</string>
 
     <!-- Report Information What to do Button title -->
-    <string name="report_information_button_title">"Que faire?"</string>
+    <string name="report_information_button_title">"Recommandation"</string>
 
     <!-- Info Text that is displayed below the info about a new report. -->
     <string name="report_message_days_ago">"Il y a {NUMBER} jours"</string>
@@ -121,19 +121,19 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="reminder_option_off">"Off"</string>
 
     <!-- Edit Checkin: Remove from diary button title -->
-    <string name="remove_from_diary_button">"Occulter"</string>
+    <string name="remove_from_diary_button">"Cacher du journal"</string>
 
     <!-- Remove from Diary Warning view title -->
     <string name="remove_diary_warning_title">"Avertissement"</string>
 
     <!-- Remove from diary warning view explanation text -->
-    <string name="remove_diary_warning_text">"Vous êtes sur le point de supprimer “{LOCATION_INFO}” de votre journal. Cette démarche est irréversible. Veuillez confirmer cette action."</string>
+    <string name="remove_diary_warning_text">"Êtes-vous sûr de ne plus vouloir afficher “{LOCATION_INFO}” dans votre journal? Cette démarche est irréversible."</string>
 
     <!-- Remove from diary warning view remove button title -->
-    <string name="remove_diary_remove_now_button">"Occulter maintenant"</string>
+    <string name="remove_diary_remove_now_button">"Cacher du journal"</string>
 
     <!-- Remove from diary warning start text -->
-    <string name="remove_diary_warning_star_text">"l'Application grade cette information en arrière-plan pendant 14 jours afin de pouvoir vous avertir au cas où il y a un risque d'infection."</string>
+    <string name="remove_diary_warning_star_text">"l'Application garde cette information de manière cryptée en arrière-plan pendant 14 jours afin de pouvoir vous avertir au cas où il y a un risque d'infection."</string>
 
     <!-- Report: 1 day ago singular -->
     <string name="report_message_one_day_ago">"Il y a un jour"</string>
@@ -205,12 +205,12 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="imprint_webview_collaboration_title">"En collaboration avec"</string>
 
     <!-- CrowdNotifier Paper text -->
-    <string name="imprint_webview_paper_text">"Ce projet est basé sur l'article CrowdNotifier de Wouter Lueks (EPFL) et al.:"</string>
+    <string name="imprint_webview_paper_text">"Ce projet implémente le protocole CrowdNotifier de Wouter Lueks (EPFL) et al."</string>
 
     <!-- CrowdNotifier Paper link -->
     <string name="imprint_webview_paper_link">"github.com/CrowdNotifier/documents"</string>
     <string name="imprint_webview_more_info_title">"Informations supplémentaires"</string>
-    <string name="imprint_webview_more_info_link">"https://notify-me.ch"</string>
+    <string name="imprint_webview_more_info_link">"www.notify-me.ch"</string>
     <string name="imprint_webview_legal_title">"Indications légales"</string>
     <string name="imprint_webview_legal_link_text">"Protection des données et conditions d'utilisation"</string>
     <string name="imprint_webview_legal_link_url">"www.notify-me.ch/agb"</string>
@@ -306,7 +306,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_upload_period_to_label">"à"</string>
 
     <!-- Fuzzy -->
-    <string name="web_upload_note_label">"Indication au visiteur"</string>
+    <string name="web_upload_note_label">"Recommandation au visiteur"</string>
 
     <!-- Fuzzy -->
     <string name="web_upload_note_placeholder">"Que faire?"</string>
@@ -347,10 +347,10 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Landing page: iOS app store link URL -->
     <!-- Fuzzy -->
-    <string name="web_landing_app_store_link">"https://itunes.apple.com/app/id1537859001"</string>
+    <string name="web_landing_app_store_link">"https://apps.apple.com/app/id1537859001"</string>
 
     <!-- Fuzzy -->
-    <string name="web_landing_play_store_link">"https://example.com"</string>
+    <string name="web_landing_play_store_link">"https://play.google.com/store/apps/details?id=ch.ubique.notifyme"</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <!-- Fuzzy -->
@@ -460,4 +460,5 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <!-- For sharing on Twitter and Facebook -->
     <!-- Fuzzy -->
     <string name="web_page_description">"Un système d'enregistrement décentralisé pour réunions, rencontres et événements."</string>
+    <string name="imprint_webview_feedback">"Questions, suggestions ou réactions?"</string>
 </resources>

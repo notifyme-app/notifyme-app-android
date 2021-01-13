@@ -29,8 +29,8 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1000
-		versionName "1.0"
+		versionCode 1100
+		versionName "1.1"
 		resConfigs "en", "fr", "de"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
@@ -53,6 +53,14 @@ android {
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
+		}
+		abn {
+			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
+			applicationIdSuffix '.abn'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
 		}
 	}
 
@@ -126,16 +134,16 @@ dependencies {
 	androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 	// QR code scanning
-	def camerax_version = "1.0.0-beta12"
+	def camerax_version = "1.0.0-rc01"
 	implementation "androidx.camera:camera-camera2:${camerax_version}"
 	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
-	implementation "androidx.camera:camera-view:1.0.0-alpha19"
+	implementation "androidx.camera:camera-view:1.0.0-alpha20"
 	//DO NOT UPDATE ZXING TO 3.4.0! (3.4.0 is not compatible with API Level 23 or lower)
 	implementation "com.google.zxing:core:3.3.0"
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:1.1'
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:2.0'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'

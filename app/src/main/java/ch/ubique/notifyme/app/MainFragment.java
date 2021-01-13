@@ -75,8 +75,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 			checkInButton.setVisibility(View.GONE);
 			checkOutButton.setVisibility(View.VISIBLE);
 			checkedInLabel.setVisibility(View.VISIBLE);
-			viewModel.timeSinceCheckIn
-					.observe(getViewLifecycleOwner(), duration -> checkOutButton.setText(StringUtils.getDurationString(duration)));
+			viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(),
+					duration -> checkOutButton.setText(StringUtils.getShortDurationString(duration)));
 			viewModel.startCheckInTimer();
 		} else {
 			checkInButton.setOnClickListener(v -> showQRCodeScanner());
