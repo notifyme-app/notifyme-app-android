@@ -2,10 +2,14 @@ package ch.ubique.notifyme.app.onboarding;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.instantapps.InstantApps;
+import com.google.android.gms.instantapps.PackageManagerCompat;
 
 import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.R;
@@ -16,6 +20,7 @@ import ch.ubique.notifyme.app.utils.UrlUtil;
 public class OnboardingHintsFragment extends Fragment {
 
 	public final static String TAG = OnboardingHintsFragment.class.getCanonicalName();
+	private boolean isInstantApp = false;
 
 	public OnboardingHintsFragment() { super(R.layout.fragment_onboarding_hints); }
 
@@ -25,24 +30,39 @@ public class OnboardingHintsFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		View okButton = view.findViewById(R.id.fragment_onboarding_hints_ok_button);
+		Button okButton = view.findViewById(R.id.fragment_onboarding_hints_ok_button);
 		View agbLink = view.findViewById(R.id.fragment_onboarding_hints_link);
 		TextView title = view.findViewById(R.id.fragment_onboarding_hints_title);
+
+		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
+		isInstantApp = pmc.isInstantApp();
+
+		if (isInstantApp) {
+			okButton.setText(R.string.onboarding_continue_button);
+		}
 
 		title.setText(StringUtils.getTwoColoredString(getString(R.string.onboarding_hints_for_usage),
 				getString(R.string.onboarding_hints_for_usage_highlight), getResources().getColor(R.color.primary, null)));
 		agbLink.setOnClickListener(v -> UrlUtil.openUrl(requireContext(), getString(R.string.onboarding_agb_link)));
-		okButton.setOnClickListener(v -> finishOnboarding());
+		okButton.setOnClickListener(v -> continueOrFinishOnboarding());
 	}
 
-	private void finishOnboarding() {
-
-		Storage.getInstance(requireContext()).setOnboardingCompleted(true);
-
-		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-				.replace(R.id.container, MainFragment.newInstance())
-				.commit();
+	private void continueOrFinishOnboarding() {
+		if (isInstantApp) {
+			// Show the install now onboarding step if this is the instant app
+			requireActivity().getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.replace(R.id.container, OnboardingInstantAppFragment.newInstance())
+					.addToBackStack(OnboardingInstantAppFragment.TAG)
+					.commit();
+		} else {
+			// Complete the onboarding if this is the installable app
+			Storage.getInstance(requireContext()).setOnboardingCompleted(true);
+			requireActivity().getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.replace(R.id.container, MainFragment.newInstance())
+					.commit();
+		}
 	}
 
 }
