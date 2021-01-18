@@ -3,12 +3,13 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/fragment_main_swipe_refresh_layout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools"
+	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:fillViewport="true">
@@ -31,14 +32,14 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 
-				<ImageView
+				<ImageButton
 					android:id="@+id/fragment_main_info_button"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/spacing_small"
+					android:background="@drawable/ripple_rounded"
 					android:clickable="true"
 					android:focusable="true"
-					android:foreground="?android:selectableItemBackground"
 					android:padding="@dimen/spacing_medium"
 					android:src="@drawable/ic_info_outlined"
 					app:layout_constraintEnd_toEndOf="parent"
