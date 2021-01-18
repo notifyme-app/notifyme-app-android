@@ -152,6 +152,6 @@ dependencies {
 	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 	implementation 'androidx.security:security-crypto:1.0.0-rc03'
 	implementation 'androidx.biometric:biometric:1.1.0-rc01'
-
+	implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
 
 }

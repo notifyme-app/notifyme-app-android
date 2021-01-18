@@ -1,14 +1,17 @@
 package ch.ubique.notifyme.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
-
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import com.google.android.gms.instantapps.InstantApps;
+import com.google.android.gms.instantapps.PackageManagerCompat;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
@@ -46,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
 
 		boolean onboardingCompleted = storage.getOnboardingCompleted();
 
+		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(this);
+		boolean isInstantApp = pmc.isInstantApp();
+
+		if (!isInstantApp) {
+			byte[] instantAppCookie = pmc.getInstantAppCookie();
+			if (instantAppCookie != null && instantAppCookie.length > 0) {
+				// If there is an url in the instant app cookies, mark the onboarding as complete and process the url
+				onboardingCompleted = true;
+				Storage.getInstance(this).setOnboardingCompleted(true);
+
+				String url = new String(instantAppCookie, StandardCharsets.UTF_8);
+				checkValidCheckInIntent(url);
+				pmc.setInstantAppCookie(null);
+			}
+
+			viewModel.refreshExposures();
+		}
+
 		if (savedInstanceState == null) {
 			if (onboardingCompleted) {
 				showMainFragment();
@@ -55,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		//TODO: Handle intents also when Activity is not newly created, but the app was already opened
-		if (onboardingCompleted) handleCustomIntents();
+		if (onboardingCompleted && !isInstantApp) handleCustomIntents();
 
 		KeyLoadWorker.startKeyLoadWorker(this);
 
@@ -67,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		viewModel.refreshTraceKeys();
+		if (!InstantApps.getPackageManagerCompat(this).isInstantApp()) {
+			viewModel.refreshTraceKeys();
+		}
 		viewModel.refreshErrors();
 	}
 

@@ -57,7 +57,6 @@ public class MainViewModel extends AndroidViewModel {
 
 	public MainViewModel(@NonNull Application application) {
 		super(application);
-		refreshExposures();
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCurrentVenue();
 		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,
@@ -138,7 +137,7 @@ public class MainViewModel extends AndroidViewModel {
 		}
 	}
 
-	private void refreshExposures() {
+	public void refreshExposures() {
 		List<ExposureEvent> newExposures = CrowdNotifier.getExposureEvents(getApplication());
 		Collections.sort(newExposures, (e1, e2) -> Long.compare(e2.getStartTime(), e1.getStartTime()));
 		exposures.setValue(newExposures);
