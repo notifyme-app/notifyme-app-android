@@ -21,7 +21,6 @@ import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
-import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
