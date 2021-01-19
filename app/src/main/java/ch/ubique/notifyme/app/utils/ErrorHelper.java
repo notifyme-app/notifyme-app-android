@@ -17,15 +17,25 @@ import ch.ubique.notifyme.app.R;
 public class ErrorHelper {
 
 	public static void updateErrorView(View errorView, ErrorState errorState, Runnable customButtonClickAction, Context context) {
+		updateErrorView(errorView, errorState, customButtonClickAction, context, true);
+	}
+
+	public static void updateErrorView(View errorView, ErrorState errorState, Runnable customButtonClickAction, Context context,
+			boolean showButton) {
 		((TextView) errorView.findViewById(R.id.error_status_title)).setText(errorState.getTitleResId());
 		((TextView) errorView.findViewById(R.id.error_status_text)).setText(errorState.getTextResId());
 		((ImageView) errorView.findViewById(R.id.error_status_image))
 				.setImageDrawable(ContextCompat.getDrawable(errorView.getContext(), errorState.getImageResId()));
 
 		TextView buttonView = errorView.findViewById(R.id.error_status_button);
-		buttonView.setText(errorState.getActionResId());
-		buttonView.setPaintFlags(buttonView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-		buttonView.setOnClickListener(v -> executeErrorAction(errorState, customButtonClickAction, context));
+		if (showButton) {
+			buttonView.setVisibility(View.VISIBLE);
+			buttonView.setText(errorState.getActionResId());
+			buttonView.setPaintFlags(buttonView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+			buttonView.setOnClickListener(v -> executeErrorAction(errorState, customButtonClickAction, context));
+		} else {
+			buttonView.setVisibility(View.GONE);
+		}
 	}
 
 	private static void executeErrorAction(ErrorState errorState, Runnable customButtonClickAction, Context context) {

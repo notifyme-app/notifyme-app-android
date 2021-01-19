@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:fillViewport="true">
@@ -10,17 +11,77 @@
 		android:orientation="vertical"
 		android:padding="@dimen/spacing_large">
 
+		<TextView
+			android:id="@+id/onboarding_instant_app_title"
+			style="@style/NotifyMe.Text.Title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:gravity="center"
+			android:text="@string/onboarding_install_app_title"
+			android:textColor="@color/primary" />
+
+		<TextView
+			android:id="@+id/onboarding_instant_app_explanation"
+			style="@style/NotifyMe.Text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:breakStrategy="balanced"
+			android:gravity="center"
+			android:text="@string/onboarding_install_app_explanation" />
+
 		<Space
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_weight="1" />
 
-		<TextView
-			android:id="@+id/instant_app_explanation"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center"
-			android:text="Some explanation about this app" />
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/onboarding_instant_app_venue_info"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<ImageView
+					android:id="@+id/onboarding_instant_app_venue_type_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					tools:src="@drawable/ic_tea" />
+
+				<TextView
+					android:id="@+id/onboarding_instant_app_venue_title"
+					style="@style/NotifyMe.Text.Title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/spacing_large"
+					android:gravity="center"
+					tools:text="Cyber Cafe SV" />
+
+				<TextView
+					android:id="@+id/onboarding_instant_app_venue_subtitle"
+					style="@style/NotifyMe.Text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/spacing_very_small"
+					android:gravity="center"
+					tools:text="Lausanne" />
+			</LinearLayout>
+
+			<include
+				android:id="@+id/onboarding_instant_app_error_view"
+				layout="@layout/item_error_status"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/spacing_very_small"
+				android:layout_marginBottom="@dimen/spacing_very_small"
+				android:visibility="gone"
+				tools:visibility="gone" />
+		</FrameLayout>
 
 		<Space
 			android:layout_width="match_parent"
@@ -28,13 +89,13 @@
 			android:layout_weight="1" />
 
 		<com.google.android.material.button.MaterialButton
-			android:id="@+id/fragment_onboarding_instant_app_install"
+			android:id="@+id/onboarding_instant_app_install_button"
 			style="@style/NotifyMe.Button.Small"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/spacing_large"
-			android:text="Install now" />
+			android:text="@string/onboarding_install_app_button" />
 	</LinearLayout>
 
 </ScrollView>
