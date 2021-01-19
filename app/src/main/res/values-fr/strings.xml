@@ -461,4 +461,19 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <!-- Fuzzy -->
     <string name="web_page_description">"Un système d'enregistrement décentralisé pour réunions, rencontres et événements."</string>
     <string name="imprint_webview_feedback">"Questions, suggestions ou réactions?"</string>
+
+    <!-- Button Text des Löschen-Buttons für eine Exposure-Meldung. -->
+    <string name="delete_exposure_button_title">"Supprimer la notification"</string>
+
+    <!-- Text that is displayed in a Dialog asking the user if the exposure should really be deleted. -->
+    <string name="delete_exposure_warning_dialog_text">"Voulez-vous vraiment supprimer cette notification? Cette action ne peut pas être annulée."</string>
+
+    <!-- Title of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_title">"One last step…"</string>
+
+    <!-- Explanation of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_explanation">"Install the NotifyMe app to check-in and to be informed in case of an incident."</string>
+
+    <!-- Button text of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_button">"Install app"</string>
 </resources>

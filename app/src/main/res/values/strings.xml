@@ -464,4 +464,19 @@ QR Code"</string>
     <!-- Fuzzy -->
     <string name="web_page_description">"A decentralised check-in system for meetings and events"</string>
     <string name="imprint_webview_feedback">"Questions, suggestions or feedback?"</string>
+
+    <!-- Button Text des Löschen-Buttons für eine Exposure-Meldung. -->
+    <string name="delete_exposure_button_title">"Delete notification"</string>
+
+    <!-- Text that is displayed in a Dialog asking the user if the exposure should really be deleted. -->
+    <string name="delete_exposure_warning_dialog_text">"Do you really want to delete this notification? This action can not be undone."</string>
+
+    <!-- Title of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_title">"One last step…"</string>
+
+    <!-- Explanation of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_explanation">"Install the NotifyMe app to check-in and to be informed in case of an incident."</string>
+
+    <!-- Button text of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_button">"Install app"</string>
 </resources>
