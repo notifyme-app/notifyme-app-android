@@ -29,7 +29,7 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1100
+		versionCode 1101
 		versionName "1.1"
 		resConfigs "en", "fr", "de"
 
