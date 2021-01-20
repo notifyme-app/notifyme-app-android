@@ -1,6 +1,7 @@
 package ch.ubique.notifyme.app.qr;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
@@ -95,7 +96,11 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		super.onStart();
 		if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) !=
 				PackageManager.PERMISSION_GRANTED) {
-			requestPermissions(new String[] { Manifest.permission.CAMERA }, PERMISSION_REQUEST_CAMERA);
+			CameraPermissionExplanationDialog dialog = new CameraPermissionExplanationDialog(requireContext());
+			dialog.setOnCancelListener(v -> refreshView(false));
+			dialog.setGrantCameraAccessClickListener(
+					v -> requestPermissions(new String[] { Manifest.permission.CAMERA }, PERMISSION_REQUEST_CAMERA));
+			dialog.show();
 		} else {
 			startCameraAndQrAnalyzer();
 		}
@@ -249,19 +254,22 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				.commit();
 	}
 
+	private void refreshView(boolean cameraPermissionGranted) {
+		if (cameraPermissionGranted) {
+			mainView.setVisibility(View.VISIBLE);
+			errorView.setVisibility(View.GONE);
+			startCameraAndQrAnalyzer();
+		} else {
+			errorView.setVisibility(View.VISIBLE);
+			ErrorHelper.updateErrorView(errorView, ErrorState.CAMERA_ACCESS_DENIED, null, getContext());
+			mainView.setVisibility(View.GONE);
+		}
+	}
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		if (requestCode == PERMISSION_REQUEST_CAMERA) {
-			if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				mainView.setVisibility(View.VISIBLE);
-				errorView.setVisibility(View.GONE);
-				startCameraAndQrAnalyzer();
-			} else {
-				errorView.setVisibility(View.VISIBLE);
-				ErrorHelper.updateErrorView(errorView, ErrorState.CAMERA_ACCESS_DENIED, null, getContext());
-				mainView.setVisibility(View.GONE);
-			}
+			refreshView(grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED);
 		}
 	}
 

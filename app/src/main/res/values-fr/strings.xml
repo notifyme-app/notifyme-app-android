@@ -20,10 +20,10 @@
     <string name="no_report_title">"Aucun rapport"</string>
 
     <!-- Check-In: scan code -->
-    <string name="checkin_scan_code">"Scannez le code QR pour vous enregistrer"</string>
+    <string name="checkin_scan_code">"Scannez le QR code pour vous enregistrer"</string>
 
     <!-- iOS: Text bei Berechtigung für Kamera -->
-    <string name="NSCameraUsageDescription">"Votre caméra est utilisée pour scanner le code QR."</string>
+    <string name="NSCameraUsageDescription">"Votre caméra est utilisée pour scanner le QR code."</string>
 
     <!-- iOS Permission: Text to show for FaceID -->
     <string name="NSFaceIDUsageDescription">"Activez l'identification par Face ID pour accéder à votre journal."</string>
@@ -62,7 +62,7 @@
     <string name="report_message_text_highlight">"Une infection"</string>
 
     <!-- QR-Scanner: request for scan text -->
-    <string name="qrscanner_scan_qr_text">"Scannez le code QR pour vous enregistrer."</string>
+    <string name="qrscanner_scan_qr_text">"Scannez le QR code pour vous enregistrer."</string>
 
     <!-- QR Code Scanner: no valid code text -->
     <string name="qrscanner_error">"Le code n'est pas valide!"</string>
@@ -175,7 +175,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="cancel">"Annuler"</string>
 
     <!-- QR Scanner: camera has no permission explanation text -->
-    <string name="qr_scanner_no_camera_permission">"l'Accès à votre caméra est nécessaire pour scanner le code QR."</string>
+    <string name="qr_scanner_no_camera_permission">"l'Accès à votre caméra est nécessaire pour scanner le QR code."</string>
 
     <!-- Title for an exposure notification. -->
     <string name="exposure_notification_title">"Nouveau message"</string>
@@ -219,7 +219,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_title">"Créer code QR démo"</string>
+    <string name="web_generator_title">"Créer QR code démo"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_category_label">"Catégorie"</string>
@@ -255,13 +255,13 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_generator_addition_placeholder">"p. ex. Bâtiment ou lieu"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_generation_button_label">"Générer un code QR"</string>
+    <string name="web_generator_generation_button_label">"Générer un QR code"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_back">"Retour"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_public_bulletpoint_1">"Avec ce code QR les visiteurs peuvent s'enregistrer sur place."</string>
+    <string name="web_generator_public_bulletpoint_1">"Avec ce QR code les visiteurs peuvent s'enregistrer sur place."</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_public_bulletpoint_2">"Le code peut être scanné avec NotifyMe"</string>
@@ -270,7 +270,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_generator_public_bulletpoint_3">"Aucune données personnelles ne sont saisies. Les enregistrements ne sont pas visibles pour les propriétaires de lieux."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_private_bulletpoint_1">"Ce code QR informe les visiteurs en cas incident."</string>
+    <string name="web_generator_private_bulletpoint_1">"Ce QR code informe les visiteurs en cas incident."</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
@@ -282,12 +282,12 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_generator_pdf_button">"Télécharger PDF"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_public_qr_title">"Code QR\
+    <string name="web_generator_public_qr_title">"QR Code\
 &lt;span&gt;publique&lt;/span&gt;
 "</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_private_qr_title">"Code QR\
+    <string name="web_generator_private_qr_title">"QR Code\
 &lt;span&gt;privé&lt;/span&gt;"</string>
 
     <!-- Fuzzy -->
@@ -320,7 +320,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="error_background_refresh_title">"Actualisation de l'arrière-plan désactivée"</string>
     <string name="error_background_refresh_text">"Activez les notifications dans vos réglages pour être informé immédiatement au cas où vous avez reçu un rapport."</string>
     <string name="error_camera_permission_title">"Accès à la caméra bloqué."</string>
-    <string name="error_camera_permission_text">"Autorisez l'accès à votre caméra pour pouvoir scanner le code QR."</string>
+    <string name="error_camera_permission_text">"Autorisez l'accès à votre caméra pour pouvoir scanner le QR code ."</string>
     <string name="error_action_change_settings">"Modifier les paramètres"</string>
     <string name="error_action_retry">"Réessayer"</string>
 
@@ -331,7 +331,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_upload_error_message">"Téléchargement échoué"</string>
 
     <!-- Fuzzy -->
-    <string name="web_upload_missing_payload">"Code privé invalable. Scannez un code QR valable."</string>
+    <string name="web_upload_missing_payload">"Code privé invalable. Scannez un QR code valable."</string>
 
     <!-- Titel einer generischen Fehleranzeige -->
     <string name="error_title">"Erreur"</string>
@@ -410,8 +410,8 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="onboarding_hint2">"Veuillez aussi lire les conditions générales."</string>
     <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
     <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
-    <string name="qr_scanner_error_code_not_yet_valid">"Le code QR n'est pas valide."</string>
-    <string name="qr_scanner_error_code_not_valid_anymore">"Le code QR n'est plus valide."</string>
+    <string name="qr_scanner_error_code_not_yet_valid">"Le QR code n'est pas valide."</string>
+    <string name="qr_scanner_error_code_not_valid_anymore">"Le QR code n'est plus valide."</string>
 
     <!-- Onboarding: subtitle on first page -->
     <string name="onboarding_subtitle">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
@@ -461,4 +461,32 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <!-- Fuzzy -->
     <string name="web_page_description">"Un système d'enregistrement décentralisé pour réunions, rencontres et événements."</string>
     <string name="imprint_webview_feedback">"Questions, suggestions ou réactions?"</string>
+
+    <!-- Button Text des Löschen-Buttons für eine Exposure-Meldung. -->
+    <string name="delete_exposure_button_title">"Supprimer"</string>
+
+    <!-- Text that is displayed in a Dialog asking the user if the exposure should really be deleted. -->
+    <string name="delete_exposure_warning_dialog_text">"Vous êtes sur le point de retirer ce rapport d'exposition. Cette action est irréversible. Veuillez confirmer que vous en êtes sûr."</string>
+
+    <!-- Title of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_title">"La dernière étape..."</string>
+
+    <!-- Explanation of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_explanation">"Installez l'application pour vous enregistrer et pour rester informé en cas d'incidents."</string>
+
+    <!-- Button text of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_button">"Installer l'application"</string>
+    <string name="delete_now_exposure_button_title">"Supprimer maintenant"</string>
+
+    <!-- Tagebuch: Titel bei leerem Tagebuch -->
+    <string name="empty_diary_title">"Votre journal est vide."</string>
+
+    <!-- Tagebuch: Text bei leerem Tagebuch -->
+    <string name="empty_diary_text">"Les réunions et événements auxquels vous assistez peuvent être affiché dans votre journal après le check-out."</string>
+
+    <!-- Text, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <string name="camera_permission_dialog_text">"NotifyMe nécessite l'accès à votre caméra. La caméra sera qu'utilisé pour scanner des QR code."</string>
+
+    <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <string name="camera_permission_dialog_action">"Accorder l'accès à la caméra."</string>
 </resources>
