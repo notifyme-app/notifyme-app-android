@@ -370,4 +370,32 @@ QR Code"</string>
     <!-- For sharing on Twitter and Facebook -->
     <string name="web_page_description">"A decentralised check-in system for meetings and events"</string>
     <string name="imprint_webview_feedback">"Questions, suggestions or feedback?"</string>
+
+    <!-- Button Text des Löschen-Buttons für eine Exposure-Meldung. -->
+    <string name="delete_exposure_button_title">"Remove"</string>
+
+    <!-- Text that is displayed in a Dialog asking the user if the exposure should really be deleted. -->
+    <string name="delete_exposure_warning_dialog_text">"You are about to remove this exposure report. This action is irreversible. Please confirm you are sure about this."</string>
+
+    <!-- Title of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_title">"One last step…"</string>
+
+    <!-- Explanation of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_explanation">"Install the NotifyMe app to check-in and to be informed in case of an incident."</string>
+
+    <!-- Button text of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_button">"Install app"</string>
+    <string name="delete_now_exposure_button_title">"Remove now"</string>
+
+    <!-- Tagebuch: Titel bei leerem Tagebuch -->
+    <string name="empty_diary_title">"No diary entries yet"</string>
+
+    <!-- Tagebuch: Text bei leerem Tagebuch -->
+    <string name="empty_diary_text">"The meetings &amp; events you attended to can be shown in your diary after checking out."</string>
+
+    <!-- Text, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <string name="camera_permission_dialog_text">"NotifyMe requires access to your camera. The camera will only be used for scanning QR codes."</string>
+
+    <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <string name="camera_permission_dialog_action">"Grant camera access"</string>
 </resources>
