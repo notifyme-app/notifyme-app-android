@@ -2,6 +2,7 @@ package ch.ubique.notifyme.app.diary;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +33,7 @@ public class DiaryFragment extends Fragment {
 
 	private MainViewModel viewModel;
 	private Toolbar toolbar;
+	private ViewGroup emptyView;
 	private DiaryRecyclerAdapter recyclerAdapter = new DiaryRecyclerAdapter();
 
 	public DiaryFragment() { super(R.layout.fragment_diary); }
@@ -50,6 +52,7 @@ public class DiaryFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		toolbar = view.findViewById(R.id.fragment_diary_toolbar);
 		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
+		emptyView = view.findViewById(R.id.fragment_diary_empty_view);
 
 		RecyclerView recyclerView = view.findViewById(R.id.fragment_diary_recycler_view);
 		recyclerView.setAdapter(recyclerAdapter);
@@ -60,6 +63,9 @@ public class DiaryFragment extends Fragment {
 
 			List<DiaryEntry> diaryEntries = DiaryStorage.getInstance(getContext()).getEntries();
 			Collections.sort(diaryEntries, (d1, d2) -> Long.compare(d2.getArrivalTime(), d1.getArrivalTime()));
+
+			boolean isEmpty = diaryEntries == null || diaryEntries.isEmpty();
+			emptyView.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
 
 			String daysAgoString = "";
 			for (DiaryEntry diaryEntry : diaryEntries) {
