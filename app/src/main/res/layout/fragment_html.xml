@@ -6,14 +6,14 @@
 	android:elevation="@dimen/modal_elevation"
 	android:orientation="vertical">
 
-	<ImageView
+	<ImageButton
 		android:id="@+id/html_fragment_close_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="end"
+		android:background="@drawable/ripple_rounded"
 		android:clickable="true"
 		android:focusable="true"
-		android:foreground="?android:selectableItemBackgroundBorderless"
 		android:padding="@dimen/spacing_large"
 		android:src="@drawable/ic_close" />
 

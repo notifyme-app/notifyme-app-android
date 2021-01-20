@@ -296,7 +296,7 @@ QR-Code"</string>
     <string name="web_upload_title">"Besucher informieren"</string>
 
     <!-- Fuzzy -->
-    <string name="web_upload_period_label">"Betroffener Zeitraum"</string>
+    <string name="web_upload_period_label">"Betroffener Zeitraum Von/Bis"</string>
 
     <!-- Fuzzy -->
     <string name="web_upload_period_from_label">"Von"</string>
@@ -474,4 +474,33 @@ zur Nutzung"</string>
     <!-- Fuzzy -->
     <string name="web_page_description">"Dezentral gespeicherte Check-Ins für Meetings &amp; Events"</string>
     <string name="imprint_webview_feedback">"Fragen, Anregungen oder Feedback?"</string>
+
+    <!-- Button Text des Löschen-Buttons für eine Exposure-Meldung. -->
+    <string name="delete_exposure_button_title">"Entfernen"</string>
+
+    <!-- Text that is displayed in a Dialog asking the user if the exposure should really be deleted. -->
+    <string name="delete_exposure_warning_dialog_text">"Wollen Sie diese Meldung wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden."</string>
+
+    <!-- Title of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_title">"Noch ein Schritt…"</string>
+
+    <!-- Explanation of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_explanation">"Installieren Sie die NotifyMe App für Check-Ins und Meldungen bei einem Vorfall."</string>
+
+    <!-- Button text of the instant app/app clips onboarding screen -->
+    <string name="onboarding_install_app_button">"App installieren"</string>
+    <string name="delete_now_exposure_button_title">"Jetzt entfernen"</string>
+
+    <!-- Tagebuch: Titel bei leerem Tagebuch -->
+    <string name="empty_diary_title">"Noch keine Tagebucheinträge vorhanden"</string>
+
+    <!-- Tagebuch: Text bei leerem Tagebuch -->
+    <string name="empty_diary_text">"Die Meetings &amp; Events, die besucht wurden, erscheinen im Tagebuch nach dem Check-out."</string>
+
+    <!-- Text, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <!-- Fuzzy -->
+    <string name="camera_permission_dialog_text">"NotifyMe benötigt Zugriff auf die Kamera Ihres Gerätes. Die Kamera wird nur verwendet, um QR Codes zu scannen."</string>
+
+    <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
+    <string name="camera_permission_dialog_action">"Kamera-Zugriff erlauben"</string>
 </resources>
