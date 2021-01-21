@@ -1,19 +1,17 @@
 package ch.ubique.notifyme.app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -32,18 +30,22 @@ import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.KeyLoadWorker;
-import ch.ubique.notifyme.app.onboarding.OnboardingIntroductionFragment;
 import ch.ubique.notifyme.app.reports.ExposureFragment;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
-import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_CHECK_OUT_NOW;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_EXPOSURE_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_ONGOING_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_REMINDER_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_ID_EXTRA;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.autoCheckoutIfNecessary;
 
 public class MainActivity extends AppCompatActivity {
 
+	private static final int REQUEST_CODE_ONBOARDING = 1;
 	private MainViewModel viewModel;
 	private Storage storage;
 	private static final String KEY_IS_INTENT_CONSUMED = "KEY_IS_INTENT_CONSUMED";
@@ -67,22 +69,18 @@ public class MainActivity extends AppCompatActivity {
 		boolean onboardingCompleted = storage.getOnboardingCompleted();
 
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(this);
-		boolean isInstantApp = pmc.isInstantApp();
+		byte[] instantAppCookie = pmc.getInstantAppCookie();
+		if (instantAppCookie != null && instantAppCookie.length > 0) {
+			// If there is an url in the instant app cookies, mark the onboarding as complete and process the url
+			onboardingCompleted = true;
+			storage.setOnboardingCompleted(true);
 
-		if (!isInstantApp) {
-			byte[] instantAppCookie = pmc.getInstantAppCookie();
-			if (instantAppCookie != null && instantAppCookie.length > 0) {
-				// If there is an url in the instant app cookies, mark the onboarding as complete and process the url
-				onboardingCompleted = true;
-				Storage.getInstance(this).setOnboardingCompleted(true);
-
-				String url = new String(instantAppCookie, StandardCharsets.UTF_8);
-				checkValidCheckInIntent(url);
-				pmc.setInstantAppCookie(null);
-			}
-
-			viewModel.refreshExposures();
+			String url = new String(instantAppCookie, StandardCharsets.UTF_8);
+			checkValidCheckInIntent(url);
+			pmc.setInstantAppCookie(null);
 		}
+
+		viewModel.refreshExposures();
 
 		if (savedInstanceState == null) {
 			if (onboardingCompleted) {
@@ -113,18 +111,24 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(this);
-		if (storage.getOnboardingCompleted() && !pmc.isInstantApp()) checkIntentForActions();
+		if (storage.getOnboardingCompleted()) checkIntentForActions();
 		LocalBroadcastManager.getInstance(this)
 				.registerReceiver(autoCheckoutBroadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == REQUEST_CODE_ONBOARDING) {
+			showMainFragment();
+		}
+	}
+
+	@Override
 	protected void onStart() {
 		super.onStart();
-		if (!InstantApps.getPackageManagerCompat(this).isInstantApp()) {
-			viewModel.refreshTraceKeys();
-		}
+		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
 		autoCheckoutIfNecessary(this, viewModel.getCheckInState());
 	}
@@ -239,9 +243,9 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showOnboarding() {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, OnboardingIntroductionFragment.newInstance())
-				.commit();
+		final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://qr-dev.notify-me.ch"));
+		intent.setPackage(getPackageName());
+		startActivityForResult(intent, REQUEST_CODE_ONBOARDING);
 	}
 
 

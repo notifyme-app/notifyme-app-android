@@ -87,6 +87,7 @@ android {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
+	dynamicFeatures = [':onboarding']
 }
 
 sonarqube {
@@ -122,36 +123,36 @@ protobuf {
 
 dependencies {
 
-	implementation 'androidx.appcompat:appcompat:1.2.0'
-	implementation 'com.google.android.material:material:1.2.1'
-	implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-	implementation 'androidx.fragment:fragment:1.2.5'
-	implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
-	implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-	implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
-	testImplementation 'junit:junit:4.+'
-	androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-	androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+	api 'androidx.appcompat:appcompat:1.2.0'
+	api 'com.google.android.material:material:1.2.1'
+	api 'androidx.constraintlayout:constraintlayout:2.0.4'
+	api 'androidx.fragment:fragment:1.2.5'
+	api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+	api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+	api 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+	testApi 'junit:junit:4.+'
+	androidTestApi 'androidx.test.ext:junit:1.1.2'
+	androidTestApi 'androidx.test.espresso:espresso-core:3.3.0'
 
 	// QR code scanning
 	def camerax_version = "1.0.0-rc01"
-	implementation "androidx.camera:camera-camera2:${camerax_version}"
-	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
-	implementation "androidx.camera:camera-view:1.0.0-alpha20"
+	api "androidx.camera:camera-camera2:${camerax_version}"
+	api "androidx.camera:camera-lifecycle:${camerax_version}"
+	api "androidx.camera:camera-view:1.0.0-alpha20"
 	//DO NOT UPDATE ZXING TO 3.4.0! (3.4.0 is not compatible with API Level 23 or lower)
-	implementation "com.google.zxing:core:3.3.0"
+	api "com.google.zxing:core:3.3.0"
 
-	implementation 'com.google.code.gson:gson:2.8.6'
+	api 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
+	api 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
 
-	implementation 'androidx.work:work-runtime:2.4.0'
-	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-	implementation 'com.google.protobuf:protobuf-lite:3.0.1'
-	implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-	implementation 'androidx.security:security-crypto:1.0.0-rc03'
-	implementation 'androidx.biometric:biometric:1.1.0-rc01'
-	implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
+	api 'androidx.work:work-runtime:2.4.0'
+	api 'com.squareup.retrofit2:retrofit:2.9.0'
+	api 'com.google.protobuf:protobuf-lite:3.0.1'
+	api 'com.squareup.retrofit2:converter-gson:2.9.0'
+	api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+	api 'androidx.security:security-crypto:1.0.0-rc03'
+	api 'androidx.biometric:biometric:1.1.0-rc01'
+	api 'com.google.android.gms:play-services-instantapps:17.0.0'
 
 }

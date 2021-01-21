@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.onboarding;
+package ch.ubique.notifyme.onboarding;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +22,6 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import org.crowdnotifier.android.sdk.utils.QrUtils;
 
 import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.utils.ErrorHelper;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;

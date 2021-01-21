@@ -1,0 +1,53 @@
+plugins {
+	id 'com.android.dynamic-feature'
+}
+android {
+	compileSdkVersion 30
+	buildToolsVersion "30.0.3"
+
+	defaultConfig {
+		minSdkVersion 23
+		targetSdkVersion 30
+		versionCode 1
+		versionName "1.0"
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	productFlavors {
+		dev {
+			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
+			applicationIdSuffix '.dev'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
+		}
+		prod {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
+		}
+		abn {
+			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
+			applicationIdSuffix '.abn'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
+		}
+	}
+
+	flavorDimensions "version"
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+}
+
+dependencies {
+	implementation project(":app")
+}

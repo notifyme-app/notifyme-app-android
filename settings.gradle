@@ -1,2 +1,3 @@
+include ':onboarding'
 include ':app'
 rootProject.name = "NotifyMe"
