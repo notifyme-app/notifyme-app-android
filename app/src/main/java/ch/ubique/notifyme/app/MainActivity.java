@@ -27,13 +27,15 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 import ch.ubique.notifyme.app.checkin.CheckInFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
-import ch.ubique.notifyme.app.model.CheckInState;
-import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.KeyLoadWorker;
 import ch.ubique.notifyme.app.reports.ExposureFragment;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.Storage;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.FeatureUtil;
+import ch.ubique.notifyme.base.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_CHECK_OUT_NOW;
 import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_EXPOSURE_NOTIFICATION;
@@ -158,7 +160,14 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		if (getIntent().getData() != null) {
-			checkValidCheckInIntent(getIntent().getData().toString());
+			String dataString = getIntent().getDataString();
+			if (dataString.startsWith(FeatureUtil.APP_SCHEME)) {
+				dataString = getIntent().getStringExtra(FeatureUtil.ARG_MAIN_URL);
+			}
+
+			if (dataString != null) {
+				checkValidCheckInIntent(dataString);
+			}
 		}
 	}
 
@@ -195,8 +204,9 @@ public class MainActivity extends AppCompatActivity {
 	private void showCheckOutScreen() {
 		showCheckedInScreen();
 		getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter,
+						ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commit();
@@ -243,11 +253,9 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showOnboarding() {
-		final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://qr-dev.notify-me.ch"));
-		intent.setPackage(getPackageName());
+		Intent intent = FeatureUtil.createIntentForOnboarding(this);
 		startActivityForResult(intent, REQUEST_CODE_ONBOARDING);
 	}
-
 
 	@Override
 	public void onBackPressed() {
@@ -274,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
 
 	public interface BackPressListener {
 		boolean onBackPressed();
-
 	}
 
 }

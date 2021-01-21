@@ -1,9 +1,9 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
-import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.R;
 
 public enum ErrorState {
 	NETWORK(R.string.error_network_title, R.string.error_network_text, R.string.error_action_retry, R.drawable.ic_error),

@@ -1,11 +1,10 @@
-package ch.ubique.notifyme.app.model;
+package ch.ubique.notifyme.base.model;
 
 import android.content.Context;
 import androidx.annotation.IdRes;
 
-import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.R;
-
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.R;
 
 public enum ReminderOption {
 

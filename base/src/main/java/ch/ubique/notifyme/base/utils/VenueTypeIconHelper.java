@@ -1,10 +1,10 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import androidx.annotation.DrawableRes;
 
 import org.crowdnotifier.android.sdk.model.Qr;
 
-import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.R;
 
 public class VenueTypeIconHelper {
 

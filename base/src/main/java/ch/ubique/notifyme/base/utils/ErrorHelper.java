@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,9 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.core.content.ContextCompat;
 
-import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.R;
 
 public class ErrorHelper {
 

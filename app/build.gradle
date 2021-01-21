@@ -1,9 +1,9 @@
 plugins {
-	id 'com.android.application'
+	id 'com.android.dynamic-feature'
 	id 'org.sonarqube' version '3.0'
-	id 'com.google.protobuf'
 }
 
+// TODO Try to reuse from base gradle
 ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
 ext.readPropertyWithDefault = { paramName, defaultValue ->
 	if (project.hasProperty(paramName)) {
@@ -26,41 +26,23 @@ android {
 	buildToolsVersion "29.0.3"
 
 	defaultConfig {
-		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
 		versionCode 1120
 		versionName "1.1.2"
 		resConfigs "en", "fr", "de"
 
-		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
-
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 
 	productFlavors {
 		dev {
-			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
 			applicationIdSuffix '.dev'
-			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-config.notify-me.ch/"'
-			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
-			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
-			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
 		}
 		prod {
-			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
-			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/"'
-			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
-			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
-			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
 		}
 		abn {
-			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
 			applicationIdSuffix '.abn'
-			buildConfigField "String", "CONFIG_BASE_URL", '"https://cn-a.bit.admin.ch/"'
-			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
-			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
-			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
 		}
 	}
 
@@ -87,7 +69,10 @@ android {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
-	dynamicFeatures = [':onboarding']
+
+	buildFeatures {
+		buildConfig = false
+	}
 }
 
 sonarqube {
@@ -99,60 +84,24 @@ sonarqube {
 	}
 }
 
-protobuf {
-	protoc {
-		artifact = 'com.google.protobuf:protoc:3.0.0'
-	}
-	plugins {
-		javalite {
-			artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
-		}
-	}
-	generateProtoTasks {
-		all().each { task ->
-			task.builtins {
-				remove java
-			}
-			task.plugins {
-				javalite {}
-			}
-		}
-	}
-}
-
 
 dependencies {
+	implementation project(":base")
 
-	api 'androidx.appcompat:appcompat:1.2.0'
-	api 'com.google.android.material:material:1.2.1'
-	api 'androidx.constraintlayout:constraintlayout:2.0.4'
-	api 'androidx.fragment:fragment:1.2.5'
-	api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
-	api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-	api 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
-	testApi 'junit:junit:4.+'
-	androidTestApi 'androidx.test.ext:junit:1.1.2'
-	androidTestApi 'androidx.test.espresso:espresso-core:3.3.0'
+	implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 
 	// QR code scanning
 	def camerax_version = "1.0.0-rc01"
-	api "androidx.camera:camera-camera2:${camerax_version}"
-	api "androidx.camera:camera-lifecycle:${camerax_version}"
-	api "androidx.camera:camera-view:1.0.0-alpha20"
+	implementation "androidx.camera:camera-camera2:${camerax_version}"
+	implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+	implementation "androidx.camera:camera-view:1.0.0-alpha20"
 	//DO NOT UPDATE ZXING TO 3.4.0! (3.4.0 is not compatible with API Level 23 or lower)
-	api "com.google.zxing:core:3.3.0"
+	implementation "com.google.zxing:core:3.3.0"
 
-	api 'com.google.code.gson:gson:2.8.6'
-
-	api 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
-
-	api 'androidx.work:work-runtime:2.4.0'
-	api 'com.squareup.retrofit2:retrofit:2.9.0'
-	api 'com.google.protobuf:protobuf-lite:3.0.1'
-	api 'com.squareup.retrofit2:converter-gson:2.9.0'
-	api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-	api 'androidx.security:security-crypto:1.0.0-rc03'
-	api 'androidx.biometric:biometric:1.1.0-rc01'
-	api 'com.google.android.gms:play-services-instantapps:17.0.0'
+	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+	implementation 'androidx.security:security-crypto:1.0.0-rc03'
+	implementation 'androidx.biometric:biometric:1.1.0-rc01'
 
 }

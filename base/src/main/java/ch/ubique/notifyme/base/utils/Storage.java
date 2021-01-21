@@ -1,11 +1,12 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
-import ch.ubique.notifyme.app.model.CheckInState;
+import ch.ubique.notifyme.base.model.CheckInState;
+
 
 public class Storage {
 

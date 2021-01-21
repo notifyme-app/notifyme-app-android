@@ -21,8 +21,8 @@ import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.StringUtils;
 
 public class ReportsFragment extends Fragment {
 
@@ -80,13 +80,13 @@ public class ReportsFragment extends Fragment {
 		}
 
 		if (exposures == null || exposures.isEmpty()) {
-			toolbar.setTitle(R.string.no_report_title);
+			toolbar.setTitle(ch.ubique.notifyme.base.R.string.no_report_title);
 			items.add(new ItemNoReportsHeader());
 		} else if (exposures.size() == 1) {
-			toolbar.setTitle(R.string.report_title_singular);
+			toolbar.setTitle(ch.ubique.notifyme.base.R.string.report_title_singular);
 			items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
 		} else {
-			toolbar.setTitle(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(exposures.size())));
+			toolbar.setTitle(getString(ch.ubique.notifyme.base.R.string.report_title_plural).replace("{NUMBER}", String.valueOf(exposures.size())));
 			items.add(new ItemReportsHeader(v -> Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show()));
 		}
 
@@ -108,8 +108,8 @@ public class ReportsFragment extends Fragment {
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter, ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
 				.addToBackStack(ReportsFragment.TAG)
 				.commit();

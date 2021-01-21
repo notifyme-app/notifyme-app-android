@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -20,11 +19,11 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
-import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.utils.NotificationHelper;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.R;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class CheckInFragment extends Fragment {
 
@@ -108,7 +107,7 @@ public class CheckInFragment extends Fragment {
 	private void showHomeFragment() {
 		FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-				.replace(R.id.container, MainFragment.newInstance());
+				.replace(ch.ubique.notifyme.app.R.id.container, MainFragment.newInstance());
 		transaction.commit();
 	}
 

@@ -56,8 +56,8 @@ public class DeleteNotificationDialogFragment extends DialogFragment {
 		View closeButton = view.findViewById(R.id.warning_dialog_close_button);
 		Button deleteButton = view.findViewById(R.id.warning_dialog_action_button);
 		TextView explanationText = view.findViewById(R.id.warning_dialog_text);
-		explanationText.setText(R.string.delete_exposure_warning_dialog_text);
-		deleteButton.setText(R.string.delete_now_exposure_button_title);
+		explanationText.setText(ch.ubique.notifyme.base.R.string.delete_exposure_warning_dialog_text);
+		deleteButton.setText(ch.ubique.notifyme.base.R.string.delete_now_exposure_button_title);
 
 		closeButton.setOnClickListener(v -> dismiss());
 		deleteButton.setOnClickListener(v -> deleteNow());

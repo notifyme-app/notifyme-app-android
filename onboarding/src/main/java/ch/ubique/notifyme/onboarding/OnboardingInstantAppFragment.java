@@ -21,10 +21,10 @@ import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 import org.crowdnotifier.android.sdk.utils.QrUtils;
 
-import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.utils.ErrorHelper;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.utils.ErrorHelper;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class OnboardingInstantAppFragment extends Fragment {
 

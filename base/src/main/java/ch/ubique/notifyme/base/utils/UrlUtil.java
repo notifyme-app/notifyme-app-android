@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.model;
+package ch.ubique.notifyme.base.model;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 

@@ -1,4 +1,4 @@
-package ch.ubique.notifyme.app.utils;
+package ch.ubique.notifyme.base.utils;
 
 import android.content.Context;
 import android.text.Spannable;
@@ -12,8 +12,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import ch.ubique.notifyme.app.R;
-
+import ch.ubique.notifyme.base.R;
 
 public class StringUtils {
 

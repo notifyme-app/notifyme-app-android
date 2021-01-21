@@ -1,12 +1,12 @@
 package ch.ubique.notifyme.onboarding;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import ch.ubique.notifyme.app.utils.Storage;
+import ch.ubique.notifyme.base.utils.FeatureUtil;
+import ch.ubique.notifyme.base.utils.Storage;
 
 public class OnboardingActivity extends AppCompatActivity {
 
@@ -30,10 +30,7 @@ public class OnboardingActivity extends AppCompatActivity {
 	}
 
 	private void showMainActivity() {
-		Intent intent = new Intent(this, MainActivity.class);
-		if (url != null) {
-			intent.setData(Uri.parse(url));
-		}
+		Intent intent = FeatureUtil.createIntentForMain(this, url);
 		startActivity(intent);
 		finish();
 	}

@@ -16,8 +16,8 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.diary.HideInDiaryDialogFragment;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class ExposureFragment extends Fragment {
 
@@ -68,8 +68,8 @@ public class ExposureFragment extends Fragment {
 		closeButton.setOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 		deleteButton.setOnClickListener(v -> showDeleteExposureDialog());
 		header.setText(StringUtils
-				.getTwoColoredString(getString(R.string.report_message_text), getString(R.string.report_message_text_highlight),
-						getResources().getColor(R.color.tertiary, null)));
+				.getTwoColoredString(getString(ch.ubique.notifyme.base.R.string.report_message_text), getString(ch.ubique.notifyme.base.R.string.report_message_text_highlight),
+						getResources().getColor(ch.ubique.notifyme.base.R.color.tertiary, null)));
 		daysAgo.setText(StringUtils.getDaysAgoString(exposure.getStartTime(), getContext()));
 		dayTextView.setText(StringUtils.getCheckOutDateString(getContext(), exposure.getStartTime(), exposure.getEndTime()));
 		String startTime = StringUtils.getHourMinuteTimeString(exposure.getStartTime(), ":");

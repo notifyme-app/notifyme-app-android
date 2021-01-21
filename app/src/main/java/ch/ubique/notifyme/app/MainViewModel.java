@@ -20,12 +20,12 @@ import java.util.List;
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
-import ch.ubique.notifyme.app.model.ReminderOption;
-import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.network.ConfigServiceController;
 import ch.ubique.notifyme.app.network.TraceKeysServiceController;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.Storage;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.Storage;
 
 import static ch.ubique.notifyme.app.network.KeyLoadWorker.ACTION_NEW_EXPOSURE_NOTIFICATION;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;

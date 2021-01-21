@@ -1,0 +1,128 @@
+plugins {
+	id 'com.android.application'
+	id 'com.google.protobuf'
+}
+
+ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
+ext.readPropertyWithDefault = { paramName, defaultValue ->
+	if (project.hasProperty(paramName)) {
+		return project.getProperties().get(paramName)
+	} else {
+		Properties properties = new Properties()
+		if (project.rootProject.file('local.properties').exists()) {
+			properties.load(project.rootProject.file('local.properties').newDataInputStream())
+		}
+		if (properties.getProperty(paramName) != null) {
+			return properties.getProperty(paramName)
+		} else {
+			return defaultValue
+		}
+	}
+}
+
+android {
+	compileSdkVersion 30
+	buildToolsVersion "30.0.3"
+
+	defaultConfig {
+		applicationId "ch.ubique.notifyme"
+		minSdkVersion 23
+		targetSdkVersion 30
+		versionCode 1
+		versionName "1.0"
+
+		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	productFlavors {
+		dev {
+			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
+			applicationIdSuffix '.dev'
+			buildConfigField "String", "QR_CODE_HOST_NAME", '"qr-dev.notify-me.ch"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-config.notify-me.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
+		}
+		prod {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+			buildConfigField "String", "QR_CODE_HOST_NAME", '"qr.notify-me.ch"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
+		}
+		abn {
+			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
+			applicationIdSuffix '.abn'
+			buildConfigField "String", "QR_CODE_HOST_NAME", '"qr-abn.notify-me.ch"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
+		}
+	}
+
+	flavorDimensions "version"
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	dynamicFeatures = [':onboarding', ':app']
+
+	buildFeatures {
+		buildConfig = true
+	}
+}
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.0.0'
+	}
+	plugins {
+		javalite {
+			artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+		}
+	}
+	generateProtoTasks {
+		all().each { task ->
+			task.builtins {
+				remove java
+			}
+			task.plugins {
+				javalite {}
+			}
+		}
+	}
+}
+
+dependencies {
+
+	api 'androidx.appcompat:appcompat:1.2.0'
+	api 'com.google.android.material:material:1.2.1'
+	api 'androidx.constraintlayout:constraintlayout:2.0.4'
+	api 'androidx.fragment:fragment:1.2.5'
+	api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+	api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+
+	api 'com.google.code.gson:gson:2.8.6'
+
+	api 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
+
+	api 'androidx.work:work-runtime:2.4.0'
+	api 'com.google.protobuf:protobuf-lite:3.0.1'
+	api 'com.google.android.gms:play-services-instantapps:17.0.0'
+
+	testApi 'junit:junit:4.+'
+	androidTestApi 'androidx.test.ext:junit:1.1.2'
+	androidTestApi 'androidx.test.espresso:espresso-core:3.3.0'
+}

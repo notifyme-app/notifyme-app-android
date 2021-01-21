@@ -1,16 +1,16 @@
 package ch.ubique.notifyme.app;
 
-import androidx.annotation.NonNull;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
@@ -21,9 +21,13 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.diary.DiaryFragment;
 import ch.ubique.notifyme.app.impressum.HtmlFragment;
-import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
-import ch.ubique.notifyme.app.utils.*;
+import ch.ubique.notifyme.app.reports.ReportsFragment;
+import ch.ubique.notifyme.app.utils.AssetUtil;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.utils.ErrorHelper;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.StringUtils;
 
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
 
@@ -61,8 +65,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View errorViewSmall = view.findViewById(R.id.reports_header_error_view);
 		View nonProductiveInfo = view.findViewById(R.id.fragment_main_non_productive_info);
 
-		appNameTextView.setText(StringUtils.getTwoColoredString(getString(R.string.app_name),
-				getString(R.string.app_name_highlight), getResources().getColor(R.color.primary, null)));
+		appNameTextView.setText(StringUtils.getTwoColoredString(getString(ch.ubique.notifyme.base.R.string.app_name),
+				getString(ch.ubique.notifyme.base.R.string.app_name_highlight), getResources().getColor(ch.ubique.notifyme.base.R.color.primary, null)));
 		infoButton.setOnClickListener(v -> showImpressum());
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
@@ -90,8 +94,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				noReportsHeader.setVisibility(View.VISIBLE);
 				reportsHeader.setVisibility(View.GONE);
 				splashText.setVisibility(View.VISIBLE);
-				splashText.setText(StringUtils.getTwoColoredString(getString(R.string.no_report_hero_text),
-						getString(R.string.no_report_hero_text_highlight), getResources().getColor(R.color.secondary, null)));
+				splashText.setText(StringUtils.getTwoColoredString(getString(ch.ubique.notifyme.base.R.string.no_report_hero_text),
+						getString(ch.ubique.notifyme.base.R.string.no_report_hero_text_highlight), getResources().getColor(ch.ubique.notifyme.base.R.color.secondary, null)));
 
 				mainImageView.setVisibility(View.VISIBLE);
 			} else {
@@ -100,15 +104,15 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				splashText.setVisibility(View.GONE);
 				mainImageView.setVisibility(View.GONE);
 				((TextView) reportsHeader.findViewById(R.id.reports_header_text)).setText(StringUtils
-						.getTwoColoredString(getString(R.string.report_message_text),
-								getString(R.string.report_message_text_highlight),
-								getResources().getColor(R.color.tertiary, null)));
+						.getTwoColoredString(getString(ch.ubique.notifyme.base.R.string.report_message_text),
+								getString(ch.ubique.notifyme.base.R.string.report_message_text_highlight),
+								getResources().getColor(ch.ubique.notifyme.base.R.color.tertiary, null)));
 
 				if (reports.size() == 1) {
-					((TextView) reportsHeader.findViewById(R.id.reports_header_title)).setText(R.string.report_title_singular);
+					((TextView) reportsHeader.findViewById(R.id.reports_header_title)).setText(ch.ubique.notifyme.base.R.string.report_title_singular);
 				} else {
 					((TextView) reportsHeader.findViewById(R.id.reports_header_title))
-							.setText(getString(R.string.report_title_plural).replace("{NUMBER}", String.valueOf(reports.size())));
+							.setText(getString(ch.ubique.notifyme.base.R.string.report_title_plural).replace("{NUMBER}", String.valueOf(reports.size())));
 				}
 				((TextView) reportsHeader.findViewById(R.id.reports_header_days_ago))
 						.setText(StringUtils.getDaysAgoString(reports.get(0).getStartTime(), getContext()));
@@ -153,7 +157,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showCheckedInScreen() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit, ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, CheckedInFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commit();
@@ -161,7 +165,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showQRCodeScanner() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit, ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, QrCodeScannerFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commit();
@@ -169,7 +173,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showReportsFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit, ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, ReportsFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commit();
@@ -189,7 +193,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		if (BiometricManager.from(requireContext()).canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL |
 				BiometricManager.Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS) {
 			BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-					.setTitle(getString(R.string.authenticate_for_diary))
+					.setTitle(getString(ch.ubique.notifyme.base.R.string.authenticate_for_diary))
 					.setAllowedAuthenticators(
 							BiometricManager.Authenticators.DEVICE_CREDENTIAL | BiometricManager.Authenticators.BIOMETRIC_WEAK)
 					.build();
@@ -201,7 +205,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showDiary() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit, ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, DiaryFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commitAllowingStateLoss();
@@ -209,8 +213,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 	private void showImpressum() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter, ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				//TODO: It would be nice to load this asynchronous
 				.replace(R.id.container, HtmlFragment
 						.newInstance(AssetUtil.getImpressumBaseUrl(getContext()), AssetUtil.getImpressumHtml(getContext())))

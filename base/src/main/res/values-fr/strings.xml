@@ -175,11 +175,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="cancel">"Annuler"</string>
 
     <!-- QR Scanner: camera has no permission explanation text -->
-<<<<<<< HEAD
     <string name="qr_scanner_no_camera_permission">"L'accès à votre caméra est nécessaire pour scanner le QR code."</string>
-=======
-    <string name="qr_scanner_no_camera_permission">"l'Accès à votre caméra est nécessaire pour scanner le QR code."</string>
->>>>>>> Add camera permission explanation dialog
 
     <!-- Title for an exposure notification. -->
     <string name="exposure_notification_title">"Nouveau message"</string>
@@ -259,21 +255,13 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_generator_addition_placeholder">"p. ex. bâtiment ou lieu"</string>
 
     <!-- Fuzzy -->
-<<<<<<< HEAD
     <string name="web_generator_generation_button_label">"Générer les QR codes"</string>
-=======
-    <string name="web_generator_generation_button_label">"Générer un QR code"</string>
->>>>>>> Add camera permission explanation dialog
 
     <!-- Fuzzy -->
     <string name="web_generator_back">"Retour"</string>
 
     <!-- Fuzzy -->
-<<<<<<< HEAD
     <string name="web_generator_public_bulletpoint_1">"Avec ce QR code les visiteurs peuvent s'enregistrer en arrivant."</string>
-=======
-    <string name="web_generator_public_bulletpoint_1">"Avec ce QR code les visiteurs peuvent s'enregistrer sur place."</string>
->>>>>>> Add camera permission explanation dialog
 
     <!-- Fuzzy -->
     <string name="web_generator_public_bulletpoint_2">"Le code ne peut être scanné avec NotifyMe"</string>
@@ -282,11 +270,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_generator_public_bulletpoint_3">"Les check-ins ne seront enregistrés que sur l'appareil des utilisateurs."</string>
 
     <!-- Fuzzy -->
-<<<<<<< HEAD
     <string name="web_generator_private_bulletpoint_1">"Ce QR code permet aux visiteurs d'être notifiés en cas incident."</string>
-=======
-    <string name="web_generator_private_bulletpoint_1">"Ce QR code informe les visiteurs en cas incident."</string>
->>>>>>> Add camera permission explanation dialog
 
     <!-- Fuzzy -->
     <string name="web_generator_private_bulletpoint_2">"Le code peut être scanné avec n'importe quel autre lecteur QR."</string>
@@ -347,11 +331,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_upload_error_message">"Téléchargement échoué"</string>
 
     <!-- Fuzzy -->
-<<<<<<< HEAD
     <string name="web_upload_missing_payload">"Code privé non valable. Scannez un QR code valable."</string>
-=======
-    <string name="web_upload_missing_payload">"Code privé invalable. Scannez un QR code valable."</string>
->>>>>>> Add camera permission explanation dialog
 
     <!-- Titel einer generischen Fehleranzeige -->
     <string name="error_title">"Erreur"</string>

@@ -18,8 +18,9 @@ import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class CheckedInFragment extends Fragment implements MainActivity.BackPressListener {
 
@@ -81,8 +82,9 @@ public class CheckedInFragment extends Fragment implements MainActivity.BackPres
 
 	private void showCheckOutFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter,
+						ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
 				.addToBackStack(CheckedInFragment.TAG)
 				.commit();

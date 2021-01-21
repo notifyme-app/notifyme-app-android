@@ -11,17 +11,16 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.instantapps.InstantApps;
 import com.google.android.gms.instantapps.PackageManagerCompat;
 
-import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.utils.Storage;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.UrlUtil;
+import ch.ubique.notifyme.base.utils.Storage;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.UrlUtil;
 
 public class OnboardingHintsFragment extends Fragment {
 
 	public final static String TAG = OnboardingHintsFragment.class.getCanonicalName();
 	private boolean isInstantApp = false;
 
-	public OnboardingHintsFragment() { super(ch.ubique.notifyme.onboarding.R.layout.fragment_onboarding_hints); }
+	public OnboardingHintsFragment() { super(R.layout.fragment_onboarding_hints); }
 
 	public static OnboardingHintsFragment newInstance() {
 		return new OnboardingHintsFragment();
@@ -29,20 +28,20 @@ public class OnboardingHintsFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		Button okButton = view.findViewById(ch.ubique.notifyme.onboarding.R.id.fragment_onboarding_hints_ok_button);
-		View agbLink = view.findViewById(ch.ubique.notifyme.onboarding.R.id.fragment_onboarding_hints_link);
-		TextView title = view.findViewById(ch.ubique.notifyme.onboarding.R.id.fragment_onboarding_hints_title);
+		Button okButton = view.findViewById(R.id.fragment_onboarding_hints_ok_button);
+		View agbLink = view.findViewById(R.id.fragment_onboarding_hints_link);
+		TextView title = view.findViewById(R.id.fragment_onboarding_hints_title);
 
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
 		isInstantApp = pmc.isInstantApp();
 
 		if (isInstantApp) {
-			okButton.setText(R.string.onboarding_continue_button);
+			okButton.setText(ch.ubique.notifyme.base.R.string.onboarding_continue_button);
 		}
 
-		title.setText(StringUtils.getTwoColoredString(getString(R.string.onboarding_hints_for_usage),
-				getString(R.string.onboarding_hints_for_usage_highlight), getResources().getColor(R.color.primary, null)));
-		agbLink.setOnClickListener(v -> UrlUtil.openUrl(requireContext(), getString(R.string.onboarding_agb_link)));
+		title.setText(StringUtils.getTwoColoredString(getString(ch.ubique.notifyme.base.R.string.onboarding_hints_for_usage),
+				getString(ch.ubique.notifyme.base.R.string.onboarding_hints_for_usage_highlight), getResources().getColor(ch.ubique.notifyme.base.R.color.primary, null)));
+		agbLink.setOnClickListener(v -> UrlUtil.openUrl(requireContext(), getString(ch.ubique.notifyme.base.R.string.onboarding_agb_link)));
 		okButton.setOnClickListener(v -> continueOrFinishOnboarding());
 	}
 
@@ -50,7 +49,8 @@ public class OnboardingHintsFragment extends Fragment {
 		if (isInstantApp) {
 			// Show the install now onboarding step if this is the instant app
 			requireActivity().getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+					.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit,
+							ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 					.replace(ch.ubique.notifyme.onboarding.R.id.container, OnboardingInstantAppFragment.newInstance())
 					.addToBackStack(OnboardingInstantAppFragment.TAG)
 					.commit();
