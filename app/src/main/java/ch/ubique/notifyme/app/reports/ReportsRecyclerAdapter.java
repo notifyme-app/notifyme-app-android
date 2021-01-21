@@ -144,6 +144,7 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		private ImageView venueTypeIcon;
 		private View infoBox;
 		private TextView infoBoxText;
+		private ImageView hiddenEventPlaceholder;
 
 		public VenueVisitViewHolder(View itemView) {
 			super(itemView);
@@ -154,6 +155,7 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			this.venueTypeIcon = itemView.findViewById(R.id.item_diary_entry_icon);
 			this.infoBox = itemView.findViewById(R.id.item_diary_entry_infobox);
 			this.infoBoxText = itemView.findViewById(R.id.item_diary_entry_infobox_text);
+			this.hiddenEventPlaceholder = itemView.findViewById(R.id.item_diary_hidden_event_placeholder);
 		}
 
 		public void bind(ItemVenueVisit item) {
@@ -161,9 +163,14 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
 				nameTextView.setText(venueInfo.getTitle());
 				locationTextView.setText(venueInfo.getSubtitle());
+				venueTypeIcon.setVisibility(View.VISIBLE);
 				venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+				hiddenEventPlaceholder.setVisibility(View.GONE);
 			} else {
-				venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(Qr.QRCodeContent.VenueType.OTHER));
+				nameTextView.setText("");
+				locationTextView.setText("");
+				venueTypeIcon.setVisibility(View.INVISIBLE);
+				hiddenEventPlaceholder.setVisibility(View.VISIBLE);
 			}
 			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 			String start = StringUtils.getHourMinuteTimeString(item.getExposure().getStartTime(), ":");
