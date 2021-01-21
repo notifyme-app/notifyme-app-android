@@ -3,13 +3,14 @@ package ch.ubique.notifyme.app.model;
 import android.content.Context;
 import androidx.annotation.IdRes;
 
+import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.R;
 
 
 public enum ReminderOption {
 
 	OFF(0, R.id.checked_in_fragment_toggle_button_1),
-	THIRTY_MINUTES(30, R.id.checked_in_fragment_toggle_button_2),
+	THIRTY_MINUTES(BuildConfig.FLAVOR.equals("dev") ? 1 : 30, R.id.checked_in_fragment_toggle_button_2),
 	ONE_HOUR(60, R.id.checked_in_fragment_toggle_button_3),
 	TWO_HOURS(120, R.id.checked_in_fragment_toggle_button_4),
 	FOUR_HOURS(240, R.id.checked_in_fragment_toggle_button_5);
