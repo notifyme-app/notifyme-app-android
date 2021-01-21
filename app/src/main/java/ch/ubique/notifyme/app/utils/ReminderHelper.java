@@ -39,9 +39,8 @@ public class ReminderHelper extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		CheckInState checkInState = Storage.getInstance(context).getCurrentVenue();
-		if (intent.hasExtra(KEY_REMINDER_INTENT) && checkInState != null) {
-			NotificationHelper.getInstance(context).showReminderNotification(checkInState.getCheckInTime(), checkInState.getVenueInfo());
+		if (intent.hasExtra(KEY_REMINDER_INTENT) && Storage.getInstance(context).getCurrentVenue() != null) {
+			NotificationHelper.getInstance(context).showReminderNotification();
 		}
 	}
 

@@ -17,7 +17,8 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.MainActivity;
 import ch.ubique.notifyme.app.R;
 
-import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
+import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH;
+import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW;
 
 public class NotificationHelper {
 
@@ -31,7 +32,7 @@ public class NotificationHelper {
 
 	private final String CHANNEL_ID_EXPOSURE_NOTIFICATION = "ExposureNotificaitons";
 	private final String CHANNEL_ID_REMINDER = "Reminders";
-	private final String CHANNEL_ID_ONGOING_CHECK_IN = "Permanent Check In6";
+	private final String CHANNEL_ID_ONGOING_CHECK_IN = "Ongoing Check In";
 
 	private final int ONGOING_NOTIFICATION_ID = -1;
 	private final int REMINDER_NOTIFICATION_ID = -2;
@@ -54,26 +55,14 @@ public class NotificationHelper {
 		return instance;
 	}
 
-	private void createNotificationChannel(String channelId, String channelName, boolean silent) {
+	private void createNotificationChannel(String channelId, String channelName, boolean silent, int importance) {
 		if (Build.VERSION.SDK_INT >= 26) {
-			NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+			NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
 			if (silent) {
 				channel.setSound(null, null);
 				channel.enableVibration(false);
 			}
 			notificationManager.createNotificationChannel(channel);
-		}
-	}
-
-	private boolean isNotificationChannelEnabled(String channelId) {
-		if (Build.VERSION.SDK_INT >= 26) {
-			if (notificationManager.getNotificationChannel(channelId).getImportance() == IMPORTANCE_NONE) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return true;
 		}
 	}
 
@@ -96,18 +85,19 @@ public class NotificationHelper {
 	}
 
 	private NotificationCompat.Builder getNotificationBuilder(String channelId) {
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+		return new NotificationCompat.Builder(context, channelId)
 				.setAutoCancel(true)
 				.setSmallIcon(R.drawable.ic_notification)
-				.setColor(ContextCompat.getColor(context, R.color.primary));
-		return builder;
+				.setColor(ContextCompat.getColor(context, R.color.primary))
+				.setPriority(NotificationCompat.PRIORITY_HIGH)
+				.setDefaults(Notification.DEFAULT_ALL);
 	}
 
 
 	public void showExposureNotification(long exposureId) {
 
 		createNotificationChannel(CHANNEL_ID_EXPOSURE_NOTIFICATION, context.getString(R.string.android_notification_channel_name),
-				false);
+				false, IMPORTANCE_HIGH);
 
 		Notification notification = getNotificationBuilder(CHANNEL_ID_EXPOSURE_NOTIFICATION)
 				.setContentIntent(createExposurePendingIntent(exposureId))
@@ -118,15 +108,10 @@ public class NotificationHelper {
 		notificationManager.notify((int) exposureId, notification);
 	}
 
-	public void showReminderNotification(long startTime, VenueInfo venueInfo) {
+	public void showReminderNotification() {
 
-		//If the user has enabled the Ongoing Notification, just popup that one again. Otherwise send a reminder notification.
-		if (isNotificationChannelEnabled(CHANNEL_ID_ONGOING_CHECK_IN)) {
-			startOngoingNotification(startTime, venueInfo);
-			return;
-		}
-
-		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name), false);
+		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name), false,
+				IMPORTANCE_HIGH);
 
 		Intent snoozeIntent = new Intent(context, NotificationQuickActionReceiver.class);
 		snoozeIntent.setAction(SNOOZE_ACTION);
@@ -139,7 +124,7 @@ public class NotificationHelper {
 				.setContentText(context.getString(R.string.checkout_reminder_text))
 				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
 						createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
-				.addAction(R.drawable.ic_notification, context.getString(R.string.reminder_notification_snooze_action),
+				.addAction(R.drawable.ic_snooze, context.getString(R.string.reminder_notification_snooze_action),
 						snoozePendingIntent)
 				.build();
 
@@ -152,19 +137,20 @@ public class NotificationHelper {
 
 	public void startOngoingNotification(long startTime, VenueInfo venueInfo) {
 		createNotificationChannel(CHANNEL_ID_ONGOING_CHECK_IN,
-				context.getString(R.string.android_ongoing_checkin_notification_channel_name), true);
-		NotificationCompat.Builder permanentNotificationBuilder =
+				context.getString(R.string.android_ongoing_checkin_notification_channel_name), true, IMPORTANCE_LOW);
+		NotificationCompat.Builder ongoingNotificationBuilder =
 				new NotificationCompat.Builder(context, CHANNEL_ID_ONGOING_CHECK_IN)
+						.setSmallIcon(R.drawable.ic_notification)
+						.setColor(ContextCompat.getColor(context, R.color.primary))
 						.setContentTitle(context.getString(R.string.ongoing_notification_title)
 								.replace("{TIME}", StringUtils.getHourMinuteTimeString(startTime, ":")))
 						.setContentText(venueInfo.getTitle() + "\n" + venueInfo.getSubtitle())
-						.setSmallIcon(R.drawable.ic_notification)
-						.setColor(ContextCompat.getColor(context, R.color.primary))
+						.setPriority(NotificationCompat.PRIORITY_LOW)
 						.setOngoing(true)
 						.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
 								createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
 						.setContentIntent(createBasicPendingIntent(ONGOING_ACTION));
-		notificationManager.notify(ONGOING_NOTIFICATION_ID, permanentNotificationBuilder.build());
+		notificationManager.notify(ONGOING_NOTIFICATION_ID, ongoingNotificationBuilder.build());
 	}
 
 	public void stopOngoingNotification() {
