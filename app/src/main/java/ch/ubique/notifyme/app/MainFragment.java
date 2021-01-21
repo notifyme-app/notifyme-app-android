@@ -23,10 +23,7 @@ import ch.ubique.notifyme.app.diary.DiaryFragment;
 import ch.ubique.notifyme.app.impressum.HtmlFragment;
 import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
-import ch.ubique.notifyme.app.utils.AssetUtil;
-import ch.ubique.notifyme.app.utils.ErrorHelper;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.app.utils.*;
 
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
 

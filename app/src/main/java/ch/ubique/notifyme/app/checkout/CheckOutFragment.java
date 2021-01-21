@@ -22,6 +22,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
+import ch.ubique.notifyme.app.utils.NotificationHelper;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.utils.StringUtils;
 import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
@@ -85,6 +86,7 @@ public class CheckOutFragment extends Fragment {
 		doneButton.setOnClickListener(v -> {
 			ReminderHelper.removeReminder(getContext());
 			saveEntry();
+			NotificationHelper.getInstance(getContext()).stopOngoingNotification();
 			showStartScreen();
 		});
 		cancelButton.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());

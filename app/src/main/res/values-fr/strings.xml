@@ -440,7 +440,9 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="error_update_text">"Ce code QR n'est pas compatible avec la version actuelle de l'application. Faite une mise à jour de l'application pour pouvoir scanner le Code QR."</string>
     <string name="web_generator_date_label">"Valide le"</string>
     <string name="web_generator_date_placeholder">"Choisir date"</string>
-    <string name="web_generator_validity_information">"Le code QR démo est uniquement valide le jour même."</string>
+
+    <!-- Fuzzy -->
+    <string name="web_generator_validity_information">"Les codes QR de démonstration ne sont valables que pour un jour à la fois. Pour les codes QR à validité permanente, veuillez &lt;a href=\"mailto:info@notify-me.ch\"&gt;nous contacter&lt;/a&gt;."</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <string name="web_generator_code_validity_message">"Ce code QR démo est valable le **%d.%m.%Y**"</string>
@@ -489,4 +491,13 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
     <string name="camera_permission_dialog_action">"Accorder l'accès à la caméra."</string>
+
+    <!-- Notification Channel name for Ongoing Checkin Notifications on Android Devices (Only visible in System Settings) -->
+    <string name="android_ongoing_checkin_notification_channel_name">"Ongoing Checkin Notification"</string>
+
+    <!-- Titel der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_title">"You are checked in since {TIME}."</string>
+
+    <!-- Quick Action der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_checkout_quick_action">"Check out"</string>
 </resources>

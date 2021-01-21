@@ -450,8 +450,10 @@ zur Nutzung"</string>
     <!-- Fuzzy -->
     <string name="web_generator_date_placeholder">"Datum wählen"</string>
 
+    <!-- Vorschlag zur Formulierung: 
+Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauerhafter Gültigkeit nehmen Sie bitte mit uns Kontakt auf. -->
     <!-- Fuzzy -->
-    <string name="web_generator_validity_information">"Die Demo QR-Codes sind jeweils nur an einem Tag gültig"</string>
+    <string name="web_generator_validity_information">"Die Demo QR-Codes sind jeweils nur an einem Tag gültig.  Für QR-Codes mit dauerhafter Gültigkeit nehmen Sie bitte &lt;a href=\"mailto:info@notify-me.ch\"&gt;mit uns Kontakt&lt;/a&gt; auf."</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <!-- Fuzzy -->
@@ -503,4 +505,13 @@ zur Nutzung"</string>
 
     <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
     <string name="camera_permission_dialog_action">"Kamera-Zugriff erlauben"</string>
+
+    <!-- Notification Channel name for Ongoing Checkin Notifications on Android Devices (Only visible in System Settings) -->
+    <string name="android_ongoing_checkin_notification_channel_name">"Permanente Checkin Meldung"</string>
+
+    <!-- Titel der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_title">"Sie sind eingecheckt seit {TIME} Uhr."</string>
+
+    <!-- Quick Action der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_checkout_quick_action">"Check out"</string>
 </resources>
