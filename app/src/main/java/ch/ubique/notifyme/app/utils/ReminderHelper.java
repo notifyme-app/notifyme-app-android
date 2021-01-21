@@ -6,6 +6,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
+import ch.ubique.notifyme.app.model.CheckInState;
+
 public class ReminderHelper extends BroadcastReceiver {
 
 	private static final int REMINDER_INTENT_ID = 12;
@@ -35,8 +39,9 @@ public class ReminderHelper extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		if (intent.hasExtra(KEY_REMINDER_INTENT) && Storage.getInstance(context).getCurrentVenue() != null) {
-			NotificationHelper.getInstance(context).showReminderNotification();
+		CheckInState checkInState = Storage.getInstance(context).getCurrentVenue();
+		if (intent.hasExtra(KEY_REMINDER_INTENT) && checkInState != null) {
+			NotificationHelper.getInstance(context).showReminderNotification(checkInState.getCheckInTime(), checkInState.getVenueInfo());
 		}
 	}
 

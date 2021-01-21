@@ -504,4 +504,7 @@ QR Code"</string>
 
     <!-- Quick Action der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
     <string name="ongoing_notification_checkout_quick_action">"Check out"</string>
+
+    <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
+    <string name="reminder_notification_snooze_action">"Snooze"</string>
 </resources>

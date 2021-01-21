@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 		String intentAction = getIntent().getAction();
 		if ((REMINDER_ACTION.equals(intentAction) || ONGOING_ACTION.equals(intentAction)) && viewModel.isCheckedIn()) {
 			showCheckedInScreen();
-		} else if (ONGOING_CHECK_OUT_NOW_ACTION.equals(intentAction) && viewModel.isCheckedIn()) {
+		} else if (CHECK_OUT_NOW_ACTION.equals(intentAction) && viewModel.isCheckedIn()) {
 			showCheckOutScreen();
 		} else if (EXPOSURE_NOTIFICATION_ACTION.equals(intentAction)) {
 			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);

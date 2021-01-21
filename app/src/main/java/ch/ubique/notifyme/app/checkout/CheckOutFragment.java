@@ -86,7 +86,9 @@ public class CheckOutFragment extends Fragment {
 		doneButton.setOnClickListener(v -> {
 			ReminderHelper.removeReminder(getContext());
 			saveEntry();
-			NotificationHelper.getInstance(getContext()).stopOngoingNotification();
+			NotificationHelper notificationHelper = NotificationHelper.getInstance(getContext());
+			notificationHelper.stopOngoingNotification();
+			notificationHelper.removeReminderNotification();
 			showStartScreen();
 		});
 		cancelButton.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());

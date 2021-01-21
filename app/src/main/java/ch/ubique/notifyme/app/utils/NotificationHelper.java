@@ -17,12 +17,15 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.MainActivity;
 import ch.ubique.notifyme.app.R;
 
+import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
+
 public class NotificationHelper {
 
 	public static final String EXPOSURE_NOTIFICATION_ACTION = "EXPOSURE_NOTIFICATION_ACTION";
 	public static final String REMINDER_ACTION = "REMINDER_ACTION";
 	public static final String ONGOING_ACTION = "ONGOING_ACTION";
-	public static final String ONGOING_CHECK_OUT_NOW_ACTION = "ONGOING_CHECK_OUT_NOW_ACTION";
+	public static final String CHECK_OUT_NOW_ACTION = "CHECK_OUT_NOW_ACTION";
+	public static final String SNOOZE_ACTION = "SNOOZE_ACTION";
 
 	public static final String EXPOSURE_ID_EXTRA = "EXPOSURE_ID";
 
@@ -30,7 +33,8 @@ public class NotificationHelper {
 	private final String CHANNEL_ID_REMINDER = "Reminders";
 	private final String CHANNEL_ID_ONGOING_CHECK_IN = "Permanent Check In6";
 
-	private final int ONGOING_NOTIFICATION_ID = 188;
+	private final int ONGOING_NOTIFICATION_ID = -1;
+	private final int REMINDER_NOTIFICATION_ID = -2;
 
 
 	private static NotificationHelper instance;
@@ -61,6 +65,18 @@ public class NotificationHelper {
 		}
 	}
 
+	private boolean isNotificationChannelEnabled(String channelId) {
+		if (Build.VERSION.SDK_INT >= 26) {
+			if (notificationManager.getNotificationChannel(channelId).getImportance() == IMPORTANCE_NONE) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	}
+
 	private PendingIntent createBasicPendingIntent(String notificationAction) {
 		Intent intent = new Intent(context, MainActivity.class);
 		intent.setAction(notificationAction);
@@ -79,16 +95,12 @@ public class NotificationHelper {
 				.getPendingIntent(EXPOSURE_NOTIFICATION_ACTION.hashCode(), PendingIntent.FLAG_ONE_SHOT);
 	}
 
-	private Notification createNotification(String title, String message, PendingIntent pendingIntent, String channelId) {
+	private NotificationCompat.Builder getNotificationBuilder(String channelId) {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-				.setContentIntent(pendingIntent)
 				.setAutoCancel(true)
-				.setContentTitle(title)
-				.setContentText(message)
 				.setSmallIcon(R.drawable.ic_notification)
-				.setColor(ContextCompat.getColor(context, R.color.primary))
-				.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
-		return builder.build();
+				.setColor(ContextCompat.getColor(context, R.color.primary));
+		return builder;
 	}
 
 
@@ -96,23 +108,46 @@ public class NotificationHelper {
 
 		createNotificationChannel(CHANNEL_ID_EXPOSURE_NOTIFICATION, context.getString(R.string.android_notification_channel_name),
 				false);
-		PendingIntent pendingIntent = createExposurePendingIntent(exposureId);
-		String title = context.getString(R.string.exposure_notification_title);
-		String message = context.getString(R.string.exposure_notification_body);
 
-		Notification notification = createNotification(title, message, pendingIntent, CHANNEL_ID_EXPOSURE_NOTIFICATION);
-		notificationManager.notify(message.hashCode(), notification);
+		Notification notification = getNotificationBuilder(CHANNEL_ID_EXPOSURE_NOTIFICATION)
+				.setContentIntent(createExposurePendingIntent(exposureId))
+				.setContentTitle(context.getString(R.string.exposure_notification_title))
+				.setContentText(context.getString(R.string.exposure_notification_body))
+				.build();
+
+		notificationManager.notify((int) exposureId, notification);
 	}
 
-	public void showReminderNotification() {
-		//TODO: Add quick actions to reminder
-		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name), false);
-		PendingIntent pendingIntent = createBasicPendingIntent(REMINDER_ACTION);
-		String title = context.getString(R.string.checkout_reminder_title);
-		String message = context.getString(R.string.checkout_reminder_text);
+	public void showReminderNotification(long startTime, VenueInfo venueInfo) {
 
-		Notification notification = createNotification(title, message, pendingIntent, CHANNEL_ID_REMINDER);
-		notificationManager.notify(message.hashCode(), notification);
+		//If the user has enabled the Ongoing Notification, just popup that one again. Otherwise send a reminder notification.
+		if (isNotificationChannelEnabled(CHANNEL_ID_ONGOING_CHECK_IN)) {
+			startOngoingNotification(startTime, venueInfo);
+			return;
+		}
+
+		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name), false);
+
+		Intent snoozeIntent = new Intent(context, NotificationQuickActionReceiver.class);
+		snoozeIntent.setAction(SNOOZE_ACTION);
+		PendingIntent snoozePendingIntent = PendingIntent.getBroadcast(context, 1, snoozeIntent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+
+		Notification notification = getNotificationBuilder(CHANNEL_ID_REMINDER)
+				.setContentIntent(createBasicPendingIntent(REMINDER_ACTION))
+				.setContentTitle(context.getString(R.string.checkout_reminder_title))
+				.setContentText(context.getString(R.string.checkout_reminder_text))
+				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
+						createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
+				.addAction(R.drawable.ic_notification, context.getString(R.string.reminder_notification_snooze_action),
+						snoozePendingIntent)
+				.build();
+
+		notificationManager.notify(REMINDER_NOTIFICATION_ID, notification);
+	}
+
+	public void removeReminderNotification() {
+		notificationManager.cancel(REMINDER_NOTIFICATION_ID);
 	}
 
 	public void startOngoingNotification(long startTime, VenueInfo venueInfo) {
@@ -127,7 +162,7 @@ public class NotificationHelper {
 						.setColor(ContextCompat.getColor(context, R.color.primary))
 						.setOngoing(true)
 						.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
-								createBasicPendingIntent(ONGOING_CHECK_OUT_NOW_ACTION))
+								createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
 						.setContentIntent(createBasicPendingIntent(ONGOING_ACTION));
 		notificationManager.notify(ONGOING_NOTIFICATION_ID, permanentNotificationBuilder.build());
 	}
