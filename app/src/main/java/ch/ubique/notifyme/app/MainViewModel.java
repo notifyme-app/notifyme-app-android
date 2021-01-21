@@ -144,6 +144,11 @@ public class MainViewModel extends AndroidViewModel {
 		exposures.setValue(newExposures);
 	}
 
+	public void removeExposure(long exposureId) {
+		CrowdNotifier.removeExposure(getApplication(), exposureId);
+		refreshExposures();
+	}
+
 	public ExposureEvent getExposureWithId(long id) {
 		List<ExposureEvent> exposureEvents = exposures.getValue();
 		if (exposureEvents == null) return null;

@@ -13,6 +13,7 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.app.diary.HideInDiaryDialogFragment;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.StringUtils;
@@ -62,8 +63,10 @@ public class ExposureFragment extends Fragment {
 		TextView notes = view.findViewById(R.id.fragment_exposure_notes_textview);
 		TextView message = view.findViewById(R.id.fragment_exposure_infobox_text);
 		View infobox = view.findViewById(R.id.fragment_exposure_infobox);
+		View deleteButton = view.findViewById(R.id.fragment_exposure_delete_button);
 
 		closeButton.setOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
+		deleteButton.setOnClickListener(v -> showDeleteExposureDialog());
 		header.setText(StringUtils
 				.getTwoColoredString(getString(R.string.report_message_text), getString(R.string.report_message_text_highlight),
 						getResources().getColor(R.color.tertiary, null)));
@@ -99,6 +102,12 @@ public class ExposureFragment extends Fragment {
 			notesHeader.setVisibility(View.GONE);
 			notes.setVisibility(View.GONE);
 		}
+	}
+
+	private void showDeleteExposureDialog() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.add(DeleteNotificationDialogFragment.newInstance(exposure.getId()), DeleteNotificationDialogFragment.TAG)
+				.commit();
 	}
 
 }

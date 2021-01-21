@@ -184,6 +184,15 @@
 
 			</androidx.cardview.widget.CardView>
 
+			<Button
+				android:id="@+id/fragment_exposure_delete_button"
+				style="@style/NotifyMe.Button.Outlined.Small.Tertiary"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_huge"
+				android:text="@string/delete_exposure_button_title" />
+
 		</LinearLayout>
 	</ScrollView>
 
