@@ -112,10 +112,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showCheckOutScreen() {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, CheckedInFragment.newInstance())
-				.addToBackStack(CheckedInFragment.TAG)
-				.commit();
+		showCheckedInScreen();
 		getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)

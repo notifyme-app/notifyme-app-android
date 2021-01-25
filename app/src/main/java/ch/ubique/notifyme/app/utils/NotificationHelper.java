@@ -138,19 +138,19 @@ public class NotificationHelper {
 	public void startOngoingNotification(long startTime, VenueInfo venueInfo) {
 		createNotificationChannel(CHANNEL_ID_ONGOING_CHECK_IN,
 				context.getString(R.string.android_ongoing_checkin_notification_channel_name), true, IMPORTANCE_LOW);
-		NotificationCompat.Builder ongoingNotificationBuilder =
-				new NotificationCompat.Builder(context, CHANNEL_ID_ONGOING_CHECK_IN)
-						.setSmallIcon(R.drawable.ic_notification)
-						.setColor(ContextCompat.getColor(context, R.color.primary))
-						.setContentTitle(context.getString(R.string.ongoing_notification_title)
-								.replace("{TIME}", StringUtils.getHourMinuteTimeString(startTime, ":")))
-						.setContentText(venueInfo.getTitle() + "\n" + venueInfo.getSubtitle())
-						.setPriority(NotificationCompat.PRIORITY_LOW)
-						.setOngoing(true)
-						.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
-								createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
-						.setContentIntent(createBasicPendingIntent(ONGOING_ACTION));
-		notificationManager.notify(ONGOING_NOTIFICATION_ID, ongoingNotificationBuilder.build());
+		Notification ongoingNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ONGOING_CHECK_IN)
+				.setSmallIcon(R.drawable.ic_notification)
+				.setColor(ContextCompat.getColor(context, R.color.primary))
+				.setContentTitle(context.getString(R.string.ongoing_notification_title)
+						.replace("{TIME}", StringUtils.getHourMinuteTimeString(startTime, ":")))
+				.setContentText(venueInfo.getTitle() + "\n" + venueInfo.getSubtitle())
+				.setPriority(NotificationCompat.PRIORITY_LOW)
+				.setOngoing(true)
+				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
+						createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
+				.setContentIntent(createBasicPendingIntent(ONGOING_ACTION))
+				.build();
+		notificationManager.notify(ONGOING_NOTIFICATION_ID, ongoingNotification);
 	}
 
 	public void stopOngoingNotification() {
