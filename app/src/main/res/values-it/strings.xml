@@ -350,7 +350,7 @@ QR Code"</string>
     <string name="error_update_text">"This QR code is not compatible with the current version of the app. Please update the app to scan it the code."</string>
     <string name="web_generator_date_label">"Valid on"</string>
     <string name="web_generator_date_placeholder">"Pick date"</string>
-    <string name="web_generator_validity_information">"The demo QR codes are only available on the same day."</string>
+    <string name="web_generator_validity_information">"The demo QR codes are only valid for one day at a time. For QR codes with permanent validity, please &lt;a href=\"mailto:info@notify-me.ch\"&gt;contact us&lt;/a&gt;."</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <string name="web_generator_code_validity_message">"This demo QR code is valid on **%e %B %Y**"</string>
@@ -398,4 +398,16 @@ QR Code"</string>
 
     <!-- Button titel, welcher in einem Popup erscheint um die Camera Permission Abfrage zu erklären. -->
     <string name="camera_permission_dialog_action">"Grant camera access"</string>
+
+    <!-- Notification Channel name for Ongoing Checkin Notifications on Android Devices (Only visible in System Settings) -->
+    <string name="android_ongoing_checkin_notification_channel_name">"Ongoing Checkin Notification"</string>
+
+    <!-- Titel der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_title">"You are checked in since {TIME}."</string>
+
+    <!-- Quick Action der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
+    <string name="ongoing_notification_checkout_quick_action">"Check out"</string>
+
+    <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
+    <string name="reminder_notification_snooze_action">"Snooze"</string>
 </resources>

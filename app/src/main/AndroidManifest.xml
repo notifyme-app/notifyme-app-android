@@ -37,6 +37,8 @@
 
 		<receiver android:name=".utils.ReminderHelper" />
 
+		<receiver android:name=".utils.NotificationQuickActionReceiver"/>
+
 	</application>
 
 </manifest>

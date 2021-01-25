@@ -57,7 +57,7 @@ public class KeyLoadWorker extends Worker {
 		List<ExposureEvent> exposures = CrowdNotifier.checkForMatches(problematicEventInfos, getApplicationContext());
 		if (!exposures.isEmpty()) {
 			for (ExposureEvent exposureEvent : exposures) {
-				new NotificationHelper(getApplicationContext()).showExposureNotification(exposureEvent.getId());
+				NotificationHelper.getInstance(getApplicationContext()).showExposureNotification(exposureEvent.getId());
 			}
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
