@@ -1,5 +1,6 @@
 package ch.ubique.notifyme.app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
 	private MainViewModel viewModel;
 	private Storage storage;
+	private static final String STATE_CONSUMED_INTENT = "STATE_CONSUMED_INTENT";
+	private boolean consumedIntent = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +53,9 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				showOnboarding();
 			}
+		} else {
+			consumedIntent = savedInstanceState.getBoolean(STATE_CONSUMED_INTENT);
 		}
-
-		//TODO: Handle intents also when Activity is not newly created, but the app was already opened
-		if (onboardingCompleted) handleCustomIntents();
 
 		KeyLoadWorker.startKeyLoadWorker(this);
 
@@ -61,12 +63,34 @@ public class MainActivity extends AppCompatActivity {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}
-	
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+		consumedIntent = false;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (storage.getOnboardingCompleted()) checkIntentForActions();
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
+	}
+
+	private void checkIntentForActions() {
+		Intent intent = getIntent();
+		boolean launchedFromHistory = (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0;
+		if (!launchedFromHistory && !consumedIntent){
+			consumedIntent = true;
+			handleCustomIntents();
+		}
 	}
 
 	private void handleCustomIntents() {
@@ -179,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
 			if (interceptedByFragment) return;
 		}
 		super.onBackPressed();
+	}
+
+	@Override
+	protected void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(STATE_CONSUMED_INTENT, consumedIntent);
 	}
 
 	public interface BackPressListener {
