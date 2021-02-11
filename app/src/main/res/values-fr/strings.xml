@@ -343,7 +343,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="ok_button">"Ok"</string>
 
     <!-- Fuzzy -->
-    <string name="web_landing_description">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
+    <string name="web_landing_description">"Check-in pour réunions et événements."</string>
 
     <!-- Landing page: iOS app store link URL -->
     <!-- Fuzzy -->
@@ -407,14 +407,14 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="onboarding_hint1">"Cette application ne saisit pas des données de contacts obligatoirement et ne peut pas être utilisée à cet effet."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint2">"Veuillez aussi lire les conditions générales."</string>
+    <string name="onboarding_hint2">"Veuillez lire les conditions générales."</string>
     <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
     <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
     <string name="qr_scanner_error_code_not_yet_valid">"Le QR code n'est pas valide."</string>
     <string name="qr_scanner_error_code_not_valid_anymore">"Le QR code n'est plus valide."</string>
 
     <!-- Onboarding: subtitle on first page -->
-    <string name="onboarding_subtitle">"Check-ins sauvé de manière décentralisé pour réunions et événements."</string>
+    <string name="onboarding_subtitle">"Check-in pour réunions et événements."</string>
 
     <!-- qr validity period label used in qr generator web app -->
     <string name="web_qr_validity_period_label">"Validité (24h max.)"</string>
