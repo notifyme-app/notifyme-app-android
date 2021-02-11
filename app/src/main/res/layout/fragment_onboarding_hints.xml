@@ -63,26 +63,6 @@
 			<ImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:src="@drawable/ic_error_tertiary" />
-
-			<TextView
-				style="@style/NotifyMe.Text.Tertiary"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/spacing_medium"
-				android:text="@string/onboarding_hint1" />
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/spacing_large"
-			android:orientation="horizontal">
-
-			<ImageView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
 				android:src="@drawable/ic_info_outlined" />
 
 			<TextView
