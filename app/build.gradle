@@ -29,8 +29,8 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1101
-		versionName "1.1"
+		versionCode 1110
+		versionName "1.1.1"
 		resConfigs "en", "fr", "de"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
@@ -143,7 +143,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:2.0'
+	implementation 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
 
 	implementation 'androidx.work:work-runtime:2.4.0'
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'

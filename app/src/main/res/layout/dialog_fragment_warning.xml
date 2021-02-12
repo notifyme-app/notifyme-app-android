@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	style="@style/NotifyMe.Card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
 		android:orientation="vertical">
 
 		<ImageButton
-			android:id="@+id/remove_diary_entry_dialog_close_button"
+			android:id="@+id/warning_dialog_close_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end"
@@ -44,28 +45,21 @@
 					android:text="@string/remove_diary_warning_title" />
 
 				<TextView
-					android:id="@+id/hide_diary_entry_dialog_text"
+					android:id="@+id/warning_dialog_text"
 					style="@style/NotifyMe.Text"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/spacing_large"
-					android:text="@string/remove_diary_warning_text" />
-
-				<TextView
-					style="@style/NotifyMe.Text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/spacing_large"
-					android:text="@string/remove_diary_warning_star_text" />
+					tools:text="@string/remove_diary_warning_text" />
 
 				<Button
-					android:id="@+id/hide_diary_entry_dialog_hide_button"
+					android:id="@+id/warning_dialog_action_button"
 					style="@style/NotifyMe.Button.Small.Tertiary"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:layout_marginTop="@dimen/spacing_very_large"
-					android:text="@string/remove_diary_remove_now_button" />
+					tools:text="@string/delete_exposure_button_title" />
 
 			</LinearLayout>
 

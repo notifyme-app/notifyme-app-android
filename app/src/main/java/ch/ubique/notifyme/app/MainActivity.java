@@ -1,5 +1,6 @@
 package ch.ubique.notifyme.app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +18,7 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 
 import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
+import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.KeyLoadWorker;
@@ -26,15 +28,14 @@ import ch.ubique.notifyme.app.utils.ErrorDialog;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
-import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_ID;
-import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_NOTIFICATION_TYPE;
-import static ch.ubique.notifyme.app.utils.NotificationHelper.NOTIFICATION_TYPE;
-import static ch.ubique.notifyme.app.utils.NotificationHelper.REMINDER_TYPE;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
 
 public class MainActivity extends AppCompatActivity {
 
 	private MainViewModel viewModel;
 	private Storage storage;
+	private static final String STATE_CONSUMED_INTENT = "STATE_CONSUMED_INTENT";
+	private boolean consumedIntent = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +53,31 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				showOnboarding();
 			}
+		} else {
+			consumedIntent = savedInstanceState.getBoolean(STATE_CONSUMED_INTENT);
 		}
 
-		//TODO: Handle intents also when Activity is not newly created, but the app was already opened
-		if (onboardingCompleted) handleCustomIntents();
-
 		KeyLoadWorker.startKeyLoadWorker(this);
+		KeyLoadWorker.cleanUpOldData(this);
 
 		viewModel.forceUpdate.observe(this, forceUpdate -> {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}
-	
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+		consumedIntent = false;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (storage.getOnboardingCompleted()) checkIntentForActions();
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -71,19 +85,30 @@ public class MainActivity extends AppCompatActivity {
 		viewModel.refreshErrors();
 	}
 
+	private void checkIntentForActions() {
+		Intent intent = getIntent();
+		boolean launchedFromHistory = (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0;
+		if (!launchedFromHistory && !consumedIntent) {
+			consumedIntent = true;
+			handleCustomIntents();
+		}
+	}
+
 	private void handleCustomIntents() {
-		if (getIntent().hasExtra(NOTIFICATION_TYPE)) {
-			int notificationType = getIntent().getIntExtra(NOTIFICATION_TYPE, 0);
-			if (notificationType == REMINDER_TYPE && viewModel.isCheckedIn()) {
-				showCheckedInScreen();
-			} else if (notificationType == EXPOSURE_NOTIFICATION_TYPE) {
-				long id = getIntent().getLongExtra(EXPOSURE_ID, -1);
-				ExposureEvent exposureEvent = getExposureWithId(id);
-				if (exposureEvent != null) {
-					showExposureScreen(exposureEvent);
-				}
+		String intentAction = getIntent().getAction();
+		if ((REMINDER_ACTION.equals(intentAction) || ONGOING_ACTION.equals(intentAction)) && viewModel.isCheckedIn()) {
+			showCheckedInScreen();
+		} else if (CHECK_OUT_NOW_ACTION.equals(intentAction) && viewModel.isCheckedIn()) {
+			showCheckOutScreen();
+		} else if (EXPOSURE_NOTIFICATION_ACTION.equals(intentAction)) {
+			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);
+			ExposureEvent exposureEvent = getExposureWithId(id);
+			if (exposureEvent != null) {
+				showExposureScreen(exposureEvent);
 			}
-		} else if (getIntent().getData() != null) {
+		}
+
+		if (getIntent().getData() != null) {
 			checkValidCheckInIntent(getIntent().getData().toString());
 		}
 	}
@@ -108,6 +133,16 @@ public class MainActivity extends AppCompatActivity {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, CheckedInFragment.newInstance())
 				.addToBackStack(CheckedInFragment.TAG)
+				.commit();
+	}
+
+	private void showCheckOutScreen() {
+		showCheckedInScreen();
+		getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
+						R.anim.modal_pop_exit)
+				.replace(R.id.container, CheckOutFragment.newInstance())
+				.addToBackStack(CheckOutFragment.TAG)
 				.commit();
 	}
 
@@ -169,6 +204,12 @@ public class MainActivity extends AppCompatActivity {
 			if (interceptedByFragment) return;
 		}
 		super.onBackPressed();
+	}
+
+	@Override
+	protected void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(STATE_CONSUMED_INTENT, consumedIntent);
 	}
 
 	public interface BackPressListener {
