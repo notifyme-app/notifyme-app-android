@@ -454,7 +454,7 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="web_date_picker_format">"d.m.Y"</string>
 
     <!-- https://flatpickr.js.org/formatting/ -->
-    <string name="web_date_picker_format_with_time">"d.m.Y"</string>
+    <string name="web_date_picker_format_with_time">"d.m.Y H:i"</string>
 
     <!-- For sharing on Twitter and Facebook -->
     <string name="web_page_title">"NotifyMe"</string>
@@ -503,4 +503,19 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
 
     <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
     <string name="reminder_notification_snooze_action">"Répéter la notification"</string>
+
+    <!-- Text des Homescreen Buttons um sich als positiv getestet zu melden -->
+    <string name="report_positive_button_title"></string>
+
+    <!-- Titel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_title"></string>
+
+    <!-- Untertitel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_subtitle"></string>
+
+    <!-- Test des Tagebuch teilen Buttons -->
+    <string name="report_positive_share_diary_button_title"></string>
+
+    <!-- Titel nach erfolgreichem Tagebuch teilen -->
+    <string name="report_positive_success_title"></string>
 </resources>

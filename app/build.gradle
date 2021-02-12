@@ -44,6 +44,7 @@ android {
 			applicationIdSuffix '.dev'
 			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-dev-config.notify-me.ch/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
+			buildConfigField "String", "DIARY_BASE_URL", '"https://app-dev-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-dev.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload-dev.notify-me.ch"'
 		}
@@ -51,6 +52,7 @@ android {
 			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
 			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
+			buildConfigField "String", "DIARY_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
 		}
@@ -59,6 +61,7 @@ android {
 			applicationIdSuffix '.abn'
 			buildConfigField "String", "CONFIG_BASE_URL", '"https://cn-a.bit.admin.ch/"'
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
+			buildConfigField "String", "DIARY_BASE_URL", '"https://cn-a.bit.admin.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
 		}
@@ -149,6 +152,10 @@ dependencies {
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 	implementation 'com.google.protobuf:protobuf-lite:3.0.1'
 	implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+	implementation('com.squareup.retrofit2:converter-protobuf:2.9.0'){
+		exclude group: 'com.google.protobuf'
+	}
+	implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 	implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 	implementation 'androidx.security:security-crypto:1.0.0-rc03'
 	implementation 'androidx.biometric:biometric:1.1.0-rc01'

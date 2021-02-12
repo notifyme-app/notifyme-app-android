@@ -507,4 +507,19 @@ QR Code"</string>
 
     <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
     <string name="reminder_notification_snooze_action">"Snooze"</string>
+
+    <!-- Text des Homescreen Buttons um sich als positiv getestet zu melden -->
+    <string name="report_positive_button_title"></string>
+
+    <!-- Titel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_title"></string>
+
+    <!-- Untertitel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_subtitle"></string>
+
+    <!-- Test des Tagebuch teilen Buttons -->
+    <string name="report_positive_share_diary_button_title"></string>
+
+    <!-- Titel nach erfolgreichem Tagebuch teilen -->
+    <string name="report_positive_success_title"></string>
 </resources>
