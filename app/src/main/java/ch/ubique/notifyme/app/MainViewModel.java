@@ -24,6 +24,7 @@ import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.network.ConfigServiceController;
 import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.app.utils.LoadingState;
 import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION;
@@ -44,7 +45,7 @@ public class MainViewModel extends AndroidViewModel {
 	private Runnable timeUpdateRunnable;
 	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 1000;
 	private TraceKeysServiceController traceKeysServiceController = new TraceKeysServiceController(getApplication());
-	private ConfigServiceController configServiceController = new ConfigServiceController(getApplication());
+	private ConfigServiceController configServiceController = new ConfigServiceController();
 
 
 	private BroadcastReceiver newNotificationBroadcastReceiver = new BroadcastReceiver() {
@@ -181,10 +182,6 @@ public class MainViewModel extends AndroidViewModel {
 	public void onCleared() {
 		super.onCleared();
 		LocalBroadcastManager.getInstance(getApplication()).unregisterReceiver(newNotificationBroadcastReceiver);
-	}
-
-	public enum LoadingState {
-		LOADING, SUCCESS, FAILURE
 	}
 
 }

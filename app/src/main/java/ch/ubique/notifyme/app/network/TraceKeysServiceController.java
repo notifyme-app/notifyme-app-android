@@ -1,7 +1,6 @@
 package ch.ubique.notifyme.app.network;
 
 import android.content.Context;
-import android.os.Build;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,38 +11,23 @@ import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.model.ProblematicEventOuterClass;
 import ch.ubique.notifyme.app.utils.Storage;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-public class TraceKeysServiceController {
+public class TraceKeysServiceController extends BaseServiceController<TraceKeysService> {
 
 	private static final String KEY_BUNDLE_TAG_HEADER = "x-key-bundle-tag";
 
-	private TraceKeysService traceKeysService;
 	private Storage storage;
 
 	public TraceKeysServiceController(Context context) {
-
+		super(BuildConfig.PUBLISHED_KEYS_BASE_URL);
 		storage = Storage.getInstance(context);
-		String baseUrl = BuildConfig.PUBLISHED_KEYS_BASE_URL;
-
-		String userAgent = BuildConfig.APPLICATION_ID + ";" + BuildConfig.VERSION_NAME + ";Android;" + Build.VERSION.RELEASE;
-		OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
-		okHttpBuilder.networkInterceptors().add(new UserAgentInterceptor(userAgent));
-
-		Retrofit bucketRetrofit = new Retrofit.Builder()
-				.baseUrl(baseUrl)
-				.client(okHttpBuilder.build())
-				.build();
-
-		traceKeysService = bucketRetrofit.create(TraceKeysService.class);
 	}
 
 	public void loadTraceKeysAsync(Callback callback) {
-		traceKeysService.getTraceKeys(storage.getLastKeyBundleTag()).enqueue(new retrofit2.Callback<ResponseBody>() {
+		service.getTraceKeys(storage.getLastKeyBundleTag()).enqueue(new retrofit2.Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				if (response.isSuccessful()) {
@@ -62,7 +46,7 @@ public class TraceKeysServiceController {
 
 	public List<ProblematicEventInfo> loadTraceKeys() {
 		try {
-			Response<ResponseBody> response = traceKeysService.getTraceKeys(storage.getLastKeyBundleTag()).execute();
+			Response<ResponseBody> response = service.getTraceKeys(storage.getLastKeyBundleTag()).execute();
 			if (response.isSuccessful()) {
 				return handleSuccessfulResponse(response);
 			}
@@ -70,6 +54,11 @@ public class TraceKeysServiceController {
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	protected Class<TraceKeysService> getServiceClass() {
+		return TraceKeysService.class;
 	}
 
 	private List<ProblematicEventInfo> handleSuccessfulResponse(Response<ResponseBody> response) {
