@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/fragment_share_diray_success_cancel_button"
+			style="@style/NotifyMe.Text.Status.Primary.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:background="?selectableItemBackground"
+			android:padding="@dimen/spacing_large"
+			android:text="@string/cancel" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/fragment_share_diray_success_title"
+			style="@style/NotifyMe.Text.Title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/spacing_large"
+			android:layout_marginTop="@dimen/spacing_large"
+			android:text="@string/report_positive_success_title" />
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom">
+
+		<Button
+			android:id="@+id/fragment_share_diray_success_button"
+			style="@style/NotifyMe.Button.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_margin="@dimen/spacing_large"
+			android:text="@string/done_button" />
+	</FrameLayout>
+
+</LinearLayout>

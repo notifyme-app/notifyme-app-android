@@ -22,6 +22,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.app.utils.LoadingState;
 import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class ReportsFragment extends Fragment {
@@ -65,7 +66,7 @@ public class ReportsFragment extends Fragment {
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
-				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+				swipeRefreshLayout.setRefreshing(loadingState == LoadingState.LOADING));
 	}
 
 	private void publishRecyclerItems(List<ExposureEvent> exposures, ErrorState errorState) {

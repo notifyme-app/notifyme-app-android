@@ -1,16 +1,16 @@
 package ch.ubique.notifyme.app;
 
-import androidx.annotation.NonNull;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
@@ -21,9 +21,14 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.diary.DiaryFragment;
 import ch.ubique.notifyme.app.impressum.HtmlFragment;
-import ch.ubique.notifyme.app.reports.ReportsFragment;
+import ch.ubique.notifyme.app.diary.share.ShareDiaryFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
-import ch.ubique.notifyme.app.utils.*;
+import ch.ubique.notifyme.app.reports.ReportsFragment;
+import ch.ubique.notifyme.app.utils.AssetUtil;
+import ch.ubique.notifyme.app.utils.ErrorHelper;
+import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.app.utils.LoadingState;
+import ch.ubique.notifyme.app.utils.StringUtils;
 
 public class MainFragment extends Fragment implements MainActivity.BackPressListener {
 
@@ -60,12 +65,14 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		View errorView = view.findViewById(R.id.no_reports_header_error_view);
 		View errorViewSmall = view.findViewById(R.id.reports_header_error_view);
 		View nonProductiveInfo = view.findViewById(R.id.fragment_main_non_productive_info);
+		Button shareDiaryButton = view.findViewById(R.id.fragment_main_share_diary_button);
 
 		appNameTextView.setText(StringUtils.getTwoColoredString(getString(R.string.app_name),
 				getString(R.string.app_name_highlight), getResources().getColor(R.color.primary, null)));
 		infoButton.setOnClickListener(v -> showImpressum());
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
+		shareDiaryButton.setOnClickListener(v -> showShareDiaryFragment());
 
 		if (viewModel.isCheckedIn()) {
 			checkOutButton.setOnClickListener(v -> showCheckedInScreen());
@@ -139,7 +146,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
-				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
+				swipeRefreshLayout.setRefreshing(loadingState == LoadingState.LOADING));
 
 		if (BuildConfig.FLAVOR.equals("prod")) {
 			nonProductiveInfo.setVisibility(View.GONE);
@@ -169,6 +176,15 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, ReportsFragment.newInstance())
 				.addToBackStack(ReportsFragment.TAG)
+				.commit();
+	}
+
+	private void showShareDiaryFragment() {
+		// TODO Authenticate first
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter, R.anim.modal_pop_exit)
+				.replace(R.id.container, ShareDiaryFragment.newInstance())
+				.addToBackStack(ShareDiaryFragment.TAG)
 				.commit();
 	}
 

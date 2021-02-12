@@ -111,7 +111,21 @@
 					android:layout_width="match_parent"
 					android:layout_height="0dp"
 					app:barrierDirection="top"
-					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label,fragment_main_non_productive_info" />
+					app:constraint_referenced_ids="fragment_main_buttons_container,fragment_main_checked_in_label,fragment_main_non_productive_info,fragment_main_share_diary_button" />
+
+				<Button
+					android:id="@+id/fragment_main_share_diary_button"
+					style="@style/NotifyMe.Button.Small"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/spacing_large"
+					android:layout_marginBottom="@dimen/spacing_small"
+					android:layout_weight="1"
+					android:text="@string/report_positive_button_title"
+					app:layout_constraintBottom_toTopOf="@+id/fragment_main_non_productive_info"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0"
+					app:layout_constraintStart_toStartOf="parent" />
 
 				<TextView
 					android:id="@+id/fragment_main_non_productive_info"

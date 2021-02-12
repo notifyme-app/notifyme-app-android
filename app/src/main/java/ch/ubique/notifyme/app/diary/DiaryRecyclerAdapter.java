@@ -24,6 +24,7 @@ import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	List<VenueVisitRecyclerItem> items = new ArrayList<>();
+	private boolean showStatusIcon = true;
 
 	@Override
 	public int getItemViewType(int position) { return items.get(position).getViewType().getId(); }
@@ -70,6 +71,9 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 		notifyDataSetChanged();
 	}
 
+	public void setShowStatusIcon(boolean showStatusIcon) {
+		this.showStatusIcon = showStatusIcon;
+	}
 
 	public class DayHeaderViewHolder extends RecyclerView.ViewHolder {
 
@@ -116,17 +120,24 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 			String start = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getArrivalTime(), ":");
 			String end = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getDepartureTime(), ":");
 			timeTextView.setText(start + " — " + end);
-			if (item.getExposure() == null) {
-				infoBox.setVisibility(View.GONE);
-				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_filled));
-			} else {
-				if (item.getExposure().getMessage() != null && !item.getExposure().getMessage().isEmpty()) {
-					infoBox.setVisibility(View.VISIBLE);
-					infoBoxText.setText(item.getExposure().getMessage());
-				} else {
+
+			if (showStatusIcon) {
+				statusIcon.setVisibility(View.VISIBLE);
+				if (item.getExposure() == null) {
 					infoBox.setVisibility(View.GONE);
+					statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_filled));
+				} else {
+					if (item.getExposure().getMessage() != null && !item.getExposure().getMessage().isEmpty()) {
+						infoBox.setVisibility(View.VISIBLE);
+						infoBoxText.setText(item.getExposure().getMessage());
+					} else {
+						infoBox.setVisibility(View.GONE);
+					}
+					statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
 				}
-				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
+			} else {
+				statusIcon.setVisibility(View.GONE);
+				infoBox.setVisibility(View.GONE);
 			}
 			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
 			itemView.setOnClickListener(item.getOnClickListener());
