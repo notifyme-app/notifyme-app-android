@@ -61,11 +61,15 @@ public class KeyLoadWorker extends Worker {
 			}
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION));
 		}
-		CrowdNotifier.cleanUpOldData(getApplicationContext(), DAYS_TO_KEEP_VENUE_VISITS);
-		DiaryStorage.getInstance(getApplicationContext()).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
+		cleanUpOldData(getApplicationContext());
 
 		Log.d(LOG_TAG, "KeyLoadWorker success");
 		return Result.success();
+	}
+
+	public static void cleanUpOldData(Context context) {
+		CrowdNotifier.cleanUpOldData(context, DAYS_TO_KEEP_VENUE_VISITS);
+		DiaryStorage.getInstance(context).removeEntriesBefore(DAYS_TO_KEEP_VENUE_VISITS);
 	}
 
 }

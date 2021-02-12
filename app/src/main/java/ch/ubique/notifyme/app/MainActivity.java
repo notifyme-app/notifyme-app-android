@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		KeyLoadWorker.startKeyLoadWorker(this);
+		KeyLoadWorker.cleanUpOldData(this);
 
 		viewModel.forceUpdate.observe(this, forceUpdate -> {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 	private void checkIntentForActions() {
 		Intent intent = getIntent();
 		boolean launchedFromHistory = (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0;
-		if (!launchedFromHistory && !consumedIntent){
+		if (!launchedFromHistory && !consumedIntent) {
 			consumedIntent = true;
 			handleCustomIntents();
 		}
