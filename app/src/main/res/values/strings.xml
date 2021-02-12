@@ -253,7 +253,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="web_generator_subtitle_placeholder">"E.g. organization or organizer"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_addition_label">"Addition"</string>
+    <string name="web_generator_addition_label">"Additional information"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_addition_placeholder">"E.g. building or place"</string>
@@ -271,7 +271,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="web_generator_public_bulletpoint_2">"NotifyMe can't scan the code."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_public_bulletpoint_3">"Check-ins are not registered. No private are seized."</string>
+    <string name="web_generator_public_bulletpoint_3">"Check-ins are only saved on the users’ devices."</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_private_bulletpoint_1">"This QR code informs visitors in case of an incident."</string>
@@ -280,10 +280,10 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="web_generator_private_bulletpoint_2">"The code can be scanned with any QR code reader."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer."</string>
+    <string name="web_generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer is published."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_pdf_button">"Dowload PDF"</string>
+    <string name="web_generator_pdf_button">"Download PDF"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
@@ -321,7 +321,7 @@ QR Code"</string>
     <string name="error_notification_deactivated_title">"Deactivate notifications"</string>
     <string name="error_notification_deactivated_text">"Edit the app settings to receive report-notifications."</string>
     <string name="error_background_refresh_title">"Background updates are off"</string>
-    <string name="error_background_refresh_text">"Edit the app settings to be informed when there is a report outside of the app as well."</string>
+    <string name="error_background_refresh_text">"Edit the app settings to be informed at all times."</string>
     <string name="error_camera_permission_title">"No camera access"</string>
     <string name="error_camera_permission_text">"The app needs camera access to scan the QR code."</string>
     <string name="error_action_change_settings">"Edit settings"</string>
@@ -410,7 +410,7 @@ QR Code"</string>
     <string name="onboarding_hint1">"This app does not collect obligatory contact data and cannot be used for this purpose."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint2">"Please read the terms and conditions as well"</string>
+    <string name="onboarding_hint2">"Please read the terms and conditions:"</string>
     <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
     <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
     <string name="qr_scanner_error_code_not_yet_valid">"Code is not valid yet"</string>
@@ -497,7 +497,7 @@ QR Code"</string>
     <string name="camera_permission_dialog_action">"Grant camera access"</string>
 
     <!-- Notification Channel name for Ongoing Checkin Notifications on Android Devices (Only visible in System Settings) -->
-    <string name="android_ongoing_checkin_notification_channel_name">"Ongoing Checkin Notification"</string>
+    <string name="android_ongoing_checkin_notification_channel_name">"Ongoing Check-in Notification"</string>
 
     <!-- Titel der Ongoing Notification, welche während des ganzen Check Ins angezeigt wird im Notificaiton Center. -->
     <string name="ongoing_notification_title">"You are checked in since {TIME}."</string>

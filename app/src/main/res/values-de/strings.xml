@@ -408,7 +408,7 @@ zur Nutzung"</string>
     <string name="onboarding_hint1">"Diese App kann nicht für die obligatorische Kontaktdatenerfassung verwendet werden, da sie keinerlei Kontaktdaten erfasst."</string>
 
     <!-- Zweiter Hinweis auf dem Onboarding Screen mit Hinweisen zur Nutzung -->
-    <string name="onboarding_hint2">"Bitte lesen Sie auch die Allgemeinen Geschäftsbedingungen"</string>
+    <string name="onboarding_hint2">"Bitte lesen Sie die Allgemeinen Geschäftsbedingungen:"</string>
     <string name="onboarding_agb_link">"https://notify-me.ch/agb"</string>
     <string name="onboarding_agb_link_title">"www.notify-me.ch/agb"</string>
     <string name="qr_scanner_error_code_not_yet_valid">"QR-Code noch nicht gültig"</string>
