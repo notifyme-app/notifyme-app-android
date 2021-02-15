@@ -148,6 +148,8 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == LoadingState.LOADING));
 
+		shareDiaryButton.setVisibility(viewModel.shouldShowReportPositiveButton() ? View.VISIBLE : View.GONE);
+
 		if (BuildConfig.FLAVOR.equals("prod")) {
 			nonProductiveInfo.setVisibility(View.GONE);
 		} else {

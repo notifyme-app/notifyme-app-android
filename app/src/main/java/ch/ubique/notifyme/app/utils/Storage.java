@@ -13,6 +13,7 @@ public class Storage {
 	private static final String KEY_CURRENT_CHECK_IN = "KEY_CURRENT_CHECK_IN";
 	private static final String KEY_LAST_KEY_BUNDLE_TAG = "KEY_LAST_KEY_BUNDLE_TAG";
 	private static final String KEY_ONBOARDING_COMPLETE = "KEY_ONBOARDING_COMPLETE";
+	private static final String KEY_LAST_POSITIVE_REPORT_TIMESTAMP = "KEY_LAST_POSITIVE_REPORT_TIMESTAMP";
 
 	private static Storage instance;
 
@@ -52,6 +53,14 @@ public class Storage {
 
 	public boolean getOnboardingCompleted() {
 		return sharedPreferences.getBoolean(KEY_ONBOARDING_COMPLETE, false);
+	}
+
+	public long getLastPositiveReportTimestamp() {
+		return sharedPreferences.getLong(KEY_LAST_POSITIVE_REPORT_TIMESTAMP, 0);
+	}
+
+	public void setLastPositiveReportTimestamp(long timestamp) {
+		sharedPreferences.edit().putLong(KEY_LAST_POSITIVE_REPORT_TIMESTAMP, timestamp).apply();
 	}
 
 }

@@ -87,7 +87,6 @@ public class ShareDiaryFragment extends Fragment {
 				case FAILURE:
 					shareDiaryButton.setVisibility(View.VISIBLE);
 					shareDiaryProgress.setVisibility(View.GONE);
-					// TODO Show error inline?
 					new ErrorDialog(requireContext(), ErrorState.NETWORK).show();
 					break;
 			}

@@ -15,12 +15,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
-import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
+import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.ConfigServiceController;
 import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
@@ -46,6 +47,7 @@ public class MainViewModel extends AndroidViewModel {
 	private final long CHECK_IN_TIME_UPDATE_INTERVAL = 1000;
 	private TraceKeysServiceController traceKeysServiceController = new TraceKeysServiceController(getApplication());
 	private ConfigServiceController configServiceController = new ConfigServiceController();
+	private static final int DAYS_TO_HIDE_REPORT_POSITIVE_BUTTON = 14;
 
 
 	private BroadcastReceiver newNotificationBroadcastReceiver = new BroadcastReceiver() {
@@ -176,6 +178,12 @@ public class MainViewModel extends AndroidViewModel {
 				this.forceUpdate.setValue(configResponseModel.isForceUpdate());
 			}
 		});
+	}
+
+	public boolean shouldShowReportPositiveButton() {
+		long now = System.currentTimeMillis();
+		long threshold = now - TimeUnit.DAYS.toMillis(DAYS_TO_HIDE_REPORT_POSITIVE_BUTTON);
+		return storage.getLastPositiveReportTimestamp() < threshold;
 	}
 
 	@Override
