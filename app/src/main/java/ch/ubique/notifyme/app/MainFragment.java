@@ -20,8 +20,8 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.diary.DiaryFragment;
-import ch.ubique.notifyme.app.impressum.HtmlFragment;
 import ch.ubique.notifyme.app.diary.share.ShareDiaryFragment;
+import ch.ubique.notifyme.app.impressum.HtmlFragment;
 import ch.ubique.notifyme.app.qr.QrCodeScannerFragment;
 import ch.ubique.notifyme.app.reports.ReportsFragment;
 import ch.ubique.notifyme.app.utils.AssetUtil;
@@ -72,7 +72,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		infoButton.setOnClickListener(v -> showImpressum());
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
-		shareDiaryButton.setOnClickListener(v -> showShareDiaryFragment());
+		shareDiaryButton.setOnClickListener(v -> authenticateAndShowShareDiary());
 
 		if (viewModel.isCheckedIn()) {
 			checkOutButton.setOnClickListener(v -> showCheckedInScreen());
@@ -181,37 +181,44 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				.commit();
 	}
 
-	private void showShareDiaryFragment() {
-		// TODO Authenticate first
-		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter, R.anim.modal_pop_exit)
-				.replace(R.id.container, ShareDiaryFragment.newInstance())
-				.addToBackStack(ShareDiaryFragment.TAG)
-				.commit();
+	private void authenticateAndShowDiary() {
+		authenticateAndShow(getString(R.string.authenticate_for_diary), this::showDiary);
 	}
 
-	private void authenticateAndShowDiary() {
+	private void authenticateAndShowShareDiary() {
+		authenticateAndShow(getString(R.string.authenticate_for_diary), this::showShareDiaryFragment);
+	}
+
+	private void authenticateAndShow(String promptTitle, Runnable showCallback) {
 		Executor executor = ContextCompat.getMainExecutor(requireContext());
 		BiometricPrompt biometricPrompt =
 				new BiometricPrompt(requireActivity(), executor, new BiometricPrompt.AuthenticationCallback() {
 					@Override
 					public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
 						super.onAuthenticationSucceeded(result);
-						showDiary();
+						showCallback.run();
 					}
 				});
 
 		if (BiometricManager.from(requireContext()).canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL |
 				BiometricManager.Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS) {
 			BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-					.setTitle(getString(R.string.authenticate_for_diary))
+					.setTitle(promptTitle)
 					.setAllowedAuthenticators(
 							BiometricManager.Authenticators.DEVICE_CREDENTIAL | BiometricManager.Authenticators.BIOMETRIC_WEAK)
 					.build();
 			biometricPrompt.authenticate(promptInfo);
 		} else {
-			showDiary();
+			showCallback.run();
 		}
+	}
+
+	private void showShareDiaryFragment() {
+		requireActivity().getSupportFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter, R.anim.modal_pop_exit)
+				.replace(R.id.container, ShareDiaryFragment.newInstance())
+				.addToBackStack(ShareDiaryFragment.TAG)
+				.commit();
 	}
 
 	private void showDiary() {
