@@ -84,7 +84,7 @@ public class CheckOutFragment extends Fragment {
 		toTime.setOnClickListener(v -> showTimePicker(false));
 
 		doneButton.setOnClickListener(v -> {
-			ReminderHelper.removeReminder(getContext());
+			ReminderHelper.removeAllReminders(getContext());
 			saveEntry();
 			NotificationHelper notificationHelper = NotificationHelper.getInstance(getContext());
 			notificationHelper.stopOngoingNotification();

@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -29,13 +33,21 @@ import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.AUTO_CHECKOUT_BROADCAST;
 
 public class MainActivity extends AppCompatActivity {
 
 	private MainViewModel viewModel;
 	private Storage storage;
-	private static final String STATE_CONSUMED_INTENT = "STATE_CONSUMED_INTENT";
-	private boolean consumedIntent = false;
+	private static final String KEY_IS_INTENT_CONSUMED = "KEY_IS_INTENT_CONSUMED";
+	private boolean isIntentConsumed = false;
+
+	private BroadcastReceiver autoCheckoutBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			showMainFragment();
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		storage = Storage.getInstance(this);
+		if (storage.getDidAutoCheckout()) {
+			showMainFragment();
+			storage.setDidAutoCheckout(false);
+		}
 
 		boolean onboardingCompleted = storage.getOnboardingCompleted();
 
@@ -54,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 				showOnboarding();
 			}
 		} else {
-			consumedIntent = savedInstanceState.getBoolean(STATE_CONSUMED_INTENT);
+			isIntentConsumed = savedInstanceState.getBoolean(KEY_IS_INTENT_CONSUMED);
 		}
 
 		KeyLoadWorker.startKeyLoadWorker(this);
@@ -69,13 +85,15 @@ public class MainActivity extends AppCompatActivity {
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
-		consumedIntent = false;
+		isIntentConsumed = false;
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (storage.getOnboardingCompleted()) checkIntentForActions();
+		LocalBroadcastManager.getInstance(this)
+				.registerReceiver(autoCheckoutBroadcastReceiver, new IntentFilter(AUTO_CHECKOUT_BROADCAST));
 	}
 
 	@Override
@@ -88,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
 	private void checkIntentForActions() {
 		Intent intent = getIntent();
 		boolean launchedFromHistory = (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0;
-		if (!launchedFromHistory && !consumedIntent) {
-			consumedIntent = true;
+		if (!launchedFromHistory && !isIntentConsumed) {
+			isIntentConsumed = true;
 			handleCustomIntents();
 		}
 	}
@@ -209,7 +227,13 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(STATE_CONSUMED_INTENT, consumedIntent);
+		outState.putBoolean(KEY_IS_INTENT_CONSUMED, isIntentConsumed);
+	}
+
+	@Override
+	protected void onPause() {
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(autoCheckoutBroadcastReceiver);
+		super.onPause();
 	}
 
 	public interface BackPressListener {

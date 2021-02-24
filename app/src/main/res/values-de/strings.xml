@@ -517,4 +517,32 @@ Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauer
 
     <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
     <string name="reminder_notification_snooze_action">"Snooze"</string>
+
+    <!-- Text des Homescreen Buttons um sich als positiv getestet zu melden -->
+    <string name="report_positive_button_title">"Positiv?"</string>
+
+    <!-- Titel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_title">"Sie wurden positiv getestet?"</string>
+
+    <!-- Untertitel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_subtitle">"Unterstützen Sie das Contact Tracing, indem Sie Ihr Tagebuch teilen."</string>
+
+    <!-- Test des Tagebuch teilen Buttons -->
+    <string name="report_positive_share_diary_button_title">"Tagebuch teilen"</string>
+
+    <!-- Titel nach erfolgreichem Tagebuch teilen -->
+    <string name="report_positive_success_title">"Vielen Dank &amp; Gute Besserung"</string>
+
+    <!-- iOS: Titel Popup nach 2 Tagen -->
+    <string name="sync_warning_notification_title">"App synchronisieren"</string>
+
+    <!-- Sync Warning: Popup nach 2 Tagen Text -->
+    <!-- Fuzzy -->
+    <string name="sync_warning_notification_text">"Öffnen Sie die App, um die Liste der gemeldeten zufälligen IDs abzugleichen."</string>
+
+    <!-- Titel der Notification, welche erscheint, wenn der Benutzer automatisch ausgecheckt wurde nach 12 Stunden. -->
+    <string name="auto_checkout_title">"Automatischer Checkout"</string>
+
+    <!-- Nachrichttext der Notification, welche erscheint, wenn der Benutzer automatisch ausgecheckt wurde nach 12 Stunden. -->
+    <string name="auto_checkout_body">"Sie wurden automatisch ausgecheckt."</string>
 </resources>

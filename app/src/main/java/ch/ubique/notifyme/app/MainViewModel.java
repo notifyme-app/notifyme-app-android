@@ -26,7 +26,8 @@ import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
-import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION;
+import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION_BROADCAST;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.AUTO_CHECKOUT_BROADCAST;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -46,22 +47,25 @@ public class MainViewModel extends AndroidViewModel {
 	private TraceKeysServiceController traceKeysServiceController = new TraceKeysServiceController(getApplication());
 	private ConfigServiceController configServiceController = new ConfigServiceController(getApplication());
 
-
-	private BroadcastReceiver newNotificationBroadcastReceiver = new BroadcastReceiver() {
+	private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			refreshExposures();
+			if (AUTO_CHECKOUT_BROADCAST.equals(intent.getAction())) {
+				setCheckInState(null);
+			} else if (NEW_NOTIFICATION_BROADCAST.equals(intent.getAction())) {
+				refreshExposures();
+			}
 		}
 	};
-
 
 	public MainViewModel(@NonNull Application application) {
 		super(application);
 		refreshExposures();
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCurrentVenue();
-		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,
-				new IntentFilter(NEW_NOTIFICATION));
+		LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(application);
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(AUTO_CHECKOUT_BROADCAST));
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(NEW_NOTIFICATION_BROADCAST));
 		traceKeyLoadingState.observeForever(loadingState -> { if (loadingState != LoadingState.LOADING) refreshErrors(); });
 		reloadConfig();
 	}
@@ -180,7 +184,7 @@ public class MainViewModel extends AndroidViewModel {
 	@Override
 	public void onCleared() {
 		super.onCleared();
-		LocalBroadcastManager.getInstance(getApplication()).unregisterReceiver(newNotificationBroadcastReceiver);
+		LocalBroadcastManager.getInstance(getApplication()).unregisterReceiver(broadcastReceiver);
 	}
 
 	public enum LoadingState {

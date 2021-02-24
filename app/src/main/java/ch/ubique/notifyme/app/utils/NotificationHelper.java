@@ -24,6 +24,7 @@ public class NotificationHelper {
 
 	public static final String EXPOSURE_NOTIFICATION_ACTION = "EXPOSURE_NOTIFICATION_ACTION";
 	public static final String REMINDER_ACTION = "REMINDER_ACTION";
+	public static final String AUTO_CHECKOUT_ACTION = "AUTO_CHECKOUT_ACTION";
 	public static final String ONGOING_ACTION = "ONGOING_ACTION";
 	public static final String CHECK_OUT_NOW_ACTION = "CHECK_OUT_NOW_ACTION";
 	public static final String SNOOZE_ACTION = "SNOOZE_ACTION";
@@ -36,6 +37,7 @@ public class NotificationHelper {
 
 	private final int ONGOING_NOTIFICATION_ID = -1;
 	private final int REMINDER_NOTIFICATION_ID = -2;
+	private final int AUTO_CHECKOUT_NOTIFICATION_ID = -3;
 
 
 	private static NotificationHelper instance;
@@ -93,6 +95,18 @@ public class NotificationHelper {
 				.setDefaults(Notification.DEFAULT_ALL);
 	}
 
+	public void showAutoCheckoutNotification() {
+		createNotificationChannel(CHANNEL_ID_REMINDER, context.getString(R.string.android_reminder_channel_name), false,
+				IMPORTANCE_HIGH);
+
+		Notification notification = getNotificationBuilder(CHANNEL_ID_REMINDER)
+				.setContentIntent(createBasicPendingIntent(AUTO_CHECKOUT_ACTION))
+				.setContentTitle(context.getString(R.string.auto_checkout_title))
+				.setContentText(context.getString(R.string.auto_checkout_body))
+				.build();
+
+		notificationManager.notify(AUTO_CHECKOUT_NOTIFICATION_ID, notification);
+	}
 
 	public void showExposureNotification(long exposureId) {
 

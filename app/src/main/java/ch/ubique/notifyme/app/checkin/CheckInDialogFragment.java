@@ -18,6 +18,7 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.utils.NotificationHelper;
+import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class CheckInDialogFragment extends DialogFragment {
@@ -83,6 +84,8 @@ public class CheckInDialogFragment extends DialogFragment {
 			viewModel.setCheckedIn(true);
 			viewModel.getCheckInState().setCheckInTime(checkInTime);
 			NotificationHelper.getInstance(getContext()).startOngoingNotification(checkInTime, venueInfo);
+			ReminderHelper.set8HourReminder(getContext());
+			ReminderHelper.setAutoCheckOut(getContext());
 			showCheckedInFragment();
 			dismiss();
 		});
