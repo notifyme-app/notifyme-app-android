@@ -14,12 +14,13 @@ import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 
+import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.NotificationHelper;
 
 public class KeyLoadWorker extends Worker {
 
-	public static final String NEW_NOTIFICATION_BROADCAST = "NEW_NOTIFICATION_BROADCAST";
+	public static final String ACTION_NEW_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_NEW_EXPOSURE_NOTIFICATION";
 	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.KeyLoadWorker";
 	private static final int DAYS_TO_KEEP_VENUE_VISITS = 14;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;
@@ -59,7 +60,7 @@ public class KeyLoadWorker extends Worker {
 			for (ExposureEvent exposureEvent : exposures) {
 				NotificationHelper.getInstance(getApplicationContext()).showExposureNotification(exposureEvent.getId());
 			}
-			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(NEW_NOTIFICATION_BROADCAST));
+			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(ACTION_NEW_EXPOSURE_NOTIFICATION));
 		}
 		cleanUpOldData(getApplicationContext());
 

@@ -10,18 +10,19 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 
+import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 
 public class ReminderHelper extends BroadcastReceiver {
 
-	public static final String AUTO_CHECKOUT_BROADCAST = "AUTO_CHECKOUT_BROADCAST";
+	public static final String ACTION_DID_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + "ACTION_DID_AUTO_CHECKOUT";
 	private static final int REMINDER_INTENT_ID = 12;
-	private static final String KEY_REMINDER_INTENT = "KEY_REMINDER_INTENT";
+	private static final String ACTION_REMINDER = BuildConfig.APPLICATION_ID + "ACTION_REMINDER";
 	private static final int EIGHT_HOUR_REMINDER_INTENT_ID = 13;
-	private static final String KEY_EIGHT_HOUR_REMINDER_INTENT = "KEY_EIGHT_HOUR_REMINDER_INTENT";
+	private static final String ACTION_EIGHT_HOUR_REMINDER = BuildConfig.APPLICATION_ID + "ACTION_EIGHT_HOUR_REMINDER";
 	private static final int AUTO_CHECK_OUT_INTENT_ID = 14;
-	private static final String KEY_AUTO_CHECKOUT_INTENT = "KEY_AUTO_CHECKOUT_INTENT";
+	private static final String ACTION_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + "ACTION_AUTO_CHECKOUT";
 	private static final long EIGHT_HOURS = 1000L * 60 * 60 * 8;
 	private static final long TWELVE_HOURS = 1000L * 60 * 60 * 12;
 
@@ -78,26 +79,27 @@ public class ReminderHelper extends BroadcastReceiver {
 	private static PendingIntent getPendingIntent(Context context, boolean eightHours) {
 		Intent intent = new Intent(context, ReminderHelper.class);
 		if (eightHours) {
-			intent.putExtra(KEY_EIGHT_HOUR_REMINDER_INTENT, KEY_EIGHT_HOUR_REMINDER_INTENT);
+			intent.setAction(ACTION_EIGHT_HOUR_REMINDER);
 			return PendingIntent.getBroadcast(context, EIGHT_HOUR_REMINDER_INTENT_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		} else {
-			intent.putExtra(KEY_REMINDER_INTENT, KEY_REMINDER_INTENT);
+			intent.setAction(ACTION_REMINDER);
 			return PendingIntent.getBroadcast(context, REMINDER_INTENT_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 	}
 
 	private static PendingIntent getAutoCheckOutPendingIntent(Context context) {
 		Intent intent = new Intent(context, ReminderHelper.class);
-		intent.putExtra(KEY_AUTO_CHECKOUT_INTENT, KEY_AUTO_CHECKOUT_INTENT);
+		intent.setAction(ACTION_AUTO_CHECKOUT);
 		return PendingIntent.getBroadcast(context, AUTO_CHECK_OUT_INTENT_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		CheckInState checkInState = Storage.getInstance(context).getCurrentVenue();
-		if ((intent.hasExtra(KEY_REMINDER_INTENT) || intent.hasExtra(KEY_EIGHT_HOUR_REMINDER_INTENT)) && checkInState != null) {
+		if (ACTION_REMINDER.equals(intent.getAction()) ||
+				ACTION_EIGHT_HOUR_REMINDER.equals(intent.getAction()) && checkInState != null) {
 			NotificationHelper.getInstance(context).showReminderNotification();
-		} else if (intent.hasExtra(KEY_AUTO_CHECKOUT_INTENT) && checkInState != null) {
+		} else if (ACTION_AUTO_CHECKOUT.equals(intent.getAction()) && checkInState != null) {
 			autoCheckout(context, checkInState);
 		}
 	}
@@ -108,12 +110,12 @@ public class ReminderHelper extends BroadcastReceiver {
 		notificationHelper.removeReminderNotification();
 		notificationHelper.showAutoCheckoutNotification();
 		long checkIn = checkInState.getCheckInTime();
-		long checkOut = System.currentTimeMillis();
+		long checkOut = checkIn + TWELVE_HOURS;
 		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, checkInState.getVenueInfo(), context);
 		DiaryStorage.getInstance(context).addEntry(new DiaryEntry(id, checkIn, checkOut, checkInState.getVenueInfo(), ""));
 		Storage storage = Storage.getInstance(context);
 		storage.setCurrentVenue(null);
-		LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(AUTO_CHECKOUT_BROADCAST));
+		LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_DID_AUTO_CHECKOUT));
 		storage.setDidAutoCheckout(true);
 	}
 

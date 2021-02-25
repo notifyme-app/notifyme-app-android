@@ -33,7 +33,7 @@ import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
-import static ch.ubique.notifyme.app.utils.ReminderHelper.AUTO_CHECKOUT_BROADCAST;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onResume();
 		if (storage.getOnboardingCompleted()) checkIntentForActions();
 		LocalBroadcastManager.getInstance(this)
-				.registerReceiver(autoCheckoutBroadcastReceiver, new IntentFilter(AUTO_CHECKOUT_BROADCAST));
+				.registerReceiver(autoCheckoutBroadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
 	}
 
 	@Override
@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
 	private void handleCustomIntents() {
 		String intentAction = getIntent().getAction();
-		if ((REMINDER_ACTION.equals(intentAction) || ONGOING_ACTION.equals(intentAction)) && viewModel.isCheckedIn()) {
+		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) && viewModel.isCheckedIn()) {
 			showCheckedInScreen();
-		} else if (CHECK_OUT_NOW_ACTION.equals(intentAction) && viewModel.isCheckedIn()) {
+		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn()) {
 			showCheckOutScreen();
-		} else if (EXPOSURE_NOTIFICATION_ACTION.equals(intentAction)) {
+		} else if (ACTION_EXPOSURE_NOTIFICATION.equals(intentAction)) {
 			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);
 			ExposureEvent exposureEvent = getExposureWithId(id);
 			if (exposureEvent != null) {

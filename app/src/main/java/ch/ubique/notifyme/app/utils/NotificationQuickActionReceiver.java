@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import static ch.ubique.notifyme.app.utils.NotificationHelper.SNOOZE_ACTION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_SNOOZE;
 
 public class NotificationQuickActionReceiver extends BroadcastReceiver {
 
@@ -12,7 +12,7 @@ public class NotificationQuickActionReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		if (SNOOZE_ACTION.equals(intent.getAction())) {
+		if (ACTION_SNOOZE.equals(intent.getAction())) {
 			NotificationHelper.getInstance(context).removeReminderNotification();
 			ReminderHelper.setReminder(System.currentTimeMillis() + SNOOZE_DURATION, context);
 		}

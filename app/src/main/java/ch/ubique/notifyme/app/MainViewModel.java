@@ -26,8 +26,8 @@ import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
-import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION_BROADCAST;
-import static ch.ubique.notifyme.app.utils.ReminderHelper.AUTO_CHECKOUT_BROADCAST;
+import static ch.ubique.notifyme.app.network.KeyLoadWorker.ACTION_NEW_EXPOSURE_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -49,9 +49,9 @@ public class MainViewModel extends AndroidViewModel {
 	private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (AUTO_CHECKOUT_BROADCAST.equals(intent.getAction())) {
+			if (ACTION_DID_AUTO_CHECKOUT.equals(intent.getAction())) {
 				setCheckInState(null);
-			} else if (NEW_NOTIFICATION_BROADCAST.equals(intent.getAction())) {
+			} else if (ACTION_NEW_EXPOSURE_NOTIFICATION.equals(intent.getAction())) {
 				refreshExposures();
 			}
 		}
@@ -63,8 +63,8 @@ public class MainViewModel extends AndroidViewModel {
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCurrentVenue();
 		LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(application);
-		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(AUTO_CHECKOUT_BROADCAST));
-		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(NEW_NOTIFICATION_BROADCAST));
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_NEW_EXPOSURE_NOTIFICATION));
 		traceKeyLoadingState.observeForever(loadingState -> { if (loadingState != LoadingState.LOADING) refreshErrors(); });
 		reloadConfig();
 	}

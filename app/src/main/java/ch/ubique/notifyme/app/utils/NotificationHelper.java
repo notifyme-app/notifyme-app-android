@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
+import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainActivity;
 import ch.ubique.notifyme.app.R;
 
@@ -22,12 +23,13 @@ import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW;
 
 public class NotificationHelper {
 
-	public static final String EXPOSURE_NOTIFICATION_ACTION = "EXPOSURE_NOTIFICATION_ACTION";
-	public static final String REMINDER_ACTION = "REMINDER_ACTION";
-	public static final String AUTO_CHECKOUT_ACTION = "AUTO_CHECKOUT_ACTION";
-	public static final String ONGOING_ACTION = "ONGOING_ACTION";
-	public static final String CHECK_OUT_NOW_ACTION = "CHECK_OUT_NOW_ACTION";
-	public static final String SNOOZE_ACTION = "SNOOZE_ACTION";
+	public static final String ACTION_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + "EXPOSURE_NOTIFICATION_ACTION";
+	public static final String ACTION_REMINDER_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_REMINDER_NOTIFICATION";
+	public static final String ACTION_AUTO_CHECKOUT_NOTIFICATION = BuildConfig.APPLICATION_ID +
+			"ACTION_AUTO_CHECKOUT_NOTIFICATION";
+	public static final String ACTION_ONGOING_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_ONGOING_NOTIFICATION";
+	public static final String ACTION_CHECK_OUT_NOW = BuildConfig.APPLICATION_ID + "ACTION_CHECK_OUT_NOW";
+	public static final String ACTION_SNOOZE = BuildConfig.APPLICATION_ID + "ACTION_SNOOZE";
 
 	public static final String EXPOSURE_ID_EXTRA = "EXPOSURE_ID";
 
@@ -78,12 +80,12 @@ public class NotificationHelper {
 
 	private PendingIntent createExposurePendingIntent(long exposureId) {
 		Intent intent = new Intent(context, MainActivity.class);
-		intent.setAction(EXPOSURE_NOTIFICATION_ACTION);
+		intent.setAction(ACTION_EXPOSURE_NOTIFICATION);
 		intent.putExtra(EXPOSURE_ID_EXTRA, exposureId);
 		intent.setAction(Long.toString(exposureId));
 		return TaskStackBuilder.create(context)
 				.addNextIntentWithParentStack(intent)
-				.getPendingIntent(EXPOSURE_NOTIFICATION_ACTION.hashCode(), PendingIntent.FLAG_ONE_SHOT);
+				.getPendingIntent(ACTION_EXPOSURE_NOTIFICATION.hashCode(), PendingIntent.FLAG_ONE_SHOT);
 	}
 
 	private NotificationCompat.Builder getNotificationBuilder(String channelId) {
@@ -100,7 +102,7 @@ public class NotificationHelper {
 				IMPORTANCE_HIGH);
 
 		Notification notification = getNotificationBuilder(CHANNEL_ID_REMINDER)
-				.setContentIntent(createBasicPendingIntent(AUTO_CHECKOUT_ACTION))
+				.setContentIntent(createBasicPendingIntent(ACTION_AUTO_CHECKOUT_NOTIFICATION))
 				.setContentTitle(context.getString(R.string.auto_checkout_title))
 				.setContentText(context.getString(R.string.auto_checkout_body))
 				.build();
@@ -128,16 +130,16 @@ public class NotificationHelper {
 				IMPORTANCE_HIGH);
 
 		Intent snoozeIntent = new Intent(context, NotificationQuickActionReceiver.class);
-		snoozeIntent.setAction(SNOOZE_ACTION);
+		snoozeIntent.setAction(ACTION_SNOOZE);
 		PendingIntent snoozePendingIntent = PendingIntent.getBroadcast(context, 1, snoozeIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		Notification notification = getNotificationBuilder(CHANNEL_ID_REMINDER)
-				.setContentIntent(createBasicPendingIntent(REMINDER_ACTION))
+				.setContentIntent(createBasicPendingIntent(ACTION_REMINDER_NOTIFICATION))
 				.setContentTitle(context.getString(R.string.checkout_reminder_title))
 				.setContentText(context.getString(R.string.checkout_reminder_text))
 				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
-						createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
+						createBasicPendingIntent(ACTION_CHECK_OUT_NOW))
 				.addAction(R.drawable.ic_snooze, context.getString(R.string.reminder_notification_snooze_action),
 						snoozePendingIntent)
 				.build();
@@ -161,8 +163,8 @@ public class NotificationHelper {
 				.setPriority(NotificationCompat.PRIORITY_LOW)
 				.setOngoing(true)
 				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
-						createBasicPendingIntent(CHECK_OUT_NOW_ACTION))
-				.setContentIntent(createBasicPendingIntent(ONGOING_ACTION))
+						createBasicPendingIntent(ACTION_CHECK_OUT_NOW))
+				.setContentIntent(createBasicPendingIntent(ACTION_ONGOING_NOTIFICATION))
 				.build();
 		notificationManager.notify(ONGOING_NOTIFICATION_ID, ongoingNotification);
 	}
