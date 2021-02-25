@@ -533,5 +533,5 @@ Cependant, l'application sauvegarde cette information pendant 14  jours afin de 
     <string name="auto_checkout_body">"Vous avez quitté le lieu automatiquement."</string>
 
     <!-- Titel des Check-In Screens -->
-    <string name="check_in_screen_title"></string>
+    <string name="check_in_screen_title">"Check-in en cours"</string>
 </resources>

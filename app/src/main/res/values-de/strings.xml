@@ -127,7 +127,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="remove_diary_warning_title">"Achtung"</string>
 
     <!-- Remove from diary warning view explanation text -->
-    <string name="remove_diary_warning_text">"Sind Sie sicher, dass Sie “{LOCATION_INFO}” in ihrem Tagebuch nicht mehr anzeigen möchten? Diese Aktion kann nicht rückgängig gemacht werden."</string>
+    <string name="remove_diary_warning_text">"Sind Sie sicher, dass Sie “{LOCATION_INFO}” in Ihrem Tagebuch nicht mehr anzeigen möchten? Diese Aktion kann nicht rückgängig gemacht werden."</string>
 
     <!-- Remove from diary warning view remove button title -->
     <string name="remove_diary_remove_now_button">"Nicht mehr anzeigen"</string>
@@ -547,5 +547,5 @@ Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauer
     <string name="auto_checkout_body">"Sie wurden automatisch ausgecheckt."</string>
 
     <!-- Titel des Check-In Screens -->
-    <string name="check_in_screen_title">"Hier einchecken?"</string>
+    <string name="check_in_screen_title">"Einchecken"</string>
 </resources>

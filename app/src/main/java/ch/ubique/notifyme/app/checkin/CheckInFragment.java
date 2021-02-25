@@ -30,7 +30,7 @@ public class CheckInFragment extends Fragment {
 	public final static String TAG = CheckInFragment.class.getCanonicalName();
 
 	private MainViewModel viewModel;
-	VenueInfo venueInfo;
+	private VenueInfo venueInfo;
 
 	public CheckInFragment() { super(R.layout.fragment_check_in); }
 

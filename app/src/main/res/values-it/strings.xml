@@ -440,5 +440,5 @@ QR Code"</string>
     <string name="auto_checkout_body">"You were checked out automatically."</string>
 
     <!-- Titel des Check-In Screens -->
-    <string name="check_in_screen_title"></string>
+    <string name="check_in_screen_title">"Checking in"</string>
 </resources>
