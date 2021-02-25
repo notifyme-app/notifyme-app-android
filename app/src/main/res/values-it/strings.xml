@@ -410,4 +410,35 @@ QR Code"</string>
 
     <!-- Quick Action bei einer Reminder Notification, welche einen neuen Reminder setzt in 30 Minuten. -->
     <string name="reminder_notification_snooze_action">"Snooze"</string>
+
+    <!-- Text des Homescreen Buttons um sich als positiv getestet zu melden -->
+    <string name="report_positive_button_title">"Positive?"</string>
+
+    <!-- Titel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_title">"Have you been tested positive?"</string>
+
+    <!-- Untertitel des Tagebuch teilen Screens -->
+    <string name="report_positive_share_diary_subtitle">"Share your diary to foster contact tracing."</string>
+
+    <!-- Test des Tagebuch teilen Buttons -->
+    <string name="report_positive_share_diary_button_title">"Share diary"</string>
+
+    <!-- Titel nach erfolgreichem Tagebuch teilen -->
+    <string name="report_positive_success_title">"Thanks and get well soon"</string>
+
+    <!-- iOS: Titel Popup nach 2 Tagen -->
+    <string name="sync_warning_notification_title">"Sincronizzare l'app"</string>
+
+    <!-- Sync Warning: Popup nach 2 Tagen Text -->
+    <!-- Fuzzy -->
+    <string name="sync_warning_notification_text">"Apri l'app per sincronizzare l'elenco degli ID casuali segnalati."</string>
+
+    <!-- Titel der Notification, welche erscheint, wenn der Benutzer automatisch ausgecheckt wurde nach 12 Stunden. -->
+    <string name="auto_checkout_title">"Automated checkout"</string>
+
+    <!-- Nachrichttext der Notification, welche erscheint, wenn der Benutzer automatisch ausgecheckt wurde nach 12 Stunden. -->
+    <string name="auto_checkout_body">"You were checked out automatically."</string>
+
+    <!-- Titel des Check-In Screens -->
+    <string name="check_in_screen_title">"Checking in"</string>
 </resources>

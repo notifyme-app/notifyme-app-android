@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,7 +20,7 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 import org.crowdnotifier.android.sdk.utils.QrUtils;
 
-import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
+import ch.ubique.notifyme.app.checkin.CheckInFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.model.CheckInState;
@@ -29,13 +33,21 @@ import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
 
 public class MainActivity extends AppCompatActivity {
 
 	private MainViewModel viewModel;
 	private Storage storage;
-	private static final String STATE_CONSUMED_INTENT = "STATE_CONSUMED_INTENT";
-	private boolean consumedIntent = false;
+	private static final String KEY_IS_INTENT_CONSUMED = "KEY_IS_INTENT_CONSUMED";
+	private boolean isIntentConsumed = false;
+
+	private BroadcastReceiver autoCheckoutBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			showMainFragment();
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 				showOnboarding();
 			}
 		} else {
-			consumedIntent = savedInstanceState.getBoolean(STATE_CONSUMED_INTENT);
+			isIntentConsumed = savedInstanceState.getBoolean(KEY_IS_INTENT_CONSUMED);
 		}
 
 		KeyLoadWorker.startKeyLoadWorker(this);
@@ -69,13 +81,15 @@ public class MainActivity extends AppCompatActivity {
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
-		consumedIntent = false;
+		isIntentConsumed = false;
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (storage.getOnboardingCompleted()) checkIntentForActions();
+		LocalBroadcastManager.getInstance(this)
+				.registerReceiver(autoCheckoutBroadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
 	}
 
 	@Override
@@ -88,19 +102,20 @@ public class MainActivity extends AppCompatActivity {
 	private void checkIntentForActions() {
 		Intent intent = getIntent();
 		boolean launchedFromHistory = (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0;
-		if (!launchedFromHistory && !consumedIntent) {
-			consumedIntent = true;
+		if (!launchedFromHistory && !isIntentConsumed) {
+			isIntentConsumed = true;
 			handleCustomIntents();
 		}
 	}
 
 	private void handleCustomIntents() {
 		String intentAction = getIntent().getAction();
-		if ((REMINDER_ACTION.equals(intentAction) || ONGOING_ACTION.equals(intentAction)) && viewModel.isCheckedIn()) {
+		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) &&
+				viewModel.isCheckedIn()) {
 			showCheckedInScreen();
-		} else if (CHECK_OUT_NOW_ACTION.equals(intentAction) && viewModel.isCheckedIn()) {
+		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn()) {
 			showCheckOutScreen();
-		} else if (EXPOSURE_NOTIFICATION_ACTION.equals(intentAction)) {
+		} else if (ACTION_EXPOSURE_NOTIFICATION.equals(intentAction)) {
 			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);
 			ExposureEvent exposureEvent = getExposureWithId(id);
 			if (exposureEvent != null) {
@@ -132,7 +147,14 @@ public class MainActivity extends AppCompatActivity {
 	private void showCheckedInScreen() {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, CheckedInFragment.newInstance())
-				.addToBackStack(CheckedInFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
+				.commit();
+	}
+
+	private void showCheckInScreen() {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, CheckInFragment.newInstance())
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -142,14 +164,14 @@ public class MainActivity extends AppCompatActivity {
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
-				.addToBackStack(CheckOutFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
-				.addToBackStack(ExposureFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -162,9 +184,7 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(),
 						System.currentTimeMillis(), ReminderOption.OFF));
-				getSupportFragmentManager().beginTransaction()
-						.add(CheckInDialogFragment.newInstance(true), CheckInDialogFragment.TAG)
-						.commit();
+				showCheckInScreen();
 			}
 		} catch (QrUtils.QRException e) {
 			handleInvalidQRCodeExceptions(qrCodeData, e);
@@ -209,7 +229,13 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(STATE_CONSUMED_INTENT, consumedIntent);
+		outState.putBoolean(KEY_IS_INTENT_CONSUMED, isIntentConsumed);
+	}
+
+	@Override
+	protected void onPause() {
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(autoCheckoutBroadcastReceiver);
+		super.onPause();
 	}
 
 	public interface BackPressListener {

@@ -47,6 +47,11 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1" />
+
 			<TextView
 				android:id="@+id/checked_in_fragment_timer"
 				style="@style/NotifyMe.Text.Title.Mega"
@@ -60,7 +65,7 @@
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
-				android:layout_weight="2" />
+				android:layout_weight="1" />
 
 			<ImageView
 				android:id="@+id/checked_in_fragment_venue_type_icon"
@@ -91,68 +96,7 @@
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
-				android:layout_weight="2" />
-
-			<LinearLayout
-				android:id="@+id/checked_in_fragment_reminder_container"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginHorizontal="@dimen/spacing_large"
-				android:layout_marginTop="@dimen/spacing_large"
-				android:orientation="vertical"
-				android:paddingBottom="@dimen/button_radius">
-
-				<TextView
-					style="@style/NotifyMe.Text.Status.Primary.Small"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					android:text="@string/checkin_set_reminder" />
-
-				<com.google.android.material.button.MaterialButtonToggleGroup
-					android:id="@+id/checked_in_fragment_toggle_group"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:layout_marginTop="@dimen/spacing_medium"
-					android:layout_marginBottom="@dimen/spacing_large"
-					app:selectionRequired="true"
-					app:singleSelection="true">
-
-					<com.google.android.material.button.MaterialButton
-						android:id="@+id/checked_in_fragment_toggle_button_1"
-						style="@style/NotifyMe.ToggleButton"
-						android:text="Off"
-						android:textAllCaps="true" />
-
-					<com.google.android.material.button.MaterialButton
-						android:id="@+id/checked_in_fragment_toggle_button_2"
-						style="@style/NotifyMe.ToggleButton"
-						android:text="30'" />
-
-					<com.google.android.material.button.MaterialButton
-						android:id="@+id/checked_in_fragment_toggle_button_3"
-						style="@style/NotifyMe.ToggleButton"
-						android:text="1h" />
-
-					<com.google.android.material.button.MaterialButton
-						android:id="@+id/checked_in_fragment_toggle_button_4"
-						style="@style/NotifyMe.ToggleButton"
-						android:text="2h" />
-
-					<com.google.android.material.button.MaterialButton
-						android:id="@+id/checked_in_fragment_toggle_button_5"
-						style="@style/NotifyMe.ToggleButton"
-						android:text="4h" />
-
-				</com.google.android.material.button.MaterialButtonToggleGroup>
-
-			</LinearLayout>
-
-			<Space
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="1" />
+				android:layout_weight="4" />
 
 		</LinearLayout>
 	</ScrollView>
@@ -163,8 +107,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
+		android:layout_marginVertical="@dimen/spacing_larger"
 		android:elevation="@dimen/card_elevation"
-		android:text="@string/checkout_button_title"
-		android:translationY="@dimen/negative_button_radius" />
+		android:text="@string/checkout_button_title" />
 
 </LinearLayout>

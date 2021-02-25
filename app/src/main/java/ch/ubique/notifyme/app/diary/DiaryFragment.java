@@ -97,14 +97,14 @@ public class DiaryFragment extends Fragment {
 					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 							R.anim.modal_pop_exit)
 					.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
-					.addToBackStack(ExposureFragment.TAG)
+					.addToBackStack(DiaryFragment.TAG)
 					.commit();
 		} else {
 			requireActivity().getSupportFragmentManager().beginTransaction()
 					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 							R.anim.modal_pop_exit)
 					.replace(R.id.container, EditDiaryEntryFragment.newInstance(true, diaryEntry.getId()))
-					.addToBackStack(EditDiaryEntryFragment.TAG)
+					.addToBackStack(DiaryFragment.TAG)
 					.commit();
 		}
 	}

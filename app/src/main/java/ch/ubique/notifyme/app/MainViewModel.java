@@ -26,7 +26,8 @@ import ch.ubique.notifyme.app.network.TraceKeysServiceController;
 import ch.ubique.notifyme.app.utils.ErrorState;
 import ch.ubique.notifyme.app.utils.Storage;
 
-import static ch.ubique.notifyme.app.network.KeyLoadWorker.NEW_NOTIFICATION;
+import static ch.ubique.notifyme.app.network.KeyLoadWorker.ACTION_NEW_EXPOSURE_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -37,7 +38,6 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
 	public MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
 	private CheckInState checkInState;
-	private boolean isQrScanningEnabled = true;
 
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
@@ -46,22 +46,25 @@ public class MainViewModel extends AndroidViewModel {
 	private TraceKeysServiceController traceKeysServiceController = new TraceKeysServiceController(getApplication());
 	private ConfigServiceController configServiceController = new ConfigServiceController(getApplication());
 
-
-	private BroadcastReceiver newNotificationBroadcastReceiver = new BroadcastReceiver() {
+	private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			refreshExposures();
+			if (ACTION_DID_AUTO_CHECKOUT.equals(intent.getAction())) {
+				setCheckInState(null);
+			} else if (ACTION_NEW_EXPOSURE_NOTIFICATION.equals(intent.getAction())) {
+				refreshExposures();
+			}
 		}
 	};
-
 
 	public MainViewModel(@NonNull Application application) {
 		super(application);
 		refreshExposures();
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCurrentVenue();
-		LocalBroadcastManager.getInstance(application).registerReceiver(newNotificationBroadcastReceiver,
-				new IntentFilter(NEW_NOTIFICATION));
+		LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(application);
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
+		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_NEW_EXPOSURE_NOTIFICATION));
 		traceKeyLoadingState.observeForever(loadingState -> { if (loadingState != LoadingState.LOADING) refreshErrors(); });
 		reloadConfig();
 	}
@@ -102,14 +105,6 @@ public class MainViewModel extends AndroidViewModel {
 		} else {
 			return checkInState.isCheckedIn();
 		}
-	}
-
-	public boolean isQrScanningEnabled() {
-		return isQrScanningEnabled;
-	}
-
-	public void setQrScanningEnabled(boolean qrScanningEnabled) {
-		isQrScanningEnabled = qrScanningEnabled;
 	}
 
 	public void refreshTraceKeys() {
@@ -180,7 +175,7 @@ public class MainViewModel extends AndroidViewModel {
 	@Override
 	public void onCleared() {
 		super.onCleared();
-		LocalBroadcastManager.getInstance(getApplication()).unregisterReceiver(newNotificationBroadcastReceiver);
+		LocalBroadcastManager.getInstance(getApplication()).unregisterReceiver(broadcastReceiver);
 	}
 
 	public enum LoadingState {
