@@ -116,7 +116,7 @@
 	</style>
 
 	<style name="NotifyMe.Button.Small">
-		<item name="android:height">@dimen/small_button_height</item>
+		<item name="android:minHeight">@dimen/small_button_height</item>
 	</style>
 
 	<style name="NotifyMe.Button.Small.Tertiary">
@@ -132,7 +132,7 @@
 	</style>
 
 	<style name="NotifyMe.Button.Outlined.Small">
-		<item name="android:height">@dimen/small_button_height</item>
+		<item name="android:minHeight">@dimen/small_button_height</item>
 	</style>
 
 	<style name="NotifyMe.Button.Outlined.Small.Tertiary">
