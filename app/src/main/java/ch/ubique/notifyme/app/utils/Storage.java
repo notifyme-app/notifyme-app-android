@@ -13,7 +13,6 @@ public class Storage {
 	private static final String KEY_CURRENT_CHECK_IN = "KEY_CURRENT_CHECK_IN";
 	private static final String KEY_LAST_KEY_BUNDLE_TAG = "KEY_LAST_KEY_BUNDLE_TAG";
 	private static final String KEY_ONBOARDING_COMPLETE = "KEY_ONBOARDING_COMPLETE";
-	private static final String KEY_DID_AUTO_CHECKOUT = "KEY_DID_AUTO_CHECKOUT";
 
 	private static Storage instance;
 
@@ -45,14 +44,6 @@ public class Storage {
 
 	public long getLastKeyBundleTag() {
 		return sharedPreferences.getLong(KEY_LAST_KEY_BUNDLE_TAG, 0);
-	}
-
-	public void setDidAutoCheckout(boolean didAutoCheckout) {
-		sharedPreferences.edit().putBoolean(KEY_DID_AUTO_CHECKOUT, didAutoCheckout).apply();
-	}
-
-	public boolean getDidAutoCheckout() {
-		return sharedPreferences.getBoolean(KEY_DID_AUTO_CHECKOUT, false);
 	}
 
 	public void setOnboardingCompleted(boolean completed) {

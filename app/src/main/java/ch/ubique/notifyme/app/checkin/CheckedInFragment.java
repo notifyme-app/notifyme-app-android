@@ -36,9 +36,24 @@ public class CheckedInFragment extends Fragment implements MainActivity.BackPres
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		if (viewModel.getCheckInState() != null) venueInfo = viewModel.getCheckInState().getVenueInfo();
 		super.onCreate(savedInstanceState);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		if (viewModel.getCheckInState() != null) {
+			venueInfo = viewModel.getCheckInState().getVenueInfo();
+		}
+		checkIfAutoCheckoutHappened();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		checkIfAutoCheckoutHappened();
+	}
+
+	private void checkIfAutoCheckoutHappened() {
+		if (viewModel.getCheckInState() == null) {
+			getParentFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
 	}
 
 	@Override
@@ -76,7 +91,7 @@ public class CheckedInFragment extends Fragment implements MainActivity.BackPres
 
 	@Override
 	public boolean onBackPressed() {
-		getActivity().getSupportFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		getParentFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		return true;
 	}
 

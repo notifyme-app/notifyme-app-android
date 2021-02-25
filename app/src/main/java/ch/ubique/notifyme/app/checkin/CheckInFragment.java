@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,7 +28,7 @@ import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
 public class CheckInFragment extends Fragment {
 
-	public final static String TAG = CheckInFragment.class.getCanonicalName();
+	public static final String TAG = CheckInFragment.class.getCanonicalName();
 
 	private MainViewModel viewModel;
 	private VenueInfo venueInfo;
@@ -41,10 +42,26 @@ public class CheckInFragment extends Fragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-		venueInfo = viewModel.getCheckInState().getVenueInfo();
 		super.onCreate(savedInstanceState);
+		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+		if (viewModel.getCheckInState() != null) {
+			venueInfo = viewModel.getCheckInState().getVenueInfo();
+		}
+		checkIfAutoCheckoutHappened();
 	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		checkIfAutoCheckoutHappened();
+	}
+
+	private void checkIfAutoCheckoutHappened() {
+		if (viewModel.getCheckInState() == null) {
+			getParentFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
+	}
+
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

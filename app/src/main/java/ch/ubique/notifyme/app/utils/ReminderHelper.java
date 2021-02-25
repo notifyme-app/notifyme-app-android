@@ -116,7 +116,6 @@ public class ReminderHelper extends BroadcastReceiver {
 		Storage storage = Storage.getInstance(context);
 		storage.setCurrentVenue(null);
 		LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_DID_AUTO_CHECKOUT));
-		storage.setDidAutoCheckout(true);
 	}
 
 }

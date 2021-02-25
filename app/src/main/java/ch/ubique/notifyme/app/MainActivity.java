@@ -69,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
 			isIntentConsumed = savedInstanceState.getBoolean(KEY_IS_INTENT_CONSUMED);
 		}
 
-		if (storage.getDidAutoCheckout()) {
-			showMainFragment();
-			storage.setDidAutoCheckout(false);
-		}
-
 		KeyLoadWorker.startKeyLoadWorker(this);
 		KeyLoadWorker.cleanUpOldData(this);
 
