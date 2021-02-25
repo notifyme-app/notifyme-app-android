@@ -38,7 +38,6 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
 	public MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
 	private CheckInState checkInState;
-	private boolean isQrScanningEnabled = true;
 
 	private Storage storage;
 	private final Handler handler = new Handler(Looper.getMainLooper());
@@ -106,14 +105,6 @@ public class MainViewModel extends AndroidViewModel {
 		} else {
 			return checkInState.isCheckedIn();
 		}
-	}
-
-	public boolean isQrScanningEnabled() {
-		return isQrScanningEnabled;
-	}
-
-	public void setQrScanningEnabled(boolean qrScanningEnabled) {
-		isQrScanningEnabled = qrScanningEnabled;
 	}
 
 	public void refreshTraceKeys() {

@@ -20,7 +20,7 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 import org.crowdnotifier.android.sdk.utils.QrUtils;
 
-import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
+import ch.ubique.notifyme.app.checkin.CheckInFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.model.CheckInState;
@@ -150,7 +150,14 @@ public class MainActivity extends AppCompatActivity {
 	private void showCheckedInScreen() {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, CheckedInFragment.newInstance())
-				.addToBackStack(CheckedInFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
+				.commit();
+	}
+
+	private void showCheckInScreen() {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, CheckInFragment.newInstance())
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -160,14 +167,14 @@ public class MainActivity extends AppCompatActivity {
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
-				.addToBackStack(CheckOutFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
 	private void showExposureScreen(ExposureEvent exposureEvent) {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
-				.addToBackStack(ExposureFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -180,9 +187,7 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(),
 						System.currentTimeMillis(), ReminderOption.OFF));
-				getSupportFragmentManager().beginTransaction()
-						.add(CheckInDialogFragment.newInstance(true), CheckInDialogFragment.TAG)
-						.commit();
+				showCheckInScreen();
 			}
 		} catch (QrUtils.QRException e) {
 			handleInvalidQRCodeExceptions(qrCodeData, e);

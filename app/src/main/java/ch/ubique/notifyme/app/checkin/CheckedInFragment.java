@@ -8,22 +8,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
-import ch.ubique.notifyme.app.model.ReminderOption;
-import ch.ubique.notifyme.app.utils.ReminderHelper;
+import ch.ubique.notifyme.app.MainActivity;
+import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
 import ch.ubique.notifyme.app.utils.StringUtils;
 import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
 
-public class CheckedInFragment extends Fragment {
+public class CheckedInFragment extends Fragment implements MainActivity.BackPressListener {
 
 	public final static String TAG = CheckedInFragment.class.getCanonicalName();
 
@@ -52,21 +50,8 @@ public class CheckedInFragment extends Fragment {
 		ImageView venueTypeIcon = view.findViewById(R.id.checked_in_fragment_venue_type_icon);
 		View checkOutButton = view.findViewById(R.id.checked_in_fragment_check_out_button);
 		Toolbar toolbar = view.findViewById(R.id.checked_in_fragment_toolbar);
-		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.checked_in_fragment_toggle_group);
-		for (ReminderOption option : ReminderOption.values()) {
-			((MaterialButton) view.findViewById(option.getToggleButtonId())).setText(option.getName(getContext()));
-		}
 
-		toggleGroup.check(viewModel.getSelectedReminderOption().getToggleButtonId());
-
-		toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-			if (isChecked) {
-				ReminderOption selectedReminderOption = ReminderOption.getReminderOptionForToggleButtonId(checkedId);
-				ReminderHelper.setReminder(System.currentTimeMillis() + selectedReminderOption.getDelayMillis(), getContext());
-				viewModel.setSelectedReminderOption(selectedReminderOption);
-			}
-		});
-		toolbar.setNavigationOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
+		toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
 		viewModel.startCheckInTimer();
 		viewModel.timeSinceCheckIn
@@ -84,8 +69,15 @@ public class CheckedInFragment extends Fragment {
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
-				.addToBackStack(CheckOutFragment.TAG)
+				.addToBackStack(CheckedInFragment.TAG)
 				.commit();
+	}
+
+
+	@Override
+	public boolean onBackPressed() {
+		getActivity().getSupportFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		return true;
 	}
 
 }

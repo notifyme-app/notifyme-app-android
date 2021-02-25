@@ -152,7 +152,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, CheckedInFragment.newInstance())
-				.addToBackStack(CheckedInFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -160,7 +160,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, QrCodeScannerFragment.newInstance())
-				.addToBackStack(QrCodeScannerFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -168,7 +168,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, ReportsFragment.newInstance())
-				.addToBackStack(ReportsFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commit();
 	}
 
@@ -200,7 +200,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		requireActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
 				.replace(R.id.container, DiaryFragment.newInstance())
-				.addToBackStack(DiaryFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commitAllowingStateLoss();
 	}
 
@@ -211,7 +211,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 				//TODO: It would be nice to load this asynchronous
 				.replace(R.id.container, HtmlFragment
 						.newInstance(AssetUtil.getImpressumBaseUrl(getContext()), AssetUtil.getImpressumHtml(getContext())))
-				.addToBackStack(DiaryFragment.TAG)
+				.addToBackStack(MainFragment.TAG)
 				.commitAllowingStateLoss();
 	}
 

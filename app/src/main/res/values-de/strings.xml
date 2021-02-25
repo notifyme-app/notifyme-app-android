@@ -545,4 +545,7 @@ Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauer
 
     <!-- Nachrichttext der Notification, welche erscheint, wenn der Benutzer automatisch ausgecheckt wurde nach 12 Stunden. -->
     <string name="auto_checkout_body">"Sie wurden automatisch ausgecheckt."</string>
+
+    <!-- Titel des Check-In Screens -->
+    <string name="check_in_screen_title">"Hier einchecken?"</string>
 </resources>
