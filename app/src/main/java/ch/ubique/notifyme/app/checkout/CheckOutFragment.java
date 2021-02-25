@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
@@ -55,10 +56,25 @@ public class CheckOutFragment extends Fragment {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 		checkInState = viewModel.getCheckInState();
-		venueInfo = checkInState.getVenueInfo();
-		super.onCreate(savedInstanceState);
+		if (checkInState != null) {
+			venueInfo = checkInState.getVenueInfo();
+		}
+		checkIfAutoCheckoutHappened();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		checkIfAutoCheckoutHappened();
+	}
+
+	private void checkIfAutoCheckoutHappened() {
+		if (viewModel.getCheckInState() == null) {
+			getParentFragmentManager().popBackStack(MainFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
 	}
 
 	@Override
@@ -84,7 +100,7 @@ public class CheckOutFragment extends Fragment {
 		toTime.setOnClickListener(v -> showTimePicker(false));
 
 		doneButton.setOnClickListener(v -> {
-			ReminderHelper.removeReminder(getContext());
+			ReminderHelper.removeAllReminders(getContext());
 			saveEntry();
 			NotificationHelper notificationHelper = NotificationHelper.getInstance(getContext());
 			notificationHelper.stopOngoingNotification();

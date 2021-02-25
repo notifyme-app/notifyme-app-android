@@ -111,7 +111,7 @@ public class ReportsFragment extends Fragment {
 				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
 						R.anim.modal_pop_exit)
 				.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
-				.addToBackStack(ExposureFragment.TAG)
+				.addToBackStack(ReportsFragment.TAG)
 				.commit();
 	}
 

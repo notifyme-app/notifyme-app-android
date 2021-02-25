@@ -1,7 +1,6 @@
 package ch.ubique.notifyme.app.qr;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
@@ -41,7 +40,7 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.checkin.CheckInDialogFragment;
+import ch.ubique.notifyme.app.checkin.CheckInFragment;
 import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
@@ -66,6 +65,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private View errorView;
 	private View mainView;
 	private boolean goToHome = false;
+	private boolean isQRScanningEnabled = true;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
 
@@ -86,7 +86,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 			getActivity().getSupportFragmentManager().popBackStack();
 			goToHome = false;
 		} else {
-			viewModel.setQrScanningEnabled(true);
+			isQRScanningEnabled = true;
 		}
 		super.onResume();
 	}
@@ -181,13 +181,13 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public synchronized void onQRCodeFound(String qrCodeData) {
-		if (!viewModel.isQrScanningEnabled()) return;
+		if (!isQRScanningEnabled) return;
 		try {
 			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-			viewModel.setQrScanningEnabled(false);
+			isQRScanningEnabled = false;
 			viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
 					ReminderOption.OFF));
-			showCheckInDialog();
+			showCheckInFragment();
 		} catch (QrUtils.QRException e) {
 			handleInvalidQRCodeExceptions(qrCodeData, e);
 		}
@@ -196,10 +196,10 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private void handleInvalidQRCodeExceptions(String qrCodeData, QrUtils.QRException e) {
 		if (e instanceof QrUtils.InvalidQRCodeVersionException) {
 			if (getActivity() != null) getActivity().runOnUiThread(() -> {
-				viewModel.setQrScanningEnabled(false);
+				isQRScanningEnabled = false;
 				ErrorDialog errorDialog = new ErrorDialog(requireContext(), ErrorState.UPDATE_REQUIRED);
-				errorDialog.setOnDismissListener(v -> viewModel.setQrScanningEnabled(true));
-				errorDialog.setOnCancelListener(v -> viewModel.setQrScanningEnabled(true));
+				errorDialog.setOnDismissListener(v -> isQRScanningEnabled = true);
+				errorDialog.setOnCancelListener(v -> isQRScanningEnabled = true);
 				errorDialog.show();
 			});
 		} else if (e instanceof QrUtils.NotYetValidException) {
@@ -208,7 +208,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 			if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.NOT_VALID_ANYMORE));
 		} else {
 			if (qrCodeData.startsWith(BuildConfig.TRACE_QR_CODE_PREFIX)) {
-				viewModel.setQrScanningEnabled(false);
+				isQRScanningEnabled = false;
 				Intent openBrowserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrCodeData));
 				startActivity(openBrowserIntent);
 				goToHome = true;
@@ -248,10 +248,12 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				getResources().getColor(color, null));
 	}
 
-	private void showCheckInDialog() {
+	private void showCheckInFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.add(CheckInDialogFragment.newInstance(false), CheckInDialogFragment.TAG)
-				.commit();
+				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.replace(R.id.container, CheckInFragment.newInstance())
+				.addToBackStack(QrCodeScannerFragment.TAG)
+				.commitAllowingStateLoss();
 	}
 
 	private void refreshView(boolean cameraPermissionGranted) {
