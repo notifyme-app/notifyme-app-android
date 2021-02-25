@@ -26,14 +26,14 @@ public class CameraPermissionExplanationDialog extends AlertDialog {
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
 
-		TextView buttonView = findViewById(R.id.camera_permission_dialog_ok_button);
-		buttonView.setPaintFlags(buttonView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		TextView grantCameraAccessButton = findViewById(R.id.camera_permission_dialog_ok_button);
+		grantCameraAccessButton.setPaintFlags(grantCameraAccessButton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-		findViewById(R.id.camera_permission_dialog_close_button).setOnClickListener(v -> cancel());
-		findViewById(R.id.camera_permission_dialog_ok_button).setOnClickListener(v -> {
+		grantCameraAccessButton.setOnClickListener(v -> {
 			dismiss();
 			if (grantCameraAccessClickListener != null) grantCameraAccessClickListener.onClick(v);
 		});
+		findViewById(R.id.camera_permission_dialog_close_button).setOnClickListener(v -> cancel());
 	}
 
 	public void setGrantCameraAccessClickListener(View.OnClickListener listener) {

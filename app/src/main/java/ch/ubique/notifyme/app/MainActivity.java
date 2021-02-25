@@ -56,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		storage = Storage.getInstance(this);
-		if (storage.getDidAutoCheckout()) {
-			showMainFragment();
-			storage.setDidAutoCheckout(false);
-		}
 
 		boolean onboardingCompleted = storage.getOnboardingCompleted();
 
@@ -71,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
 			}
 		} else {
 			isIntentConsumed = savedInstanceState.getBoolean(KEY_IS_INTENT_CONSUMED);
+		}
+
+		if (storage.getDidAutoCheckout()) {
+			showMainFragment();
+			storage.setDidAutoCheckout(false);
 		}
 
 		KeyLoadWorker.startKeyLoadWorker(this);
@@ -114,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
 	private void handleCustomIntents() {
 		String intentAction = getIntent().getAction();
-		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) && viewModel.isCheckedIn()) {
+		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) &&
+				viewModel.isCheckedIn()) {
 			showCheckedInScreen();
 		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn()) {
 			showCheckOutScreen();

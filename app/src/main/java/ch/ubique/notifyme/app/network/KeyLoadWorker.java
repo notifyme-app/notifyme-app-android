@@ -20,7 +20,7 @@ import ch.ubique.notifyme.app.utils.NotificationHelper;
 
 public class KeyLoadWorker extends Worker {
 
-	public static final String ACTION_NEW_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_NEW_EXPOSURE_NOTIFICATION";
+	public static final String ACTION_NEW_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + ".ACTION_NEW_EXPOSURE_NOTIFICATION";
 	private static final String WORK_TAG = "ch.ubique.notifyme.app.network.KeyLoadWorker";
 	private static final int DAYS_TO_KEEP_VENUE_VISITS = 14;
 	private static final int REPEAT_INTERVAL_MINUTES = 120;

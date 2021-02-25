@@ -16,13 +16,13 @@ import ch.ubique.notifyme.app.model.DiaryEntry;
 
 public class ReminderHelper extends BroadcastReceiver {
 
-	public static final String ACTION_DID_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + "ACTION_DID_AUTO_CHECKOUT";
+	public static final String ACTION_DID_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + ".ACTION_DID_AUTO_CHECKOUT";
 	private static final int REMINDER_INTENT_ID = 12;
-	private static final String ACTION_REMINDER = BuildConfig.APPLICATION_ID + "ACTION_REMINDER";
+	private static final String ACTION_REMINDER = BuildConfig.APPLICATION_ID + ".ACTION_REMINDER";
 	private static final int EIGHT_HOUR_REMINDER_INTENT_ID = 13;
-	private static final String ACTION_EIGHT_HOUR_REMINDER = BuildConfig.APPLICATION_ID + "ACTION_EIGHT_HOUR_REMINDER";
+	private static final String ACTION_EIGHT_HOUR_REMINDER = BuildConfig.APPLICATION_ID + ".ACTION_EIGHT_HOUR_REMINDER";
 	private static final int AUTO_CHECK_OUT_INTENT_ID = 14;
-	private static final String ACTION_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + "ACTION_AUTO_CHECKOUT";
+	private static final String ACTION_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + ".ACTION_AUTO_CHECKOUT";
 	private static final long EIGHT_HOURS = 1000L * 60 * 60 * 8;
 	private static final long TWELVE_HOURS = 1000L * 60 * 60 * 12;
 

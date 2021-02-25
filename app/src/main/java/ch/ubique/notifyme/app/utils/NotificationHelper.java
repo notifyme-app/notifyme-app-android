@@ -23,13 +23,13 @@ import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW;
 
 public class NotificationHelper {
 
-	public static final String ACTION_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + "EXPOSURE_NOTIFICATION_ACTION";
-	public static final String ACTION_REMINDER_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_REMINDER_NOTIFICATION";
+	public static final String ACTION_EXPOSURE_NOTIFICATION = BuildConfig.APPLICATION_ID + ".EXPOSURE_NOTIFICATION_ACTION";
+	public static final String ACTION_REMINDER_NOTIFICATION = BuildConfig.APPLICATION_ID + ".ACTION_REMINDER_NOTIFICATION";
 	public static final String ACTION_AUTO_CHECKOUT_NOTIFICATION = BuildConfig.APPLICATION_ID +
-			"ACTION_AUTO_CHECKOUT_NOTIFICATION";
-	public static final String ACTION_ONGOING_NOTIFICATION = BuildConfig.APPLICATION_ID + "ACTION_ONGOING_NOTIFICATION";
-	public static final String ACTION_CHECK_OUT_NOW = BuildConfig.APPLICATION_ID + "ACTION_CHECK_OUT_NOW";
-	public static final String ACTION_SNOOZE = BuildConfig.APPLICATION_ID + "ACTION_SNOOZE";
+			".ACTION_AUTO_CHECKOUT_NOTIFICATION";
+	public static final String ACTION_ONGOING_NOTIFICATION = BuildConfig.APPLICATION_ID + ".ACTION_ONGOING_NOTIFICATION";
+	public static final String ACTION_CHECK_OUT_NOW = BuildConfig.APPLICATION_ID + ".ACTION_CHECK_OUT_NOW";
+	public static final String ACTION_SNOOZE = BuildConfig.APPLICATION_ID + ".ACTION_SNOOZE";
 
 	public static final String EXPOSURE_ID_EXTRA = "EXPOSURE_ID";
 
