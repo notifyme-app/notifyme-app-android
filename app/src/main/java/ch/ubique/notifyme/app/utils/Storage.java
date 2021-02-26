@@ -30,11 +30,11 @@ public class Storage {
 		return instance;
 	}
 
-	public void setCurrentVenue(CheckInState checkInState) {
+	public void setCheckInState(CheckInState checkInState) {
 		sharedPreferences.edit().putString(KEY_CURRENT_CHECK_IN, gson.toJson(checkInState)).apply();
 	}
 
-	public CheckInState getCurrentVenue() {
+	public CheckInState getCheckInState() {
 		return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInState.class);
 	}
 

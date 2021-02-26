@@ -34,6 +34,7 @@ import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.autoCheckoutIfNecessary;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
+
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onStart();
 		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
+		autoCheckoutIfNecessary(this, viewModel.getCheckInState());
 	}
 
 	private void checkIntentForActions() {

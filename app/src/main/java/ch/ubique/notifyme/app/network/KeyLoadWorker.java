@@ -17,6 +17,9 @@ import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.NotificationHelper;
+import ch.ubique.notifyme.app.utils.Storage;
+
+import static ch.ubique.notifyme.app.utils.ReminderHelper.autoCheckoutIfNecessary;
 
 public class KeyLoadWorker extends Worker {
 
@@ -63,6 +66,7 @@ public class KeyLoadWorker extends Worker {
 			LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(ACTION_NEW_EXPOSURE_NOTIFICATION));
 		}
 		cleanUpOldData(getApplicationContext());
+		autoCheckoutIfNecessary(getApplicationContext(), Storage.getInstance(getApplicationContext()).getCheckInState());
 
 		Log.d(LOG_TAG, "KeyLoadWorker success");
 		return Result.success();
