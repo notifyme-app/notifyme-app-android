@@ -67,20 +67,23 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 		reportsHeader.setOnClickListener(v -> showReportsFragment());
 		noReportsHeader.setOnClickListener(v -> showReportsFragment());
 
-		if (viewModel.isCheckedIn()) {
-			checkOutButton.setOnClickListener(v -> showCheckedInScreen());
-			checkInButton.setVisibility(View.GONE);
-			checkOutButton.setVisibility(View.VISIBLE);
-			checkedInLabel.setVisibility(View.VISIBLE);
-			viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(),
-					duration -> checkOutButton.setText(StringUtils.getShortDurationString(duration)));
-			viewModel.startCheckInTimer();
-		} else {
-			checkInButton.setOnClickListener(v -> showQRCodeScanner());
-			checkInButton.setVisibility(View.VISIBLE);
-			checkOutButton.setVisibility(View.GONE);
-			checkedInLabel.setVisibility(View.GONE);
-		}
+		viewModel.isCheckedIn().observe(getViewLifecycleOwner(), isCheckedIn -> {
+			if (isCheckedIn) {
+				checkOutButton.setOnClickListener(v -> showCheckedInScreen());
+				checkInButton.setVisibility(View.GONE);
+				checkOutButton.setVisibility(View.VISIBLE);
+				checkedInLabel.setVisibility(View.VISIBLE);
+				viewModel.startCheckInTimer();
+			} else {
+				checkInButton.setOnClickListener(v -> showQRCodeScanner());
+				checkInButton.setVisibility(View.VISIBLE);
+				checkOutButton.setVisibility(View.GONE);
+				checkedInLabel.setVisibility(View.GONE);
+			}
+		});
+
+		viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(),
+				duration -> checkOutButton.setText(StringUtils.getShortDurationString(duration)));
 
 		viewModel.exposures.observe(getViewLifecycleOwner(), reports -> {
 			if (reports == null || reports.isEmpty()) {

@@ -10,6 +10,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -37,6 +38,7 @@ public class MainViewModel extends AndroidViewModel {
 	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
 	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
 	public MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
+	private MutableLiveData<Boolean> isCheckedIn = new MutableLiveData<>(false);
 	private CheckInState checkInState;
 
 	private Storage storage;
@@ -88,6 +90,11 @@ public class MainViewModel extends AndroidViewModel {
 	public void setCheckInState(CheckInState checkInState) {
 		storage.setCurrentVenue(checkInState);
 		this.checkInState = checkInState;
+		if (checkInState == null) {
+			this.isCheckedIn.setValue(false);
+		} else {
+			this.isCheckedIn.setValue(checkInState.isCheckedIn());
+		}
 	}
 
 	public CheckInState getCheckInState() {
@@ -96,15 +103,11 @@ public class MainViewModel extends AndroidViewModel {
 
 	public void setCheckedIn(boolean checkedIn) {
 		if (checkInState != null) checkInState.setCheckedIn(checkedIn);
-		storage.setCurrentVenue(checkInState);
+		setCheckInState(checkInState);
 	}
 
-	public boolean isCheckedIn() {
-		if (checkInState == null) {
-			return false;
-		} else {
-			return checkInState.isCheckedIn();
-		}
+	public LiveData<Boolean> isCheckedIn() {
+		return isCheckedIn;
 	}
 
 	public void refreshTraceKeys() {
