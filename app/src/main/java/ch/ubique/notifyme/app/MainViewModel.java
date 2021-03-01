@@ -10,6 +10,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -32,11 +33,12 @@ import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKO
 public class MainViewModel extends AndroidViewModel {
 
 
-	public MutableLiveData<List<ExposureEvent>> exposures = new MutableLiveData<>();
-	public MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
-	public MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
-	public MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
-	public MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
+	private final MutableLiveData<List<ExposureEvent>> exposures = new MutableLiveData<>();
+	private final MutableLiveData<Long> timeSinceCheckIn = new MutableLiveData<>(0L);
+	private final MutableLiveData<LoadingState> traceKeyLoadingState = new MutableLiveData<>(LoadingState.SUCCESS);
+	private final MutableLiveData<ErrorState> errorState = new MutableLiveData<>(null);
+	private final MutableLiveData<Boolean> forceUpdate = new MutableLiveData<>(false);
+	private final MutableLiveData<Boolean> isCheckedIn = new MutableLiveData<>(false);
 	private CheckInState checkInState;
 
 	private Storage storage;
@@ -61,7 +63,7 @@ public class MainViewModel extends AndroidViewModel {
 		super(application);
 		refreshExposures();
 		storage = Storage.getInstance(getApplication());
-		checkInState = storage.getCurrentVenue();
+		checkInState = storage.getCheckInState();
 		LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(application);
 		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
 		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_NEW_EXPOSURE_NOTIFICATION));
@@ -86,8 +88,13 @@ public class MainViewModel extends AndroidViewModel {
 	}
 
 	public void setCheckInState(CheckInState checkInState) {
-		storage.setCurrentVenue(checkInState);
+		storage.setCheckInState(checkInState);
 		this.checkInState = checkInState;
+		if (checkInState == null) {
+			this.isCheckedIn.setValue(false);
+		} else {
+			this.isCheckedIn.setValue(checkInState.isCheckedIn());
+		}
 	}
 
 	public CheckInState getCheckInState() {
@@ -96,15 +103,31 @@ public class MainViewModel extends AndroidViewModel {
 
 	public void setCheckedIn(boolean checkedIn) {
 		if (checkInState != null) checkInState.setCheckedIn(checkedIn);
-		storage.setCurrentVenue(checkInState);
+		setCheckInState(checkInState);
 	}
 
-	public boolean isCheckedIn() {
-		if (checkInState == null) {
-			return false;
-		} else {
-			return checkInState.isCheckedIn();
-		}
+	public LiveData<List<ExposureEvent>> getExposures() {
+		return exposures;
+	}
+
+	public LiveData<Long> getTimeSinceCheckIn() {
+		return timeSinceCheckIn;
+	}
+
+	public LiveData<LoadingState> getTraceKeyLoadingState() {
+		return traceKeyLoadingState;
+	}
+
+	public LiveData<ErrorState> getErrorState() {
+		return errorState;
+	}
+
+	public LiveData<Boolean> getForceUpdate() {
+		return forceUpdate;
+	}
+
+	public LiveData<Boolean> isCheckedIn() {
+		return isCheckedIn;
 	}
 
 	public void refreshTraceKeys() {
@@ -161,7 +184,7 @@ public class MainViewModel extends AndroidViewModel {
 
 	public void setSelectedReminderOption(ReminderOption selectedReminderOption) {
 		this.checkInState.setSelectedTimerOption(selectedReminderOption);
-		storage.setCurrentVenue(checkInState);
+		storage.setCheckInState(checkInState);
 	}
 
 	public void reloadConfig() {

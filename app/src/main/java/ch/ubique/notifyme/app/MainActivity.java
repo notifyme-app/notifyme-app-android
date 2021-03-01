@@ -34,6 +34,7 @@ import ch.ubique.notifyme.app.utils.Storage;
 
 import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.autoCheckoutIfNecessary;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,10 +73,11 @@ public class MainActivity extends AppCompatActivity {
 		KeyLoadWorker.startKeyLoadWorker(this);
 		KeyLoadWorker.cleanUpOldData(this);
 
-		viewModel.forceUpdate.observe(this, forceUpdate -> {
+		viewModel.getForceUpdate().observe(this, forceUpdate -> {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}
+
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onStart();
 		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
+		autoCheckoutIfNecessary(this, viewModel.getCheckInState());
 	}
 
 	private void checkIntentForActions() {
@@ -111,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
 	private void handleCustomIntents() {
 		String intentAction = getIntent().getAction();
 		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) &&
-				viewModel.isCheckedIn()) {
+				viewModel.isCheckedIn().getValue()) {
 			showCheckedInScreen();
-		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn()) {
+		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn().getValue()) {
 			showCheckOutScreen();
 		} else if (ACTION_EXPOSURE_NOTIFICATION.equals(intentAction)) {
 			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);
@@ -179,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 	private void checkValidCheckInIntent(String qrCodeData) {
 		try {
 			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-			if (viewModel.isCheckedIn()) {
+			if (viewModel.isCheckedIn().getValue()) {
 				new ErrorDialog(this, ErrorState.ALREADY_CHECKED_IN).show();
 			} else {
 				viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(),

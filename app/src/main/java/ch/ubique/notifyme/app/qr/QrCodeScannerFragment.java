@@ -185,8 +185,9 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		try {
 			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
 			isQRScanningEnabled = false;
-			viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
-					ReminderOption.OFF));
+			if (getActivity() != null) getActivity().runOnUiThread(() -> viewModel.setCheckInState(
+					new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
+							ReminderOption.OFF)));
 			showCheckInFragment();
 		} catch (QrUtils.QRException e) {
 			handleInvalidQRCodeExceptions(qrCodeData, e);

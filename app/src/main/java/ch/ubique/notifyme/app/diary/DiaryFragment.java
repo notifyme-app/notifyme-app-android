@@ -58,7 +58,7 @@ public class DiaryFragment extends Fragment {
 		recyclerView.setAdapter(recyclerAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		viewModel.exposures.observe(getViewLifecycleOwner(), exposures -> {
+		viewModel.getExposures().observe(getViewLifecycleOwner(), exposures -> {
 			ArrayList<VenueVisitRecyclerItem> items = new ArrayList<>();
 
 			List<DiaryEntry> diaryEntries = DiaryStorage.getInstance(getContext()).getEntries();
