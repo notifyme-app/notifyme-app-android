@@ -69,7 +69,7 @@ public class CheckedInFragment extends Fragment implements MainActivity.BackPres
 		toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
 		viewModel.startCheckInTimer();
-		viewModel.timeSinceCheckIn
+		viewModel.getTimeSinceCheckIn()
 				.observe(getViewLifecycleOwner(), duration -> timerTextView.setText(StringUtils.getDurationString(duration)));
 
 		titleTextView.setText(venueInfo.getTitle());

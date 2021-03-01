@@ -82,10 +82,10 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 			}
 		});
 
-		viewModel.timeSinceCheckIn.observe(getViewLifecycleOwner(),
+		viewModel.getTimeSinceCheckIn().observe(getViewLifecycleOwner(),
 				duration -> checkOutButton.setText(StringUtils.getShortDurationString(duration)));
 
-		viewModel.exposures.observe(getViewLifecycleOwner(), reports -> {
+		viewModel.getExposures().observe(getViewLifecycleOwner(), reports -> {
 			if (reports == null || reports.isEmpty()) {
 				noReportsHeader.setVisibility(View.VISIBLE);
 				reportsHeader.setVisibility(View.GONE);
@@ -115,9 +115,9 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 			}
 		});
 
-		viewModel.errorState.observe(getViewLifecycleOwner(), errorState -> {
+		viewModel.getErrorState().observe(getViewLifecycleOwner(), errorState -> {
 			if (errorState == null) {
-				List<ExposureEvent> reports = viewModel.exposures.getValue();
+				List<ExposureEvent> reports = viewModel.getExposures().getValue();
 				if (reports == null || reports.isEmpty()) {
 					splashText.setVisibility(View.VISIBLE);
 					mainImageView.setVisibility(View.VISIBLE);
@@ -141,7 +141,7 @@ public class MainFragment extends Fragment implements MainActivity.BackPressList
 
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
-		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
+		viewModel.getTraceKeyLoadingState().observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
 
 		if (BuildConfig.FLAVOR.equals("prod")) {

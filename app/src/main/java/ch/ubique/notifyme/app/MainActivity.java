@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 		KeyLoadWorker.startKeyLoadWorker(this);
 		KeyLoadWorker.cleanUpOldData(this);
 
-		viewModel.forceUpdate.observe(this, forceUpdate -> {
+		viewModel.getForceUpdate().observe(this, forceUpdate -> {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}

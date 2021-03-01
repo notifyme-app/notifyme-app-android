@@ -57,14 +57,14 @@ public class ReportsFragment extends Fragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		diaryStorage = DiaryStorage.getInstance(getContext());
-		viewModel.exposures
-				.observe(getViewLifecycleOwner(), exposures -> publishRecyclerItems(exposures, viewModel.errorState.getValue()));
-		viewModel.errorState
-				.observe(getViewLifecycleOwner(), errorState -> publishRecyclerItems(viewModel.exposures.getValue(), errorState));
+		viewModel.getExposures()
+				.observe(getViewLifecycleOwner(), exposures -> publishRecyclerItems(exposures, viewModel.getErrorState().getValue()));
+		viewModel.getErrorState()
+				.observe(getViewLifecycleOwner(), errorState -> publishRecyclerItems(viewModel.getExposures().getValue(), errorState));
 
 		swipeRefreshLayout.setOnRefreshListener(() -> viewModel.refreshTraceKeys());
 
-		viewModel.traceKeyLoadingState.observe(getViewLifecycleOwner(), loadingState ->
+		viewModel.getTraceKeyLoadingState().observe(getViewLifecycleOwner(), loadingState ->
 				swipeRefreshLayout.setRefreshing(loadingState == MainViewModel.LoadingState.LOADING));
 	}
 
