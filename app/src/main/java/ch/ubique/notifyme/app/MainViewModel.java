@@ -64,6 +64,7 @@ public class MainViewModel extends AndroidViewModel {
 		refreshExposures();
 		storage = Storage.getInstance(getApplication());
 		checkInState = storage.getCheckInState();
+		updateCheckedIn();
 		LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(application);
 		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_DID_AUTO_CHECKOUT));
 		localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_NEW_EXPOSURE_NOTIFICATION));
@@ -90,11 +91,7 @@ public class MainViewModel extends AndroidViewModel {
 	public void setCheckInState(CheckInState checkInState) {
 		storage.setCheckInState(checkInState);
 		this.checkInState = checkInState;
-		if (checkInState == null) {
-			this.isCheckedIn.setValue(false);
-		} else {
-			this.isCheckedIn.setValue(checkInState.isCheckedIn());
-		}
+		updateCheckedIn();
 	}
 
 	public CheckInState getCheckInState() {
@@ -153,6 +150,14 @@ public class MainViewModel extends AndroidViewModel {
 			errorState.setValue(ErrorState.NOTIFICATIONS_DISABLED);
 		} else {
 			errorState.setValue(null);
+		}
+	}
+
+	private void updateCheckedIn() {
+		if (checkInState == null) {
+			isCheckedIn.setValue(false);
+		} else {
+			isCheckedIn.setValue(checkInState.isCheckedIn());
 		}
 	}
 
