@@ -1,6 +1,5 @@
 plugins {
 	id 'com.android.dynamic-feature'
-	id 'org.sonarqube' version '3.0'
 }
 
 // TODO Try to reuse from base gradle
@@ -48,20 +47,6 @@ android {
 
 	flavorDimensions "version"
 
-	signingConfigs {
-		release {
-			storeFile file(readPropertyWithDefault('keystoreFile', 'testKeystore'))
-			storePassword readProperty('keystorePassword')
-			keyAlias 'keyAlias'
-			keyPassword readProperty('keyAliasPassword')
-		}
-	}
-
-	buildTypes {
-		release {
-			signingConfig signingConfigs.release
-		}
-	}
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
@@ -69,15 +54,6 @@ android {
 
 	buildFeatures {
 		buildConfig = false
-	}
-}
-
-sonarqube {
-	properties {
-		property "sonar.projectName", "NotifyMe App Android"
-		property "sonar.projectKey", "notifyme-app_notifyme-app-android"
-		property "sonar.organization", "notifyme-app"
-		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
 

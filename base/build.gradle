@@ -1,6 +1,7 @@
 plugins {
 	id 'com.android.application'
 	id 'com.google.protobuf'
+	id 'org.sonarqube' version '3.0'
 }
 
 ext.readProperty = { paramName -> readPropertyWithDefault(paramName, null) }
@@ -67,11 +68,21 @@ android {
 
 	flavorDimensions "version"
 
+	signingConfigs {
+		release {
+			storeFile file(readPropertyWithDefault('keystoreFile', 'testKeystore'))
+			storePassword readProperty('keystorePassword')
+			keyAlias 'keyAlias'
+			keyPassword readProperty('keyAliasPassword')
+		}
+	}
+
 	buildTypes {
 		release {
 			shrinkResources false
 			setMinifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release
 		}
 	}
 	compileOptions {
@@ -82,6 +93,15 @@ android {
 
 	buildFeatures {
 		buildConfig = true
+	}
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectName", "NotifyMe App Android"
+		property "sonar.projectKey", "notifyme-app_notifyme-app-android"
+		property "sonar.organization", "notifyme-app"
+		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
 
