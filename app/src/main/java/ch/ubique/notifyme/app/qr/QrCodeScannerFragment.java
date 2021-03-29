@@ -51,6 +51,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	public final static String TAG = QrCodeScannerFragment.class.getCanonicalName();
 	private static final int PERMISSION_REQUEST_CAMERA = 13;
+	private static final long MIN_ERROR_VISIBILITY = 1000L;
 
 	private MainViewModel viewModel;
 	private PreviewView previewView;
@@ -66,6 +67,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	private View mainView;
 	private boolean goToHome = false;
 	private boolean isQRScanningEnabled = true;
+	private long lastUIErrorUpdate = 0L;
 
 	public QrCodeScannerFragment() { super(R.layout.fragment_qr_code_scanner); }
 
@@ -176,7 +178,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 
 	@Override
 	public void noQRCodeFound() {
-		if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.VALID));
+		if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.NO_CODE_FOUND));
 	}
 
 	@Override
@@ -189,6 +191,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 					new CheckInState(false, venueInfo, System.currentTimeMillis(), System.currentTimeMillis(),
 							ReminderOption.OFF)));
 			showCheckInFragment();
+			if (getActivity() != null) getActivity().runOnUiThread(() -> indicateInvalidQrCode(QRScannerState.VALID));
 		} catch (QrUtils.QRException e) {
 			handleInvalidQRCodeExceptions(qrCodeData, e);
 		}
@@ -220,8 +223,13 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	private void indicateInvalidQrCode(QRScannerState qrScannerState) {
+		long currentTime = System.currentTimeMillis();
+		if (lastUIErrorUpdate > currentTime - MIN_ERROR_VISIBILITY && qrScannerState == QRScannerState.NO_CODE_FOUND) {
+			return;
+		}
+		lastUIErrorUpdate = currentTime;
 		int color = ch.ubique.notifyme.base.R.color.primary;
-		if (qrScannerState == QRScannerState.VALID) {
+		if (qrScannerState == QRScannerState.VALID || qrScannerState == QRScannerState.NO_CODE_FOUND) {
 			invalidCodeText.setVisibility(View.INVISIBLE);
 		} else {
 			invalidCodeText.setVisibility(View.VISIBLE);
@@ -278,7 +286,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	enum QRScannerState {
-		VALID, INVALID_FORMAT, NOT_YET_VALID, NOT_VALID_ANYMORE
+		NO_CODE_FOUND, VALID, INVALID_FORMAT, NOT_YET_VALID, NOT_VALID_ANYMORE
 	}
 
 }
