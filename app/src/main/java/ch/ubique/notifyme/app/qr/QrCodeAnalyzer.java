@@ -1,5 +1,14 @@
 package ch.ubique.notifyme.app.qr;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
+import android.renderscript.Type;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
@@ -16,11 +25,16 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 	private final static String TAG = QrCodeAnalyzer.class.getCanonicalName();
 
 	private Listener listener;
+	private Context context;
+	private YuvToRgbConverter yuvToRgbConverter;
 
-	public QrCodeAnalyzer(Listener listener) {
+	public QrCodeAnalyzer(Listener listener, Context context) {
 		this.listener = listener;
+		this.context = context;
+		this.yuvToRgbConverter = new YuvToRgbConverter(context);
 	}
 
+	@SuppressLint("UnsafeExperimentalUsageError")
 	@Override
 	public void analyze(@NonNull ImageProxy image) {
 
@@ -28,8 +42,21 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 		int height = image.getHeight();
 		int ySize = width * height;
 
-		byte[] imageData = new byte[ySize];
+		//ImageProxy.PlaneProxy[] p = image.getPlanes();
 
+		Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+		Bitmap bmp = Bitmap.createBitmap(width, height, conf); // this creates a MUTABLE bitmap
+		yuvToRgbConverter.yuvToRgb(image.getImage(), bmp);
+		//byte[] imageData = new byte[ySize];
+
+		byte[] red = new byte[ySize];
+		int[] pixels = new int[ySize];
+		bmp.getPixels(pixels, 0, width, 0, 0, width, height);
+		for (int i = 0; i < ySize; i++) {
+			red[i] = (byte) ((pixels[i] & 0x0000ff00) >> 8);
+		}
+
+		/*
 		ByteBuffer yBuffer = image.getPlanes()[0].getBuffer();
 
 		int rowStride = image.getPlanes()[0].getRowStride();
@@ -47,8 +74,10 @@ public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 			}
 		}
 
+		 */
+
 		PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(
-				imageData,
+				red,
 				image.getWidth(), image.getHeight(),
 				0, 0,
 				image.getWidth(), image.getHeight(),

@@ -153,7 +153,7 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 				preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
 				ImageAnalysis imageAnalyzer = new ImageAnalysis.Builder().build();
-				imageAnalyzer.setAnalyzer(cameraExecutor, new QrCodeAnalyzer(this));
+				imageAnalyzer.setAnalyzer(cameraExecutor, new QrCodeAnalyzer(this, requireContext()));
 
 				CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
 
