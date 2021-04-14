@@ -5,11 +5,8 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
-import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.BuildConfig;
 
 public class AssetUtil {
 
@@ -26,7 +23,7 @@ public class AssetUtil {
 
 
 	private static String getFolderNameImpressum(Context context) {
-		return FOLDER_NAME_IMPRESSUM + context.getString(R.string.language_code) + "/";
+		return FOLDER_NAME_IMPRESSUM + context.getString(ch.ubique.notifyme.base.R.string.language_code) + "/";
 	}
 
 	public static String getImpressumHtml(Context context) {

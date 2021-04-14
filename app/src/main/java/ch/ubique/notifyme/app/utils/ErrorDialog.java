@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.utils.ErrorHelper;
+import ch.ubique.notifyme.base.utils.ErrorState;
 
 public class ErrorDialog extends AlertDialog {
 

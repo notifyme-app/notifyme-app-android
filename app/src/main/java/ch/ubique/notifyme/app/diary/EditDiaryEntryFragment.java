@@ -17,8 +17,8 @@ import org.crowdnotifier.android.sdk.CrowdNotifier;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class EditDiaryEntryFragment extends Fragment {
 

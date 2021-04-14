@@ -25,7 +25,7 @@ import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
-import ch.ubique.notifyme.app.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.StringUtils;
 
 public class DiaryFragment extends Fragment {
 
@@ -94,15 +94,15 @@ public class DiaryFragment extends Fragment {
 	private void onDiaryEntryClicked(DiaryEntry diaryEntry, ExposureEvent exposureEvent) {
 		if (exposureEvent != null) {
 			requireActivity().getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-							R.anim.modal_pop_exit)
+					.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter, ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+							ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 					.replace(R.id.container, ExposureFragment.newInstance(exposureEvent.getId()))
 					.addToBackStack(DiaryFragment.TAG)
 					.commit();
 		} else {
 			requireActivity().getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-							R.anim.modal_pop_exit)
+					.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter, ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+							ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 					.replace(R.id.container, EditDiaryEntryFragment.newInstance(true, diaryEntry.getId()))
 					.addToBackStack(DiaryFragment.TAG)
 					.commit();

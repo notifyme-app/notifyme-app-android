@@ -7,16 +7,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 import androidx.core.content.ContextCompat;
 
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
-import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainActivity;
-import ch.ubique.notifyme.app.R;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.R;
+import ch.ubique.notifyme.base.utils.StringUtils;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW;
@@ -91,8 +91,8 @@ public class NotificationHelper {
 	private NotificationCompat.Builder getNotificationBuilder(String channelId) {
 		return new NotificationCompat.Builder(context, channelId)
 				.setAutoCancel(true)
-				.setSmallIcon(R.drawable.ic_notification)
-				.setColor(ContextCompat.getColor(context, R.color.primary))
+				.setSmallIcon(ch.ubique.notifyme.app.R.drawable.ic_notification)
+				.setColor(ContextCompat.getColor(context, ch.ubique.notifyme.base.R.color.primary))
 				.setPriority(NotificationCompat.PRIORITY_HIGH)
 				.setDefaults(Notification.DEFAULT_ALL);
 	}
@@ -138,9 +138,9 @@ public class NotificationHelper {
 				.setContentIntent(createBasicPendingIntent(ACTION_REMINDER_NOTIFICATION))
 				.setContentTitle(context.getString(R.string.checkout_reminder_title))
 				.setContentText(context.getString(R.string.checkout_reminder_text))
-				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
+				.addAction(ch.ubique.notifyme.app.R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
 						createBasicPendingIntent(ACTION_CHECK_OUT_NOW))
-				.addAction(R.drawable.ic_snooze, context.getString(R.string.reminder_notification_snooze_action),
+				.addAction(ch.ubique.notifyme.app.R.drawable.ic_snooze, context.getString(R.string.reminder_notification_snooze_action),
 						snoozePendingIntent)
 				.build();
 
@@ -155,14 +155,14 @@ public class NotificationHelper {
 		createNotificationChannel(CHANNEL_ID_ONGOING_CHECK_IN,
 				context.getString(R.string.android_ongoing_checkin_notification_channel_name), true, IMPORTANCE_LOW);
 		Notification ongoingNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ONGOING_CHECK_IN)
-				.setSmallIcon(R.drawable.ic_notification)
+				.setSmallIcon(ch.ubique.notifyme.app.R.drawable.ic_notification)
 				.setColor(ContextCompat.getColor(context, R.color.primary))
 				.setContentTitle(context.getString(R.string.ongoing_notification_title)
 						.replace("{TIME}", StringUtils.getHourMinuteTimeString(startTime, ":")))
 				.setContentText(venueInfo.getTitle() + "\n" + venueInfo.getSubtitle())
 				.setPriority(NotificationCompat.PRIORITY_LOW)
 				.setOngoing(true)
-				.addAction(R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
+				.addAction(ch.ubique.notifyme.app.R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),
 						createBasicPendingIntent(ACTION_CHECK_OUT_NOW))
 				.setContentIntent(createBasicPendingIntent(ACTION_ONGOING_NOTIFICATION))
 				.build();

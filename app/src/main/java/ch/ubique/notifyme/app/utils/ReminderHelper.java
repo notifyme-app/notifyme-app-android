@@ -5,14 +5,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 
-import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.utils.Storage;
 
 public class ReminderHelper extends BroadcastReceiver {
 

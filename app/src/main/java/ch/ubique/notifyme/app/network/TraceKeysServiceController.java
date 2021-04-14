@@ -9,9 +9,9 @@ import java.util.List;
 
 import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 
-import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.model.ProblematicEventOuterClass;
-import ch.ubique.notifyme.app.utils.Storage;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.utils.Storage;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

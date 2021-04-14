@@ -1,6 +1,6 @@
 package ch.ubique.notifyme.app.reports.items;
 
-import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.ErrorState;
 
 public class ItemError extends VenueVisitRecyclerItem {
 

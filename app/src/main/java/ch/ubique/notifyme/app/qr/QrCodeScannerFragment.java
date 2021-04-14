@@ -37,15 +37,15 @@ import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 import org.crowdnotifier.android.sdk.utils.QrUtils;
 
-import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkin.CheckInFragment;
-import ch.ubique.notifyme.app.model.ReminderOption;
-import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
-import ch.ubique.notifyme.app.utils.ErrorHelper;
-import ch.ubique.notifyme.app.utils.ErrorState;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.ErrorHelper;
+import ch.ubique.notifyme.base.utils.ErrorState;
 
 public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Listener {
 
@@ -220,20 +220,20 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 	}
 
 	private void indicateInvalidQrCode(QRScannerState qrScannerState) {
-		int color = R.color.primary;
+		int color = ch.ubique.notifyme.base.R.color.primary;
 		if (qrScannerState == QRScannerState.VALID) {
 			invalidCodeText.setVisibility(View.INVISIBLE);
 		} else {
 			invalidCodeText.setVisibility(View.VISIBLE);
-			color = R.color.tertiary;
+			color = ch.ubique.notifyme.base.R.color.tertiary;
 		}
 
 		if (qrScannerState == QRScannerState.INVALID_FORMAT) {
-			invalidCodeText.setText(R.string.qrscanner_error);
+			invalidCodeText.setText(ch.ubique.notifyme.base.R.string.qrscanner_error);
 		} else if (qrScannerState == QRScannerState.NOT_VALID_ANYMORE) {
-			invalidCodeText.setText(R.string.qr_scanner_error_code_not_valid_anymore);
+			invalidCodeText.setText(ch.ubique.notifyme.base.R.string.qr_scanner_error_code_not_valid_anymore);
 		} else if (qrScannerState == QRScannerState.NOT_YET_VALID) {
-			invalidCodeText.setText(R.string.qr_scanner_error_code_not_yet_valid);
+			invalidCodeText.setText(ch.ubique.notifyme.base.R.string.qr_scanner_error_code_not_yet_valid);
 		}
 		setIndicatorColor(topLeftIndicator, color);
 		setIndicatorColor(topRightIndicator, color);
@@ -245,13 +245,14 @@ public class QrCodeScannerFragment extends Fragment implements QrCodeAnalyzer.Li
 		LayerDrawable drawable = (LayerDrawable) indicator.getBackground();
 		GradientDrawable stroke = (GradientDrawable) drawable.findDrawableByLayerId(R.id.indicator);
 		if (getContext() == null) return;
-		stroke.setStroke(getResources().getDimensionPixelSize(R.dimen.qr_scanner_indicator_stroke_width),
+		stroke.setStroke(getResources().getDimensionPixelSize(ch.ubique.notifyme.base.R.dimen.qr_scanner_indicator_stroke_width),
 				getResources().getColor(color, null));
 	}
 
 	private void showCheckInFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit,
+						ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, CheckInFragment.newInstance())
 				.addToBackStack(QrCodeScannerFragment.TAG)
 				.commitAllowingStateLoss();
