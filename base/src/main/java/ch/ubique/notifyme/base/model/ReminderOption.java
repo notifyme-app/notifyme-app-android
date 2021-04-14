@@ -14,7 +14,7 @@ public enum ReminderOption {
 	TWO_HOURS(120, R.id.check_in_fragment_toggle_button_4),
 	FOUR_HOURS(240, R.id.check_in_fragment_toggle_button_5);
 
-	private static final long MINUTE_IN_MILLIS = 60 * 1000;
+	private static final long MINUTE_IN_MILLIS = 60 * 1000L;
 
 	private int delayMinutes;
 	@IdRes private int toggleButtonId;

@@ -18,7 +18,6 @@ import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
-import ch.ubique.notifyme.base.model.ReminderOption;
 import ch.ubique.notifyme.base.utils.StringUtils;
 import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
