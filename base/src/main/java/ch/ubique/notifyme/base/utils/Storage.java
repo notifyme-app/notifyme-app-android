@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.model.CheckInStateOldV2;
 
 
 public class Storage {
@@ -36,8 +38,12 @@ public class Storage {
 	}
 
 	public CheckInState getCheckInState() {
-		//TODO: Handle Update case
-		return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInState.class);
+		try {
+			return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInState.class);
+		} catch(JsonSyntaxException e){
+			//If the user updated the App while being checked in, the CheckInState has to be converted to the new Specifications
+			return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInStateOldV2.class).toCheckInState();
+		}
 	}
 
 	public void setLastKeyBundleTag(long lastSync) {
