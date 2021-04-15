@@ -18,7 +18,7 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.base.utils.StringUtils;
-import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class EditDiaryEntryFragment extends Fragment {
 
@@ -78,8 +78,8 @@ public class EditDiaryEntryFragment extends Fragment {
 		venueTypeIcon = view.findViewById(R.id.edit_diary_entry_venue_type_icon);
 
 		titleTextView.setText(diaryEntry.getVenueInfo().getTitle());
-		subtitleTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
-		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(diaryEntry.getVenueInfo().getVenueType()));
+		subtitleTextView.setText(VenueInfoExtensions.getSubtitle(diaryEntry.getVenueInfo()));
+		venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(diaryEntry.getVenueInfo()));
 
 		refreshTimeTextViews();
 

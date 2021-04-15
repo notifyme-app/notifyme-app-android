@@ -13,11 +13,10 @@ import org.crowdnotifier.android.sdk.model.ExposureEvent;
 
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.diary.HideInDiaryDialogFragment;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.base.utils.StringUtils;
-import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class ExposureFragment extends Fragment {
 
@@ -85,8 +84,8 @@ public class ExposureFragment extends Fragment {
 
 		if (diaryEntry != null) {
 			nameTextView.setText(diaryEntry.getVenueInfo().getTitle());
-			locationTextView.setText(diaryEntry.getVenueInfo().getSubtitle());
-			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(diaryEntry.getVenueInfo().getVenueType()));
+			locationTextView.setText(VenueInfoExtensions.getSubtitle(diaryEntry.getVenueInfo()));
+			venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(diaryEntry.getVenueInfo()));
 
 			if (diaryEntry.getComment() != null && !diaryEntry.getComment().isEmpty()) {
 				notes.setText(diaryEntry.getComment());

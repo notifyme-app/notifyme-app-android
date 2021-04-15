@@ -36,6 +36,7 @@ public class Storage {
 	}
 
 	public CheckInState getCheckInState() {
+		//TODO: Handle Update case
 		return gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInState.class);
 	}
 

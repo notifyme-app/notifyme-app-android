@@ -12,6 +12,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import org.crowdnotifier.android.sdk.model.VenueInfo;
+
+import ch.ubique.notifyme.app.model.Proto;
 import ch.ubique.notifyme.base.R;
 
 public class StringUtils {

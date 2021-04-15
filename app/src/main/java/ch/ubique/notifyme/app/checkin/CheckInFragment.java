@@ -23,7 +23,7 @@ import ch.ubique.notifyme.app.utils.NotificationHelper;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
 import ch.ubique.notifyme.base.R;
 import ch.ubique.notifyme.base.model.ReminderOption;
-import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class CheckInFragment extends Fragment {
 
@@ -71,8 +71,8 @@ public class CheckInFragment extends Fragment {
 		MaterialButtonToggleGroup toggleGroup = view.findViewById(R.id.check_in_fragment_toggle_group);
 
 		titleTextView.setText(venueInfo.getTitle());
-		subtitleTextView.setText(venueInfo.getSubtitle());
-		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+		subtitleTextView.setText(VenueInfoExtensions.getSubtitle(venueInfo));
+		venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 
 		checkInButton.setOnClickListener(v -> {
 			long checkInTime = System.currentTimeMillis();

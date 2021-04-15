@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.crowdnotifier.android.sdk.model.ProblematicEventInfo;
 
-import ch.ubique.notifyme.app.model.ProblematicEventOuterClass;
+import ch.ubique.notifyme.app.model.Proto;
 import ch.ubique.notifyme.base.BuildConfig;
 import ch.ubique.notifyme.base.utils.Storage;
 import okhttp3.OkHttpClient;
@@ -76,13 +76,13 @@ public class TraceKeysServiceController {
 		try {
 			long keyBundleTag = Long.parseLong(response.headers().get(KEY_BUNDLE_TAG_HEADER));
 			storage.setLastKeyBundleTag(keyBundleTag);
-			ProblematicEventOuterClass.ProblematicEventWrapper problematicEventWrapper =
-					ProblematicEventOuterClass.ProblematicEventWrapper.parseFrom(response.body().byteStream());
+			Proto.ProblematicEventWrapper problematicEventWrapper =
+					Proto.ProblematicEventWrapper.parseFrom(response.body().byteStream());
 			ArrayList<ProblematicEventInfo> problematicEventInfos = new ArrayList<>();
-			for (ProblematicEventOuterClass.ProblematicEvent event : problematicEventWrapper.getEventsList()) {
+			for (Proto.ProblematicEvent event : problematicEventWrapper.getEventsList()) {
 				problematicEventInfos.add(new ProblematicEventInfo(event.getIdentity().toByteArray(),
 						event.getSecretKeyForIdentity().toByteArray(), event.getStartTime(), event.getEndTime(),
-						event.getMessage().toByteArray(), event.getNonce().toByteArray()));
+						event.getEncryptedAssociatedData().toByteArray(), event.getCipherTextNonce().toByteArray()));
 			}
 			return problematicEventInfos;
 		} catch (IOException e) {
