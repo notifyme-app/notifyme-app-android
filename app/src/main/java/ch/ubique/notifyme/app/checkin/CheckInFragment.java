@@ -61,7 +61,6 @@ public class CheckInFragment extends Fragment {
 		}
 	}
 
-
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		TextView titleTextView = view.findViewById(R.id.check_in_fragment_title);
@@ -81,10 +80,9 @@ public class CheckInFragment extends Fragment {
 			viewModel.setCheckedIn(true);
 			viewModel.getCheckInState().setCheckInTime(checkInTime);
 			NotificationHelper.getInstance(getContext()).startOngoingNotification(checkInTime, venueInfo);
-			ReminderHelper.set8HourReminder(getContext());
-			ReminderHelper.setAutoCheckOut(getContext());
-			ReminderHelper.setReminder(System.currentTimeMillis() + viewModel.getSelectedReminderOption().getDelayMillis(),
-					getContext());
+			ReminderHelper.set8HourReminder(checkInTime, getContext());
+			ReminderHelper.setAutoCheckOut(checkInTime, getContext());
+			ReminderHelper.setReminder(checkInTime + viewModel.getSelectedReminderOption().getDelayMillis(), getContext());
 			showHomeFragment();
 		});
 

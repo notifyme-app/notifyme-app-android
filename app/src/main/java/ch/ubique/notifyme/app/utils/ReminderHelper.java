@@ -42,9 +42,9 @@ public class ReminderHelper extends BroadcastReceiver {
 		setReminder(alarmTime, pendingIntent, context);
 	}
 
-	public static void set8HourReminder(Context context) {
+	public static void set8HourReminder(long checkInTime, Context context) {
 		PendingIntent pendingIntent = getPendingIntent(context, true);
-		setReminder(System.currentTimeMillis() + EIGHT_HOURS, pendingIntent, context);
+		setReminder(checkInTime + EIGHT_HOURS, pendingIntent, context);
 	}
 
 	public static void remove8HourReminder(Context context) {
@@ -52,9 +52,9 @@ public class ReminderHelper extends BroadcastReceiver {
 		removeReminder(pendingIntent, context);
 	}
 
-	public static void setAutoCheckOut(Context context) {
+	public static void setAutoCheckOut(long checkInTime, Context context) {
 		PendingIntent pendingIntent = getAutoCheckOutPendingIntent(context);
-		setReminder(System.currentTimeMillis() + TWELVE_HOURS, pendingIntent, context);
+		setReminder(checkInTime + TWELVE_HOURS, pendingIntent, context);
 	}
 
 	public static void removeAutoCheckOut(Context context) {
@@ -104,20 +104,23 @@ public class ReminderHelper extends BroadcastReceiver {
 		}
 	}
 
-	public static void autoCheckoutIfNecessary(Context context, CheckInState checkInState) {
-		if (checkInState != null && checkInState.getCheckInTime() <= System.currentTimeMillis() - TWELVE_HOURS) {
-			NotificationHelper notificationHelper = NotificationHelper.getInstance(context);
-			notificationHelper.stopOngoingNotification();
-			notificationHelper.removeReminderNotification();
-			notificationHelper.showAutoCheckoutNotification();
-			long checkIn = checkInState.getCheckInTime();
-			long checkOut = checkIn + TWELVE_HOURS;
-			long id = CrowdNotifier.addCheckIn(checkIn, checkOut, checkInState.getVenueInfo(), context);
-			DiaryStorage.getInstance(context).addEntry(new DiaryEntry(id, checkIn, checkOut, checkInState.getVenueInfo(), ""));
-			Storage storage = Storage.getInstance(context);
-			storage.setCheckInState(null);
-			LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_DID_AUTO_CHECKOUT));
+	public static boolean autoCheckoutIfNecessary(Context context, CheckInState checkInState) {
+		if (checkInState == null || checkInState.getCheckInTime() > System.currentTimeMillis() - TWELVE_HOURS) {
+			return false;
 		}
+
+		NotificationHelper notificationHelper = NotificationHelper.getInstance(context);
+		notificationHelper.stopOngoingNotification();
+		notificationHelper.removeReminderNotification();
+		notificationHelper.showAutoCheckoutNotification();
+		long checkIn = checkInState.getCheckInTime();
+		long checkOut = checkIn + TWELVE_HOURS;
+		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, checkInState.getVenueInfo(), context);
+		DiaryStorage.getInstance(context).addEntry(new DiaryEntry(id, checkIn, checkOut, checkInState.getVenueInfo(), ""));
+		Storage storage = Storage.getInstance(context);
+		storage.setCheckInState(null);
+		LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_DID_AUTO_CHECKOUT));
+		return true;
 	}
 
 }
