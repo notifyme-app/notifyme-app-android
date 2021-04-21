@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:dist="http://schemas.android.com/apk/distribution"
-	android:targetSandboxVersion="2"
-	package="ch.ubique.notifyme.onboarding">
+	package="ch.ubique.notifyme.onboarding"
+	android:targetSandboxVersion="2">
 
-	<dist:module
-		dist:instant="true">
+	<dist:module dist:instant="true">
 		<dist:delivery>
 			<dist:install-time />
 		</dist:delivery>
@@ -27,10 +26,25 @@
 					android:host="${qrCodeHostName}"
 					android:scheme="https" />
 
+			</intent-filter>
+
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+
 				<data
 					android:host="onboarding"
 					android:scheme="notifyme" />
 			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+
 		</activity>
 	</application>
 </manifest>

@@ -3,15 +3,14 @@
 	xmlns:dist="http://schemas.android.com/apk/distribution"
 	package="ch.ubique.notifyme.app">
 
-	<dist:module
-		dist:instant="false">
+	<dist:module dist:instant="false">
 		<dist:delivery>
 			<dist:install-time />
 		</dist:delivery>
 		<dist:fusing dist:include="true" />
 	</dist:module>
 
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 	<application>
 		<activity
@@ -38,11 +37,11 @@
 
 		<receiver android:name=".utils.ReminderHelper" />
 
-		<receiver android:name=".utils.NotificationQuickActionReceiver"/>
+		<receiver android:name=".utils.NotificationQuickActionReceiver" />
 
 		<receiver android:name=".startup.BootCompletedReceiver">
 			<intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
 		</receiver>
 
