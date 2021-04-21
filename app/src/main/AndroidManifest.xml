@@ -4,8 +4,7 @@
 	package="ch.ubique.notifyme.app">
 
 	<dist:module
-		dist:instant="false"
-		dist:onDemand="false">
+		dist:instant="false">
 		<dist:delivery>
 			<dist:install-time />
 		</dist:delivery>

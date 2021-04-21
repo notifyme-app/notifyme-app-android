@@ -5,8 +5,7 @@
 	package="ch.ubique.notifyme.onboarding">
 
 	<dist:module
-		dist:instant="true"
-		dist:onDemand="false">
+		dist:instant="true">
 		<dist:delivery>
 			<dist:install-time />
 		</dist:delivery>
