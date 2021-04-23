@@ -16,8 +16,9 @@
 			android:name=".OnboardingActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/NotifyMeTheme">
-			<intent-filter android:autoVerify="true">
+			<intent-filter android:autoVerify="true" android:order="1">
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
 
@@ -29,6 +30,7 @@
 
 			<intent-filter android:autoVerify="true">
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
 
@@ -40,6 +42,12 @@
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 			</intent-filter>
+
+			<!--When clicking on "try now" in the Playstore, the instant app will be started with this Url. Unfortunately, the value
+			can not be set to something dynamic such as ${qrCodeHostName}, otherwise the Play Consolue upload will fail.-->
+			<meta-data
+				android:name="default-url"
+				android:value="https://qr.notify-me.ch" />
 
 		</activity>
 	</application>

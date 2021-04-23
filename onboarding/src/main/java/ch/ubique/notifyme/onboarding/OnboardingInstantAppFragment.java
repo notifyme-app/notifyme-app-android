@@ -31,6 +31,7 @@ public class OnboardingInstantAppFragment extends Fragment {
 
 	public final static String TAG = OnboardingInstantAppFragment.class.getCanonicalName();
 	private final static int REQUEST_CODE_INSTALL = 1;
+	private final static String DEFAULT_TRY_NOW_URL = "https://qr.notify-me.ch";
 	private String qrCodeUrl;
 	private View errorView;
 	private ViewGroup venueInfoContainer;
@@ -62,7 +63,11 @@ public class OnboardingInstantAppFragment extends Fragment {
 	}
 
 	private void showVenueInfo() {
-		if (qrCodeUrl == null) {
+		// If the instant app is started without a url (should never happen) or with the default url, don't show any QR Code
+		// information nor error.
+		// Note: https://qr.notify-me.ch is defined as the default url in the Manifest. When clicking on "Try now" in the Playstore
+		// the Instant App is started with this url.
+		if (qrCodeUrl == null || DEFAULT_TRY_NOW_URL.equals(qrCodeUrl)) {
 			venueInfoContainer.setVisibility(View.GONE);
 			errorView.setVisibility(View.GONE);
 			return;
@@ -109,7 +114,7 @@ public class OnboardingInstantAppFragment extends Fragment {
 	}
 
 	private void storeInstantAppCookie() {
-		if (qrCodeUrl == null) return;
+		if (qrCodeUrl == null || DEFAULT_TRY_NOW_URL.equals(qrCodeUrl)) return;
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
 		byte[] cookieContent = qrCodeUrl.getBytes(StandardCharsets.UTF_8);
 
