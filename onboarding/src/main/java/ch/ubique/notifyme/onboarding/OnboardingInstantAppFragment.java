@@ -24,6 +24,7 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 import ch.ubique.notifyme.base.BuildConfig;
 import ch.ubique.notifyme.base.utils.ErrorHelper;
 import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.Storage;
 import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class OnboardingInstantAppFragment extends Fragment {
@@ -63,8 +64,7 @@ public class OnboardingInstantAppFragment extends Fragment {
 	private void showVenueInfo() {
 		if (qrCodeUrl == null) {
 			venueInfoContainer.setVisibility(View.GONE);
-			errorView.setVisibility(View.VISIBLE);
-			ErrorHelper.updateErrorView(errorView, ErrorState.NO_VALID_QR_CODE, null, getContext(), false);
+			errorView.setVisibility(View.GONE);
 			return;
 		}
 
@@ -105,9 +105,11 @@ public class OnboardingInstantAppFragment extends Fragment {
 				.setPackage(requireContext().getPackageName());
 
 		InstantApps.showInstallPrompt(requireActivity(), postInstallIntent, REQUEST_CODE_INSTALL, null);
+		Storage.getInstance(requireContext()).setOnboardingCompleted(true);
 	}
 
 	private void storeInstantAppCookie() {
+		if (qrCodeUrl == null) return;
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
 		byte[] cookieContent = qrCodeUrl.getBytes(StandardCharsets.UTF_8);
 

@@ -27,8 +27,6 @@ android {
 	defaultConfig {
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1123
-		versionName "1.1.3"
 		resConfigs "en", "fr", "de"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
