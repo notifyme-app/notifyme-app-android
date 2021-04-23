@@ -3,6 +3,7 @@ package ch.ubique.notifyme.onboarding;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class OnboardingInstantAppFragment extends Fragment {
 
 	public final static String TAG = OnboardingInstantAppFragment.class.getCanonicalName();
 	private final static int REQUEST_CODE_INSTALL = 1;
-	private final static String DEFAULT_TRY_NOW_URL = "https://qr.notify-me.ch";
+	private final static String DEFAULT_TRY_NOW_URL = "https://qr.notify-me.ch/";
 	private String qrCodeUrl;
 	private View errorView;
 	private ViewGroup venueInfoContainer;
@@ -58,6 +59,8 @@ public class OnboardingInstantAppFragment extends Fragment {
 		if (requireActivity().getIntent().getData() != null) {
 			qrCodeUrl = requireActivity().getIntent().getData().toString();
 		}
+
+		Log.d(TAG, "QR Code Url: " + qrCodeUrl);
 
 		showVenueInfo();
 	}

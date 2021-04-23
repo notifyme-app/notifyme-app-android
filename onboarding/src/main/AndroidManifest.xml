@@ -47,7 +47,7 @@
 			can not be set to something dynamic such as ${qrCodeHostName}, otherwise the Play Consolue upload will fail.-->
 			<meta-data
 				android:name="default-url"
-				android:value="https://qr.notify-me.ch" />
+				android:value="https://qr.notify-me.ch/" />
 
 		</activity>
 	</application>
