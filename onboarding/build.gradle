@@ -24,6 +24,9 @@ android {
 			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
 			applicationIdSuffix '.abn'
 		}
+		instant {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+		}
 	}
 
 	flavorDimensions "version"
