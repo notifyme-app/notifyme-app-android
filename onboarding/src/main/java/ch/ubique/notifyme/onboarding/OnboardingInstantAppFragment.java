@@ -26,7 +26,7 @@ import ch.ubique.notifyme.base.BuildConfig;
 import ch.ubique.notifyme.base.utils.ErrorHelper;
 import ch.ubique.notifyme.base.utils.ErrorState;
 import ch.ubique.notifyme.base.utils.Storage;
-import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class OnboardingInstantAppFragment extends Fragment {
 
@@ -79,9 +79,9 @@ public class OnboardingInstantAppFragment extends Fragment {
 
 		try {
 			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeUrl, BuildConfig.ENTRY_QR_CODE_PREFIX);
-			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+			venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 			venueTitle.setText(venueInfo.getTitle());
-			venueSubtitle.setText(venueInfo.getSubtitle());
+			venueSubtitle.setText(VenueInfoExtensions.getSubtitle(venueInfo));
 		} catch (QrUtils.QRException e) {
 			venueInfoContainer.setVisibility(View.GONE);
 			errorView.setVisibility(View.VISIBLE);

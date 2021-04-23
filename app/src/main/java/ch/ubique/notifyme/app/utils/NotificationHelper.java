@@ -17,6 +17,7 @@ import ch.ubique.notifyme.app.MainActivity;
 import ch.ubique.notifyme.base.BuildConfig;
 import ch.ubique.notifyme.base.R;
 import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_HIGH;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW;
@@ -159,7 +160,7 @@ public class NotificationHelper {
 				.setColor(ContextCompat.getColor(context, R.color.primary))
 				.setContentTitle(context.getString(R.string.ongoing_notification_title)
 						.replace("{TIME}", StringUtils.getHourMinuteTimeString(startTime, ":")))
-				.setContentText(venueInfo.getTitle() + "\n" + venueInfo.getSubtitle())
+				.setContentText(venueInfo.getTitle() + "\n" + VenueInfoExtensions.getSubtitle(venueInfo))
 				.setPriority(NotificationCompat.PRIORITY_LOW)
 				.setOngoing(true)
 				.addAction(ch.ubique.notifyme.app.R.drawable.ic_close, context.getString(R.string.ongoing_notification_checkout_quick_action),

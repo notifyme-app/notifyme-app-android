@@ -146,7 +146,7 @@ dependencies {
 
 	api 'com.google.code.gson:gson:2.8.6'
 
-	api 'org.crowdnotifier:crowdnotifier-sdk-android:2.1.0'
+	api 'org.crowdnotifier:crowdnotifier-sdk-android:3.0-dev-56'
 
 	api 'androidx.work:work-runtime:2.4.0'
 	api 'com.google.protobuf:protobuf-lite:3.0.1'
