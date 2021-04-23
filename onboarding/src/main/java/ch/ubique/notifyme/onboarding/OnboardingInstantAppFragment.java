@@ -3,6 +3,7 @@ package ch.ubique.notifyme.onboarding;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,12 +25,14 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 import ch.ubique.notifyme.base.BuildConfig;
 import ch.ubique.notifyme.base.utils.ErrorHelper;
 import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.Storage;
 import ch.ubique.notifyme.base.utils.VenueTypeIconHelper;
 
 public class OnboardingInstantAppFragment extends Fragment {
 
 	public final static String TAG = OnboardingInstantAppFragment.class.getCanonicalName();
 	private final static int REQUEST_CODE_INSTALL = 1;
+	private final static String QR_URL_PREFIX = "https://qr.notify-me.ch?v=";
 	private String qrCodeUrl;
 	private View errorView;
 	private ViewGroup venueInfoContainer;
@@ -57,14 +60,20 @@ public class OnboardingInstantAppFragment extends Fragment {
 			qrCodeUrl = requireActivity().getIntent().getData().toString();
 		}
 
+		Log.d(TAG, "QR Code Url: " + qrCodeUrl);
+
 		showVenueInfo();
 	}
 
 	private void showVenueInfo() {
-		if (qrCodeUrl == null) {
+		// If the instant app is started without a url (should never happen) or with the default url, don't show any QR Code
+		// information nor error.
+		// Note: https://qr.notify-me.ch is defined as the default url in the Manifest. When clicking on "Try now" in the Playstore
+		// the Instant App is started with this url and some parameters, e.g.:
+		// https://qr.notify-me.ch/?referrer=utm_source%3D(not%2520set)%26utm_medium%3D(not%2520set)
+		if (qrCodeUrl == null || !qrCodeUrl.startsWith(QR_URL_PREFIX)) {
 			venueInfoContainer.setVisibility(View.GONE);
-			errorView.setVisibility(View.VISIBLE);
-			ErrorHelper.updateErrorView(errorView, ErrorState.NO_VALID_QR_CODE, null, getContext(), false);
+			errorView.setVisibility(View.GONE);
 			return;
 		}
 
@@ -105,9 +114,11 @@ public class OnboardingInstantAppFragment extends Fragment {
 				.setPackage(requireContext().getPackageName());
 
 		InstantApps.showInstallPrompt(requireActivity(), postInstallIntent, REQUEST_CODE_INSTALL, null);
+		Storage.getInstance(requireContext()).setOnboardingCompleted(true);
 	}
 
 	private void storeInstantAppCookie() {
+		if (qrCodeUrl == null || !qrCodeUrl.startsWith(QR_URL_PREFIX)) return;
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
 		byte[] cookieContent = qrCodeUrl.getBytes(StandardCharsets.UTF_8);
 

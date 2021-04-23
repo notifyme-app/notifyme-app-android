@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.instantapps.InstantApps;
+import com.google.android.gms.instantapps.PackageManagerCompat;
+
 import ch.ubique.notifyme.base.utils.FeatureUtil;
 import ch.ubique.notifyme.base.utils.Storage;
 
@@ -21,8 +24,11 @@ public class OnboardingActivity extends AppCompatActivity {
 			url = getIntent().getData().toString();
 		}
 
+		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(this);
+		boolean isInstantApp = pmc.isInstantApp();
+
 		boolean onboardingCompleted = Storage.getInstance(this).getOnboardingCompleted();
-		if (onboardingCompleted) {
+		if (onboardingCompleted && !isInstantApp) {
 			showMainActivity();
 		} else {
 			showOnboarding();

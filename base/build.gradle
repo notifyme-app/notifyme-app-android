@@ -29,8 +29,8 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1
-		versionName "1.0"
+		versionCode 1120_1
+		versionName "1.1.2"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
 
@@ -63,6 +63,15 @@ android {
 			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://cn-a.bit.admin.ch/"'
 			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr-abn.notify-me.ch"'
 			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://qr-uploader-a.bit.admin.ch"'
+		}
+		instant {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+			buildConfigField "String", "QR_CODE_HOST_NAME", '"qr.notify-me.ch"'
+			buildConfigField "String", "CONFIG_BASE_URL", '"https://app-prod-config.notify-me.ch/"'
+			buildConfigField "String", "PUBLISHED_KEYS_BASE_URL", '"https://app-prod-ws.notify-me.ch/"'
+			buildConfigField "String", "ENTRY_QR_CODE_PREFIX", '"https://qr.notify-me.ch"'
+			buildConfigField "String", "TRACE_QR_CODE_PREFIX", '"https://upload.notify-me.ch"'
+			versionCode defaultConfig.versionCode - 1
 		}
 	}
 

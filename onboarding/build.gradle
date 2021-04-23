@@ -8,8 +8,6 @@ android {
 	defaultConfig {
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1
-		versionName "1.0"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -25,6 +23,9 @@ android {
 		abn {
 			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
 			applicationIdSuffix '.abn'
+		}
+		instant {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
 		}
 	}
 
