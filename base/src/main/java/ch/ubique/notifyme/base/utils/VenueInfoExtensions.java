@@ -14,6 +14,7 @@ public class VenueInfoExtensions {
 
 
 	public static Proto.NotifyMeLocationData getNotifyMeLocationData(VenueInfo venueInfo) {
+		if (venueInfo.getCountryData() == null) return Proto.NotifyMeLocationData.newBuilder().build();
 		try {
 			return Proto.NotifyMeLocationData.parseFrom(venueInfo.getCountryData());
 		} catch (InvalidProtocolBufferException e) {

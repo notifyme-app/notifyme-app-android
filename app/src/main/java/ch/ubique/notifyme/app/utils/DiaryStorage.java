@@ -17,15 +17,17 @@ import com.google.gson.reflect.TypeToken;
 
 
 import org.crowdnotifier.android.sdk.model.DayDate;
-import org.crowdnotifier.android.sdk.model.EncryptedVenueVisit;
 
 import ch.ubique.notifyme.app.model.DiaryEntry;
+import ch.ubique.notifyme.app.model.DiaryEntryDeprecatedV2;
 
 public class DiaryStorage {
 
 	private static final String KEY_DIARY_STORE = "KEY_DIARY_STORE";
 	private static final String KEY_DIARY_ENTRIES = "KEY_DIARY_ENTRIES";
-	private static final Type EXPOSURE_LIST_TYPE = new TypeToken<ArrayList<DiaryEntry>>() { }.getType();
+	private static final String KEY_DIARY_ENTRIES_V3 = "KEY_DIARY_ENTRIES_V3";
+	private static final Type EXPOSURE_LIST_TYPE = new TypeToken<ArrayList<DiaryEntryDeprecatedV2>>() { }.getType();
+	private static final Type EXPOSURE_LIST_V3_TYPE = new TypeToken<ArrayList<DiaryEntry>>() { }.getType();
 
 
 	private static DiaryStorage instance;
@@ -98,7 +100,20 @@ public class DiaryStorage {
 	}
 
 	public List<DiaryEntry> getEntries() {
-		return gson.fromJson(sharedPreferences.getString(KEY_DIARY_ENTRIES, "[]"), EXPOSURE_LIST_TYPE);
+		migrateDiaryEntriesIfNecessary();
+		return gson.fromJson(sharedPreferences.getString(KEY_DIARY_ENTRIES_V3, "[]"), EXPOSURE_LIST_V3_TYPE);
+	}
+
+	private void migrateDiaryEntriesIfNecessary() {
+		if (!sharedPreferences.contains(KEY_DIARY_ENTRIES)) return;
+		ArrayList<DiaryEntryDeprecatedV2> oldDiaryEntries =
+				gson.fromJson(sharedPreferences.getString(KEY_DIARY_ENTRIES, "[]"), EXPOSURE_LIST_TYPE);
+		ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
+		for (DiaryEntryDeprecatedV2 oldDiaryEntry : oldDiaryEntries) {
+			diaryEntries.add(oldDiaryEntry.toDiaryEntry());
+		}
+		saveToPrefs(diaryEntries);
+		sharedPreferences.edit().remove(KEY_DIARY_ENTRIES).apply();
 	}
 
 	public void removeEntriesBefore(int maxDaysToKeep) {
@@ -113,8 +128,8 @@ public class DiaryStorage {
 		saveToPrefs(exposureList);
 	}
 
-	private void saveToPrefs(List<DiaryEntry> exposureList) {
-		sharedPreferences.edit().putString(KEY_DIARY_ENTRIES, gson.toJson(exposureList)).apply();
+	private void saveToPrefs(List<DiaryEntry> diaryEntries) {
+		sharedPreferences.edit().putString(KEY_DIARY_ENTRIES_V3, gson.toJson(diaryEntries)).apply();
 	}
 
 	public void clear() {
