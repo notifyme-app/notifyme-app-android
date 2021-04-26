@@ -118,11 +118,15 @@ public class OnboardingInstantAppFragment extends Fragment {
 	}
 
 	private void storeInstantAppCookie() {
-		if (qrCodeUrl == null || !qrCodeUrl.startsWith(QR_URL_PREFIX)) return;
 		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(requireContext());
-		byte[] cookieContent = qrCodeUrl.getBytes(StandardCharsets.UTF_8);
+		byte[] cookieContent;
+		if (qrCodeUrl == null || !qrCodeUrl.startsWith(QR_URL_PREFIX)) {
+			cookieContent = null;
+		} else {
+			cookieContent = qrCodeUrl.getBytes(StandardCharsets.UTF_8);
+		}
 
-		if (cookieContent.length <= pmc.getInstantAppCookieMaxSize()) {
+		if (cookieContent == null || cookieContent.length <= pmc.getInstantAppCookieMaxSize()) {
 			pmc.setInstantAppCookie(cookieContent);
 		}
 	}
