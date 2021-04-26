@@ -26,7 +26,7 @@ public class VenueInfoExtensions {
 		if (notifyMeLocationData.getRoom() == null || notifyMeLocationData.getRoom().equals("")) {
 			return venueInfo.getAddress();
 		} else {
-			return venueInfo.getDescription() + ", " + notifyMeLocationData.getRoom();
+			return venueInfo.getAddress() + ", " + notifyMeLocationData.getRoom();
 		}
 	}
 
