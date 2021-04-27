@@ -3,6 +3,7 @@ package ch.ubique.notifyme.base.model;
 /**
  * This class is only used for Migration Purposes from CrowdNotifier V2 to V3, if a user is checked in while updating the app
  */
+@Deprecated
 public class CheckInStateDeprecatedV2 {
 	private boolean isCheckedIn;
 	private VenueInfoDeprecatedV2 venueInfo;

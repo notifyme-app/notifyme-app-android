@@ -24,16 +24,16 @@ import ch.ubique.notifyme.app.model.DiaryEntryDeprecatedV2;
 public class DiaryStorage {
 
 	private static final String KEY_DIARY_STORE = "KEY_DIARY_STORE";
-	private static final String KEY_DIARY_ENTRIES = "KEY_DIARY_ENTRIES";
+	@Deprecated private static final String KEY_DIARY_ENTRIES_V2 = "KEY_DIARY_ENTRIES";
 	private static final String KEY_DIARY_ENTRIES_V3 = "KEY_DIARY_ENTRIES_V3";
-	private static final Type EXPOSURE_LIST_TYPE = new TypeToken<ArrayList<DiaryEntryDeprecatedV2>>() { }.getType();
+	@Deprecated private static final Type EXPOSURE_LIST_V2_TYPE = new TypeToken<ArrayList<DiaryEntryDeprecatedV2>>() { }.getType();
 	private static final Type EXPOSURE_LIST_V3_TYPE = new TypeToken<ArrayList<DiaryEntry>>() { }.getType();
 
 
 	private static DiaryStorage instance;
 
 	private SharedPreferences sharedPreferences;
-	private Gson gson = new Gson();
+	private final Gson gson = new Gson();
 
 	private DiaryStorage(Context context) {
 		try {
@@ -105,15 +105,15 @@ public class DiaryStorage {
 	}
 
 	private void migrateDiaryEntriesIfNecessary() {
-		if (!sharedPreferences.contains(KEY_DIARY_ENTRIES)) return;
+		if (!sharedPreferences.contains(KEY_DIARY_ENTRIES_V2)) return;
 		ArrayList<DiaryEntryDeprecatedV2> oldDiaryEntries =
-				gson.fromJson(sharedPreferences.getString(KEY_DIARY_ENTRIES, "[]"), EXPOSURE_LIST_TYPE);
+				gson.fromJson(sharedPreferences.getString(KEY_DIARY_ENTRIES_V2, "[]"), EXPOSURE_LIST_V2_TYPE);
 		ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
 		for (DiaryEntryDeprecatedV2 oldDiaryEntry : oldDiaryEntries) {
 			diaryEntries.add(oldDiaryEntry.toDiaryEntry());
 		}
 		saveToPrefs(diaryEntries);
-		sharedPreferences.edit().remove(KEY_DIARY_ENTRIES).apply();
+		sharedPreferences.edit().remove(KEY_DIARY_ENTRIES_V2).apply();
 	}
 
 	public void removeEntriesBefore(int maxDaysToKeep) {

@@ -2,6 +2,7 @@ package ch.ubique.notifyme.app.model;
 
 import ch.ubique.notifyme.base.model.VenueInfoDeprecatedV2;
 
+@Deprecated
 public class DiaryEntryDeprecatedV2 {
 	private long id;
 	private long arrivalTime;

@@ -3,6 +3,7 @@ package ch.ubique.notifyme.base.model;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.model.Proto;
 
+@Deprecated
 public class VenueInfoDeprecatedV2 {
 	private String name;
 	private String location;

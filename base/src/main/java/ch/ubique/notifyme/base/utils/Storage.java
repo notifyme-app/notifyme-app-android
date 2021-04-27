@@ -12,15 +12,15 @@ import ch.ubique.notifyme.base.model.CheckInStateDeprecatedV2;
 public class Storage {
 
 	private static final String KEY_SHARED_PREFERENCES_STORAGE = "KEY_SHARED_PREFERENCES_STORAGE";
-	private static final String KEY_CURRENT_CHECK_IN = "KEY_CURRENT_CHECK_IN";
+	@Deprecated private static final String KEY_CURRENT_CHECK_IN_V2 = "KEY_CURRENT_CHECK_IN";
 	private static final String KEY_CURRENT_CHECK_IN_V3 = "KEY_CURRENT_CHECK_IN_V3";
 	private static final String KEY_LAST_KEY_BUNDLE_TAG = "KEY_LAST_KEY_BUNDLE_TAG";
 	private static final String KEY_ONBOARDING_COMPLETE = "KEY_ONBOARDING_COMPLETE";
 
 	private static Storage instance;
 
-	private SharedPreferences sharedPreferences;
-	private Gson gson = new Gson();
+	private final SharedPreferences sharedPreferences;
+	private final Gson gson = new Gson();
 
 	private Storage(Context context) {
 		sharedPreferences = context.getSharedPreferences(KEY_SHARED_PREFERENCES_STORAGE, Context.MODE_PRIVATE);
@@ -43,11 +43,11 @@ public class Storage {
 	}
 
 	private void migrateCheckInStateIfNecessary() {
-		if (!sharedPreferences.contains(KEY_CURRENT_CHECK_IN)) return;
+		if (!sharedPreferences.contains(KEY_CURRENT_CHECK_IN_V2)) return;
 		CheckInStateDeprecatedV2 oldCheckInState =
-				gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN, null), CheckInStateDeprecatedV2.class);
+				gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN_V2, null), CheckInStateDeprecatedV2.class);
 		setCheckInState(oldCheckInState.toCheckInState());
-		sharedPreferences.edit().remove(KEY_CURRENT_CHECK_IN).apply();
+		sharedPreferences.edit().remove(KEY_CURRENT_CHECK_IN_V2).apply();
 	}
 
 	public void setLastKeyBundleTag(long lastSync) {
