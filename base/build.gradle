@@ -29,8 +29,8 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1120_1
-		versionName "1.1.2"
+		versionCode 1200_1
+		versionName "1.2.0"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
 
@@ -146,7 +146,7 @@ dependencies {
 
 	api 'com.google.code.gson:gson:2.8.6'
 
-	api 'org.crowdnotifier:crowdnotifier-sdk-android:3.0-dev-4'
+	api 'org.crowdnotifier:crowdnotifier-sdk-android:3.0'
 
 	api 'androidx.work:work-runtime:2.4.0'
 	api 'com.google.protobuf:protobuf-lite:3.0.1'
