@@ -46,7 +46,9 @@ public class Storage {
 		if (!sharedPreferences.contains(KEY_CURRENT_CHECK_IN_V2)) return;
 		CheckInStateDeprecatedV2 oldCheckInState =
 				gson.fromJson(sharedPreferences.getString(KEY_CURRENT_CHECK_IN_V2, null), CheckInStateDeprecatedV2.class);
-		setCheckInState(oldCheckInState.toCheckInState());
+		if (oldCheckInState != null) {
+			setCheckInState(oldCheckInState.toCheckInState());
+		}
 		sharedPreferences.edit().remove(KEY_CURRENT_CHECK_IN_V2).apply();
 	}
 
