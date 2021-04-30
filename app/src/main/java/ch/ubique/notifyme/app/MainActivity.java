@@ -1,19 +1,23 @@
 package ch.ubique.notifyme.app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import com.google.android.gms.instantapps.InstantApps;
+import com.google.android.gms.instantapps.PackageManagerCompat;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 import org.crowdnotifier.android.sdk.model.ExposureEvent;
@@ -23,20 +27,27 @@ import org.crowdnotifier.android.sdk.utils.QrUtils;
 import ch.ubique.notifyme.app.checkin.CheckInFragment;
 import ch.ubique.notifyme.app.checkin.CheckedInFragment;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
-import ch.ubique.notifyme.app.model.CheckInState;
-import ch.ubique.notifyme.app.model.ReminderOption;
 import ch.ubique.notifyme.app.network.KeyLoadWorker;
-import ch.ubique.notifyme.app.onboarding.OnboardingIntroductionFragment;
 import ch.ubique.notifyme.app.reports.ExposureFragment;
 import ch.ubique.notifyme.app.utils.ErrorDialog;
-import ch.ubique.notifyme.app.utils.ErrorState;
-import ch.ubique.notifyme.app.utils.Storage;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.model.ReminderOption;
+import ch.ubique.notifyme.base.utils.ErrorState;
+import ch.ubique.notifyme.base.utils.FeatureUtil;
+import ch.ubique.notifyme.base.utils.Storage;
 
-import static ch.ubique.notifyme.app.utils.NotificationHelper.*;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_CHECK_OUT_NOW;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_EXPOSURE_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_ONGOING_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.ACTION_REMINDER_NOTIFICATION;
+import static ch.ubique.notifyme.app.utils.NotificationHelper.EXPOSURE_ID_EXTRA;
 import static ch.ubique.notifyme.app.utils.ReminderHelper.ACTION_DID_AUTO_CHECKOUT;
+import static ch.ubique.notifyme.app.utils.ReminderHelper.autoCheckoutIfNecessary;
 
 public class MainActivity extends AppCompatActivity {
 
+	private static final int REQUEST_CODE_ONBOARDING = 1;
 	private MainViewModel viewModel;
 	private Storage storage;
 	private static final String KEY_IS_INTENT_CONSUMED = "KEY_IS_INTENT_CONSUMED";
@@ -59,6 +70,20 @@ public class MainActivity extends AppCompatActivity {
 
 		boolean onboardingCompleted = storage.getOnboardingCompleted();
 
+		PackageManagerCompat pmc = InstantApps.getPackageManagerCompat(this);
+		byte[] instantAppCookie = pmc.getInstantAppCookie();
+		if (instantAppCookie != null && instantAppCookie.length > 0) {
+			// If there is an url in the instant app cookies, mark the onboarding as complete and process the url
+			onboardingCompleted = true;
+			storage.setOnboardingCompleted(true);
+
+			String url = new String(instantAppCookie, StandardCharsets.UTF_8);
+			checkValidCheckInIntent(url);
+			pmc.setInstantAppCookie(null);
+		}
+
+		viewModel.refreshExposures();
+
 		if (savedInstanceState == null) {
 			if (onboardingCompleted) {
 				showMainFragment();
@@ -72,10 +97,11 @@ public class MainActivity extends AppCompatActivity {
 		KeyLoadWorker.startKeyLoadWorker(this);
 		KeyLoadWorker.cleanUpOldData(this);
 
-		viewModel.forceUpdate.observe(this, forceUpdate -> {
+		viewModel.getForceUpdate().observe(this, forceUpdate -> {
 			if (forceUpdate) new ErrorDialog(this, ErrorState.FORCE_UPDATE_REQUIRED).show();
 		});
 	}
+
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -93,10 +119,20 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == REQUEST_CODE_ONBOARDING) {
+			showMainFragment();
+		}
+	}
+
+	@Override
 	protected void onStart() {
 		super.onStart();
 		viewModel.refreshTraceKeys();
 		viewModel.refreshErrors();
+		autoCheckoutIfNecessary(this, viewModel.getCheckInState());
 	}
 
 	private void checkIntentForActions() {
@@ -111,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
 	private void handleCustomIntents() {
 		String intentAction = getIntent().getAction();
 		if ((ACTION_REMINDER_NOTIFICATION.equals(intentAction) || ACTION_ONGOING_NOTIFICATION.equals(intentAction)) &&
-				viewModel.isCheckedIn()) {
+				viewModel.isCheckedIn().getValue()) {
 			showCheckedInScreen();
-		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn()) {
+		} else if (ACTION_CHECK_OUT_NOW.equals(intentAction) && viewModel.isCheckedIn().getValue()) {
 			showCheckOutScreen();
 		} else if (ACTION_EXPOSURE_NOTIFICATION.equals(intentAction)) {
 			long id = getIntent().getLongExtra(EXPOSURE_ID_EXTRA, -1);
@@ -124,7 +160,14 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		if (getIntent().getData() != null) {
-			checkValidCheckInIntent(getIntent().getData().toString());
+			String dataString = getIntent().getDataString();
+			if (dataString.startsWith(FeatureUtil.APP_SCHEME)) {
+				dataString = getIntent().getStringExtra(FeatureUtil.ARG_MAIN_URL);
+			}
+
+			if (dataString != null) {
+				checkValidCheckInIntent(dataString);
+			}
 		}
 	}
 
@@ -161,8 +204,9 @@ public class MainActivity extends AppCompatActivity {
 	private void showCheckOutScreen() {
 		showCheckedInScreen();
 		getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter,
+						ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
 				.addToBackStack(MainFragment.TAG)
 				.commit();
@@ -179,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
 	private void checkValidCheckInIntent(String qrCodeData) {
 		try {
 			VenueInfo venueInfo = CrowdNotifier.getVenueInfo(qrCodeData, BuildConfig.ENTRY_QR_CODE_PREFIX);
-			if (viewModel.isCheckedIn()) {
+			if (viewModel.isCheckedIn().getValue()) {
 				new ErrorDialog(this, ErrorState.ALREADY_CHECKED_IN).show();
 			} else {
 				viewModel.setCheckInState(new CheckInState(false, venueInfo, System.currentTimeMillis(),
@@ -209,11 +253,9 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showOnboarding() {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, OnboardingIntroductionFragment.newInstance())
-				.commit();
+		Intent intent = FeatureUtil.createIntentForOnboarding(this);
+		startActivityForResult(intent, REQUEST_CODE_ONBOARDING);
 	}
-
 
 	@Override
 	public void onBackPressed() {
@@ -240,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
 
 	public interface BackPressListener {
 		boolean onBackPressed();
-
 	}
 
 }

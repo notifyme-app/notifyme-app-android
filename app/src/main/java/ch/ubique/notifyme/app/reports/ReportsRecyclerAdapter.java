@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.crowdnotifier.android.sdk.model.Qr;
 import org.crowdnotifier.android.sdk.model.VenueInfo;
 
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.*;
-import ch.ubique.notifyme.app.utils.ErrorHelper;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.ErrorHelper;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -48,7 +47,8 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_venue_visit, parent, false));
 			case ERROR:
 				return new ErrorViewHolder(
-						LayoutInflater.from(parent.getContext()).inflate(R.layout.item_error_status, parent, false));
+						LayoutInflater.from(parent.getContext())
+								.inflate(ch.ubique.notifyme.base.R.layout.item_error_status, parent, false));
 			default:
 				return null;
 		}
@@ -162,9 +162,9 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			if (item.getDiaryEntry() != null) {
 				VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
 				nameTextView.setText(venueInfo.getTitle());
-				locationTextView.setText(venueInfo.getSubtitle());
+				locationTextView.setText(VenueInfoExtensions.getSubtitle(venueInfo));
 				venueTypeIcon.setVisibility(View.VISIBLE);
-				venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+				venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 				hiddenEventPlaceholder.setVisibility(View.GONE);
 			} else {
 				nameTextView.setText("");
@@ -172,7 +172,8 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				venueTypeIcon.setVisibility(View.INVISIBLE);
 				hiddenEventPlaceholder.setVisibility(View.VISIBLE);
 			}
-			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
+			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+					ch.ubique.notifyme.base.R.drawable.ic_info));
 			String start = StringUtils.getHourMinuteTimeString(item.getExposure().getStartTime(), ":");
 			String end = StringUtils.getHourMinuteTimeString(item.getExposure().getEndTime(), ":");
 			timeTextView.setText(start + " — " + end);
@@ -184,7 +185,9 @@ public class ReportsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			} else {
 				infoBox.setVisibility(View.GONE);
 			}
-			statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
+			statusIcon
+					.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+							ch.ubique.notifyme.base.R.drawable.ic_info));
 		}
 
 	}

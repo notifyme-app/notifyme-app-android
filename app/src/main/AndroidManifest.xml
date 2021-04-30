@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:dist="http://schemas.android.com/apk/distribution"
 	package="ch.ubique.notifyme.app">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<dist:module dist:instant="false">
+		<dist:delivery>
+			<dist:install-time />
+		</dist:delivery>
+		<dist:fusing dist:include="true" />
+	</dist:module>
 
-	<application
-		android:allowBackup="false"
-		android:icon="@mipmap/app_icon"
-		android:label="@string/app_name"
-		android:roundIcon="@mipmap/app_icon"
-		android:supportsRtl="true"
-		android:theme="@style/NotifyMeTheme">
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+	<application>
 		<activity
 			android:name="ch.ubique.notifyme.app.MainActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/NotifyMeTheme">
-
 			<intent-filter android:autoVerify="true">
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+
 				<data
-					android:host="${qrCodeHostName}"
-					android:scheme="https" />
+					android:host="main"
+					android:scheme="notifyme" />
 			</intent-filter>
 
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-
+				<category android:name="android.intent.category.DEFAULT"/>
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 
 		<receiver android:name=".utils.ReminderHelper" />
 
-		<receiver android:name=".utils.NotificationQuickActionReceiver"/>
+		<receiver android:name=".utils.NotificationQuickActionReceiver" />
+
+		<receiver android:name=".startup.BootCompletedReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
 
 	</application>
 

@@ -3,8 +3,8 @@ package ch.ubique.notifyme.app.network;
 import android.content.Context;
 import android.os.Build;
 
-import ch.ubique.notifyme.app.BuildConfig;
 import ch.ubique.notifyme.app.model.ConfigResponseModel;
+import ch.ubique.notifyme.base.BuildConfig;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;

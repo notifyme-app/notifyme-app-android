@@ -1,0 +1,46 @@
+plugins {
+	id 'com.android.dynamic-feature'
+}
+android {
+	compileSdkVersion 30
+	buildToolsVersion "30.0.3"
+
+	defaultConfig {
+		minSdkVersion 23
+		targetSdkVersion 30
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	productFlavors {
+		dev {
+			manifestPlaceholders = [qrCodeHostName: "qr-dev.notify-me.ch"]
+			applicationIdSuffix '.dev'
+		}
+		prod {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+		}
+		abn {
+			manifestPlaceholders = [qrCodeHostName: "qr-abn.notify-me.ch"]
+			applicationIdSuffix '.abn'
+		}
+		instant {
+			manifestPlaceholders = [qrCodeHostName: "qr.notify-me.ch"]
+		}
+	}
+
+	flavorDimensions "version"
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+
+	buildFeatures {
+		buildConfig = false
+	}
+}
+
+dependencies {
+	implementation project(":base")
+}

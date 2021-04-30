@@ -18,8 +18,8 @@ import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.checkout.CheckOutFragment;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class CheckedInFragment extends Fragment implements MainActivity.BackPressListener {
 
@@ -69,20 +69,21 @@ public class CheckedInFragment extends Fragment implements MainActivity.BackPres
 		toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
 		viewModel.startCheckInTimer();
-		viewModel.timeSinceCheckIn
+		viewModel.getTimeSinceCheckIn()
 				.observe(getViewLifecycleOwner(), duration -> timerTextView.setText(StringUtils.getDurationString(duration)));
 
 		titleTextView.setText(venueInfo.getTitle());
-		subtitleTextView.setText(venueInfo.getSubtitle());
-		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+		subtitleTextView.setText(VenueInfoExtensions.getSubtitle(venueInfo));
+		venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 
 		checkOutButton.setOnClickListener(v -> showCheckOutFragment());
 	}
 
 	private void showCheckOutFragment() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.modal_slide_enter, R.anim.modal_slide_exit, R.anim.modal_pop_enter,
-						R.anim.modal_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.modal_slide_enter,
+						ch.ubique.notifyme.base.R.anim.modal_slide_exit, ch.ubique.notifyme.base.R.anim.modal_pop_enter,
+						ch.ubique.notifyme.base.R.anim.modal_pop_exit)
 				.replace(R.id.container, CheckOutFragment.newInstance())
 				.addToBackStack(CheckedInFragment.TAG)
 				.commit();

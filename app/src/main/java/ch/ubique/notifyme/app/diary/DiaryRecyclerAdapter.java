@@ -18,8 +18,8 @@ import ch.ubique.notifyme.app.R;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisit;
 import ch.ubique.notifyme.app.reports.items.ItemVenueVisitDayHeader;
 import ch.ubique.notifyme.app.reports.items.VenueVisitRecyclerItem;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -112,13 +112,13 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 			VenueInfo venueInfo = item.getDiaryEntry().getVenueInfo();
 			nameTextView.setText(venueInfo.getTitle());
-			locationTextView.setText(venueInfo.getSubtitle());
+			locationTextView.setText(VenueInfoExtensions.getSubtitle(venueInfo));
 			String start = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getArrivalTime(), ":");
 			String end = StringUtils.getHourMinuteTimeString(item.getDiaryEntry().getDepartureTime(), ":");
 			timeTextView.setText(start + " — " + end);
 			if (item.getExposure() == null) {
 				infoBox.setVisibility(View.GONE);
-				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_filled));
+				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), ch.ubique.notifyme.base.R.drawable.ic_check_filled));
 			} else {
 				if (item.getExposure().getMessage() != null && !item.getExposure().getMessage().isEmpty()) {
 					infoBox.setVisibility(View.VISIBLE);
@@ -126,9 +126,9 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 				} else {
 					infoBox.setVisibility(View.GONE);
 				}
-				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_info));
+				statusIcon.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), ch.ubique.notifyme.base.R.drawable.ic_info));
 			}
-			venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+			venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 			itemView.setOnClickListener(item.getOnClickListener());
 		}
 

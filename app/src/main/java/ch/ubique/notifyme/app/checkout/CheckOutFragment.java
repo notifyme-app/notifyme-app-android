@@ -20,13 +20,13 @@ import org.crowdnotifier.android.sdk.model.VenueInfo;
 import ch.ubique.notifyme.app.MainFragment;
 import ch.ubique.notifyme.app.MainViewModel;
 import ch.ubique.notifyme.app.R;
-import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
 import ch.ubique.notifyme.app.utils.DiaryStorage;
 import ch.ubique.notifyme.app.utils.NotificationHelper;
 import ch.ubique.notifyme.app.utils.ReminderHelper;
-import ch.ubique.notifyme.app.utils.StringUtils;
-import ch.ubique.notifyme.app.utils.VenueTypeIconHelper;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.utils.StringUtils;
+import ch.ubique.notifyme.base.utils.VenueInfoExtensions;
 
 public class CheckOutFragment extends Fragment {
 
@@ -90,8 +90,8 @@ public class CheckOutFragment extends Fragment {
 		venueTypeIcon = view.findViewById(R.id.check_out_fragment_venue_type_icon);
 
 		titleTextView.setText(venueInfo.getTitle());
-		subtitleTextView.setText(venueInfo.getSubtitle());
-		venueTypeIcon.setImageResource(VenueTypeIconHelper.getDrawableForVenueType(venueInfo.getVenueType()));
+		subtitleTextView.setText(VenueInfoExtensions.getSubtitle(venueInfo));
+		venueTypeIcon.setImageResource(VenueInfoExtensions.getVenueTypeDrawable(venueInfo));
 
 		checkInState.setCheckOutTime(System.currentTimeMillis());
 		refreshTimeTextViews();
@@ -158,7 +158,7 @@ public class CheckOutFragment extends Fragment {
 
 	private void showStartScreen() {
 		requireActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+				.setCustomAnimations(ch.ubique.notifyme.base.R.anim.slide_enter, ch.ubique.notifyme.base.R.anim.slide_exit, ch.ubique.notifyme.base.R.anim.slide_pop_enter, ch.ubique.notifyme.base.R.anim.slide_pop_exit)
 				.replace(R.id.container, MainFragment.newInstance())
 				.commit();
 	}

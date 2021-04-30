@@ -5,14 +5,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.crowdnotifier.android.sdk.CrowdNotifier;
 
-import ch.ubique.notifyme.app.BuildConfig;
-import ch.ubique.notifyme.app.model.CheckInState;
 import ch.ubique.notifyme.app.model.DiaryEntry;
+import ch.ubique.notifyme.base.BuildConfig;
+import ch.ubique.notifyme.base.model.CheckInState;
+import ch.ubique.notifyme.base.utils.Storage;
 
 public class ReminderHelper extends BroadcastReceiver {
 
@@ -24,7 +24,7 @@ public class ReminderHelper extends BroadcastReceiver {
 	private static final int AUTO_CHECK_OUT_INTENT_ID = 14;
 	private static final String ACTION_AUTO_CHECKOUT = BuildConfig.APPLICATION_ID + ".ACTION_AUTO_CHECKOUT";
 	private static final long EIGHT_HOURS = 1000L * 60 * 60 * 8;
-	private static final long TWELVE_HOURS = 1000L * 60 * 60 * 12;
+	public static final long TWELVE_HOURS = 1000L * 60 * 60 * 12;
 
 	public static void removeAllReminders(Context context) {
 		removeReminder(context);
@@ -42,9 +42,9 @@ public class ReminderHelper extends BroadcastReceiver {
 		setReminder(alarmTime, pendingIntent, context);
 	}
 
-	public static void set8HourReminder(Context context) {
+	public static void set8HourReminder(long checkInTime, Context context) {
 		PendingIntent pendingIntent = getPendingIntent(context, true);
-		setReminder(System.currentTimeMillis() + EIGHT_HOURS, pendingIntent, context);
+		setReminder(checkInTime + EIGHT_HOURS, pendingIntent, context);
 	}
 
 	public static void remove8HourReminder(Context context) {
@@ -52,9 +52,9 @@ public class ReminderHelper extends BroadcastReceiver {
 		removeReminder(pendingIntent, context);
 	}
 
-	public static void setAutoCheckOut(Context context) {
+	public static void setAutoCheckOut(long checkInTime, Context context) {
 		PendingIntent pendingIntent = getAutoCheckOutPendingIntent(context);
-		setReminder(System.currentTimeMillis() + TWELVE_HOURS, pendingIntent, context);
+		setReminder(checkInTime + TWELVE_HOURS, pendingIntent, context);
 	}
 
 	public static void removeAutoCheckOut(Context context) {
@@ -95,16 +95,20 @@ public class ReminderHelper extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		CheckInState checkInState = Storage.getInstance(context).getCurrentVenue();
+		CheckInState checkInState = Storage.getInstance(context).getCheckInState();
 		if (ACTION_REMINDER.equals(intent.getAction()) ||
 				ACTION_EIGHT_HOUR_REMINDER.equals(intent.getAction()) && checkInState != null) {
 			NotificationHelper.getInstance(context).showReminderNotification();
-		} else if (ACTION_AUTO_CHECKOUT.equals(intent.getAction()) && checkInState != null) {
-			autoCheckout(context, checkInState);
+		} else if (ACTION_AUTO_CHECKOUT.equals(intent.getAction())) {
+			autoCheckoutIfNecessary(context, checkInState);
 		}
 	}
 
-	private void autoCheckout(Context context, CheckInState checkInState) {
+	public static boolean autoCheckoutIfNecessary(Context context, CheckInState checkInState) {
+		if (checkInState == null || checkInState.getCheckInTime() > System.currentTimeMillis() - TWELVE_HOURS) {
+			return false;
+		}
+
 		NotificationHelper notificationHelper = NotificationHelper.getInstance(context);
 		notificationHelper.stopOngoingNotification();
 		notificationHelper.removeReminderNotification();
@@ -114,8 +118,9 @@ public class ReminderHelper extends BroadcastReceiver {
 		long id = CrowdNotifier.addCheckIn(checkIn, checkOut, checkInState.getVenueInfo(), context);
 		DiaryStorage.getInstance(context).addEntry(new DiaryEntry(id, checkIn, checkOut, checkInState.getVenueInfo(), ""));
 		Storage storage = Storage.getInstance(context);
-		storage.setCurrentVenue(null);
+		storage.setCheckInState(null);
 		LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_DID_AUTO_CHECKOUT));
+		return true;
 	}
 
 }

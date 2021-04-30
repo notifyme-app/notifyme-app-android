@@ -57,8 +57,8 @@ public class HideInDiaryDialogFragment extends DialogFragment {
 		View hideButton = view.findViewById(R.id.hide_diary_entry_dialog_hide_button);
 		TextView explanationText = view.findViewById(R.id.hide_diary_entry_dialog_text);
 
-		String locationInfo = diaryEntry.getVenueInfo().getName() + ", " + diaryEntry.getVenueInfo().getLocation();
-		explanationText.setText(getString(R.string.remove_diary_warning_text).replace("{LOCATION_INFO}", locationInfo));
+		String locationInfo = diaryEntry.getVenueInfo().getDescription() + ", " + diaryEntry.getVenueInfo().getAddress();
+		explanationText.setText(getString(ch.ubique.notifyme.base.R.string.remove_diary_warning_text).replace("{LOCATION_INFO}", locationInfo));
 		closeButton.setOnClickListener(v -> dismiss());
 		hideButton.setOnClickListener(v -> hideNow());
 	}
