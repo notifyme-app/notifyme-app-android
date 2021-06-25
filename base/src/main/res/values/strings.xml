@@ -223,7 +223,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_title">"Generate a QR code demo"</string>
+    <string name="web_generator_title">"Generate a QR code"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_category_label">"Category"</string>
@@ -283,7 +283,7 @@ Nevertheless the app stores this entry during 14 days to warn you in case of pot
     <string name="web_generator_private_bulletpoint_3">"A decryption key is published. No data of the organizer is published."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_pdf_button">"Download PDF"</string>
+    <string name="web_generator_pdf_button">"Show PDF"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
@@ -420,7 +420,7 @@ QR Code"</string>
     <string name="onboarding_subtitle">"Check-in for meetings and events."</string>
 
     <!-- qr validity period label used in qr generator web app -->
-    <string name="web_qr_validity_period_label">"Validity (24h max)"</string>
+    <string name="web_qr_validity_period_label">"Validity"</string>
 
     <!-- qr validity period from label used in qr generator web app -->
     <!-- Fuzzy -->
@@ -443,9 +443,7 @@ QR Code"</string>
     <string name="error_update_text">"This QR code is not compatible with the current version of the app. Please update the app to scan it the code."</string>
     <string name="web_generator_date_label">"Valid on"</string>
     <string name="web_generator_date_placeholder">"Pick date"</string>
-
-    <!-- Fuzzy -->
-    <string name="web_generator_validity_information">"The demo QR codes are only valid for one day at a time. For QR codes with permanent validity, please &lt;a href=\"mailto:info@notify-me.ch\"&gt;contact us&lt;/a&gt;."</string>
+    <string name="web_generator_validity_information">"NotifyMe does not collect personal data. It is therefore not a substitute for a participants' list if this is required by the canton. However, it can be used in addition to other tools by quickly informing participants about a possible infection."</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <string name="web_generator_code_validity_message">"This demo QR code is valid on **%e %B %Y**"</string>
@@ -538,4 +536,26 @@ QR Code"</string>
 
     <!-- Titel des Check-In Screens -->
     <string name="check_in_screen_title">"Checking in"</string>
+    <string name="web_generator_validity_information_title">"NotifyMe vs. lists of attendees"</string>
+
+    <!-- AppClip: Willkommen Titel -->
+    <!-- Fuzzy -->
+    <string name="appclip_welcome">"Welcome to..."</string>
+
+    <!-- AppClip: Willkommen Text -->
+    <string name="appclip_welcome_text">"See here all information for this meeting or event"</string>
+    <string name="web_generator_contact_button">"Register NotifyMe usage"</string>
+    <string name="web_upload_criticality_label">"Criticality"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_criticality_low">"Low"</string>
+    <string name="web_upload_criticality_high">"High"</string>
+    <string name="app_termination_homescreen_button_title">"Read Note"</string>
+    <string name="app_termination_homescreen_text">"NotifyMe was integrated into SwissCovid"</string>
+    <string name="app_termination_title">"NotifyMe was integrated into the SwissCovid App"</string>
+    <string name="app_termination_text">"Please use the check-in function of the SwissCovid App from now on and note that NotifyMe will remain in operation only until the end of August 2021.
+
+<b>Important:</b> Please replace your created QR codes with new SwissCovid QR codes."</string>
+    <string name="app_termination_button_title">"Learn more"</string>
+    <string name="app_termination_detail_url">"https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/swisscovid-app-und-contact-tracing.html"</string>
 </resources>
