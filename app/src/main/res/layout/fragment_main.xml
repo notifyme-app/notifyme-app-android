@@ -32,6 +32,45 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 
+				<LinearLayout
+					android:id="@+id/app_termination_header"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:background="@color/tertiary"
+					app:layout_constraintTop_toTopOf="parent">
+
+					<TextView
+						style="@style/NotifyMe.Text.Title.White"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:padding="@dimen/spacing_large"
+						android:text="@string/app_termination_homescreen_text"/>
+
+					<Button
+						android:id="@+id/app_termination_more_info"
+						style="@style/NotifyMe.Button.Tiny.White"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:layout_margin="@dimen/spacing_large"
+						android:text="@string/app_termination_homescreen_button_title" />
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/fragment_main_app_name"
+					style="@style/NotifyMe.Text.Subtitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="@dimen/spacing_medium"
+					android:text="@string/app_name"
+					android:gravity="center"
+					android:background="@drawable/bg_header"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@id/app_termination_header"  />
+
 				<ImageButton
 					android:id="@+id/fragment_main_info_button"
 					android:layout_width="wrap_content"
@@ -43,18 +82,7 @@
 					android:padding="@dimen/spacing_medium"
 					android:src="@drawable/ic_info_outlined"
 					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintTop_toTopOf="parent" />
-
-				<TextView
-					android:id="@+id/fragment_main_app_name"
-					style="@style/NotifyMe.Text.Subtitle"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/spacing_medium"
-					android:text="@string/app_name"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent" />
+					app:layout_constraintTop_toBottomOf="@id/app_termination_header" />
 
 				<include
 					android:id="@+id/fragment_main_reports_header_no_report"
@@ -89,22 +117,11 @@
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/spacing_huge"
 					android:layout_marginTop="@dimen/spacing_large"
+					android:layout_marginBottom="@dimen/spacing_large"
 					android:text="@string/no_report_hero_text"
-					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier" />
-
-				<ImageView
-					android:id="@+id/fragment_main_image"
-					android:layout_width="wrap_content"
-					android:layout_height="0dp"
-					android:layout_marginVertical="@dimen/spacing_large"
-					android:layout_marginEnd="@dimen/spacing_very_large"
-					android:src="@drawable/ic_start_screen"
 					app:layout_constraintBottom_toTopOf="@id/fragment_main_footer_barrier"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintHeight_max="@dimen/start_screen_image_max_height"
-					app:layout_constraintHeight_min="@dimen/start_screen_image_min_height"
-					app:layout_constraintTop_toBottomOf="@id/fragment_main_splash_text"
-					app:layout_constraintVertical_weight="1" />
+					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier"
+					app:layout_constraintVertical_bias="0.0" />
 
 				<androidx.constraintlayout.widget.Barrier
 					android:id="@+id/fragment_main_footer_barrier"

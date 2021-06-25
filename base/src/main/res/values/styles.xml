@@ -123,6 +123,18 @@
 		<item name="android:background">@drawable/bg_button_default_tertiary</item>
 	</style>
 
+	<style name="NotifyMe.Button.Tiny">
+		<item name="android:height">@dimen/small_button_height</item>
+		<item name="android:paddingStart">@dimen/spacing_larger</item>
+		<item name="android:paddingEnd">@dimen/spacing_larger</item>
+	</style>
+
+	<style name="NotifyMe.Button.Tiny.White">
+		<item name="android:background">@drawable/bg_button_tiny_white</item>
+		<item name="android:height">48dp</item>
+		<item name="android:textColor">@color/tertiary</item>
+	</style>
+
 	<style name="NotifyMe.Button.Outlined">
 		<item name="android:textColor">@color/primary</item>
 		<item name="android:foreground">@drawable/ripple_button</item>
