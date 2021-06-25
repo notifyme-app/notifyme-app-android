@@ -117,8 +117,11 @@
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/spacing_huge"
 					android:layout_marginTop="@dimen/spacing_large"
+					android:layout_marginBottom="@dimen/spacing_large"
 					android:text="@string/no_report_hero_text"
-					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier" />
+					app:layout_constraintBottom_toTopOf="@id/fragment_main_footer_barrier"
+					app:layout_constraintTop_toBottomOf="@+id/fragment_main_header_barrier"
+					app:layout_constraintVertical_bias="0.0" />
 
 				<androidx.constraintlayout.widget.Barrier
 					android:id="@+id/fragment_main_footer_barrier"
