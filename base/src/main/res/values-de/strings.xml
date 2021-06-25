@@ -219,7 +219,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="imprint_webview_sourcecode_link">"github.com/notifyme-app/readme"</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_title">"Demo QR-Codes erstellen"</string>
+    <string name="web_generator_title">"QR-Codes erstellen"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_category_label">"Kategorie"</string>
@@ -279,7 +279,7 @@ Trotzdem speichert die App den Eintrag während 14 Tagen, um Sie bei einer mögl
     <string name="web_generator_private_bulletpoint_3">"Es wird nur ein Entschlüsselungs-Schlüssel veröffentlicht. Keine Angaben zum Veranstalter."</string>
 
     <!-- Fuzzy -->
-    <string name="web_generator_pdf_button">"PDF herunterladen"</string>
+    <string name="web_generator_pdf_button">"PDF anzeigen"</string>
 
     <!-- Fuzzy -->
     <string name="web_generator_public_qr_title">"&lt;span&gt;Public&lt;/span&gt;\
@@ -419,7 +419,7 @@ zur Nutzung"</string>
 
     <!-- qr validity period label used in qr generator web app -->
     <!-- Fuzzy -->
-    <string name="web_qr_validity_period_label">"Gültigkeit (max. 24h)"</string>
+    <string name="web_qr_validity_period_label">"Gültigkeit"</string>
 
     <!-- qr validity period from label used in qr generator web app -->
     <!-- Fuzzy -->
@@ -453,7 +453,7 @@ zur Nutzung"</string>
     <!-- Vorschlag zur Formulierung: 
 Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauerhafter Gültigkeit nehmen Sie bitte mit uns Kontakt auf. -->
     <!-- Fuzzy -->
-    <string name="web_generator_validity_information">"Die Demo QR-Codes sind jeweils nur an einem Tag gültig.  Für QR-Codes mit dauerhafter Gültigkeit nehmen Sie bitte &lt;a href=\"mailto:info@notify-me.ch\"&gt;mit uns Kontakt&lt;/a&gt; auf."</string>
+    <string name="web_generator_validity_information">"NotifyMe erfasst keine persönlichen Daten. Es ist daher kein Ersatz für Teilnehmerlisten, sofern sie vom Kanton eingefordert werden. Es kann aber als Ergänzung eingesetzt werden, um Teilnehmende rasch über eine mögliche Ansteckung zu informieren."</string>
 
     <!-- https://github.com/samsonjs/strftime#supported-specifiers -->
     <!-- Fuzzy -->
@@ -548,4 +548,26 @@ Die Demo QR-Codes sind jeweils nur an einem Tag gültig. Für QR-Codes mit dauer
 
     <!-- Titel des Check-In Screens -->
     <string name="check_in_screen_title">"Einchecken"</string>
+    <string name="web_generator_validity_information_title">"NotifyMe vs. Kontaktlisten"</string>
+
+    <!-- AppClip: Willkommen Titel -->
+    <!-- Fuzzy -->
+    <string name="appclip_welcome">"Willkommen bei..."</string>
+
+    <!-- AppClip: Willkommen Text -->
+    <string name="appclip_welcome_text">"Hier sind alle Informationen zu diesem Meeting oder Event"</string>
+    <string name="web_generator_contact_button">"Registrierung Nutzung NotifyMe"</string>
+    <string name="web_upload_criticality_label">"Kritikalität"</string>
+
+    <!-- Fuzzy -->
+    <string name="web_upload_criticality_low">"Tief"</string>
+    <string name="web_upload_criticality_high">"Hoch"</string>
+    <string name="app_termination_homescreen_button_title">"Hinweis lesen"</string>
+    <string name="app_termination_homescreen_text">"NotifyMe wurde in SwissCovid integriert"</string>
+    <string name="app_termination_title">"NotifyMe wurde in die SwissCovid App integriert"</string>
+    <string name="app_termination_text">"Bitte benutzen Sie ab sofort die Check-in-Funktion der SwissCovid App. NotifyMe kann nur noch bis Ende August 2021 verwendet werden.
+
+<b>Achtung:</b> Bitte ersetzen Sie Ihre erstellten QR-Codes durch neue SwissCovid-QR-Codes."</string>
+    <string name="app_termination_button_title">"Mehr erfahren"</string>
+    <string name="app_termination_detail_url">"https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/swisscovid-app-und-contact-tracing.html"</string>
 </resources>

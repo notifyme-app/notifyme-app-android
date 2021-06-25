@@ -29,8 +29,8 @@ android {
 		applicationId "ch.ubique.notifyme"
 		minSdkVersion 23
 		targetSdkVersion 30
-		versionCode 1200_1
-		versionName "1.2.0"
+		versionCode 1210_1
+		versionName "1.2.1"
 
 		buildConfigField "long", "BUILD_TIME", readPropertyWithDefault('buildTimestamp', System.currentTimeMillis()) + 'L'
 
